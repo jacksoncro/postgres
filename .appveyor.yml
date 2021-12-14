@@ -2,8 +2,8 @@ image: Visual Studio 2019
 
 environment:
   matrix:
-    - MSYSTEM: MINGW32
     - MSYSTEM: MINGW64
+#    - MSYSTEM: MINGW32
 
 # https://www.postgresql.org/message-id/flat/f1caef93-9640-022e-9211-bbe8755a56b0%402ndQuadrant.com
 matrix:
