@@ -22,11 +22,6 @@ build_script:
   - sh -l -c "./configure --enable-cassert --enable-debug --enable-nls --enable-tap-tests --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
   - sh -l -c "make world -j2"
 
-test_script:
-  - set HOME=.
-  - set PATH=C:/msys64/usr/bin;%PATH%
-  - sh -l -c "make check-world -Otarget -j2 PROVE_FLAGS=--verbose"
-
 on_failure:
   - set HOME=.
   - sh -l -c "test -f config.status || cat config.log"
