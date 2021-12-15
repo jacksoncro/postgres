@@ -17,7 +17,7 @@
 #include <windows.h>
 #endif
 
-#include <dirent.h>
+#include </C/projects/postgres/src/include/port/win32_msvc/dirent.h>
 #include <fcntl.h>
 #include <locale.h>
 #include <signal.h>
@@ -25,7 +25,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-#include <unistd.h>
+#include </C/projects/postgres/src/include/port/win32_msvc/unistd.h>
 #include <stdlib.h>
 
 /* Note the order is important for debian here. */
@@ -42,17 +42,17 @@
 
 #endif
 
-#include "libpq-fe.h"
-#include "postgres_fe.h"
-#include "pqexpbuffer.h"
+#include "/C/projects/postgres/src/interfaces/libpq/libpq-fe.h"
+#include "/C/projects/postgres/src/include/postgres_fe.h"
+#include "/C/projects/postgres/src/interfaces/libpq/pqexpbuffer.h"
 
-#include "getopt_long.h"
+#include "/C/projects/postgres/src/include/getopt_long.h"
 
-#include "miscadmin.h"
+#include "/C/projects/postgres/src/include/miscadmin.h"
 
-#include "access/timeline.h"
-#include "access/xlog_internal.h"
-#include "catalog/pg_control.h"
+#include "/C/projects/postgres/src/include/access/timeline.h"
+#include "/C/projects/postgres/src/include/access/xlog_internal.h"
+#include "/C/projects/postgres/src/include/catalog/pg_control.h"
 
 #include "pglogical_fe.h"
 

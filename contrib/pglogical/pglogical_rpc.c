@@ -11,17 +11,17 @@
  *-------------------------------------------------------------------------
  */
 
-#include "postgres.h"
+#include "/C/projects/postgres/src/include/postgres.h"
 
-#include "lib/stringinfo.h"
+#include "/C/projects/postgres/src/include/lib/stringinfo.h"
 
-#include "nodes/makefuncs.h"
+#include "/C/projects/postgres/src/include/nodes/makefuncs.h"
 
-#include "catalog/pg_type.h"
+#include "/C/projects/postgres/src/include/catalog/pg_type.h"
 
-#include "storage/lock.h"
+#include "/C/projects/postgres/src/include/storage/lock.h"
 
-#include "utils/rel.h"
+#include "/C/projects/postgres/src/include/utils/rel.h"
 
 #include "pglogical_relcache.h"
 #include "pglogical_repset.h"

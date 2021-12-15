@@ -13,9 +13,9 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "postgres.h"
+#include "/C/projects/postgres/src/include/postgres.h"
 
-#include "replication/logical.h"
+#include "/C/projects/postgres/src/include/replication/logical.h"
 
 PG_MODULE_MAGIC;
 

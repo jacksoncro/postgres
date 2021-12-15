@@ -15,30 +15,30 @@
  *-------------------------------------------------------------------------
  */
 #include <stdio.h>
-#include <unistd.h>
+#include </C/projects/postgres/src/include/port/win32_msvc/unistd.h>
 
-#include "postgres.h"
+#include "/C/projects/postgres/src/include/postgres.h"
 
-#include "access/htup_details.h"
-#include "access/sysattr.h"
-#include "access/xact.h"
+#include "/C/projects/postgres/src/include/access/htup_details.h"
+#include "/C/projects/postgres/src/include/access/sysattr.h"
+#include "/C/projects/postgres/src/include/access/xact.h"
 
-#include "commands/copy.h"
+#include "/C/projects/postgres/src/include/commands/copy.h"
 
-#include "executor/executor.h"
-#include "executor/spi.h"
+#include "/C/projects/postgres/src/include/executor/executor.h"
+#include "/C/projects/postgres/src/include/executor/spi.h"
 
-#include "replication/reorderbuffer.h"
+#include "/C/projects/postgres/src/include/replication/reorderbuffer.h"
 
-#include "storage/fd.h"
+#include "/C/projects/postgres/src/include/storage/fd.h"
 
-#include "tcop/pquery.h"
-#include "tcop/utility.h"
+#include "/C/projects/postgres/src/include/tcop/pquery.h"
+#include "/C/projects/postgres/src/include/tcop/utility.h"
 
-#include "utils/lsyscache.h"
-#include "utils/memutils.h"
-#include "utils/rel.h"
-#include "utils/builtins.h"
+#include "/C/projects/postgres/src/include/utils/lsyscache.h"
+#include "/C/projects/postgres/src/include/utils/memutils.h"
+#include "/C/projects/postgres/src/include/utils/rel.h"
+#include "/C/projects/postgres/src/include/utils/builtins.h"
 
 #include "pglogical.h"
 #include "pglogical_apply_spi.h"

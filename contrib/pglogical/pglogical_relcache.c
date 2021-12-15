@@ -10,20 +10,20 @@
  *
  * -------------------------------------------------------------------------
  */
-#include "postgres.h"
+#include "/C/projects/postgres/src/include/postgres.h"
 
-#include "access/heapam.h"
+#include "/C/projects/postgres/src/include/access/heapam.h"
 
-#include "catalog/pg_trigger.h"
+#include "/C/projects/postgres/src/include/catalog/pg_trigger.h"
 
-#include "commands/trigger.h"
+#include "/C/projects/postgres/src/include/commands/trigger.h"
 
-#include "utils/builtins.h"
-#include "utils/catcache.h"
-#include "utils/hsearch.h"
-#include "utils/fmgroids.h"
-#include "utils/inval.h"
-#include "utils/rel.h"
+#include "/C/projects/postgres/src/include/utils/builtins.h"
+#include "/C/projects/postgres/src/include/utils/catcache.h"
+#include "/C/projects/postgres/src/include/utils/hsearch.h"
+#include "/C/projects/postgres/src/include/utils/fmgroids.h"
+#include "/C/projects/postgres/src/include/utils/inval.h"
+#include "/C/projects/postgres/src/include/utils/rel.h"
 
 #include "pglogical.h"
 #include "pglogical_relcache.h"

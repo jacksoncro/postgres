@@ -11,37 +11,37 @@
  *-------------------------------------------------------------------------
  */
 
-#include "postgres.h"
+#include "/C/projects/postgres/src/include/postgres.h"
 
-#include "funcapi.h"
-#include "miscadmin.h"
+#include "/C/projects/postgres/src/include/funcapi.h"
+#include "/C/projects/postgres/src/include/miscadmin.h"
 
-#include "access/genam.h"
-#include "access/heapam.h"
-#include "access/htup_details.h"
-#include "access/xact.h"
+#include "/C/projects/postgres/src/include/access/genam.h"
+#include "/C/projects/postgres/src/include/access/heapam.h"
+#include "/C/projects/postgres/src/include/access/htup_details.h"
+#include "/C/projects/postgres/src/include/access/xact.h"
 
-#include "catalog/indexing.h"
-#include "catalog/namespace.h"
-#include "catalog/pg_database.h"
-#include "catalog/pg_type.h"
+#include "/C/projects/postgres/src/include/catalog/indexing.h"
+#include "/C/projects/postgres/src/include/catalog/namespace.h"
+#include "/C/projects/postgres/src/include/catalog/pg_database.h"
+#include "/C/projects/postgres/src/include/catalog/pg_type.h"
 
-#include "utils/array.h"
-#include "utils/builtins.h"
-#include "utils/fmgroids.h"
-#include "utils/lsyscache.h"
-#include "utils/memutils.h"
-#include "utils/pg_lsn.h"
-#include "utils/rel.h"
-#include "utils/snapmgr.h"
-#include "utils/syscache.h"
-#include "utils/tqual.h"
+#include "/C/projects/postgres/src/include/utils/array.h"
+#include "/C/projects/postgres/src/include/utils/builtins.h"
+#include "/C/projects/postgres/src/include/utils/fmgroids.h"
+#include "/C/projects/postgres/src/include/utils/lsyscache.h"
+#include "/C/projects/postgres/src/include/utils/memutils.h"
+#include "/C/projects/postgres/src/include/utils/pg_lsn.h"
+#include "/C/projects/postgres/src/include/utils/rel.h"
+#include "/C/projects/postgres/src/include/utils/snapmgr.h"
+#include "/C/projects/postgres/src/include/utils/syscache.h"
+#include "/C/projects/postgres/src/include/utils/tqual.h"
 
-#include "postmaster/bgworker_internals.h"
+#include "/C/projects/postgres/src/include/postmaster/bgworker_internals.h"
 
 #include "pglogical_compat.h"
-#include "replication/origin.h"
-#include "access/commit_ts.h"
+#include "/C/projects/postgres/src/include/replication/origin.h"
+#include "/C/projects/postgres/src/include/access/commit_ts.h"
 
 #define InvalidRepNodeId 0
 

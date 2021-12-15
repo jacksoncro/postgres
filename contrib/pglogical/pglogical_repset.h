@@ -13,7 +13,7 @@
 #ifndef PGLOGICAL_REPSET_H
 #define PGLOGICAL_REPSET_H
 
-#include "replication/reorderbuffer.h"
+#include "/C/projects/postgres/src/include/replication/reorderbuffer.h"
 
 typedef struct PGLogicalRepSet
 {

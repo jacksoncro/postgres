@@ -13,7 +13,7 @@
 #ifndef PGLOGICAL_EXECUTOR_H
 #define PGLOGICAL_EXECUTOR_H
 
-#include "executor/executor.h"
+#include "/C/projects/postgres/src/include/executor/executor.h"
 
 extern List *pglogical_truncated_tables;
 

@@ -13,7 +13,7 @@
 #ifndef PGLOGICAL_WORKER_H
 #define PGLOGICAL_WORKER_H
 
-#include "storage/lock.h"
+#include "/C/projects/postgres/src/include/storage/lock.h"
 
 #include "pglogical.h"
 

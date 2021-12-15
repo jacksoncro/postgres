@@ -10,46 +10,46 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "postgres.h"
+#include "/C/projects/postgres/src/include/postgres.h"
 
-#include "miscadmin.h"
+#include "/C/projects/postgres/src/include/miscadmin.h"
 
-#include "access/hash.h"
-#include "access/htup_details.h"
-#include "access/xact.h"
-#include "access/xlog.h"
+#include "/C/projects/postgres/src/include/access/hash.h"
+#include "/C/projects/postgres/src/include/access/htup_details.h"
+#include "/C/projects/postgres/src/include/access/xact.h"
+#include "/C/projects/postgres/src/include/access/xlog.h"
 
-#include "catalog/pg_extension.h"
-#include "catalog/indexing.h"
-#include "catalog/namespace.h"
-#include "catalog/pg_database.h"
-#include "catalog/pg_type.h"
+#include "/C/projects/postgres/src/include/catalog/pg_extension.h"
+#include "/C/projects/postgres/src/include/catalog/indexing.h"
+#include "/C/projects/postgres/src/include/catalog/namespace.h"
+#include "/C/projects/postgres/src/include/catalog/pg_database.h"
+#include "/C/projects/postgres/src/include/catalog/pg_type.h"
 
-#include "commands/extension.h"
-#include "commands/trigger.h"
+#include "/C/projects/postgres/src/include/commands/extension.h"
+#include "/C/projects/postgres/src/include/commands/trigger.h"
 
-#include "executor/executor.h"
+#include "/C/projects/postgres/src/include/executor/executor.h"
 
-#include "mb/pg_wchar.h"
+#include "/C/projects/postgres/src/include/mb/pg_wchar.h"
 
-#include "nodes/nodeFuncs.h"
+#include "/C/projects/postgres/src/include/nodes/nodeFuncs.h"
 
-#include "optimizer/planner.h"
+#include "/C/projects/postgres/src/include/optimizer/planner.h"
 
-#include "parser/parse_coerce.h"
+#include "/C/projects/postgres/src/include/parser/parse_coerce.h"
 
-#include "replication/reorderbuffer.h"
+#include "/C/projects/postgres/src/include/replication/reorderbuffer.h"
 
-#include "storage/ipc.h"
-#include "storage/proc.h"
+#include "/C/projects/postgres/src/include/storage/ipc.h"
+#include "/C/projects/postgres/src/include/storage/proc.h"
 
-#include "utils/builtins.h"
-#include "utils/fmgroids.h"
-#include "utils/lsyscache.h"
-#include "utils/rel.h"
-#include "utils/snapmgr.h"
+#include "/C/projects/postgres/src/include/utils/builtins.h"
+#include "/C/projects/postgres/src/include/utils/fmgroids.h"
+#include "/C/projects/postgres/src/include/utils/lsyscache.h"
+#include "/C/projects/postgres/src/include/utils/rel.h"
+#include "/C/projects/postgres/src/include/utils/snapmgr.h"
 
-#include "pgstat.h"
+#include "/C/projects/postgres/src/include/pgstat.h"
 
 #include "pglogical_executor.h"
 #include "pglogical_node.h"

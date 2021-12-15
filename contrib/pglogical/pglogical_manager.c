@@ -10,23 +10,23 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "postgres.h"
+#include "/C/projects/postgres/src/include/postgres.h"
 
-#include "miscadmin.h"
+#include "/C/projects/postgres/src/include/miscadmin.h"
 
-#include "access/xact.h"
+#include "/C/projects/postgres/src/include/access/xact.h"
 
-#include "commands/dbcommands.h"
-#include "commands/extension.h"
+#include "/C/projects/postgres/src/include/commands/dbcommands.h"
+#include "/C/projects/postgres/src/include/commands/extension.h"
 
-#include "storage/ipc.h"
-#include "storage/proc.h"
+#include "/C/projects/postgres/src/include/storage/ipc.h"
+#include "/C/projects/postgres/src/include/storage/proc.h"
 
-#include "utils/memutils.h"
-#include "utils/resowner.h"
-#include "utils/timestamp.h"
+#include "/C/projects/postgres/src/include/utils/memutils.h"
+#include "/C/projects/postgres/src/include/utils/resowner.h"
+#include "/C/projects/postgres/src/include/utils/timestamp.h"
 
-#include "pgstat.h"
+#include "/C/projects/postgres/src/include/pgstat.h"
 
 #include "pglogical_node.h"
 #include "pglogical_worker.h"
