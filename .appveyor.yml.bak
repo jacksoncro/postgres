@@ -21,6 +21,7 @@ build_script:
   - set PATH=C:/msys64/usr/bin;%PATH%
   - sh -l -c "./configure --enable-cassert --enable-debug --enable-nls --enable-tap-tests --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
   - sh -l -c "make world -j2"
+  - sh -l -c "make install world -j2"
 
 on_failure:
   - set HOME=.
