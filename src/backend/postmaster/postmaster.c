@@ -74,8 +74,7 @@
 #include <sys/socket.h>
 #include <fcntl.h>
 #include <sys/param.h>
-#include <C:\projects\postgres\src\include\port\win32
-etdb.h>
+#include <C:\projects\postgres\src\include\port\win32\netdb.h>
 #include <limits.h>
 
 #ifdef HAVE_SYS_SELECT_H
