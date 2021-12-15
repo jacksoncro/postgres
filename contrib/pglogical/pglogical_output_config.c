@@ -10,16 +10,17 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "/c/projects/postgres/src/include/postgres.h"
+#include "C:\projects\postgres\src\include\postgres.h"
 
-#include "/c/projects/postgres/src/include/catalog/catversion.h"
-#include "/c/projects/postgres/src/include/mb/pg_wchar.h"
-#include "/c/projects/postgres/src/include/nodes/makefuncs.h"
-#include "/c/projects/postgres/src/include/replication/reorderbuffer.h"
-#include "/c/projects/postgres/src/include/utils/builtins.h"
-#include "/c/projects/postgres/src/include/utils/int8.h"
+#include "C:\projects\postgres\src\include\catalog\catversion.h"
+#include "C:\projects\postgres\src\include\mb\pg_wchar.h"
+#include "C:\projects\postgres\src\include
+odes\makefuncs.h"
+#include "C:\projects\postgres\src\includeeplication\reorderbuffer.h"
+#include "C:\projects\postgres\src\include\utils\builtins.h"
+#include "C:\projects\postgres\src\include\utils\int8.h"
 
-#include "/c/projects/postgres/src/include/miscadmin.h"
+#include "C:\projects\postgres\src\include\miscadmin.h"
 
 #include "pglogical.h"
 #include "pglogical_output_config.h"

@@ -10,8 +10,8 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "/c/projects/postgres/src/interfaces/libpq/libpq-fe.h"
-#include "/c/projects/postgres/src/include/postgres_fe.h"
+#include "C:\projects\postgres\src\interfaces\libpq\libpq-fe.h"
+#include "C:\projects\postgres\src\include\postgres_fe.h"
 
 /* Note the order is important for debian here. */
 #if !defined(pg_attribute_printf)
@@ -27,7 +27,7 @@
 
 #endif
 
-#include "/c/projects/postgres/src/interfaces/libpq/pqexpbuffer.h"
+#include "C:\projects\postgres\src\interfaces\libpq\pqexpbuffer.h"
 
 #include "pglogical_fe.h"
 

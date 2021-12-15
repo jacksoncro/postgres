@@ -11,37 +11,38 @@
  *-------------------------------------------------------------------------
  */
 
-#include "/c/projects/postgres/src/include/postgres.h"
+#include "C:\projects\postgres\src\include\postgres.h"
 
-#include "/c/projects/postgres/src/include/funcapi.h"
-#include "/c/projects/postgres/src/include/miscadmin.h"
+#include "C:\projects\postgres\src\include\funcapi.h"
+#include "C:\projects\postgres\src\include\miscadmin.h"
 
-#include "/c/projects/postgres/src/include/access/genam.h"
-#include "/c/projects/postgres/src/include/access/hash.h"
-#include "/c/projects/postgres/src/include/access/heapam.h"
-#include "/c/projects/postgres/src/include/access/htup_details.h"
-#include "/c/projects/postgres/src/include/access/sysattr.h"
-#include "/c/projects/postgres/src/include/access/xact.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\hash.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 
-#include "/c/projects/postgres/src/include/catalog/dependency.h"
-#include "/c/projects/postgres/src/include/catalog/indexing.h"
-#include "/c/projects/postgres/src/include/catalog/namespace.h"
-#include "/c/projects/postgres/src/include/catalog/objectaddress.h"
-#include "/c/projects/postgres/src/include/catalog/pg_type.h"
+#include "C:\projects\postgres\src\include\catalog\dependency.h"
+#include "C:\projects\postgres\src\include\catalog\indexing.h"
+#include "C:\projects\postgres\src\include\catalog\namespace.h"
+#include "C:\projects\postgres\src\include\catalog\objectaddress.h"
+#include "C:\projects\postgres\src\include\catalog\pg_type.h"
 
-#include "/c/projects/postgres/src/include/executor/spi.h"
+#include "C:\projects\postgres\src\include\executor\spi.h"
 
-#include "/c/projects/postgres/src/include/nodes/makefuncs.h"
+#include "C:\projects\postgres\src\include
+odes\makefuncs.h"
 
-#include "/c/projects/postgres/src/include/replication/reorderbuffer.h"
+#include "C:\projects\postgres\src\includeeplication\reorderbuffer.h"
 
-#include "/c/projects/postgres/src/include/utils/array.h"
-#include "/c/projects/postgres/src/include/utils/builtins.h"
-#include "/c/projects/postgres/src/include/utils/catcache.h"
-#include "/c/projects/postgres/src/include/utils/fmgroids.h"
-#include "/c/projects/postgres/src/include/utils/inval.h"
-#include "/c/projects/postgres/src/include/utils/lsyscache.h"
-#include "/c/projects/postgres/src/include/utils/rel.h"
+#include "C:\projects\postgres\src\include\utils\array.h"
+#include "C:\projects\postgres\src\include\utils\builtins.h"
+#include "C:\projects\postgres\src\include\utils\catcache.h"
+#include "C:\projects\postgres\src\include\utils\fmgroids.h"
+#include "C:\projects\postgres\src\include\utils\inval.h"
+#include "C:\projects\postgres\src\include\utils\lsyscache.h"
+#include "C:\projects\postgres\src\include\utils\rel.h"
 
 #include "pglogical_dependency.h"
 #include "pglogical_node.h"

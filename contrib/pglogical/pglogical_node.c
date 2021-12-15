@@ -13,29 +13,30 @@
  *-------------------------------------------------------------------------
  */
 
-#include "/c/projects/postgres/src/include/postgres.h"
+#include "C:\projects\postgres\src\include\postgres.h"
 
-#include "/c/projects/postgres/src/include/access/genam.h"
-#include "/c/projects/postgres/src/include/access/hash.h"
-#include "/c/projects/postgres/src/include/access/heapam.h"
-#include "/c/projects/postgres/src/include/access/htup_details.h"
-#include "/c/projects/postgres/src/include/access/xact.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\hash.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 
-#include "/c/projects/postgres/src/include/catalog/indexing.h"
-#include "/c/projects/postgres/src/include/catalog/objectaddress.h"
-#include "/c/projects/postgres/src/include/catalog/pg_type.h"
+#include "C:\projects\postgres\src\include\catalog\indexing.h"
+#include "C:\projects\postgres\src\include\catalog\objectaddress.h"
+#include "C:\projects\postgres\src\include\catalog\pg_type.h"
 
-#include "/c/projects/postgres/src/include/commands/dbcommands.h"
+#include "C:\projects\postgres\src\include\commands\dbcommands.h"
 
-#include "/c/projects/postgres/src/include/miscadmin.h"
+#include "C:\projects\postgres\src\include\miscadmin.h"
 
-#include "/c/projects/postgres/src/include/nodes/makefuncs.h"
+#include "C:\projects\postgres\src\include
+odes\makefuncs.h"
 
-#include "/c/projects/postgres/src/include/utils/array.h"
-#include "/c/projects/postgres/src/include/utils/builtins.h"
-#include "/c/projects/postgres/src/include/utils/fmgroids.h"
-#include "/c/projects/postgres/src/include/utils/lsyscache.h"
-#include "/c/projects/postgres/src/include/utils/rel.h"
+#include "C:\projects\postgres\src\include\utils\array.h"
+#include "C:\projects\postgres\src\include\utils\builtins.h"
+#include "C:\projects\postgres\src\include\utils\fmgroids.h"
+#include "C:\projects\postgres\src\include\utils\lsyscache.h"
+#include "C:\projects\postgres\src\include\utils\rel.h"
 
 #include "pglogical_node.h"
 #include "pglogical_repset.h"

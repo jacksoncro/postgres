@@ -10,19 +10,19 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "/c/projects/postgres/src/include/postgres.h"
+#include "C:\projects\postgres\src\include\postgres.h"
 
-#include "/c/projects/postgres/src/include/fmgr.h"
-#include "/c/projects/postgres/src/include/miscadmin.h"
+#include "C:\projects\postgres\src\include\fmgr.h"
+#include "C:\projects\postgres\src\include\miscadmin.h"
 
-#include "/c/projects/postgres/src/include/replication/slot.h"
+#include "C:\projects\postgres\src\includeeplication\slot.h"
 
-#include "/c/projects/postgres/src/include/utils/pg_lsn.h"
+#include "C:\projects\postgres\src\include\utils\pg_lsn.h"
 
-#include "/c/projects/postgres/src/include/storage/ipc.h"
-#include "/c/projects/postgres/src/include/storage/proc.h"
+#include "C:\projects\postgres\src\include\storage\ipc.h"
+#include "C:\projects\postgres\src\include\storage\proc.h"
 
-#include "/c/projects/postgres/src/include/pgstat.h"
+#include "C:\projects\postgres\src\include\pgstat.h"
 
 #include "pglogical.h"
 

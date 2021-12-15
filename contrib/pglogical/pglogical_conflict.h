@@ -13,11 +13,12 @@
 #ifndef PGLOGICAL_CONGLICT_H
 #define PGLOGICAL_CONGLICT_H
 
-#include "/c/projects/postgres/src/include/nodes/execnodes.h"
+#include "C:\projects\postgres\src\include
+odes\execnodes.h"
 
-#include "/c/projects/postgres/src/include/replication/origin.h"
+#include "C:\projects\postgres\src\includeeplication\origin.h"
 
-#include "/c/projects/postgres/src/include/utils/guc.h"
+#include "C:\projects\postgres\src\include\utils\guc.h"
 
 #include "pglogical_proto_native.h"
 

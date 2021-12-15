@@ -13,13 +13,13 @@
 #ifndef PGLOGICAL_H
 #define PGLOGICAL_H
 
-#include "/c/projects/postgres/src/include/storage/s_lock.h"
-#include "/c/projects/postgres/src/include/postmaster/bgworker.h"
-#include "/c/projects/postgres/src/include/utils/array.h"
-#include "/c/projects/postgres/src/include/access/xlogdefs.h"
-#include "/c/projects/postgres/src/include/executor/executor.h"
+#include "C:\projects\postgres\src\include\storage\s_lock.h"
+#include "C:\projects\postgres\src\include\postmaster\bgworker.h"
+#include "C:\projects\postgres\src\include\utils\array.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "C:\projects\postgres\src\include\executor\executor.h"
 
-#include "/c/projects/postgres/src/interfaces/libpq/libpq-fe.h"
+#include "C:\projects\postgres\src\interfaces\libpq\libpq-fe.h"
 
 #include "pglogical_fe.h"
 #include "pglogical_node.h"
@@ -84,7 +84,7 @@ extern int64 sequence_get_last_value(Oid seqoid);
 
 extern bool in_pglogical_replicate_ddl_command;
 
-#include "/c/projects/postgres/src/include/utils/memdebug.h"
+#include "C:\projects\postgres\src\include\utils\memdebug.h"
 
 /*
  * PostgreSQL exposes stubs for some Valgrind macros, but there are some

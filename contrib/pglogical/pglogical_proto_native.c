@@ -10,21 +10,22 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "/c/projects/postgres/src/include/postgres.h"
+#include "C:\projects\postgres\src\include\postgres.h"
 
-#include "/c/projects/postgres/src/include/access/sysattr.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
 #if PG_VERSION_NUM >= 130000
-#include "/c/projects/postgres/src/include/access/detoast.h"
+#include "C:\projects\postgres\src\include\access\detoast.h"
 #else
-#include "/c/projects/postgres/src/include/access/tuptoaster.h"
+#include "C:\projects\postgres\src\include\access\tuptoaster.h"
 #endif
-#include "/c/projects/postgres/src/include/catalog/pg_type.h"
-#include "/c/projects/postgres/src/include/libpq/pqformat.h"
-#include "/c/projects/postgres/src/include/nodes/parsenodes.h"
-#include "/c/projects/postgres/src/include/replication/reorderbuffer.h"
-#include "/c/projects/postgres/src/include/utils/lsyscache.h"
-#include "/c/projects/postgres/src/include/utils/rel.h"
-#include "/c/projects/postgres/src/include/utils/syscache.h"
+#include "C:\projects\postgres\src\include\catalog\pg_type.h"
+#include "C:\projects\postgres\src\include\libpq\pqformat.h"
+#include "C:\projects\postgres\src\include
+odes\parsenodes.h"
+#include "C:\projects\postgres\src\includeeplication\reorderbuffer.h"
+#include "C:\projects\postgres\src\include\utils\lsyscache.h"
+#include "C:\projects\postgres\src\include\utils\rel.h"
+#include "C:\projects\postgres\src\include\utils\syscache.h"
 
 #include "pglogical_output_plugin.h"
 #include "pglogical_output_proto.h"

@@ -10,8 +10,8 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "/c/projects/postgres/src/include/postgres.h"
-#include "/c/projects/postgres/src/include/replication/reorderbuffer.h"
+#include "C:\projects\postgres\src\include\postgres.h"
+#include "C:\projects\postgres\src\includeeplication\reorderbuffer.h"
 #include "pglogical_output_plugin.h"
 
 #include "pglogical_output_proto.h"

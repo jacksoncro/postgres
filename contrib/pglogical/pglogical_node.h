@@ -13,7 +13,7 @@
 #ifndef PGLOGICAL_NODE_H
 #define PGLOGICAL_NODE_H
 
-#include "/c/projects/postgres/src/include/datatype/timestamp.h"
+#include "C:\projects\postgres\src\include\datatype\timestamp.h"
 
 typedef struct PGLogicalNode
 {

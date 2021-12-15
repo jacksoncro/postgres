@@ -2,12 +2,12 @@
 #define PG_LOGICAL_COMPAT_H
 
 
-#include "/c/projects/postgres/src/include/pgstat.h"
-#include "/c/projects/postgres/src/include/catalog/indexing.h"
-#include "/c/projects/postgres/src/include/commands/trigger.h"
-#include "/c/projects/postgres/src/include/executor/executor.h"
-#include "/c/projects/postgres/src/include/replication/origin.h"
-#include "/c/projects/postgres/src/include/storage/lwlock.h"
+#include "C:\projects\postgres\src\include\pgstat.h"
+#include "C:\projects\postgres\src\include\catalog\indexing.h"
+#include "C:\projects\postgres\src\include\commands\trigger.h"
+#include "C:\projects\postgres\src\include\executor\executor.h"
+#include "C:\projects\postgres\src\includeeplication\origin.h"
+#include "C:\projects\postgres\src\include\storage\lwlock.h"
 
 extern LWLockPadded *GetNamedLWLockTranche(const char *tranche_name);
 extern void RequestNamedLWLockTranche(const char *tranche_name, int num_lwlocks);
