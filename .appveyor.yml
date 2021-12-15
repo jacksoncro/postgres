@@ -27,7 +27,7 @@ build_script:
   - sh -l -c "make install world -j2"
   
 artifacts:
-  - path: %APPVEYOR_BUILD_FOLDER%/build
+  - path: c:\projects\postgres\build
     name: postgres
     type: zip
 

@@ -16,12 +16,20 @@ install:
   - sh -l -c "curl -L http://cpanmin.us | perl - --self-upgrade"
   - sh -l -c "cpanm --notest IPC::Run"
 
+
 build_script:
   - set HOME=.
   - set PATH=C:/msys64/usr/bin;%PATH%
-  - sh -l -c "./configure --enable-cassert --enable-debug --enable-nls --enable-tap-tests --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
+  - sh -l -c "mkdir build"
+  - sh -l -c "./configure --prefix=/c/projects/postgres/build --enable-cassert --enable-debug --enable-nls --enable-tap-tests --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
+  - sh -l -c "cd build"
   - sh -l -c "make world -j2"
   - sh -l -c "make install world -j2"
+  
+artifacts:
+  - path: %APPVEYOR_BUILD_FOLDER%/build
+    name: postgres
+    type: zip
 
 on_failure:
   - set HOME=.
