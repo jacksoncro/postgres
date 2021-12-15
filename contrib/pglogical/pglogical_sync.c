@@ -11,56 +11,56 @@
  *-------------------------------------------------------------------------
  */
 
-#include "/C/projects/postgres/src/include/postgres.h"
+#include "/c/projects/postgres/src/include/postgres.h"
 
-#include </C/projects/postgres/src/include/port/win32_msvc/unistd.h>
+#include </c/projects/postgres/src/include/port/win32_msvc/unistd.h>
 
 #ifdef WIN32
 #include <process.h>
 #else
-#include </C/projects/postgres/src/include/port/win32/sys/wait.h>
+#include </c/projects/postgres/src/include/port/win32/sys/wait.h>
 #endif
 
-#include "/C/projects/postgres/src/interfaces/libpq/libpq-fe.h"
+#include "/c/projects/postgres/src/interfaces/libpq/libpq-fe.h"
 
-#include "/C/projects/postgres/src/include/miscadmin.h"
+#include "/c/projects/postgres/src/include/miscadmin.h"
 
-#include "/C/projects/postgres/src/include/access/genam.h"
-#include "/C/projects/postgres/src/include/access/hash.h"
-#include "/C/projects/postgres/src/include/access/heapam.h"
-#include "/C/projects/postgres/src/include/access/skey.h"
-#include "/C/projects/postgres/src/include/access/stratnum.h"
-#include "/C/projects/postgres/src/include/access/xact.h"
+#include "/c/projects/postgres/src/include/access/genam.h"
+#include "/c/projects/postgres/src/include/access/hash.h"
+#include "/c/projects/postgres/src/include/access/heapam.h"
+#include "/c/projects/postgres/src/include/access/skey.h"
+#include "/c/projects/postgres/src/include/access/stratnum.h"
+#include "/c/projects/postgres/src/include/access/xact.h"
 
-#include "/C/projects/postgres/src/include/catalog/indexing.h"
-#include "/C/projects/postgres/src/include/catalog/namespace.h"
+#include "/c/projects/postgres/src/include/catalog/indexing.h"
+#include "/c/projects/postgres/src/include/catalog/namespace.h"
 
-#include "/C/projects/postgres/src/include/commands/dbcommands.h"
-#include "/C/projects/postgres/src/include/commands/tablecmds.h"
+#include "/c/projects/postgres/src/include/commands/dbcommands.h"
+#include "/c/projects/postgres/src/include/commands/tablecmds.h"
 
-#include "/C/projects/postgres/src/include/lib/stringinfo.h"
+#include "/c/projects/postgres/src/include/lib/stringinfo.h"
 
-#include "/C/projects/postgres/src/include/utils/memutils.h"
+#include "/c/projects/postgres/src/include/utils/memutils.h"
 
-#include "/C/projects/postgres/src/include/nodes/makefuncs.h"
-#include "/C/projects/postgres/src/include/nodes/parsenodes.h"
+#include "/c/projects/postgres/src/include/nodes/makefuncs.h"
+#include "/c/projects/postgres/src/include/nodes/parsenodes.h"
 
-#include "/C/projects/postgres/src/include/pgstat.h"
+#include "/c/projects/postgres/src/include/pgstat.h"
 
-#include "/C/projects/postgres/src/include/replication/origin.h"
+#include "/c/projects/postgres/src/include/replication/origin.h"
 
-#include "/C/projects/postgres/src/include/storage/fd.h"
-#include "/C/projects/postgres/src/include/storage/ipc.h"
-#include "/C/projects/postgres/src/include/storage/proc.h"
+#include "/c/projects/postgres/src/include/storage/fd.h"
+#include "/c/projects/postgres/src/include/storage/ipc.h"
+#include "/c/projects/postgres/src/include/storage/proc.h"
 
-#include "/C/projects/postgres/src/include/tcop/utility.h"
+#include "/c/projects/postgres/src/include/tcop/utility.h"
 
-#include "/C/projects/postgres/src/include/utils/builtins.h"
-#include "/C/projects/postgres/src/include/utils/fmgroids.h"
-#include "/C/projects/postgres/src/include/utils/guc.h"
-#include "/C/projects/postgres/src/include/utils/pg_lsn.h"
-#include "/C/projects/postgres/src/include/utils/rel.h"
-#include "/C/projects/postgres/src/include/utils/resowner.h"
+#include "/c/projects/postgres/src/include/utils/builtins.h"
+#include "/c/projects/postgres/src/include/utils/fmgroids.h"
+#include "/c/projects/postgres/src/include/utils/guc.h"
+#include "/c/projects/postgres/src/include/utils/pg_lsn.h"
+#include "/c/projects/postgres/src/include/utils/rel.h"
+#include "/c/projects/postgres/src/include/utils/resowner.h"
 
 #include "pglogical_relcache.h"
 #include "pglogical_repset.h"

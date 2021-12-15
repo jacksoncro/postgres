@@ -10,40 +10,40 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "/C/projects/postgres/src/include/postgres.h"
+#include "/c/projects/postgres/src/include/postgres.h"
 
-#include "/C/projects/postgres/src/interfaces/libpq/libpq-fe.h"
+#include "/c/projects/postgres/src/interfaces/libpq/libpq-fe.h"
 
-#include "/C/projects/postgres/src/include/miscadmin.h"
+#include "/c/projects/postgres/src/include/miscadmin.h"
 
-#include "/C/projects/postgres/src/include/access/commit_ts.h"
-#include "/C/projects/postgres/src/include/access/heapam.h"
-#include "/C/projects/postgres/src/include/access/htup_details.h"
-#include "/C/projects/postgres/src/include/access/transam.h"
-#include "/C/projects/postgres/src/include/access/xact.h"
+#include "/c/projects/postgres/src/include/access/commit_ts.h"
+#include "/c/projects/postgres/src/include/access/heapam.h"
+#include "/c/projects/postgres/src/include/access/htup_details.h"
+#include "/c/projects/postgres/src/include/access/transam.h"
+#include "/c/projects/postgres/src/include/access/xact.h"
 
-#include "/C/projects/postgres/src/include/catalog/pg_type.h"
+#include "/c/projects/postgres/src/include/catalog/pg_type.h"
 
-#include "/C/projects/postgres/src/include/executor/executor.h"
+#include "/c/projects/postgres/src/include/executor/executor.h"
 
-#include "/C/projects/postgres/src/include/parser/parse_relation.h"
+#include "/c/projects/postgres/src/include/parser/parse_relation.h"
 
-#include "/C/projects/postgres/src/include/replication/origin.h"
-#include "/C/projects/postgres/src/include/replication/reorderbuffer.h"
+#include "/c/projects/postgres/src/include/replication/origin.h"
+#include "/c/projects/postgres/src/include/replication/reorderbuffer.h"
 
-#include "/C/projects/postgres/src/include/storage/bufmgr.h"
-#include "/C/projects/postgres/src/include/storage/lmgr.h"
+#include "/c/projects/postgres/src/include/storage/bufmgr.h"
+#include "/c/projects/postgres/src/include/storage/lmgr.h"
 
-#include "/C/projects/postgres/src/include/utils/builtins.h"
-#include "/C/projects/postgres/src/include/utils/datetime.h"
-#include "/C/projects/postgres/src/include/utils/lsyscache.h"
-#include "/C/projects/postgres/src/include/utils/rel.h"
-#include "/C/projects/postgres/src/include/utils/snapmgr.h"
-#include "/C/projects/postgres/src/include/utils/syscache.h"
+#include "/c/projects/postgres/src/include/utils/builtins.h"
+#include "/c/projects/postgres/src/include/utils/datetime.h"
+#include "/c/projects/postgres/src/include/utils/lsyscache.h"
+#include "/c/projects/postgres/src/include/utils/rel.h"
+#include "/c/projects/postgres/src/include/utils/snapmgr.h"
+#include "/c/projects/postgres/src/include/utils/syscache.h"
 #if PG_VERSION_NUM < 120000
-#include "/C/projects/postgres/src/include/utils/tqual.h"
+#include "/c/projects/postgres/src/include/utils/tqual.h"
 #endif
-#include "/C/projects/postgres/src/include/utils/typcache.h"
+#include "/c/projects/postgres/src/include/utils/typcache.h"
 
 #include "pglogical_conflict.h"
 #include "pglogical_proto_native.h"

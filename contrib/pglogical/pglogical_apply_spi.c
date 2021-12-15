@@ -15,30 +15,30 @@
  *-------------------------------------------------------------------------
  */
 #include <stdio.h>
-#include </C/projects/postgres/src/include/port/win32_msvc/unistd.h>
+#include </c/projects/postgres/src/include/port/win32_msvc/unistd.h>
 
-#include "/C/projects/postgres/src/include/postgres.h"
+#include "/c/projects/postgres/src/include/postgres.h"
 
-#include "/C/projects/postgres/src/include/access/htup_details.h"
-#include "/C/projects/postgres/src/include/access/sysattr.h"
-#include "/C/projects/postgres/src/include/access/xact.h"
+#include "/c/projects/postgres/src/include/access/htup_details.h"
+#include "/c/projects/postgres/src/include/access/sysattr.h"
+#include "/c/projects/postgres/src/include/access/xact.h"
 
-#include "/C/projects/postgres/src/include/commands/copy.h"
+#include "/c/projects/postgres/src/include/commands/copy.h"
 
-#include "/C/projects/postgres/src/include/executor/executor.h"
-#include "/C/projects/postgres/src/include/executor/spi.h"
+#include "/c/projects/postgres/src/include/executor/executor.h"
+#include "/c/projects/postgres/src/include/executor/spi.h"
 
-#include "/C/projects/postgres/src/include/replication/reorderbuffer.h"
+#include "/c/projects/postgres/src/include/replication/reorderbuffer.h"
 
-#include "/C/projects/postgres/src/include/storage/fd.h"
+#include "/c/projects/postgres/src/include/storage/fd.h"
 
-#include "/C/projects/postgres/src/include/tcop/pquery.h"
-#include "/C/projects/postgres/src/include/tcop/utility.h"
+#include "/c/projects/postgres/src/include/tcop/pquery.h"
+#include "/c/projects/postgres/src/include/tcop/utility.h"
 
-#include "/C/projects/postgres/src/include/utils/lsyscache.h"
-#include "/C/projects/postgres/src/include/utils/memutils.h"
-#include "/C/projects/postgres/src/include/utils/rel.h"
-#include "/C/projects/postgres/src/include/utils/builtins.h"
+#include "/c/projects/postgres/src/include/utils/lsyscache.h"
+#include "/c/projects/postgres/src/include/utils/memutils.h"
+#include "/c/projects/postgres/src/include/utils/rel.h"
+#include "/c/projects/postgres/src/include/utils/builtins.h"
 
 #include "pglogical.h"
 #include "pglogical_apply_spi.h"

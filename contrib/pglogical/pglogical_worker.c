@@ -10,26 +10,26 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "/C/projects/postgres/src/include/postgres.h"
+#include "/c/projects/postgres/src/include/postgres.h"
 
-#include "/C/projects/postgres/src/include/miscadmin.h"
+#include "/c/projects/postgres/src/include/miscadmin.h"
 
-#include "/C/projects/postgres/src/include/libpq/libpq-be.h"
+#include "/c/projects/postgres/src/include/libpq/libpq-be.h"
 
-#include "/C/projects/postgres/src/include/access/xact.h"
+#include "/c/projects/postgres/src/include/access/xact.h"
 
-#include "/C/projects/postgres/src/include/commands/dbcommands.h"
+#include "/c/projects/postgres/src/include/commands/dbcommands.h"
 
-#include "/C/projects/postgres/src/include/storage/ipc.h"
-#include "/C/projects/postgres/src/include/storage/proc.h"
-#include "/C/projects/postgres/src/include/storage/procsignal.h"
-#include "/C/projects/postgres/src/include/storage/procarray.h"
+#include "/c/projects/postgres/src/include/storage/ipc.h"
+#include "/c/projects/postgres/src/include/storage/proc.h"
+#include "/c/projects/postgres/src/include/storage/procsignal.h"
+#include "/c/projects/postgres/src/include/storage/procarray.h"
 
-#include "/C/projects/postgres/src/include/utils/guc.h"
-#include "/C/projects/postgres/src/include/utils/memutils.h"
-#include "/C/projects/postgres/src/include/utils/timestamp.h"
+#include "/c/projects/postgres/src/include/utils/guc.h"
+#include "/c/projects/postgres/src/include/utils/memutils.h"
+#include "/c/projects/postgres/src/include/utils/timestamp.h"
 
-#include "/C/projects/postgres/src/include/pgstat.h"
+#include "/c/projects/postgres/src/include/pgstat.h"
 
 #include "pglogical_sync.h"
 #include "pglogical_worker.h"

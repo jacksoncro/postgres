@@ -13,7 +13,7 @@
 #ifndef PGLOGICAL_RPC_H
 #define PGLOGICAL_RPC_H
 
-#include "/C/projects/postgres/src/interfaces/libpq/libpq-fe.h"
+#include "/c/projects/postgres/src/interfaces/libpq/libpq-fe.h"
 
 extern List *pg_logical_get_remote_repset_tables(PGconn *conn,
 									List *replication_sets);

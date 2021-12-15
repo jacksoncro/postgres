@@ -1,12 +1,12 @@
 #ifndef PG_LOGICAL_COMPAT_H
 #define PG_LOGICAL_COMPAT_H
 
-#include "/C/projects/postgres/src/include/access/amapi.h"
-#include "/C/projects/postgres/src/include/access/heapam.h"
-#include "/C/projects/postgres/src/include/access/table.h"
-#include "/C/projects/postgres/src/include/access/tableam.h"
-#include "/C/projects/postgres/src/include/replication/origin.h"
-#include "/C/projects/postgres/src/include/utils/varlena.h"
+#include "/c/projects/postgres/src/include/access/amapi.h"
+#include "/c/projects/postgres/src/include/access/heapam.h"
+#include "/c/projects/postgres/src/include/access/table.h"
+#include "/c/projects/postgres/src/include/access/tableam.h"
+#include "/c/projects/postgres/src/include/replication/origin.h"
+#include "/c/projects/postgres/src/include/utils/varlena.h"
 
 #define WaitLatchOrSocket(latch, wakeEvents, sock, timeout) \
 	WaitLatchOrSocket(latch, wakeEvents, sock, timeout, PG_WAIT_EXTENSION)

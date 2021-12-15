@@ -13,8 +13,8 @@
 #ifndef PG_LOGICAL_OUTPUT_PLUGIN_H
 #define PG_LOGICAL_OUTPUT_PLUGIN_H
 
-#include "/C/projects/postgres/src/include/nodes/pg_list.h"
-#include "/C/projects/postgres/src/include/nodes/primnodes.h"
+#include "/c/projects/postgres/src/include/nodes/pg_list.h"
+#include "/c/projects/postgres/src/include/nodes/primnodes.h"
 
 /* summon cross-PG-version compatibility voodoo */
 #include "pglogical_compat.h"

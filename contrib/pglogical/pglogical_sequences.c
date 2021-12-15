@@ -10,27 +10,27 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "/C/projects/postgres/src/include/postgres.h"
+#include "/c/projects/postgres/src/include/postgres.h"
 
-#include "/C/projects/postgres/src/include/miscadmin.h"
+#include "/c/projects/postgres/src/include/miscadmin.h"
 
-#include "/C/projects/postgres/src/include/access/genam.h"
-#include "/C/projects/postgres/src/include/access/heapam.h"
-#include "/C/projects/postgres/src/include/access/htup_details.h"
-#include "/C/projects/postgres/src/include/access/xact.h"
+#include "/c/projects/postgres/src/include/access/genam.h"
+#include "/c/projects/postgres/src/include/access/heapam.h"
+#include "/c/projects/postgres/src/include/access/htup_details.h"
+#include "/c/projects/postgres/src/include/access/xact.h"
 
-#include "/C/projects/postgres/src/include/catalog/indexing.h"
+#include "/c/projects/postgres/src/include/catalog/indexing.h"
 
-#include "/C/projects/postgres/src/include/commands/sequence.h"
+#include "/c/projects/postgres/src/include/commands/sequence.h"
 
-#include "/C/projects/postgres/src/include/nodes/makefuncs.h"
+#include "/c/projects/postgres/src/include/nodes/makefuncs.h"
 
-#include "/C/projects/postgres/src/include/replication/reorderbuffer.h"
+#include "/c/projects/postgres/src/include/replication/reorderbuffer.h"
 
-#include "/C/projects/postgres/src/include/utils/fmgroids.h"
-#include "/C/projects/postgres/src/include/utils/json.h"
-#include "/C/projects/postgres/src/include/utils/lsyscache.h"
-#include "/C/projects/postgres/src/include/utils/rel.h"
+#include "/c/projects/postgres/src/include/utils/fmgroids.h"
+#include "/c/projects/postgres/src/include/utils/json.h"
+#include "/c/projects/postgres/src/include/utils/lsyscache.h"
+#include "/c/projects/postgres/src/include/utils/rel.h"
 
 #include "pglogical.h"
 #include "pglogical_queue.h"

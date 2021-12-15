@@ -3,14 +3,14 @@
 
 #include <signal.h>
 
-#include "/C/projects/postgres/src/include/access/xlog.h"
-#include "/C/projects/postgres/src/include/access/xlogdefs.h"
-#include "/C/projects/postgres/src/include/catalog/objectaddress.h"
-#include "/C/projects/postgres/src/include/catalog/pg_trigger.h"
-#include "/C/projects/postgres/src/include/commands/trigger.h"
-#include "/C/projects/postgres/src/include/nodes/pg_list.h"
-#include "/C/projects/postgres/src/include/storage/lwlock.h"
-#include "/C/projects/postgres/src/include/utils/array.h"
+#include "/c/projects/postgres/src/include/access/xlog.h"
+#include "/c/projects/postgres/src/include/access/xlogdefs.h"
+#include "/c/projects/postgres/src/include/catalog/objectaddress.h"
+#include "/c/projects/postgres/src/include/catalog/pg_trigger.h"
+#include "/c/projects/postgres/src/include/commands/trigger.h"
+#include "/c/projects/postgres/src/include/nodes/pg_list.h"
+#include "/c/projects/postgres/src/include/storage/lwlock.h"
+#include "/c/projects/postgres/src/include/utils/array.h"
 
 /* 9.4 lacks PG_*_MAX */
 #ifndef PG_UINT32_MAX

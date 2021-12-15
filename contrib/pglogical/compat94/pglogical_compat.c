@@ -11,37 +11,37 @@
  *-------------------------------------------------------------------------
  */
 
-#include "/C/projects/postgres/src/include/postgres.h"
+#include "/c/projects/postgres/src/include/postgres.h"
 
-#include "/C/projects/postgres/src/include/funcapi.h"
-#include "/C/projects/postgres/src/include/miscadmin.h"
+#include "/c/projects/postgres/src/include/funcapi.h"
+#include "/c/projects/postgres/src/include/miscadmin.h"
 
-#include "/C/projects/postgres/src/include/access/genam.h"
-#include "/C/projects/postgres/src/include/access/heapam.h"
-#include "/C/projects/postgres/src/include/access/htup_details.h"
-#include "/C/projects/postgres/src/include/access/xact.h"
+#include "/c/projects/postgres/src/include/access/genam.h"
+#include "/c/projects/postgres/src/include/access/heapam.h"
+#include "/c/projects/postgres/src/include/access/htup_details.h"
+#include "/c/projects/postgres/src/include/access/xact.h"
 
-#include "/C/projects/postgres/src/include/catalog/indexing.h"
-#include "/C/projects/postgres/src/include/catalog/namespace.h"
-#include "/C/projects/postgres/src/include/catalog/pg_database.h"
-#include "/C/projects/postgres/src/include/catalog/pg_type.h"
+#include "/c/projects/postgres/src/include/catalog/indexing.h"
+#include "/c/projects/postgres/src/include/catalog/namespace.h"
+#include "/c/projects/postgres/src/include/catalog/pg_database.h"
+#include "/c/projects/postgres/src/include/catalog/pg_type.h"
 
-#include "/C/projects/postgres/src/include/utils/array.h"
-#include "/C/projects/postgres/src/include/utils/builtins.h"
-#include "/C/projects/postgres/src/include/utils/fmgroids.h"
-#include "/C/projects/postgres/src/include/utils/lsyscache.h"
-#include "/C/projects/postgres/src/include/utils/memutils.h"
-#include "/C/projects/postgres/src/include/utils/pg_lsn.h"
-#include "/C/projects/postgres/src/include/utils/rel.h"
-#include "/C/projects/postgres/src/include/utils/snapmgr.h"
-#include "/C/projects/postgres/src/include/utils/syscache.h"
-#include "/C/projects/postgres/src/include/utils/tqual.h"
+#include "/c/projects/postgres/src/include/utils/array.h"
+#include "/c/projects/postgres/src/include/utils/builtins.h"
+#include "/c/projects/postgres/src/include/utils/fmgroids.h"
+#include "/c/projects/postgres/src/include/utils/lsyscache.h"
+#include "/c/projects/postgres/src/include/utils/memutils.h"
+#include "/c/projects/postgres/src/include/utils/pg_lsn.h"
+#include "/c/projects/postgres/src/include/utils/rel.h"
+#include "/c/projects/postgres/src/include/utils/snapmgr.h"
+#include "/c/projects/postgres/src/include/utils/syscache.h"
+#include "/c/projects/postgres/src/include/utils/tqual.h"
 
-#include "/C/projects/postgres/src/include/postmaster/bgworker_internals.h"
+#include "/c/projects/postgres/src/include/postmaster/bgworker_internals.h"
 
 #include "pglogical_compat.h"
-#include "/C/projects/postgres/src/include/replication/origin.h"
-#include "/C/projects/postgres/src/include/access/commit_ts.h"
+#include "/c/projects/postgres/src/include/replication/origin.h"
+#include "/c/projects/postgres/src/include/access/commit_ts.h"
 
 #define InvalidRepNodeId 0
 

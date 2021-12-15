@@ -11,7 +11,7 @@
  *-------------------------------------------------------------------------
  */
 
-#include "/C/projects/postgres/src/include/postgres.h"
+#include "/c/projects/postgres/src/include/postgres.h"
 
 #include "pglogical_compat.h"
 

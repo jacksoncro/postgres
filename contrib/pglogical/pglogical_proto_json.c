@@ -10,35 +10,35 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "/C/projects/postgres/src/include/postgres.h"
+#include "/c/projects/postgres/src/include/postgres.h"
 
-#include "/C/projects/postgres/src/include/access/sysattr.h"
-#include "/C/projects/postgres/src/include/catalog/index.h"
-#include "/C/projects/postgres/src/include/catalog/namespace.h"
-#include "/C/projects/postgres/src/include/catalog/pg_class.h"
-#include "/C/projects/postgres/src/include/catalog/pg_database.h"
-#include "/C/projects/postgres/src/include/catalog/pg_namespace.h"
-#include "/C/projects/postgres/src/include/catalog/pg_type.h"
-#include "/C/projects/postgres/src/include/commands/dbcommands.h"
-#include "/C/projects/postgres/src/include/executor/spi.h"
-#include "/C/projects/postgres/src/include/libpq/pqformat.h"
-#include "/C/projects/postgres/src/include/mb/pg_wchar.h"
-#include "/C/projects/postgres/src/include/miscadmin.h"
-#include "/C/projects/postgres/src/include/replication/reorderbuffer.h"
-#include "/C/projects/postgres/src/include/utils/builtins.h"
-#include "/C/projects/postgres/src/include/utils/json.h"
-#include "/C/projects/postgres/src/include/utils/lsyscache.h"
-#include "/C/projects/postgres/src/include/utils/memutils.h"
-#include "/C/projects/postgres/src/include/utils/rel.h"
-#include "/C/projects/postgres/src/include/utils/syscache.h"
-#include "/C/projects/postgres/src/include/utils/timestamp.h"
-#include "/C/projects/postgres/src/include/utils/typcache.h"
+#include "/c/projects/postgres/src/include/access/sysattr.h"
+#include "/c/projects/postgres/src/include/catalog/index.h"
+#include "/c/projects/postgres/src/include/catalog/namespace.h"
+#include "/c/projects/postgres/src/include/catalog/pg_class.h"
+#include "/c/projects/postgres/src/include/catalog/pg_database.h"
+#include "/c/projects/postgres/src/include/catalog/pg_namespace.h"
+#include "/c/projects/postgres/src/include/catalog/pg_type.h"
+#include "/c/projects/postgres/src/include/commands/dbcommands.h"
+#include "/c/projects/postgres/src/include/executor/spi.h"
+#include "/c/projects/postgres/src/include/libpq/pqformat.h"
+#include "/c/projects/postgres/src/include/mb/pg_wchar.h"
+#include "/c/projects/postgres/src/include/miscadmin.h"
+#include "/c/projects/postgres/src/include/replication/reorderbuffer.h"
+#include "/c/projects/postgres/src/include/utils/builtins.h"
+#include "/c/projects/postgres/src/include/utils/json.h"
+#include "/c/projects/postgres/src/include/utils/lsyscache.h"
+#include "/c/projects/postgres/src/include/utils/memutils.h"
+#include "/c/projects/postgres/src/include/utils/rel.h"
+#include "/c/projects/postgres/src/include/utils/syscache.h"
+#include "/c/projects/postgres/src/include/utils/timestamp.h"
+#include "/c/projects/postgres/src/include/utils/typcache.h"
 
 #include "pglogical_output_plugin.h"
 #include "pglogical_proto_json.h"
 
 #ifdef HAVE_REPLICATION_ORIGINS
-#include "/C/projects/postgres/src/include/replication/origin.h"
+#include "/c/projects/postgres/src/include/replication/origin.h"
 #endif
 
 static void
@@ -189,15 +189,15 @@ json_write_startup_message(StringInfo out, List *msg)
  *
  * Current as of commit 272adf4f9cd67df323ae57ff3dee238b649d3b73
  */
-#include "/C/projects/postgres/src/include/parser/parse_coerce.h"
+#include "/c/projects/postgres/src/include/parser/parse_coerce.h"
 
-#include "/C/projects/postgres/src/include/utils/date.h"
-#include "/C/projects/postgres/src/include/utils/datetime.h"
+#include "/c/projects/postgres/src/include/utils/date.h"
+#include "/c/projects/postgres/src/include/utils/datetime.h"
 
 #if PG_VERSION_NUM >= 130000
-#include "/C/projects/postgres/src/include/common/jsonapi.h"
+#include "/c/projects/postgres/src/include/common/jsonapi.h"
 #else
-#include "/C/projects/postgres/src/include/utils/jsonapi.h"
+#include "/c/projects/postgres/src/include/utils/jsonapi.h"
 #endif
 
 /*
