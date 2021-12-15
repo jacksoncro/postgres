@@ -101,7 +101,7 @@ endif
 EXTRA_CLEAN += $(control_path)
 
 
-PGXS = /c/projects/postgres/src/makefiles/pgxs
+PGXS = /c/projects/postgres/src/makefiles/pgxs.mk
 include $(PGXS)
 
 
