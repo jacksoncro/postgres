@@ -22,7 +22,7 @@ system_or_bail 'pwd';
 system_or_bail 'cp', 'regress-pg_hba.conf', '/tmp/tmp_020_pdatadir/pg_hba.conf';
 system_or_bail 'cp', 'regress-pg_hba.conf', '/tmp/tmp_020_sdatadir/pg_hba.conf';
 
-my $pg_version = 114;
+my $pg_version = `pg_config --version| sed 's/[^0-9\.]//g' | awk -F . '{ print \$1\$2 }'`;
 
 if ($pg_version >= 95) {
     `cat t/perl-95-postgresql.conf>>/tmp/tmp_020_pdatadir/postgresql.conf`;
