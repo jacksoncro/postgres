@@ -33,7 +33,8 @@
 #include <sys/ucred.h>
 #endif
 #ifndef  MAXHOSTNAMELEN
-#include <netdb.h>				/* for MAXHOSTNAMELEN on some */
+#include <C:\projects\postgres\src\include\port\win32
+etdb.h>				/* for MAXHOSTNAMELEN on some */
 #endif
 #include <pwd.h>
 #endif

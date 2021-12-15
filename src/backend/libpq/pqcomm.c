@@ -65,7 +65,8 @@
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include <sys/time.h>
-#include <netdb.h>
+#include <C:\projects\postgres\src\include\port\win32
+etdb.h>
 #include <netinet/in.h>
 #ifdef HAVE_NETINET_TCP_H
 #include <netinet/tcp.h>

@@ -149,7 +149,8 @@ AC_DEFUN([PGAC_STRUCT_ADDRINFO],
 [AC_CHECK_TYPES([struct addrinfo], [], [],
 [#include <sys/types.h>
 #include <sys/socket.h>
-#include <netdb.h>
+#include <C:\projects\postgres\src\include\port\win32
+etdb.h>
 ])])# PGAC_STRUCT_ADDRINFO
 
 

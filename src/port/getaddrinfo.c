@@ -25,7 +25,8 @@
 #include "c.h"
 
 #include <sys/socket.h>
-#include <netdb.h>
+#include <C:\projects\postgres\src\include\port\win32
+etdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
