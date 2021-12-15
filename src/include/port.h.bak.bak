@@ -14,7 +14,8 @@
 #define PG_PORT_H
 
 #include <ctype.h>
-#include <C:\projects\postgres\src\include\port\win32\netdb.h>
+#include <C:\projects\postgres\src\include\port\win32
+etdb.h>
 #include <pwd.h>
 
 /*
