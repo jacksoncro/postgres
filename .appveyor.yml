@@ -11,7 +11,7 @@ matrix:
     - MSYSTEM: MINGW64
 
 install:
-  - set PATH=C:/msys64/usr/bin;%PATH%
+  - set PATH=C:/msys64/usr/bin;C:/projects/postgres/src/include;%PATH%
   - sh -l -c "pacman --noconfirm -S --needed ${MINGW_PACKAGE_PREFIX}-gettext ${MINGW_PACKAGE_PREFIX}-icu ${MINGW_PACKAGE_PREFIX}-libxslt ${MINGW_PACKAGE_PREFIX}-openssl"
   - sh -l -c "curl -L http://cpanmin.us | perl - --self-upgrade"
   - sh -l -c "cpanm --notest IPC::Run"
@@ -20,14 +20,12 @@ install:
 build_script:
   - set HOME=.
   - set PATH=C:/msys64/usr/bin;%PATH%
-  - sh -l -c "mkdir build"
-  - sh -l -c "./configure --prefix=/c/projects/postgres/build --enable-cassert --enable-debug --enable-nls --enable-tap-tests --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
-  - sh -l -c "cd build"
+  - sh -l -c "./configure --enable-cassert --enable-debug --enable-nls --enable-tap-tests --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
   - sh -l -c "make world -j2"
   - sh -l -c "make install world -j2"
   
 artifacts:
-  - path: c:\projects\postgres\build
+  - path: /usr/local/pgsql
     name: postgres
     type: zip
 
