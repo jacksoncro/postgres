@@ -22,7 +22,7 @@
 #include <fcntl.h>
 #include <sys/param.h>
 #include <sys/time.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 #include <C:\projects\postgres\src\include\port\win32\netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>

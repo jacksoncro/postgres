@@ -20,7 +20,7 @@
 #include <C:\projects\postgres\src\include\port\win32\pwd.h>
 #include <fcntl.h>
 #include <sys/param.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>

@@ -71,7 +71,7 @@
 #include <sys/wait.h>
 #include <ctype.h>
 #include <sys/stat.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 #include <fcntl.h>
 #include <sys/param.h>
 #include <C:\projects\postgres\src\include\port\win32\netdb.h>

@@ -16,7 +16,7 @@
 #include "postgres.h"
 
 #include <sys/param.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
 #ifdef HAVE_SYS_SELECT_H

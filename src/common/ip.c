@@ -25,7 +25,7 @@
 
 #include <unistd.h>
 #include <sys/stat.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 #include <C:\projects\postgres\src\include\port\win32\netdb.h>
 #include <netinet/in.h>
 #ifdef HAVE_NETINET_TCP_H

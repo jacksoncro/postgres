@@ -13617,7 +13617,7 @@ done
 for ac_header in net/if.h
 do :
   ac_fn_c_check_header_compile "$LINENO" "net/if.h" "ac_cv_header_net_if_h" "$ac_includes_default
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 
 "
 if test "x$ac_cv_header_net_if_h" = xyes; then :
@@ -14850,7 +14850,7 @@ _ACEOF
 fi
 
 ac_fn_c_check_type "$LINENO" "struct sockaddr_storage" "ac_cv_type_struct_sockaddr_storage" "#include <sys/types.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 
 "
 if test "x$ac_cv_type_struct_sockaddr_storage" = xyes; then :
@@ -14863,7 +14863,7 @@ _ACEOF
 fi
 
 ac_fn_c_check_member "$LINENO" "struct sockaddr_storage" "ss_family" "ac_cv_member_struct_sockaddr_storage_ss_family" "#include <sys/types.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 
 "
 if test "x$ac_cv_member_struct_sockaddr_storage_ss_family" = xyes; then :
@@ -14875,7 +14875,7 @@ _ACEOF
 
 fi
 ac_fn_c_check_member "$LINENO" "struct sockaddr_storage" "__ss_family" "ac_cv_member_struct_sockaddr_storage___ss_family" "#include <sys/types.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 
 "
 if test "x$ac_cv_member_struct_sockaddr_storage___ss_family" = xyes; then :
@@ -14887,7 +14887,7 @@ _ACEOF
 
 fi
 ac_fn_c_check_member "$LINENO" "struct sockaddr_storage" "ss_len" "ac_cv_member_struct_sockaddr_storage_ss_len" "#include <sys/types.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 
 "
 if test "x$ac_cv_member_struct_sockaddr_storage_ss_len" = xyes; then :
@@ -14899,7 +14899,7 @@ _ACEOF
 
 fi
 ac_fn_c_check_member "$LINENO" "struct sockaddr_storage" "__ss_len" "ac_cv_member_struct_sockaddr_storage___ss_len" "#include <sys/types.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 
 "
 if test "x$ac_cv_member_struct_sockaddr_storage___ss_len" = xyes; then :
@@ -14911,7 +14911,7 @@ _ACEOF
 
 fi
 ac_fn_c_check_member "$LINENO" "struct sockaddr" "sa_len" "ac_cv_member_struct_sockaddr_sa_len" "#include <sys/types.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 
 "
 if test "x$ac_cv_member_struct_sockaddr_sa_len" = xyes; then :
@@ -14924,7 +14924,7 @@ _ACEOF
 fi
 
 ac_fn_c_check_type "$LINENO" "struct addrinfo" "ac_cv_type_struct_addrinfo" "#include <sys/types.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 #include <C:\projects\postgres\src\include\port\win32\netdb.h>
 
 "
@@ -15057,7 +15057,7 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-ac_fn_c_check_type "$LINENO" "struct cmsgcred" "ac_cv_type_struct_cmsgcred" "#include <sys/socket.h>
+ac_fn_c_check_type "$LINENO" "struct cmsgcred" "ac_cv_type_struct_cmsgcred" "#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 #include <sys/param.h>
 #ifdef HAVE_SYS_UCRED_H
 #include <sys/ucred.h>
@@ -15565,7 +15565,7 @@ else
          cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <sys/types.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 extern $ac_cv_func_accept_return accept ($ac_cv_func_accept_arg1, $ac_cv_func_accept_arg2, $ac_cv_func_accept_arg3 *);
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"; then :

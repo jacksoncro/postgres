@@ -45,7 +45,7 @@
  */
 #include "postgres.h"
 
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 
 #include "access/gist.h"
 #include "access/stratnum.h"

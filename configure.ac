@@ -1419,7 +1419,7 @@ AC_CHECK_HEADERS(m4_normalize([
 # is included first.
 AC_CHECK_HEADERS(net/if.h, [], [],
 [AC_INCLUDES_DEFAULT
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 ])
 
 # On OpenBSD, test for sys/ucred.h will fail unless sys/param.h
@@ -1609,7 +1609,7 @@ AC_DEFINE_UNQUOTED([pg_restrict], [$pg_restrict],
 supported])
 
 AC_CHECK_TYPES([struct cmsgcred], [], [],
-[#include <sys/socket.h>
+[#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 #include <sys/param.h>
 #ifdef HAVE_SYS_UCRED_H
 #include <sys/ucred.h>

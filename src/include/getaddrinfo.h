@@ -22,7 +22,7 @@
 #ifndef GETADDRINFO_H
 #define GETADDRINFO_H
 
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 #include <C:\projects\postgres\src\include\port\win32\netdb.h>
 
 

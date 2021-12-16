@@ -62,7 +62,7 @@
 #include <grp.h>
 #include <unistd.h>
 #include <sys/file.h>
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <C:\projects\postgres\src\include\port\win32\netdb.h>

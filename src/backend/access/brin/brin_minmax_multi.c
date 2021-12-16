@@ -57,7 +57,7 @@
 #include "postgres.h"
 
 /* needed for PGSQL_AF_INET */
-#include <sys/socket.h>
+#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 
 #include "access/genam.h"
 #include "access/brin.h"
