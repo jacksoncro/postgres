@@ -21,11 +21,11 @@ build_script:
   - set HOME=.
   - set PATH=C:/msys64/usr/bin;%PATH%
   - mkdir C:\projects\postgres\dist
-  - sh -l -c "./configure --prefix=C:\projects\postgres\dist --enable-cassert --enable-debug --enable-tap-tests --enable-nls  --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
+  - sh -l -c "./configure --prefix=/C/projects/postgres/dist --enable-cassert --enable-debug --enable-tap-tests --enable-nls  --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
   - cd C:\projects\postgres\dist
   - sh -l -c "pwd"
   - pwd
-  - sh -l -c "echo "teste" > arquivo.txt"  
+#  - sh -l -c "echo "teste" > arquivo.txt"  
   - sh -l -c "make clean"
   - sh -l -c "make -j2"
   - sh -l -c "make install -j2"
