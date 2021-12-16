@@ -20,7 +20,6 @@ install:
 build_script:
   - set HOME=.
   - set PATH=C:/msys64/usr/bin;%PATH%
-  %APPVEYOR_BUILD_FOLDER%
   - sh -l -c "mkdir %APPVEYOR_BUILD_FOLDER%/dist"
   - sh -l -c "./configure --prefix=%APPVEYOR_BUILD_FOLDER%/dist --enable-cassert --enable-debug --enable-tap-tests --enable-nls  --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
   - sh -l -c "cd %APPVEYOR_BUILD_FOLDER%/dist"
