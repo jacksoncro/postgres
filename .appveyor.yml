@@ -28,7 +28,7 @@ build_script:
   - sh -l -c "make install -j2"
   
 artifacts:
-  - path: %APPVEYOR_BUILD_FOLDER%/dist
+  - path: '%APPVEYOR_BUILD_FOLDER%/dist'
     name: postgres
     type: zip
 
