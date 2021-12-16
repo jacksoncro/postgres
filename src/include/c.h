@@ -46,7 +46,7 @@
 #ifndef C_H
 #define C_H
 
-#include "postgres_ext.h"
+#include "C:\projects\postgres\src\include\postgres_ext.h"
 
 /* Must undef pg_config_ext.h symbols before including pg_config.h */
 #undef PG_INT64_TYPE
