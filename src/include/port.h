@@ -15,7 +15,7 @@
 
 #include <ctype.h>
 #include <C:\projects\postgres\src\include\port\win32\netdb.h>
-#include <pwd.h>
+#include <C:\projects\postgres\src\include\port\win32\pwd.h>
 
 /*
  * Windows has enough specialized port stuff that we push most of it off

@@ -23,7 +23,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <grp.h>
-#include <pwd.h>
+#include <C:\projects\postgres\src\include\port\win32\pwd.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <utime.h>

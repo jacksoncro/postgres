@@ -18,7 +18,7 @@
 #include "postgres_fe.h"
 #endif
 
-#include <pwd.h>
+#include <C:\projects\postgres\src\include\port\win32\pwd.h>
 #include <unistd.h>
 
 #include "common/username.h"

@@ -17,7 +17,7 @@
 #include "postgres.h"
 
 #include <ctype.h>
-#include <pwd.h>
+#include <C:\projects\postgres\src\include\port\win32\pwd.h>
 #include <fcntl.h>
 #include <sys/param.h>
 #include <sys/socket.h>

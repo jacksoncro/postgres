@@ -35,7 +35,7 @@
 #ifndef  MAXHOSTNAMELEN
 #include <C:\projects\postgres\src\include\port\win32\netdb.h>				/* for MAXHOSTNAMELEN on some */
 #endif
-#include <pwd.h>
+#include <C:\projects\postgres\src\include\port\win32\pwd.h>
 #endif
 
 #include "common/md5.h"

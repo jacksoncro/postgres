@@ -14,7 +14,7 @@
 
 #include "c.h"
 
-#include <pwd.h>
+#include <C:\projects\postgres\src\include\port\win32\pwd.h>
 
 
 /*
