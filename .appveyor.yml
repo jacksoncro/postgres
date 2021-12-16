@@ -20,17 +20,21 @@ install:
 build_script:
   - set HOME=.
   - set PATH=C:/msys64/usr/bin;%PATH%
-  - sh -l -c "mkdir /c/projects/postgres/dist"
-  - sh -l -c "./configure --prefix=/c/projects/postgres/dist --enable-cassert --enable-debug --enable-tap-tests --enable-nls  --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
-  - sh -l -c "cd /c/projects/postgres/dist"
-  - sh -l -c "make clean"
-  - sh -l -c "make -j2"
-  - sh -l -c "make install -j2"
+  - sh -l -c "mkdir C:\projects\postgres\dist"
+#  - sh -l -c "./configure --prefix=C:\projects\postgres\dist --enable-cassert --enable-debug --enable-tap-tests --enable-nls  --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
+  - sh -l -c "cd C:\projects\postgres\dist"
+  - sh -l -c "pwd"
+  - sh -l -c "echo "teste" > arquivo.txt"  
+  - sh -l -c "7z a postgre.zip C:\projects\postgres\dist"  
+  - sh -l -c "appveyor PushArtifact postgre.zip" 
+#  - sh -l -c "make clean"
+#  - sh -l -c "make -j2"
+#  - sh -l -c "make install -j2"
   
 artifacts:
-  - path: /c/projects/postgres/dist
+  - path: postgre.zip
     name: postgres
-    type: zip
+
 
 on_failure:
   - set HOME=.
