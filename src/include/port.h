@@ -410,7 +410,7 @@ extern char *mkdtemp(char *path);
 #endif
 
 #ifndef HAVE_INET_ATON
-#include <netinet/in.h>
+#include <C:\projects\postgres\src\include\port\win32\netinet\in.h>
 #include <arpa/inet.h>
 extern int	inet_aton(const char *cp, struct in_addr *addr);
 #endif
