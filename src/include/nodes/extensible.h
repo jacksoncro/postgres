@@ -14,7 +14,7 @@
 #ifndef EXTENSIBLE_H
 #define EXTENSIBLE_H
 
-#include "access/parallel.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
 #include "commands/explain.h"
 #include "nodes/execnodes.h"
 #include "nodes/pathnodes.h"

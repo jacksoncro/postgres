@@ -12,7 +12,7 @@
 
 #include "postgres.h"
 
-#include "access/parallel.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
 #include "libpq/pqsignal.h"
 #include "miscadmin.h"
 #include "pgstat.h"

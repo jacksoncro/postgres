@@ -14,7 +14,7 @@
  */
 #include "postgres.h"
 
-#include "access/multixact.h"
+#include "C:\projects\postgres\src\include\access\multixact.h"
 
 static void
 out_member(StringInfo buf, MultiXactMember *member)

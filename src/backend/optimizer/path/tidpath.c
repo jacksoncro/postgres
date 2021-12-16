@@ -38,7 +38,7 @@
  */
 #include "postgres.h"
 
-#include "access/sysattr.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
 #include "catalog/pg_operator.h"
 #include "catalog/pg_type.h"
 #include "nodes/nodeFuncs.h"

@@ -19,7 +19,7 @@
 #include <limits.h>
 #include <math.h>
 
-#include "access/sysattr.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
 #include "catalog/pg_class.h"
 #include "foreign/fdwapi.h"
 #include "miscadmin.h"

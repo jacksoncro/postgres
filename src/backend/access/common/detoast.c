@@ -13,10 +13,10 @@
 
 #include "postgres.h"
 
-#include "access/detoast.h"
-#include "access/table.h"
-#include "access/tableam.h"
-#include "access/toast_internals.h"
+#include "C:\projects\postgres\src\include\access\detoast.h"
+#include "C:\projects\postgres\src\include\access\table.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\toast_internals.h"
 #include "common/int.h"
 #include "common/pg_lzcompress.h"
 #include "utils/expandeddatum.h"

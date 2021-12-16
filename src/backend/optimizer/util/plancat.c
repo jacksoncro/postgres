@@ -17,13 +17,13 @@
 
 #include <math.h>
 
-#include "access/genam.h"
-#include "access/htup_details.h"
-#include "access/nbtree.h"
-#include "access/sysattr.h"
-#include "access/table.h"
-#include "access/tableam.h"
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\nbtree.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
+#include "C:\projects\postgres\src\include\access\table.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/catalog.h"
 #include "catalog/heap.h"

@@ -65,13 +65,13 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-#include "access/heapam.h"
-#include "access/htup_details.h"
-#include "access/multixact.h"
-#include "access/reloptions.h"
-#include "access/tableam.h"
-#include "access/transam.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\multixact.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "catalog/dependency.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_database.h"

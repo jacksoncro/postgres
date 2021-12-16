@@ -15,7 +15,7 @@
 
 #include "postgres.h"
 
-#include "access/parallel.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
 #include "executor/execdebug.h"
 #include "executor/nodeSort.h"
 #include "miscadmin.h"

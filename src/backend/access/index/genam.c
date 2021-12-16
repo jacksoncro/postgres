@@ -19,11 +19,11 @@
 
 #include "postgres.h"
 
-#include "access/genam.h"
-#include "access/heapam.h"
-#include "access/relscan.h"
-#include "access/tableam.h"
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "catalog/index.h"
 #include "lib/stringinfo.h"
 #include "miscadmin.h"

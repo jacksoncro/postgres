@@ -13,7 +13,7 @@
 #ifndef SLRU_H
 #define SLRU_H
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "storage/lwlock.h"
 #include "storage/sync.h"
 

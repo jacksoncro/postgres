@@ -17,10 +17,10 @@
 
 #include <ctype.h>
 
-#include "access/detoast.h"
-#include "access/htup_details.h"
-#include "access/transam.h"
-#include "access/tupconvert.h"
+#include "C:\projects\postgres\src\include\access\detoast.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\tupconvert.h"
 #include "catalog/pg_proc.h"
 #include "catalog/pg_type.h"
 #include "commands/defrem.h"

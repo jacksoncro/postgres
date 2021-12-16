@@ -22,7 +22,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-#include "access/xlog_internal.h"
+#include "C:\projects\postgres\src\include\access\xlog_internal.h"
 #include "pgstat.h"
 #include "postmaster/startup.h"
 #include "replication/walreceiver.h"

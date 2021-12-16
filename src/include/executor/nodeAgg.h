@@ -14,7 +14,7 @@
 #ifndef NODEAGG_H
 #define NODEAGG_H
 
-#include "access/parallel.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
 #include "nodes/execnodes.h"
 
 

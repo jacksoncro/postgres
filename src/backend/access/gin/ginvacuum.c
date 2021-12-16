@@ -14,9 +14,9 @@
 
 #include "postgres.h"
 
-#include "access/gin_private.h"
-#include "access/ginxlog.h"
-#include "access/xloginsert.h"
+#include "C:\projects\postgres\src\include\access\gin_private.h"
+#include "C:\projects\postgres\src\include\access\ginxlog.h"
+#include "C:\projects\postgres\src\include\access\xloginsert.h"
 #include "commands/vacuum.h"
 #include "miscadmin.h"
 #include "postmaster/autovacuum.h"

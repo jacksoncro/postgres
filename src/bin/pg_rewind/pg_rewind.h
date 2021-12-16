@@ -11,7 +11,7 @@
 #ifndef PG_REWIND_H
 #define PG_REWIND_H
 
-#include "access/timeline.h"
+#include "C:\projects\postgres\src\include\access\timeline.h"
 #include "common/logging.h"
 #include "datapagemap.h"
 #include "libpq-fe.h"

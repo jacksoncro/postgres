@@ -13,7 +13,7 @@
 #include <openssl/x509v3.h>
 #include <openssl/asn1.h>
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "funcapi.h"
 #include "libpq/libpq-be.h"
 #include "miscadmin.h"

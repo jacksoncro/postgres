@@ -30,8 +30,8 @@
 
 #include "postgres.h"
 
-#include "access/relscan.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "executor/execdebug.h"
 #include "executor/execParallel.h"
 #include "executor/nodeGather.h"

@@ -12,7 +12,7 @@
  */
 #include "postgres.h"
 
-#include "access/timeline.h"
+#include "C:\projects\postgres\src\include\access\timeline.h"
 #include "libpq/libpq.h"
 #include "libpq/pqformat.h"
 #include "mb/pg_wchar.h"

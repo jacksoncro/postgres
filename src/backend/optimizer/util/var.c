@@ -20,7 +20,7 @@
  */
 #include "postgres.h"
 
-#include "access/sysattr.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
 #include "nodes/nodeFuncs.h"
 #include "optimizer/optimizer.h"
 #include "optimizer/placeholder.h"

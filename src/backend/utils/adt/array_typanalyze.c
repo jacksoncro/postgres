@@ -14,7 +14,7 @@
  */
 #include "postgres.h"
 
-#include "access/detoast.h"
+#include "C:\projects\postgres\src\include\access\detoast.h"
 #include "commands/vacuum.h"
 #include "utils/array.h"
 #include "utils/builtins.h"

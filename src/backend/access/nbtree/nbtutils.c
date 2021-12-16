@@ -17,9 +17,9 @@
 
 #include <time.h>
 
-#include "access/nbtree.h"
-#include "access/reloptions.h"
-#include "access/relscan.h"
+#include "C:\projects\postgres\src\include\access\nbtree.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
 #include "catalog/catalog.h"
 #include "commands/progress.h"
 #include "lib/qunique.h"

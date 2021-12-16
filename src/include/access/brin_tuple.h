@@ -11,8 +11,8 @@
 #ifndef BRIN_TUPLE_H
 #define BRIN_TUPLE_H
 
-#include "access/brin_internal.h"
-#include "access/tupdesc.h"
+#include "C:\projects\postgres\src\include\access\brin_internal.h"
+#include "C:\projects\postgres\src\include\access\tupdesc.h"
 
 /*
  * The BRIN opclasses may register serialization callback, in case the on-disk

@@ -26,9 +26,9 @@
 
 #include "postgres.h"
 
-#include "access/clog.h"
-#include "access/transam.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\clog.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
 #include "funcapi.h"
 #include "lib/qunique.h"

@@ -22,8 +22,8 @@
 
 #include "postgres.h"
 
-#include "access/attmap.h"
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\attmap.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "utils/builtins.h"
 
 

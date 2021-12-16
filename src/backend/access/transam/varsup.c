@@ -13,11 +13,11 @@
 
 #include "postgres.h"
 
-#include "access/clog.h"
-#include "access/commit_ts.h"
-#include "access/subtrans.h"
-#include "access/transam.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\clog.h"
+#include "C:\projects\postgres\src\include\access\commit_ts.h"
+#include "C:\projects\postgres\src\include\access\subtrans.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
 #include "commands/dbcommands.h"
 #include "miscadmin.h"

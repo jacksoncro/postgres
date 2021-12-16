@@ -28,8 +28,8 @@
  */
 #include "postgres.h"
 
-#include "access/hash.h"
-#include "access/hash_xlog.h"
+#include "C:\projects\postgres\src\include\access\hash.h"
+#include "C:\projects\postgres\src\include\access\hash_xlog.h"
 #include "miscadmin.h"
 #include "port/pg_bitutils.h"
 #include "storage/lmgr.h"

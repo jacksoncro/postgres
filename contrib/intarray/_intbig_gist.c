@@ -4,9 +4,9 @@
 #include "postgres.h"
 
 #include "_int.h"
-#include "access/gist.h"
-#include "access/reloptions.h"
-#include "access/stratnum.h"
+#include "C:\projects\postgres\src\include\access\gist.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
 #include "port/pg_bitutils.h"
 
 #define GETENTRY(vec,pos) ((GISTTYPE *) DatumGetPointer((vec)->vector[(pos)].key))

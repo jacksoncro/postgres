@@ -19,8 +19,8 @@
 #ifndef XLOG_INTERNAL_H
 #define XLOG_INTERNAL_H
 
-#include "access/xlogdefs.h"
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "datatype/timestamp.h"
 #include "lib/stringinfo.h"
 #include "pgtime.h"

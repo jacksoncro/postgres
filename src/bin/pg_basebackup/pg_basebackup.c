@@ -26,7 +26,7 @@
 #include <zlib.h>
 #endif
 
-#include "access/xlog_internal.h"
+#include "C:\projects\postgres\src\include\access\xlog_internal.h"
 #include "common/file_perm.h"
 #include "common/file_utils.h"
 #include "common/logging.h"

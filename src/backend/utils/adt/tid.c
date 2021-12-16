@@ -20,9 +20,9 @@
 #include <math.h>
 #include <limits.h>
 
-#include "access/heapam.h"
-#include "access/sysattr.h"
-#include "access/tableam.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_type.h"
 #include "common/hashfn.h"

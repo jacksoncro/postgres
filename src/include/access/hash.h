@@ -17,9 +17,9 @@
 #ifndef HASH_H
 #define HASH_H
 
-#include "access/amapi.h"
-#include "access/itup.h"
-#include "access/sdir.h"
+#include "C:\projects\postgres\src\include\access\amapi.h"
+#include "C:\projects\postgres\src\include\access\itup.h"
+#include "C:\projects\postgres\src\include\access\sdir.h"
 #include "catalog/pg_am_d.h"
 #include "common/hashfn.h"
 #include "lib/stringinfo.h"

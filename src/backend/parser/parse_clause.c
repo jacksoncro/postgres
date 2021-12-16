@@ -15,10 +15,10 @@
 
 #include "postgres.h"
 
-#include "access/htup_details.h"
-#include "access/nbtree.h"
-#include "access/table.h"
-#include "access/tsmapi.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\nbtree.h"
+#include "C:\projects\postgres\src\include\access\table.h"
+#include "C:\projects\postgres\src\include\access\tsmapi.h"
 #include "catalog/catalog.h"
 #include "catalog/heap.h"
 #include "catalog/pg_am.h"

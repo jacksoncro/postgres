@@ -15,7 +15,7 @@
 #include <signal.h>
 #include <sys/time.h>
 
-#include "access/xlog_internal.h"
+#include "C:\projects\postgres\src\include\access\xlog_internal.h"
 #include "common/logging.h"
 #include "pg_getopt.h"
 

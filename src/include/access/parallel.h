@@ -14,7 +14,7 @@
 #ifndef PARALLEL_H
 #define PARALLEL_H
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "lib/ilist.h"
 #include "postmaster/bgworker.h"
 #include "storage/shm_mq.h"

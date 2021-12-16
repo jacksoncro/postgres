@@ -73,9 +73,9 @@
 
 #include <math.h>
 
-#include "access/amapi.h"
-#include "access/htup_details.h"
-#include "access/tsmapi.h"
+#include "C:\projects\postgres\src\include\access\amapi.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\tsmapi.h"
 #include "executor/executor.h"
 #include "executor/nodeAgg.h"
 #include "executor/nodeHash.h"

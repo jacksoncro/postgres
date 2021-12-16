@@ -12,7 +12,7 @@
  */
 #include "postgres.h"
 
-#include "access/sysattr.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
 #include "catalog/pg_namespace.h"
 #include "catalog/pg_type.h"
 #include "libpq/pqformat.h"

@@ -12,9 +12,9 @@
  */
 #include "postgres.h"
 
-#include "access/genam.h"
-#include "access/relscan.h"
-#include "access/sysattr.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
 #include "catalog/pg_type.h"
 #include "executor/executor.h"
 #include "utils/builtins.h"

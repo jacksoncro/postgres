@@ -28,7 +28,7 @@
 #include <arpa/inet.h>
 #include <utime.h>
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "catalog/pg_authid.h"
 #include "common/file_perm.h"
 #include "libpq/libpq.h"

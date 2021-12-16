@@ -14,8 +14,8 @@
  */
 #include "postgres.h"
 
-#include "access/nbtree.h"
-#include "access/nbtxlog.h"
+#include "C:\projects\postgres\src\include\access\nbtree.h"
+#include "C:\projects\postgres\src\include\access\nbtxlog.h"
 #include "miscadmin.h"
 #include "utils/rel.h"
 

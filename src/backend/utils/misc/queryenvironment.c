@@ -22,7 +22,7 @@
  */
 #include "postgres.h"
 
-#include "access/table.h"
+#include "C:\projects\postgres\src\include\access\table.h"
 #include "utils/queryenvironment.h"
 #include "utils/rel.h"
 

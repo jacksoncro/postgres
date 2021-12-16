@@ -14,7 +14,7 @@
 #ifndef INVAL_H
 #define INVAL_H
 
-#include "access/htup.h"
+#include "C:\projects\postgres\src\include\access\htup.h"
 #include "storage/relfilenode.h"
 #include "utils/relcache.h"
 

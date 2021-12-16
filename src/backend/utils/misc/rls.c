@@ -14,9 +14,9 @@
 */
 #include "postgres.h"
 
-#include "access/htup.h"
-#include "access/htup_details.h"
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\htup.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_class.h"
 #include "miscadmin.h"

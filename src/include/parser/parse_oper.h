@@ -14,7 +14,7 @@
 #ifndef PARSE_OPER_H
 #define PARSE_OPER_H
 
-#include "access/htup.h"
+#include "C:\projects\postgres\src\include\access\htup.h"
 #include "nodes/parsenodes.h"
 #include "parser/parse_node.h"
 

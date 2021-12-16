@@ -14,7 +14,7 @@
 #ifndef BRIN_XLOG_H
 #define BRIN_XLOG_H
 
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "lib/stringinfo.h"
 #include "storage/bufpage.h"
 #include "storage/itemptr.h"

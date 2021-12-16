@@ -5,7 +5,7 @@
 
 #include <limits.h>
 
-#include "access/stratnum.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
 #include "utils/builtins.h"
 #include "utils/bytea.h"
 #include "utils/cash.h"

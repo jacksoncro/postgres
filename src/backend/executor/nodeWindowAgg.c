@@ -33,7 +33,7 @@
  */
 #include "postgres.h"
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "catalog/objectaccess.h"
 #include "catalog/pg_aggregate.h"
 #include "catalog/pg_proc.h"

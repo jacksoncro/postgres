@@ -23,7 +23,7 @@
 
 #include "postgres.h"
 
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "catalog/dependency.h"
 #include "postgres_fdw.h"
 #include "utils/hsearch.h"

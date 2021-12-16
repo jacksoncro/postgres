@@ -12,7 +12,7 @@
 #ifndef NODECUSTOM_H
 #define NODECUSTOM_H
 
-#include "access/parallel.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
 #include "nodes/execnodes.h"
 
 /*

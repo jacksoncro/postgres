@@ -17,7 +17,7 @@
  */
 #include "postgres.h"
 
-#include "access/stratnum.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
 #include "catalog/pg_opfamily.h"
 #include "nodes/makefuncs.h"
 #include "nodes/nodeFuncs.h"

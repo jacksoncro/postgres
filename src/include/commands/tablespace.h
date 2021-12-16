@@ -14,7 +14,7 @@
 #ifndef TABLESPACE_H
 #define TABLESPACE_H
 
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "catalog/objectaddress.h"
 #include "lib/stringinfo.h"
 #include "nodes/parsenodes.h"

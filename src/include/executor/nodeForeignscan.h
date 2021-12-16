@@ -14,7 +14,7 @@
 #ifndef NODEFOREIGNSCAN_H
 #define NODEFOREIGNSCAN_H
 
-#include "access/parallel.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
 #include "nodes/execnodes.h"
 
 extern ForeignScanState *ExecInitForeignScan(ForeignScan *node, EState *estate, int eflags);

@@ -14,7 +14,7 @@
 #ifndef DBCOMMANDS_H
 #define DBCOMMANDS_H
 
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "catalog/objectaddress.h"
 #include "lib/stringinfo.h"
 #include "parser/parse_node.h"

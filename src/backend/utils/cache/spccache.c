@@ -18,7 +18,7 @@
  */
 #include "postgres.h"
 
-#include "access/reloptions.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
 #include "catalog/pg_tablespace.h"
 #include "commands/tablespace.h"
 #include "miscadmin.h"

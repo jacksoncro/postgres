@@ -21,7 +21,7 @@
 #include <math.h>
 #include <time.h>
 
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "common/hashfn.h"
 #include "libpq/pqformat.h"
 #include "miscadmin.h"

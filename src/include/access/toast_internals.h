@@ -12,7 +12,7 @@
 #ifndef TOAST_INTERNALS_H
 #define TOAST_INTERNALS_H
 
-#include "access/toast_compression.h"
+#include "C:\projects\postgres\src\include\access\toast_compression.h"
 #include "storage/lockdefs.h"
 #include "utils/relcache.h"
 #include "utils/snapshot.h"

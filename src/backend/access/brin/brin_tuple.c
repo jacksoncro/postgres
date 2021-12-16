@@ -31,13 +31,13 @@
  */
 #include "postgres.h"
 
-#include "access/brin_tuple.h"
-#include "access/detoast.h"
-#include "access/heaptoast.h"
-#include "access/htup_details.h"
-#include "access/toast_internals.h"
-#include "access/tupdesc.h"
-#include "access/tupmacs.h"
+#include "C:\projects\postgres\src\include\access\brin_tuple.h"
+#include "C:\projects\postgres\src\include\access\detoast.h"
+#include "C:\projects\postgres\src\include\access\heaptoast.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\toast_internals.h"
+#include "C:\projects\postgres\src\include\access\tupdesc.h"
+#include "C:\projects\postgres\src\include\access\tupmacs.h"
 #include "utils/datum.h"
 #include "utils/memutils.h"
 

@@ -14,7 +14,7 @@
  */
 #include "postgres.h"
 
-#include "access/brin_xlog.h"
+#include "C:\projects\postgres\src\include\access\brin_xlog.h"
 
 void
 brin_desc(StringInfo buf, XLogReaderState *record)

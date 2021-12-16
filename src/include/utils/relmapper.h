@@ -14,7 +14,7 @@
 #ifndef RELMAPPER_H
 #define RELMAPPER_H
 
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "lib/stringinfo.h"
 
 /* ----------------

@@ -15,9 +15,9 @@
 
 #include "postgres.h"
 
-#include "access/genam.h"
-#include "access/relscan.h"
-#include "access/spgist_private.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "C:\projects\postgres\src\include\access\spgist_private.h"
 #include "miscadmin.h"
 #include "pgstat.h"
 #include "storage/bufmgr.h"

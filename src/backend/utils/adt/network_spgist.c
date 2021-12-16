@@ -33,7 +33,7 @@
 
 #include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
 
-#include "access/spgist.h"
+#include "C:\projects\postgres\src\include\access\spgist.h"
 #include "catalog/pg_type.h"
 #include "utils/builtins.h"
 #include "utils/inet.h"

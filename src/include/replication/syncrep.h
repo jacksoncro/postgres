@@ -13,7 +13,7 @@
 #ifndef _SYNCREP_H
 #define _SYNCREP_H
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "utils/guc.h"
 
 #define SyncRepRequested() \

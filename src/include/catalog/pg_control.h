@@ -15,8 +15,8 @@
 #ifndef PG_CONTROL_H
 #define PG_CONTROL_H
 
-#include "access/transam.h"
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "pgtime.h"				/* for pg_time_t */
 #include "port/pg_crc32c.h"
 

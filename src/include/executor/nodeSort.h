@@ -14,7 +14,7 @@
 #ifndef NODESORT_H
 #define NODESORT_H
 
-#include "access/parallel.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
 #include "nodes/execnodes.h"
 
 extern SortState *ExecInitSort(Sort *node, EState *estate, int eflags);

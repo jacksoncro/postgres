@@ -14,7 +14,7 @@
 #ifndef STORAGE_XLOG_H
 #define STORAGE_XLOG_H
 
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "lib/stringinfo.h"
 #include "storage/block.h"
 #include "storage/relfilenode.h"

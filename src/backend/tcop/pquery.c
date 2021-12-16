@@ -17,7 +17,7 @@
 
 #include <limits.h>
 
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "commands/prepare.h"
 #include "executor/tstoreReceiver.h"
 #include "miscadmin.h"

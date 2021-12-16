@@ -6,9 +6,9 @@
 #include <limits.h>
 
 #include "_int.h"
-#include "access/gist.h"
-#include "access/reloptions.h"
-#include "access/stratnum.h"
+#include "C:\projects\postgres\src\include\access\gist.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
 
 #define GETENTRY(vec,pos) ((ArrayType *) DatumGetPointer((vec)->vector[(pos)].key))
 

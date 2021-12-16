@@ -42,7 +42,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "libpq/be-fsstubs.h"
 #include "libpq/libpq-fs.h"
 #include "miscadmin.h"

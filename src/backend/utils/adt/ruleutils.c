@@ -19,11 +19,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include "access/amapi.h"
-#include "access/htup_details.h"
-#include "access/relation.h"
-#include "access/sysattr.h"
-#include "access/table.h"
+#include "C:\projects\postgres\src\include\access\amapi.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\relation.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
+#include "C:\projects\postgres\src\include\access\table.h"
 #include "catalog/pg_aggregate.h"
 #include "catalog/pg_am.h"
 #include "catalog/pg_authid.h"

@@ -17,8 +17,8 @@
 #include <ctype.h>
 #include <limits.h>
 
-#include "access/detoast.h"
-#include "access/toast_compression.h"
+#include "C:\projects\postgres\src\include\access\detoast.h"
+#include "C:\projects\postgres\src\include\access\toast_compression.h"
 #include "catalog/pg_collation.h"
 #include "catalog/pg_type.h"
 #include "common/hashfn.h"

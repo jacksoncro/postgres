@@ -18,7 +18,7 @@
  */
 #include "postgres.h"
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "catalog/objectaccess.h"
 #include "executor/execdebug.h"
 #include "funcapi.h"

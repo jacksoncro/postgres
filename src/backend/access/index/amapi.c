@@ -13,8 +13,8 @@
  */
 #include "postgres.h"
 
-#include "access/amapi.h"
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\amapi.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "catalog/pg_am.h"
 #include "catalog/pg_opclass.h"
 #include "utils/builtins.h"

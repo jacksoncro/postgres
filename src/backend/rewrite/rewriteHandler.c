@@ -20,9 +20,9 @@
  */
 #include "postgres.h"
 
-#include "access/relation.h"
-#include "access/sysattr.h"
-#include "access/table.h"
+#include "C:\projects\postgres\src\include\access\relation.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
+#include "C:\projects\postgres\src\include\access\table.h"
 #include "catalog/dependency.h"
 #include "catalog/pg_type.h"
 #include "commands/trigger.h"

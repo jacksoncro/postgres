@@ -12,8 +12,8 @@
  */
 #include "postgres.h"
 
-#include "access/heapam.h"
-#include "access/visibilitymap.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\visibilitymap.h"
 #include "catalog/pg_am_d.h"
 #include "catalog/pg_proc_d.h"
 #include "miscadmin.h"

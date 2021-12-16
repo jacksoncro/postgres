@@ -28,8 +28,8 @@
 
 #include <unistd.h>
 
-#include "access/relation.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\relation.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "catalog/pg_class.h"
 #include "catalog/pg_type.h"
 #include "miscadmin.h"

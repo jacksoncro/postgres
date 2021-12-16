@@ -14,8 +14,8 @@
 #ifndef XACT_H
 #define XACT_H
 
-#include "access/transam.h"
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "datatype/timestamp.h"
 #include "lib/stringinfo.h"
 #include "nodes/pg_list.h"

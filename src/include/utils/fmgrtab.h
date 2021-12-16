@@ -13,7 +13,7 @@
 #ifndef FMGRTAB_H
 #define FMGRTAB_H
 
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "fmgr.h"
 
 

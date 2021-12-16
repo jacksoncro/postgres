@@ -11,7 +11,7 @@
 #ifndef MULTIXACT_H
 #define MULTIXACT_H
 
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "lib/stringinfo.h"
 #include "storage/sync.h"
 

@@ -93,7 +93,7 @@
 #include <pthread.h>
 #endif
 
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
 #include "bootstrap/bootstrap.h"
 #include "catalog/pg_control.h"

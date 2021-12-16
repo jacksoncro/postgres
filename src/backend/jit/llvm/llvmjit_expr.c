@@ -18,8 +18,8 @@
 #include <llvm-c/Core.h>
 #include <llvm-c/Target.h>
 
-#include "access/htup_details.h"
-#include "access/nbtree.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\nbtree.h"
 #include "catalog/objectaccess.h"
 #include "catalog/pg_type.h"
 #include "executor/execExpr.h"

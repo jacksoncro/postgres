@@ -20,7 +20,7 @@
  */
 #include "postgres.h"
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "catalog/pg_authid.h"
 #include "miscadmin.h"
 #include "utils/inval.h"

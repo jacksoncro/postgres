@@ -24,12 +24,12 @@
 
 #include "postgres.h"
 
-#include "access/detoast.h"
-#include "access/genam.h"
-#include "access/heapam.h"
-#include "access/heaptoast.h"
-#include "access/toast_helper.h"
-#include "access/toast_internals.h"
+#include "C:\projects\postgres\src\include\access\detoast.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\heaptoast.h"
+#include "C:\projects\postgres\src\include\access\toast_helper.h"
+#include "C:\projects\postgres\src\include\access\toast_internals.h"
 #include "utils/fmgroids.h"
 
 

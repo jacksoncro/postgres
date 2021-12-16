@@ -24,11 +24,11 @@
 
 #include "postgres.h"
 
-#include "access/heapam.h"
-#include "access/multixact.h"
-#include "access/relscan.h"
-#include "access/tableam.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\multixact.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_am_d.h"
 #include "catalog/pg_authid.h"

@@ -13,7 +13,7 @@
 #ifndef HEAPTOAST_H
 #define HEAPTOAST_H
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "storage/lockdefs.h"
 #include "utils/relcache.h"
 

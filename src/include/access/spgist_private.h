@@ -14,8 +14,8 @@
 #ifndef SPGIST_PRIVATE_H
 #define SPGIST_PRIVATE_H
 
-#include "access/itup.h"
-#include "access/spgist.h"
+#include "C:\projects\postgres\src\include\access\itup.h"
+#include "C:\projects\postgres\src\include\access\spgist.h"
 #include "catalog/pg_am_d.h"
 #include "nodes/tidbitmap.h"
 #include "storage/buf.h"

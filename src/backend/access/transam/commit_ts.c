@@ -24,10 +24,10 @@
  */
 #include "postgres.h"
 
-#include "access/commit_ts.h"
-#include "access/htup_details.h"
-#include "access/slru.h"
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\commit_ts.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\slru.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "catalog/pg_type.h"
 #include "funcapi.h"
 #include "miscadmin.h"

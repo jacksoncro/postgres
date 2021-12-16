@@ -12,7 +12,7 @@
  */
 #include "postgres.h"
 
-#include "access/reloptions.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
 #include "catalog/pg_foreign_server.h"
 #include "catalog/pg_foreign_table.h"
 #include "catalog/pg_user_mapping.h"

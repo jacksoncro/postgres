@@ -13,9 +13,9 @@
  */
 #include "postgres.h"
 
-#include "access/genam.h"
-#include "access/heapam.h"
-#include "access/tableam.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
 #include "catalog/index.h"
 #include "commands/trigger.h"
 #include "executor/executor.h"

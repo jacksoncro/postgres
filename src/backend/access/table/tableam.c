@@ -21,9 +21,9 @@
 
 #include <math.h>
 
-#include "access/syncscan.h"
-#include "access/tableam.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\syncscan.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "optimizer/plancat.h"
 #include "port/pg_bitutils.h"
 #include "storage/bufmgr.h"

@@ -16,10 +16,10 @@
  */
 #include "postgres.h"
 
-#include "access/htup_details.h"
-#include "access/reloptions.h"
-#include "access/twophase.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "C:\projects\postgres\src\include\access\twophase.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/catalog.h"
 #include "catalog/index.h"

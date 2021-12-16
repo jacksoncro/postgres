@@ -11,10 +11,10 @@
 #ifndef XLOG_H
 #define XLOG_H
 
-#include "access/rmgr.h"
-#include "access/xlogdefs.h"
-#include "access/xloginsert.h"
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\rmgr.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xloginsert.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "datatype/timestamp.h"
 #include "lib/stringinfo.h"
 #include "nodes/pg_list.h"

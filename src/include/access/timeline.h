@@ -11,7 +11,7 @@
 #ifndef TIMELINE_H
 #define TIMELINE_H
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "nodes/pg_list.h"
 
 /*

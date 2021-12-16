@@ -16,11 +16,11 @@
 
 #include "postgres.h"
 
-#include "access/detoast.h"
-#include "access/heaptoast.h"
-#include "access/htup_details.h"
-#include "access/itup.h"
-#include "access/toast_internals.h"
+#include "C:\projects\postgres\src\include\access\detoast.h"
+#include "C:\projects\postgres\src\include\access\heaptoast.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\itup.h"
+#include "C:\projects\postgres\src\include\access\toast_internals.h"
 
 /*
  * This enables de-toasting of index entries.  Needed until VACUUM is

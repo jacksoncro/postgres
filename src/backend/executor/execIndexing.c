@@ -106,10 +106,10 @@
  */
 #include "postgres.h"
 
-#include "access/genam.h"
-#include "access/relscan.h"
-#include "access/tableam.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "catalog/index.h"
 #include "executor/executor.h"
 #include "nodes/nodeFuncs.h"

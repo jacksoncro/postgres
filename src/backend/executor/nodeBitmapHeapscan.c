@@ -37,10 +37,10 @@
 
 #include <math.h>
 
-#include "access/relscan.h"
-#include "access/tableam.h"
-#include "access/transam.h"
-#include "access/visibilitymap.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\visibilitymap.h"
 #include "executor/execdebug.h"
 #include "executor/nodeBitmapHeapscan.h"
 #include "miscadmin.h"

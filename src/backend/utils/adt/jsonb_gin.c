@@ -59,8 +59,8 @@
 
 #include "postgres.h"
 
-#include "access/gin.h"
-#include "access/stratnum.h"
+#include "C:\projects\postgres\src\include\access\gin.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
 #include "catalog/pg_collation.h"
 #include "catalog/pg_type.h"
 #include "common/hashfn.h"

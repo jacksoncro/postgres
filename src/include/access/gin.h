@@ -10,7 +10,7 @@
 #ifndef GIN_H
 #define GIN_H
 
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "lib/stringinfo.h"
 #include "storage/block.h"
 #include "utils/relcache.h"

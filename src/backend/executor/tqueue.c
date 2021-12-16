@@ -19,7 +19,7 @@
 
 #include "postgres.h"
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "executor/tqueue.h"
 
 /*

@@ -14,7 +14,7 @@
  */
 #include "postgres.h"
 
-#include "access/skey.h"
+#include "C:\projects\postgres\src\include\access\skey.h"
 #include "catalog/pg_collation.h"
 
 

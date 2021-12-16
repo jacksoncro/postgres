@@ -14,7 +14,7 @@
  */
 #include "postgres.h"
 
-#include "access/spgxlog.h"
+#include "C:\projects\postgres\src\include\access\spgxlog.h"
 
 void
 spg_desc(StringInfo buf, XLogReaderState *record)

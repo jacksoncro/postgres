@@ -19,10 +19,10 @@
 
 #include "postgres.h"
 
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
-#include "access/xlog_internal.h"
-#include "access/xloginsert.h"
+#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "C:\projects\postgres\src\include\access\xloginsert.h"
 #include "catalog/pg_control.h"
 #include "common/pg_lzcompress.h"
 #include "executor/instrument.h"

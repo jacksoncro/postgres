@@ -14,7 +14,7 @@
 #ifndef PATHNODES_H
 #define PATHNODES_H
 
-#include "access/sdir.h"
+#include "C:\projects\postgres\src\include\access\sdir.h"
 #include "lib/stringinfo.h"
 #include "nodes/params.h"
 #include "nodes/parsenodes.h"

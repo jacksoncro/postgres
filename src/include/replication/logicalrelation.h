@@ -12,7 +12,7 @@
 #ifndef LOGICALRELATION_H
 #define LOGICALRELATION_H
 
-#include "access/attmap.h"
+#include "C:\projects\postgres\src\include\access\attmap.h"
 #include "replication/logicalproto.h"
 
 typedef struct LogicalRepRelMapEntry

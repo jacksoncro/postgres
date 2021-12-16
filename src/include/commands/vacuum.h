@@ -14,7 +14,7 @@
 #ifndef VACUUM_H
 #define VACUUM_H
 
-#include "access/htup.h"
+#include "C:\projects\postgres\src\include\access\htup.h"
 #include "catalog/pg_class.h"
 #include "catalog/pg_statistic.h"
 #include "catalog/pg_type.h"

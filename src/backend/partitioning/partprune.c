@@ -35,8 +35,8 @@
 */
 #include "postgres.h"
 
-#include "access/hash.h"
-#include "access/nbtree.h"
+#include "C:\projects\postgres\src\include\access\hash.h"
+#include "C:\projects\postgres\src\include\access\nbtree.h"
 #include "catalog/pg_operator.h"
 #include "catalog/pg_opfamily.h"
 #include "catalog/pg_proc.h"

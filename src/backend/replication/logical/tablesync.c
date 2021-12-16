@@ -94,8 +94,8 @@
 
 #include "postgres.h"
 
-#include "access/table.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\table.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "catalog/pg_subscription_rel.h"
 #include "catalog/pg_type.h"
 #include "commands/copy.h"

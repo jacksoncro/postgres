@@ -10,7 +10,7 @@
 #define LOGICAL_H
 
 #include "C:\projects\postgres\src\include\access\xlog.h"
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "replication/output_plugin.h"
 #include "replication/slot.h"
 

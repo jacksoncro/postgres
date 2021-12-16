@@ -11,8 +11,8 @@
 #define PG_ORIGIN_H
 
 #include "C:\projects\postgres\src\include\access\xlog.h"
-#include "access/xlogdefs.h"
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "catalog/pg_replication_origin.h"
 
 typedef struct xl_replorigin_set

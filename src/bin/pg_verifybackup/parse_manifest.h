@@ -14,7 +14,7 @@
 #ifndef PARSE_MANIFEST_H
 #define PARSE_MANIFEST_H
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "common/checksum_helper.h"
 #include "mb/pg_wchar.h"
 

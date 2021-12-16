@@ -14,9 +14,9 @@
  */
 #include "postgres.h"
 
-#include "access/relscan.h"
-#include "access/tableam.h"
-#include "access/tsmapi.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\tsmapi.h"
 #include "executor/executor.h"
 #include "executor/nodeSamplescan.h"
 #include "miscadmin.h"

@@ -20,8 +20,8 @@
  */
 #include "postgres.h"
 
-#include "access/htup_details.h"
-#include "access/sysattr.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
 #include "catalog/pg_aggregate.h"
 #include "catalog/pg_am.h"
 #include "catalog/pg_amop.h"

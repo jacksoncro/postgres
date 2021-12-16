@@ -17,7 +17,7 @@
 #ifndef PRIMNODES_H
 #define PRIMNODES_H
 
-#include "access/attnum.h"
+#include "C:\projects\postgres\src\include\access\attnum.h"
 #include "nodes/bitmapset.h"
 #include "nodes/pg_list.h"
 

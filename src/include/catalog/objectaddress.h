@@ -13,7 +13,7 @@
 #ifndef OBJECTADDRESS_H
 #define OBJECTADDRESS_H
 
-#include "access/htup.h"
+#include "C:\projects\postgres\src\include\access\htup.h"
 #include "nodes/parsenodes.h"
 #include "storage/lockdefs.h"
 #include "utils/relcache.h"

@@ -45,11 +45,11 @@
 
 #include "postgres.h"
 
-#include "access/parallel.h"
-#include "access/relscan.h"
-#include "access/table.h"
-#include "access/tableam.h"
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "C:\projects\postgres\src\include\access\table.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "executor/executor.h"
 #include "executor/execPartition.h"
 #include "jit/jit.h"

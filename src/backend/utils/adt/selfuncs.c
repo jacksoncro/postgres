@@ -97,12 +97,12 @@
 #include <ctype.h>
 #include <math.h>
 
-#include "access/brin.h"
-#include "access/brin_page.h"
-#include "access/gin.h"
-#include "access/table.h"
-#include "access/tableam.h"
-#include "access/visibilitymap.h"
+#include "C:\projects\postgres\src\include\access\brin.h"
+#include "C:\projects\postgres\src\include\access\brin_page.h"
+#include "C:\projects\postgres\src\include\access\gin.h"
+#include "C:\projects\postgres\src\include\access\table.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\visibilitymap.h"
 #include "catalog/pg_am.h"
 #include "catalog/pg_collation.h"
 #include "catalog/pg_operator.h"

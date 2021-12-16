@@ -10,10 +10,10 @@
 #ifndef GIN_PRIVATE_H
 #define GIN_PRIVATE_H
 
-#include "access/amapi.h"
-#include "access/gin.h"
-#include "access/ginblock.h"
-#include "access/itup.h"
+#include "C:\projects\postgres\src\include\access\amapi.h"
+#include "C:\projects\postgres\src\include\access\gin.h"
+#include "C:\projects\postgres\src\include\access\ginblock.h"
+#include "C:\projects\postgres\src\include\access\itup.h"
 #include "catalog/pg_am_d.h"
 #include "fmgr.h"
 #include "lib/rbtree.h"

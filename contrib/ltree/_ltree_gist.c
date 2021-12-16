@@ -7,9 +7,9 @@
  */
 #include "postgres.h"
 
-#include "access/gist.h"
-#include "access/reloptions.h"
-#include "access/stratnum.h"
+#include "C:\projects\postgres\src\include\access\gist.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
 #include "crc32.h"
 #include "ltree.h"
 #include "port/pg_bitutils.h"

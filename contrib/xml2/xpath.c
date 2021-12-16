@@ -6,7 +6,7 @@
  */
 #include "postgres.h"
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "executor/spi.h"
 #include "fmgr.h"
 #include "funcapi.h"

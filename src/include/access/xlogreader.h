@@ -35,10 +35,10 @@
 #define XLOGREADER_H
 
 #ifndef FRONTEND
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #endif
 
-#include "access/xlogrecord.h"
+#include "C:\projects\postgres\src\include\access\xlogrecord.h"
 
 /* WALOpenSegment represents a WAL segment being read. */
 typedef struct WALOpenSegment

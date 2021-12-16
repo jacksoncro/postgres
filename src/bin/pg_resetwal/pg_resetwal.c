@@ -44,11 +44,11 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "access/heaptoast.h"
-#include "access/multixact.h"
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\heaptoast.h"
+#include "C:\projects\postgres\src\include\access\multixact.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
-#include "access/xlog_internal.h"
+#include "C:\projects\postgres\src\include\access\xlog_internal.h"
 #include "common/controldata_utils.h"
 #include "common/fe_memutils.h"
 #include "common/file_perm.h"

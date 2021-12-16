@@ -14,9 +14,9 @@
 #ifndef TUPCONVERT_H
 #define TUPCONVERT_H
 
-#include "access/attmap.h"
-#include "access/htup.h"
-#include "access/tupdesc.h"
+#include "C:\projects\postgres\src\include\access\attmap.h"
+#include "C:\projects\postgres\src\include\access\htup.h"
+#include "C:\projects\postgres\src\include\access\tupdesc.h"
 #include "executor/tuptable.h"
 #include "nodes/bitmapset.h"
 

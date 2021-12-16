@@ -13,8 +13,8 @@
  */
 #include "postgres.h"
 
-#include "access/table.h"
-#include "access/tableam.h"
+#include "C:\projects\postgres\src\include\access\table.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
 #include "catalog/partition.h"
 #include "catalog/pg_inherits.h"
 #include "catalog/pg_type.h"

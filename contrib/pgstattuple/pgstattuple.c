@@ -24,12 +24,12 @@
 
 #include "postgres.h"
 
-#include "access/gist_private.h"
-#include "access/hash.h"
-#include "access/heapam.h"
-#include "access/nbtree.h"
-#include "access/relscan.h"
-#include "access/tableam.h"
+#include "C:\projects\postgres\src\include\access\gist_private.h"
+#include "C:\projects\postgres\src\include\access\hash.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\nbtree.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_am_d.h"
 #include "funcapi.h"

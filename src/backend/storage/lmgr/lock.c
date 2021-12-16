@@ -32,10 +32,10 @@
 #include <signal.h>
 #include <unistd.h>
 
-#include "access/transam.h"
-#include "access/twophase.h"
-#include "access/twophase_rmgr.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\twophase.h"
+#include "C:\projects\postgres\src\include\access\twophase_rmgr.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
 #include "miscadmin.h"
 #include "pg_trace.h"

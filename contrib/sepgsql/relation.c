@@ -10,10 +10,10 @@
  */
 #include "postgres.h"
 
-#include "access/genam.h"
-#include "access/htup_details.h"
-#include "access/sysattr.h"
-#include "access/table.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
+#include "C:\projects\postgres\src\include\access\table.h"
 #include "catalog/dependency.h"
 #include "catalog/pg_attribute.h"
 #include "catalog/pg_class.h"

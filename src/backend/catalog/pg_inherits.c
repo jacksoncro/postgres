@@ -19,9 +19,9 @@
  */
 #include "postgres.h"
 
-#include "access/genam.h"
-#include "access/htup_details.h"
-#include "access/table.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\table.h"
 #include "catalog/indexing.h"
 #include "catalog/pg_inherits.h"
 #include "parser/parse_type.h"

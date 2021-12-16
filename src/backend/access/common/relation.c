@@ -20,8 +20,8 @@
 
 #include "postgres.h"
 
-#include "access/relation.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\relation.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "catalog/namespace.h"
 #include "miscadmin.h"
 #include "pgstat.h"

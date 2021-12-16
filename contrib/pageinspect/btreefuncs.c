@@ -27,8 +27,8 @@
 
 #include "postgres.h"
 
-#include "access/nbtree.h"
-#include "access/relation.h"
+#include "C:\projects\postgres\src\include\access\nbtree.h"
+#include "C:\projects\postgres\src\include\access\relation.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_am.h"
 #include "catalog/pg_type.h"

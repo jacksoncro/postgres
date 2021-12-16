@@ -14,8 +14,8 @@
  */
 #include "postgres.h"
 
-#include "access/htup_details.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "catalog/pg_proc.h"
 #include "catalog/pg_type.h"
 #include "executor/functions.h"

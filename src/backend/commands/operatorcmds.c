@@ -31,8 +31,8 @@
  */
 #include "postgres.h"
 
-#include "access/htup_details.h"
-#include "access/table.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\table.h"
 #include "catalog/dependency.h"
 #include "catalog/indexing.h"
 #include "catalog/objectaccess.h"

@@ -15,10 +15,10 @@
 
 #include "postgres.h"
 
-#include "access/nbtree.h"
-#include "access/nbtxlog.h"
-#include "access/transam.h"
-#include "access/xloginsert.h"
+#include "C:\projects\postgres\src\include\access\nbtree.h"
+#include "C:\projects\postgres\src\include\access\nbtxlog.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\xloginsert.h"
 #include "lib/qunique.h"
 #include "miscadmin.h"
 #include "storage/lmgr.h"

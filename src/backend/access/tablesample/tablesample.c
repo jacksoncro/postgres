@@ -15,7 +15,7 @@
 
 #include "postgres.h"
 
-#include "access/tsmapi.h"
+#include "C:\projects\postgres\src\include\access\tsmapi.h"
 
 
 /*

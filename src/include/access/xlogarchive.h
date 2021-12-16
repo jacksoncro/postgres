@@ -15,7 +15,7 @@
 #ifndef XLOG_ARCHIVE_H
 #define XLOG_ARCHIVE_H
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 
 extern bool RestoreArchivedFile(char *path, const char *xlogfname,
 								const char *recovername, off_t expectedSize,

@@ -130,10 +130,10 @@
 #include <unistd.h>
 #include <signal.h>
 
-#include "access/parallel.h"
-#include "access/slru.h"
-#include "access/transam.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "C:\projects\postgres\src\include\access\slru.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "catalog/pg_database.h"
 #include "commands/async.h"
 #include "common/hashfn.h"

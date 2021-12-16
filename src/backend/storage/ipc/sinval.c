@@ -14,7 +14,7 @@
  */
 #include "postgres.h"
 
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "commands/async.h"
 #include "miscadmin.h"
 #include "storage/ipc.h"

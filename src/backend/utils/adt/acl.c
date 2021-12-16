@@ -16,7 +16,7 @@
 
 #include <ctype.h>
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "catalog/catalog.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_auth_members.h"

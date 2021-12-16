@@ -19,7 +19,7 @@
 #ifndef INDEX_SELFUNCS_H
 #define INDEX_SELFUNCS_H
 
-#include "access/amapi.h"
+#include "C:\projects\postgres\src\include\access\amapi.h"
 
 /* Functions in selfuncs.c */
 extern void brincostestimate(struct PlannerInfo *root,

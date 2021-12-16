@@ -12,7 +12,7 @@
 #ifndef FDWAPI_H
 #define FDWAPI_H
 
-#include "access/parallel.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
 #include "nodes/execnodes.h"
 #include "nodes/pathnodes.h"
 

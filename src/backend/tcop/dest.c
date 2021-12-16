@@ -28,9 +28,9 @@
 
 #include "postgres.h"
 
-#include "access/printsimple.h"
-#include "access/printtup.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\printsimple.h"
+#include "C:\projects\postgres\src\include\access\printtup.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "commands/copy.h"
 #include "commands/createas.h"
 #include "commands/matview.h"

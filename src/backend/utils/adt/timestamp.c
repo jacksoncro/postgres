@@ -20,7 +20,7 @@
 #include <limits.h>
 #include <sys/time.h>
 
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "catalog/pg_type.h"
 #include "common/int.h"
 #include "common/int128.h"

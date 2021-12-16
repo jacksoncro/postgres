@@ -16,7 +16,7 @@
  */
 #include "postgres.h"
 
-#include "access/reloptions.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
 #include "utils/attoptcache.h"
 #include "utils/catcache.h"
 #include "utils/hsearch.h"

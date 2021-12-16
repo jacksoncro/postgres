@@ -14,7 +14,7 @@
 #ifndef DBCOMMANDS_XLOG_H
 #define DBCOMMANDS_XLOG_H
 
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "lib/stringinfo.h"
 
 /* record types */

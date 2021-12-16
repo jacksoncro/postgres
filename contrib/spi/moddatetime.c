@@ -15,7 +15,7 @@ OH, me, I'm Terry Mackintosh <terry@terrym.com>
 */
 #include "postgres.h"
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "catalog/pg_type.h"
 #include "commands/trigger.h"
 #include "executor/spi.h"

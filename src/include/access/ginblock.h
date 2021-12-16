@@ -10,7 +10,7 @@
 #ifndef GINBLOCK_H
 #define GINBLOCK_H
 
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "storage/block.h"
 #include "storage/bufpage.h"
 #include "storage/itemptr.h"

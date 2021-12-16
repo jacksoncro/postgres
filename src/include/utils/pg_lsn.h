@@ -15,7 +15,7 @@
 #ifndef PG_LSN_H
 #define PG_LSN_H
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "fmgr.h"
 
 #define DatumGetLSN(X) ((XLogRecPtr) DatumGetInt64(X))

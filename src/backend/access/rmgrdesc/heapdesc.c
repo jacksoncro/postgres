@@ -14,7 +14,7 @@
  */
 #include "postgres.h"
 
-#include "access/heapam_xlog.h"
+#include "C:\projects\postgres\src\include\access\heapam_xlog.h"
 
 static void
 out_infobits(StringInfo buf, uint8 infobits)

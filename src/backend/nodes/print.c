@@ -19,7 +19,7 @@
 
 #include "postgres.h"
 
-#include "access/printtup.h"
+#include "C:\projects\postgres\src\include\access\printtup.h"
 #include "lib/stringinfo.h"
 #include "nodes/nodeFuncs.h"
 #include "nodes/pathnodes.h"

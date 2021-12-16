@@ -26,7 +26,7 @@
 
 #include <math.h>
 
-#include "access/tsmapi.h"
+#include "C:\projects\postgres\src\include\access\tsmapi.h"
 #include "catalog/pg_type.h"
 #include "common/hashfn.h"
 #include "optimizer/optimizer.h"

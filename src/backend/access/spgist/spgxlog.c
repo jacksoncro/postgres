@@ -14,12 +14,12 @@
  */
 #include "postgres.h"
 
-#include "access/bufmask.h"
-#include "access/spgist_private.h"
-#include "access/spgxlog.h"
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\bufmask.h"
+#include "C:\projects\postgres\src\include\access\spgist_private.h"
+#include "C:\projects\postgres\src\include\access\spgxlog.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
-#include "access/xlogutils.h"
+#include "C:\projects\postgres\src\include\access\xlogutils.h"
 #include "storage/standby.h"
 #include "utils/memutils.h"
 

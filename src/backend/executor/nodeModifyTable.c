@@ -33,10 +33,10 @@
 
 #include "postgres.h"
 
-#include "access/heapam.h"
-#include "access/htup_details.h"
-#include "access/tableam.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "catalog/catalog.h"
 #include "commands/trigger.h"
 #include "executor/execPartition.h"

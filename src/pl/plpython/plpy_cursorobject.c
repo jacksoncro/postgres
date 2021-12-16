@@ -8,7 +8,7 @@
 
 #include <limits.h>
 
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "catalog/pg_type.h"
 #include "mb/pg_wchar.h"
 #include "plpy_cursorobject.h"

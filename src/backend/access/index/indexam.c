@@ -43,12 +43,12 @@
 
 #include "postgres.h"
 
-#include "access/amapi.h"
-#include "access/heapam.h"
-#include "access/reloptions.h"
-#include "access/relscan.h"
-#include "access/tableam.h"
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\amapi.h"
+#include "C:\projects\postgres\src\include\access\heapam.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/index.h"
 #include "catalog/pg_amproc.h"

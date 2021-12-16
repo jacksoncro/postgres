@@ -16,7 +16,7 @@
 #ifndef TYPCACHE_H
 #define TYPCACHE_H
 
-#include "access/tupdesc.h"
+#include "C:\projects\postgres\src\include\access\tupdesc.h"
 #include "fmgr.h"
 #include "storage/dsm.h"
 #include "utils/dsa.h"

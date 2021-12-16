@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "common/logging.h"
 #include "getopt_long.h"
 

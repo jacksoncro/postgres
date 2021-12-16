@@ -18,7 +18,7 @@
 #ifndef PG_SUBSCRIPTION_REL_H
 #define PG_SUBSCRIPTION_REL_H
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "catalog/genbki.h"
 #include "catalog/pg_subscription_rel_d.h"
 #include "nodes/pg_list.h"

@@ -14,8 +14,8 @@
 #ifndef ATTMAP_H
 #define ATTMAP_H
 
-#include "access/attnum.h"
-#include "access/tupdesc.h"
+#include "C:\projects\postgres\src\include\access\attnum.h"
+#include "C:\projects\postgres\src\include\access\tupdesc.h"
 
 /*
  * Attribute mapping structure

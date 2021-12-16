@@ -14,7 +14,7 @@
 #ifndef NODEBITMAPHEAPSCAN_H
 #define NODEBITMAPHEAPSCAN_H
 
-#include "access/parallel.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
 #include "nodes/execnodes.h"
 
 extern BitmapHeapScanState *ExecInitBitmapHeapScan(BitmapHeapScan *node, EState *estate, int eflags);

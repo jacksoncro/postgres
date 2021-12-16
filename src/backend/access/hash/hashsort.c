@@ -25,7 +25,7 @@
 
 #include "postgres.h"
 
-#include "access/hash.h"
+#include "C:\projects\postgres\src\include\access\hash.h"
 #include "commands/progress.h"
 #include "miscadmin.h"
 #include "pgstat.h"

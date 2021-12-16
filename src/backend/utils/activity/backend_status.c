@@ -11,7 +11,7 @@
  */
 #include "postgres.h"
 
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "libpq/libpq.h"
 #include "miscadmin.h"
 #include "pg_trace.h"

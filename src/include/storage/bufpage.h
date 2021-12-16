@@ -14,7 +14,7 @@
 #ifndef BUFPAGE_H
 #define BUFPAGE_H
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "storage/block.h"
 #include "storage/item.h"
 #include "storage/off.h"

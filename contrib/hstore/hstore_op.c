@@ -3,7 +3,7 @@
  */
 #include "postgres.h"
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "catalog/pg_type.h"
 #include "common/hashfn.h"
 #include "funcapi.h"

@@ -18,9 +18,9 @@
 
 #include <ctype.h>
 
-#include "access/htup_details.h"
-#include "access/parallel.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/pg_authid.h"
 #include "commands/variable.h"

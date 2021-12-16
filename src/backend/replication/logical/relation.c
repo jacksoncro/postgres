@@ -17,7 +17,7 @@
 
 #include "postgres.h"
 
-#include "access/table.h"
+#include "C:\projects\postgres\src\include\access\table.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_subscription_rel.h"
 #include "executor/executor.h"

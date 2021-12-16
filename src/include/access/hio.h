@@ -14,7 +14,7 @@
 #ifndef HIO_H
 #define HIO_H
 
-#include "access/htup.h"
+#include "C:\projects\postgres\src\include\access\htup.h"
 #include "storage/buf.h"
 #include "utils/relcache.h"
 

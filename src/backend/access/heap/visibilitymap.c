@@ -86,8 +86,8 @@
  */
 #include "postgres.h"
 
-#include "access/heapam_xlog.h"
-#include "access/visibilitymap.h"
+#include "C:\projects\postgres\src\include\access\heapam_xlog.h"
+#include "C:\projects\postgres\src\include\access\visibilitymap.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
 #include "miscadmin.h"
 #include "port/pg_bitutils.h"

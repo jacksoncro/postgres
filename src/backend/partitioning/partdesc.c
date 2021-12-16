@@ -14,9 +14,9 @@
 
 #include "postgres.h"
 
-#include "access/genam.h"
-#include "access/htup_details.h"
-#include "access/table.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\table.h"
 #include "catalog/partition.h"
 #include "catalog/pg_inherits.h"
 #include "partitioning/partbounds.h"

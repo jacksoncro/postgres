@@ -19,7 +19,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "access/xlog_internal.h"
+#include "C:\projects\postgres\src\include\access\xlog_internal.h"
 #include "common/file_perm.h"
 #include "common/logging.h"
 #include "getopt_long.h"

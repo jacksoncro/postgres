@@ -14,8 +14,8 @@
  */
 #include "postgres.h"
 
-#include "access/transam.h"
-#include "access/xact.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\xact.h"
 #include "storage/sinval.h"
 #include "storage/standbydefs.h"
 #include "utils/timestamp.h"

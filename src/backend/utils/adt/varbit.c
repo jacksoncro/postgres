@@ -31,7 +31,7 @@
 
 #include "postgres.h"
 
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "common/int.h"
 #include "libpq/pqformat.h"
 #include "nodes/nodeFuncs.h"

@@ -7,7 +7,7 @@
 #include <math.h>
 #include <float.h>
 
-#include "access/gist.h"
+#include "C:\projects\postgres\src\include\access\gist.h"
 #include "btree_gist.h"
 #include "utils/rel.h"
 

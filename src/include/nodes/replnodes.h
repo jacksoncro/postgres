@@ -14,7 +14,7 @@
 #ifndef REPLNODES_H
 #define REPLNODES_H
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "nodes/pg_list.h"
 
 typedef enum ReplicationKind

@@ -12,7 +12,7 @@
 #ifndef DEPARSE_UTILITY_H
 #define DEPARSE_UTILITY_H
 
-#include "access/attnum.h"
+#include "C:\projects\postgres\src\include\access\attnum.h"
 #include "catalog/objectaddress.h"
 #include "nodes/nodes.h"
 #include "utils/aclchk_internal.h"

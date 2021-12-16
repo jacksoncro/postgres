@@ -51,11 +51,11 @@
 
 #include <unistd.h>
 
-#include "access/htup_details.h"
-#include "access/timeline.h"
-#include "access/transam.h"
-#include "access/xlog_internal.h"
-#include "access/xlogarchive.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\timeline.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "C:\projects\postgres\src\include\access\xlogarchive.h"
 #include "catalog/pg_authid.h"
 #include "catalog/pg_type.h"
 #include "common/ip.h"

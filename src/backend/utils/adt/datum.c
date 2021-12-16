@@ -42,7 +42,7 @@
 
 #include "postgres.h"
 
-#include "access/detoast.h"
+#include "C:\projects\postgres\src\include\access\detoast.h"
 #include "common/hashfn.h"
 #include "fmgr.h"
 #include "utils/builtins.h"

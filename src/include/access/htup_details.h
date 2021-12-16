@@ -14,10 +14,10 @@
 #ifndef HTUP_DETAILS_H
 #define HTUP_DETAILS_H
 
-#include "access/htup.h"
-#include "access/transam.h"
-#include "access/tupdesc.h"
-#include "access/tupmacs.h"
+#include "C:\projects\postgres\src\include\access\htup.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\tupdesc.h"
+#include "C:\projects\postgres\src\include\access\tupmacs.h"
 #include "storage/bufpage.h"
 
 /*

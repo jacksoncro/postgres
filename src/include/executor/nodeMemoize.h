@@ -14,7 +14,7 @@
 #ifndef NODEMEMOIZE_H
 #define NODEMEMOIZE_H
 
-#include "access/parallel.h"
+#include "C:\projects\postgres\src\include\access\parallel.h"
 #include "nodes/execnodes.h"
 
 extern MemoizeState *ExecInitMemoize(Memoize *node, EState *estate, int eflags);

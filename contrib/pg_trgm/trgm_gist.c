@@ -3,8 +3,8 @@
  */
 #include "postgres.h"
 
-#include "access/reloptions.h"
-#include "access/stratnum.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
 #include "fmgr.h"
 #include "port/pg_bitutils.h"
 #include "trgm.h"

@@ -14,8 +14,8 @@
 #ifndef PLANNODES_H
 #define PLANNODES_H
 
-#include "access/sdir.h"
-#include "access/stratnum.h"
+#include "C:\projects\postgres\src\include\access\sdir.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
 #include "lib/stringinfo.h"
 #include "nodes/bitmapset.h"
 #include "nodes/lockoptions.h"

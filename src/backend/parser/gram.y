@@ -48,7 +48,7 @@
 #include <ctype.h>
 #include <limits.h>
 
-#include "access/tableam.h"
+#include "C:\projects\postgres\src\include\access\tableam.h"
 #include "catalog/index.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_am.h"

@@ -20,8 +20,8 @@
 #ifndef CATCACHE_H
 #define CATCACHE_H
 
-#include "access/htup.h"
-#include "access/skey.h"
+#include "C:\projects\postgres\src\include\access\htup.h"
+#include "C:\projects\postgres\src\include\access\skey.h"
 #include "lib/ilist.h"
 #include "utils/relcache.h"
 

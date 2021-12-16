@@ -10,9 +10,9 @@
 #ifndef GINXLOG_H
 #define GINXLOG_H
 
-#include "access/ginblock.h"
-#include "access/itup.h"
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\ginblock.h"
+#include "C:\projects\postgres\src\include\access\itup.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "lib/stringinfo.h"
 #include "storage/off.h"
 

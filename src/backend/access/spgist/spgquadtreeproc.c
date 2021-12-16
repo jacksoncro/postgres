@@ -15,9 +15,9 @@
 
 #include "postgres.h"
 
-#include "access/spgist.h"
-#include "access/spgist_private.h"
-#include "access/stratnum.h"
+#include "C:\projects\postgres\src\include\access\spgist.h"
+#include "C:\projects\postgres\src\include\access\spgist_private.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
 #include "catalog/pg_type.h"
 #include "utils/builtins.h"
 #include "utils/float.h"

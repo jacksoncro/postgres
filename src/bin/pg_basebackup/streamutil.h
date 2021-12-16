@@ -12,7 +12,7 @@
 #ifndef STREAMUTIL_H
 #define STREAMUTIL_H
 
-#include "access/xlogdefs.h"
+#include "C:\projects\postgres\src\include\access\xlogdefs.h"
 #include "datatype/timestamp.h"
 #include "libpq-fe.h"
 

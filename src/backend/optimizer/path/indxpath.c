@@ -17,8 +17,8 @@
 
 #include <math.h>
 
-#include "access/stratnum.h"
-#include "access/sysattr.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
+#include "C:\projects\postgres\src\include\access\sysattr.h"
 #include "catalog/pg_am.h"
 #include "catalog/pg_operator.h"
 #include "catalog/pg_opfamily.h"

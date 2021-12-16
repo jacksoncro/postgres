@@ -13,8 +13,8 @@
 #ifndef NBTXLOG_H
 #define NBTXLOG_H
 
-#include "access/transam.h"
-#include "access/xlogreader.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
 #include "lib/stringinfo.h"
 #include "storage/off.h"
 

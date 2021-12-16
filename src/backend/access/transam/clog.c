@@ -32,12 +32,12 @@
  */
 #include "postgres.h"
 
-#include "access/clog.h"
-#include "access/slru.h"
-#include "access/transam.h"
+#include "C:\projects\postgres\src\include\access\clog.h"
+#include "C:\projects\postgres\src\include\access\slru.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
 #include "C:\projects\postgres\src\include\access\xlog.h"
-#include "access/xloginsert.h"
-#include "access/xlogutils.h"
+#include "C:\projects\postgres\src\include\access\xloginsert.h"
+#include "C:\projects\postgres\src\include\access\xlogutils.h"
 #include "miscadmin.h"
 #include "pg_trace.h"
 #include "pgstat.h"

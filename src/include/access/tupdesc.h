@@ -14,7 +14,7 @@
 #ifndef TUPDESC_H
 #define TUPDESC_H
 
-#include "access/attnum.h"
+#include "C:\projects\postgres\src\include\access\attnum.h"
 #include "catalog/pg_attribute.h"
 #include "nodes/pg_list.h"
 

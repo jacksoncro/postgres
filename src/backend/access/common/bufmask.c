@@ -17,7 +17,7 @@
 
 #include "postgres.h"
 
-#include "access/bufmask.h"
+#include "C:\projects\postgres\src\include\access\bufmask.h"
 
 /*
  * mask_page_lsn_and_checksum

@@ -9,12 +9,12 @@
  */
 #include "postgres.h"
 
-#include "access/brin.h"
-#include "access/brin_internal.h"
-#include "access/brin_page.h"
-#include "access/brin_revmap.h"
-#include "access/brin_tuple.h"
-#include "access/htup_details.h"
+#include "C:\projects\postgres\src\include\access\brin.h"
+#include "C:\projects\postgres\src\include\access\brin_internal.h"
+#include "C:\projects\postgres\src\include\access\brin_page.h"
+#include "C:\projects\postgres\src\include\access\brin_revmap.h"
+#include "C:\projects\postgres\src\include\access\brin_tuple.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
 #include "catalog/index.h"
 #include "catalog/pg_type.h"
 #include "funcapi.h"

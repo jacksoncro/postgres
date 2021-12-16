@@ -10,10 +10,10 @@
  */
 #include "postgres.h"
 
-#include "access/brin_internal.h"
-#include "access/brin_tuple.h"
-#include "access/genam.h"
-#include "access/stratnum.h"
+#include "C:\projects\postgres\src\include\access\brin_internal.h"
+#include "C:\projects\postgres\src\include\access\brin_tuple.h"
+#include "C:\projects\postgres\src\include\access\genam.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
 #include "catalog/pg_amop.h"
 #include "catalog/pg_type.h"
 #include "utils/builtins.h"

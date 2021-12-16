@@ -16,10 +16,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "access/transam.h"
-#include "access/xlog_internal.h"
-#include "access/xlogreader.h"
-#include "access/xlogrecord.h"
+#include "C:\projects\postgres\src\include\access\transam.h"
+#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "C:\projects\postgres\src\include\access\xlogrecord.h"
 #include "common/fe_memutils.h"
 #include "common/logging.h"
 #include "getopt_long.h"

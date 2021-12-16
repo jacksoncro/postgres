@@ -22,12 +22,12 @@
 
 #include "postgres.h"
 
-#include "access/amapi.h"
-#include "access/htup_details.h"
-#include "access/relation.h"
-#include "access/reloptions.h"
-#include "access/table.h"
-#include "access/toast_compression.h"
+#include "C:\projects\postgres\src\include\access\amapi.h"
+#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "C:\projects\postgres\src\include\access\relation.h"
+#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "C:\projects\postgres\src\include\access\table.h"
+#include "C:\projects\postgres\src\include\access\toast_compression.h"
 #include "catalog/dependency.h"
 #include "catalog/heap.h"
 #include "catalog/index.h"

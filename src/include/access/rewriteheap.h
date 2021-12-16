@@ -13,7 +13,7 @@
 #ifndef REWRITE_HEAP_H
 #define REWRITE_HEAP_H
 
-#include "access/htup.h"
+#include "C:\projects\postgres\src\include\access\htup.h"
 #include "storage/itemptr.h"
 #include "storage/relfilenode.h"
 #include "utils/relcache.h"

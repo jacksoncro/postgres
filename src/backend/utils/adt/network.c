@@ -12,7 +12,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#include "access/stratnum.h"
+#include "C:\projects\postgres\src\include\access\stratnum.h"
 #include "catalog/pg_opfamily.h"
 #include "catalog/pg_type.h"
 #include "common/hashfn.h"
