@@ -22,8 +22,8 @@ build_script:
   - set PATH=C:/msys64/usr/bin;%PATH%
   - sh -l -c "./configure --enable-cassert --enable-debug --enable-tap-tests --enable-nls  --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
   - sh -l -c "make clean"
-  - sh -l -c "make world-bin"
-  - sh -l -c "make install world-bin"
+  - sh -l -c "make -j2"
+  - sh -l -c "make install -j2"
   
 artifacts:
   - path: /usr/local/pgsql
