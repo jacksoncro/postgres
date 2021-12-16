@@ -20,13 +20,16 @@ install:
 build_script:
   - set HOME=.
   - set PATH=C:/msys64/usr/bin;%PATH%
-  - sh -l -c "./configure --enable-cassert --enable-debug --enable-tap-tests --enable-nls  --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
+  %APPVEYOR_BUILD_FOLDER%
+  - sh -l -c "mkdir %APPVEYOR_BUILD_FOLDER%/dist"
+  - sh -l -c "./configure --prefix=%APPVEYOR_BUILD_FOLDER%/dist --enable-cassert --enable-debug --enable-tap-tests --enable-nls  --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
+  - sh -l -c "cd %APPVEYOR_BUILD_FOLDER%/dist"
   - sh -l -c "make clean"
   - sh -l -c "make -j2"
   - sh -l -c "make install -j2"
   
 artifacts:
-  - path: /usr/local/pgsql
+  - path: %APPVEYOR_BUILD_FOLDER%/dist
     name: postgres
     type: zip
 
