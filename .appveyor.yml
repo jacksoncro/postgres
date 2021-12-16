@@ -22,7 +22,7 @@ build_script:
   - set PATH=C:/msys64/usr/bin;%PATH%
   - sh -l -c "mkdir /c/projects/postgres/dist"
   - sh -l -c "./configure --prefix=/c/projects/postgres/dist --enable-cassert --enable-debug --enable-tap-tests --enable-nls  --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
-  - sh -l -c "cd %APPVEYOR_BUILD_FOLDER%/dist"
+  - sh -l -c "cd /c/projects/postgres/dist"
   - sh -l -c "make clean"
   - sh -l -c "make -j2"
   - sh -l -c "make install -j2"
