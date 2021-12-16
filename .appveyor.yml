@@ -19,7 +19,7 @@ install:
 
 build_script:
   - set HOME=.
-  - set PATH=C:/msys64/usr/bin;C:/projects/postgres/src/include;C:\projects\postgres\src\include\port\win32;C:\projects\postgres\src\include\port\win32_msvc;%PATH%
+  - set PATH=C:/msys64/usr/bin;C:\msys64\usr\bin;C:/projects/postgres/src/include;C:\projects\postgres\src\include\port\win32;C:\projects\postgres\src\include\port\win32_msvc;%PATH%
   - sh -l -c "./configure --enable-cassert --enable-debug --enable-nls --enable-tap-tests --with-icu --with-ldap --with-libxml --with-libxslt --with-openssl"
   - sh -l -c "make world -j2"
   - sh -l -c "make install world -j2"
