@@ -49,7 +49,7 @@
 #include "access/relscan.h"
 #include "access/tableam.h"
 #include "access/transam.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/index.h"
 #include "catalog/pg_amproc.h"
 #include "catalog/pg_type.h"

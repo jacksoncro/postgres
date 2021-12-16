@@ -14,7 +14,7 @@
 #ifndef GENERIC_XLOG_H
 #define GENERIC_XLOG_H
 
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "access/xlog_internal.h"
 #include "access/xloginsert.h"
 #include "storage/bufpage.h"

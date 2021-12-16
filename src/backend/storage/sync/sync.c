@@ -21,7 +21,7 @@
 #include "access/commit_ts.h"
 #include "access/clog.h"
 #include "access/multixact.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "access/xlogutils.h"
 #include "commands/tablespace.h"
 #include "miscadmin.h"

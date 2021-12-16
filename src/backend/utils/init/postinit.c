@@ -26,7 +26,7 @@
 #include "access/sysattr.h"
 #include "access/tableam.h"
 #include "access/xact.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/catalog.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_authid.h"

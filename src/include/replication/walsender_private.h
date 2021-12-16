@@ -12,7 +12,7 @@
 #ifndef _WALSENDER_PRIVATE_H
 #define _WALSENDER_PRIVATE_H
 
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "nodes/nodes.h"
 #include "replication/syncrep.h"
 #include "storage/latch.h"

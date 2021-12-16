@@ -28,7 +28,7 @@
 #include "access/htup_details.h"
 #include "access/tableam.h"
 #include "access/xact.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/namespace.h"
 #include "commands/copy.h"
 #include "commands/copyfrom_internal.h"

@@ -20,7 +20,7 @@
 #include "access/reloptions.h"
 #include "access/twophase.h"
 #include "access/xact.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/catalog.h"
 #include "catalog/index.h"
 #include "catalog/namespace.h"

@@ -24,7 +24,7 @@
 #include "access/table.h"
 #include "access/tableam.h"
 #include "access/transam.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/catalog.h"
 #include "catalog/heap.h"
 #include "catalog/pg_am.h"

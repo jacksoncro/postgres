@@ -12,7 +12,7 @@
 #ifndef _WALRECEIVER_H
 #define _WALRECEIVER_H
 
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "access/xlogdefs.h"
 #include "getaddrinfo.h"		/* for NI_MAXHOST */
 #include "pgtime.h"

@@ -10,7 +10,7 @@
 #ifndef PG_LOGICAL_MESSAGE_H
 #define PG_LOGICAL_MESSAGE_H
 
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "access/xlogdefs.h"
 #include "access/xlogreader.h"
 

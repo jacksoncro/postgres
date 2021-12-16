@@ -20,7 +20,7 @@
 #include <unistd.h>
 
 #include "access/timeline.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "access/xlog_internal.h"
 #include "access/xlogutils.h"
 #include "miscadmin.h"

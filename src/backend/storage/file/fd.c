@@ -88,7 +88,7 @@
 #endif
 
 #include "access/xact.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/pg_tablespace.h"
 #include "common/file_perm.h"
 #include "common/file_utils.h"

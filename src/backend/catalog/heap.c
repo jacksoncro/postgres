@@ -39,7 +39,7 @@
 #include "access/toast_compression.h"
 #include "access/transam.h"
 #include "access/xact.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/binary_upgrade.h"
 #include "catalog/catalog.h"
 #include "catalog/dependency.h"

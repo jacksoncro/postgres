@@ -44,7 +44,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "libpq/pqsignal.h"
 #include "miscadmin.h"
 #include "pgstat.h"

@@ -21,7 +21,7 @@
 #include "access/htup_details.h"
 #include "access/parallel.h"
 #include "access/xact.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/pg_authid.h"
 #include "commands/variable.h"
 #include "mb/pg_wchar.h"

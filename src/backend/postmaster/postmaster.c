@@ -94,7 +94,7 @@
 #endif
 
 #include "access/transam.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "bootstrap/bootstrap.h"
 #include "catalog/pg_control.h"
 #include "common/file_perm.h"

@@ -18,7 +18,7 @@
 #include "access/heapam_xlog.h"
 #include "access/htup_details.h"
 #include "access/transam.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/catalog.h"
 #include "miscadmin.h"
 #include "pgstat.h"

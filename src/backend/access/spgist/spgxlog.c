@@ -18,7 +18,7 @@
 #include "access/spgist_private.h"
 #include "access/spgxlog.h"
 #include "access/transam.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "access/xlogutils.h"
 #include "storage/standby.h"
 #include "utils/memutils.h"

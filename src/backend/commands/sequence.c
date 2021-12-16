@@ -21,7 +21,7 @@
 #include "access/table.h"
 #include "access/transam.h"
 #include "access/xact.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "access/xloginsert.h"
 #include "access/xlogutils.h"
 #include "catalog/dependency.h"

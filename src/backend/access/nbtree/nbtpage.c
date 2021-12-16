@@ -26,7 +26,7 @@
 #include "access/nbtxlog.h"
 #include "access/tableam.h"
 #include "access/transam.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "access/xloginsert.h"
 #include "miscadmin.h"
 #include "storage/indexfsm.h"

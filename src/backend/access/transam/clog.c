@@ -35,7 +35,7 @@
 #include "access/clog.h"
 #include "access/slru.h"
 #include "access/transam.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "access/xloginsert.h"
 #include "access/xlogutils.h"
 #include "miscadmin.h"

@@ -36,7 +36,7 @@
 #include "access/twophase.h"
 #include "access/twophase_rmgr.h"
 #include "access/xact.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "miscadmin.h"
 #include "pg_trace.h"
 #include "pgstat.h"

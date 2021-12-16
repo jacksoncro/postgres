@@ -60,7 +60,7 @@
 #include "access/transam.h"
 #include "access/visibilitymap.h"
 #include "access/xact.h"
-#include "access/xlog.h"
+#include "C:\projects\postgres\src\include\access\xlog.h"
 #include "catalog/index.h"
 #include "catalog/storage.h"
 #include "commands/dbcommands.h"
