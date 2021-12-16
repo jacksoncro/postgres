@@ -26,8 +26,8 @@ build_script:
 #  - sh -l -c "echo "teste" > arquivo.txt"  
 #  - sh -l -c "make clean"
   - set PATH=C:/projects/postgres/dist/include/server/;%PATH%
-  - sh -l -c "make word-bin -j2"
-  - sh -l -c "make install word-bin -j2"
+  - sh -l -c "make world-bin -j2"
+  - sh -l -c "make install world-bin -j2"
   - 7z a -r postgre.zip C:\projects\postgres\dist
   - appveyor PushArtifact postgre.zip
   
