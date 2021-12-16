@@ -70,7 +70,7 @@
 #define ERRCODE_IS_CATEGORY(ec)  (((ec) & ~((1 << 12) - 1)) == 0)
 
 /* SQLSTATE codes for errors are defined in a separate file */
-#include "utils/errcodes.h"
+#include "C:\projects\postgres\extra\errcodes.h"
 
 /*
  * Provide a way to prevent "errno" from being accidentally used inside an
