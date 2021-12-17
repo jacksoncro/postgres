@@ -16,12 +16,12 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\spgist_private.h"
-#include "C:\projects\postgres\src\include\access\spgxlog.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
-#include "C:\projects\postgres\src\include\access\xloginsert.h"
+#include "access/genam.h"
+#include "access/spgist_private.h"
+#include "access/spgxlog.h"
+#include "access/tableam.h"
+#include "access/xlog.h"
+#include "access/xloginsert.h"
 #include "catalog/index.h"
 #include "miscadmin.h"
 #include "storage/bufmgr.h"

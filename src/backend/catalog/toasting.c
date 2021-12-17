@@ -14,9 +14,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\heapam.h"
-#include "C:\projects\postgres\src\include\access\toast_compression.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/heapam.h"
+#include "access/toast_compression.h"
+#include "access/xact.h"
 #include "catalog/binary_upgrade.h"
 #include "catalog/catalog.h"
 #include "catalog/dependency.h"

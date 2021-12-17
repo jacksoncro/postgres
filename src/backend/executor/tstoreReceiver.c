@@ -22,8 +22,8 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\detoast.h"
-#include "C:\projects\postgres\src\include\access\tupconvert.h"
+#include "access/detoast.h"
+#include "access/tupconvert.h"
 #include "executor/tstoreReceiver.h"
 
 

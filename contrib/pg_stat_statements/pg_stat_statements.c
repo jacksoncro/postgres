@@ -47,7 +47,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "catalog/pg_authid.h"
 #include "common/hashfn.h"
 #include "executor/instrument.h"

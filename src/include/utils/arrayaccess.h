@@ -14,7 +14,7 @@
 #ifndef ARRAYACCESS_H
 #define ARRAYACCESS_H
 
-#include "C:\projects\postgres\src\include\access\tupmacs.h"
+#include "access/tupmacs.h"
 #include "utils/array.h"
 
 

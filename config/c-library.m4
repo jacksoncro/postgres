@@ -121,7 +121,7 @@ AC_DEFUN([PGAC_STRUCT_SOCKADDR_UN],
 AC_DEFUN([PGAC_STRUCT_SOCKADDR_STORAGE],
 [AC_CHECK_TYPES([struct sockaddr_storage], [], [],
 [#include <sys/types.h>
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
+#include <sys/socket.h>
 ])])# PGAC_STRUCT_SOCKADDR_STORAGE
 
 # PGAC_STRUCT_SOCKADDR_STORAGE_MEMBERS
@@ -138,7 +138,7 @@ AC_DEFUN([PGAC_STRUCT_SOCKADDR_STORAGE_MEMBERS],
 		   struct sockaddr_storage.__ss_len,
 		   struct sockaddr.sa_len], [], [],
 [#include <sys/types.h>
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
+#include <sys/socket.h>
 ])])# PGAC_STRUCT_SOCKADDR_STORAGE_MEMBERS
 
 
@@ -148,8 +148,8 @@ AC_DEFUN([PGAC_STRUCT_SOCKADDR_STORAGE_MEMBERS],
 AC_DEFUN([PGAC_STRUCT_ADDRINFO],
 [AC_CHECK_TYPES([struct addrinfo], [], [],
 [#include <sys/types.h>
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
-#include <C:\projects\postgres\src\include\port\win32\netdb.h>
+#include <sys/socket.h>
+#include <netdb.h>
 ])])# PGAC_STRUCT_ADDRINFO
 
 

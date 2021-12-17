@@ -20,8 +20,8 @@
 #include <math.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\table.h"
+#include "access/sysattr.h"
+#include "access/table.h"
 #include "catalog/catalog.h"
 #include "catalog/pg_tablespace.h"
 #include "catalog/pg_type.h"

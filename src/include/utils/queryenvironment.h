@@ -14,7 +14,7 @@
 #ifndef QUERYENVIRONMENT_H
 #define QUERYENVIRONMENT_H
 
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
+#include "access/tupdesc.h"
 
 
 typedef enum EphemeralNameRelationType

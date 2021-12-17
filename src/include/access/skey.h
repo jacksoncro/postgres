@@ -14,8 +14,8 @@
 #ifndef SKEY_H
 #define SKEY_H
 
-#include "C:\projects\postgres\src\include\access\attnum.h"
-#include "C:\projects\postgres\src\include\access\stratnum.h"
+#include "access/attnum.h"
+#include "access/stratnum.h"
 #include "fmgr.h"
 
 

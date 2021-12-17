@@ -15,10 +15,10 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "access/htup_details.h"
+#include "access/transam.h"
+#include "access/xlog.h"
+#include "access/xlog_internal.h"
 #include "catalog/pg_control.h"
 #include "catalog/pg_type.h"
 #include "common/controldata_utils.h"

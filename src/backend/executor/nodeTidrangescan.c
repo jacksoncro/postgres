@@ -14,9 +14,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\relscan.h"
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "access/relscan.h"
+#include "access/sysattr.h"
+#include "access/tableam.h"
 #include "catalog/pg_operator.h"
 #include "executor/execdebug.h"
 #include "executor/nodeTidrangescan.h"

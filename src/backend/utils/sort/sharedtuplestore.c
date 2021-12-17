@@ -21,8 +21,8 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\htup.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/htup.h"
+#include "access/htup_details.h"
 #include "miscadmin.h"
 #include "storage/buffile.h"
 #include "storage/lwlock.h"

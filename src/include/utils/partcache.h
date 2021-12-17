@@ -11,7 +11,7 @@
 #ifndef PARTCACHE_H
 #define PARTCACHE_H
 
-#include "C:\projects\postgres\src\include\access\attnum.h"
+#include "access/attnum.h"
 #include "fmgr.h"
 #include "nodes/pg_list.h"
 #include "nodes/primnodes.h"

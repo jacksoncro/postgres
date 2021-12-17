@@ -52,7 +52,7 @@
 #ifndef SORTSUPPORT_H
 #define SORTSUPPORT_H
 
-#include "C:\projects\postgres\src\include\access\attnum.h"
+#include "access/attnum.h"
 #include "utils/relcache.h"
 
 typedef struct SortSupportData *SortSupport;

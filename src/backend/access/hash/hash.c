@@ -18,10 +18,10 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\hash.h"
-#include "C:\projects\postgres\src\include\access\hash_xlog.h"
-#include "C:\projects\postgres\src\include\access\relscan.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "access/hash.h"
+#include "access/hash_xlog.h"
+#include "access/relscan.h"
+#include "access/tableam.h"
 #include "catalog/index.h"
 #include "commands/progress.h"
 #include "commands/vacuum.h"

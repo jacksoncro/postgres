@@ -11,58 +11,56 @@
  *-------------------------------------------------------------------------
  */
 
-#include "C:\projects\postgres\src\include\postgres.h"
+#include "postgres.h"
 
-#include <C:\projects\postgres\src\include\port\win32_msvc\unistd.h>
+#include <unistd.h>
 
 #ifdef WIN32
 #include <process.h>
 #else
-#include <c:\projects\postgres\src\include\port\win32\sys\wait.h>
+#include <sys/wait.h>
 #endif
 
-#include "C:\projects\postgres\src\interfaces\libpq\libpq-fe.h"
+#include "libpq-fe.h"
 
-#include "C:\projects\postgres\src\include\miscadmin.h"
+#include "miscadmin.h"
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\hash.h"
-#include "C:\projects\postgres\src\include\access\heapam.h"
-#include "C:\projects\postgres\src\include\access\skey.h"
-#include "C:\projects\postgres\src\include\access\stratnum.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/genam.h"
+#include "access/hash.h"
+#include "access/heapam.h"
+#include "access/skey.h"
+#include "access/stratnum.h"
+#include "access/xact.h"
 
-#include "C:\projects\postgres\src\include\catalog\indexing.h"
-#include "C:\projects\postgres\src\include\catalog\namespace.h"
+#include "catalog/indexing.h"
+#include "catalog/namespace.h"
 
-#include "C:\projects\postgres\src\include\commands\dbcommands.h"
-#include "C:\projects\postgres\src\include\commands\tablecmds.h"
+#include "commands/dbcommands.h"
+#include "commands/tablecmds.h"
 
-#include "C:\projects\postgres\src\include\lib\stringinfo.h"
+#include "lib/stringinfo.h"
 
-#include "C:\projects\postgres\src\include\utils\memutils.h"
+#include "utils/memutils.h"
 
-#include "C:\projects\postgres\src\include
-odes\makefuncs.h"
-#include "C:\projects\postgres\src\include
-odes\parsenodes.h"
+#include "nodes/makefuncs.h"
+#include "nodes/parsenodes.h"
 
-#include "C:\projects\postgres\src\include\pgstat.h"
+#include "pgstat.h"
 
-#include "C:\projects\postgres\src\includeeplication\origin.h"
+#include "replication/origin.h"
 
-#include "C:\projects\postgres\src\include\storage\fd.h"
-#include "C:\projects\postgres\src\include\storage\ipc.h"
-#include "C:\projects\postgres\src\include\storage\proc.h"
+#include "storage/fd.h"
+#include "storage/ipc.h"
+#include "storage/proc.h"
 
-#include "C:\projects\postgres\src\include	cop\utility.h"
+#include "tcop/utility.h"
 
-#include "C:\projects\postgres\src\include\utils\builtins.h"
-#include "C:\projects\postgres\src\include\utils\fmgroids.h"
-#include "C:\projects\postgres\src\include\utils\guc.h"
-#include "C:\projects\postgres\src\include\utils\pg_lsn.h"
-#include "C:\projects\postgres\src\include\utils\rel.h"
-#include "C:\projects\postgres\src\include\utils\resowner.h"
+#include "utils/builtins.h"
+#include "utils/fmgroids.h"
+#include "utils/guc.h"
+#include "utils/pg_lsn.h"
+#include "utils/rel.h"
+#include "utils/resowner.h"
 
 #include "pglogical_relcache.h"
 #include "pglogical_repset.h"

@@ -15,9 +15,9 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\subtrans.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/subtrans.h"
+#include "access/transam.h"
+#include "access/xact.h"
 #include "catalog/catalog.h"
 #include "commands/progress.h"
 #include "miscadmin.h"

@@ -105,13 +105,13 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\heapam.h"
-#include "C:\projects\postgres\src\include\access\heapam_xlog.h"
-#include "C:\projects\postgres\src\include\access\heaptoast.h"
-#include "C:\projects\postgres\src\include\access\rewriteheap.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\access\xloginsert.h"
+#include "access/heapam.h"
+#include "access/heapam_xlog.h"
+#include "access/heaptoast.h"
+#include "access/rewriteheap.h"
+#include "access/transam.h"
+#include "access/xact.h"
+#include "access/xloginsert.h"
 #include "catalog/catalog.h"
 #include "lib/ilist.h"
 #include "miscadmin.h"

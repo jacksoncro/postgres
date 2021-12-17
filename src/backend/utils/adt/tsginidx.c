@@ -13,8 +13,8 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gin.h"
-#include "C:\projects\postgres\src\include\access\stratnum.h"
+#include "access/gin.h"
+#include "access/stratnum.h"
 #include "miscadmin.h"
 #include "tsearch/ts_type.h"
 #include "tsearch/ts_utils.h"

@@ -35,9 +35,9 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\twophase.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/transam.h"
+#include "access/twophase.h"
+#include "access/xact.h"
 #include "miscadmin.h"
 #include "pgstat.h"
 #include "postmaster/autovacuum.h"

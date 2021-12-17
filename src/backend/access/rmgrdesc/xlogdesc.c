@@ -14,9 +14,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "access/transam.h"
+#include "access/xlog.h"
+#include "access/xlog_internal.h"
 #include "catalog/pg_control.h"
 #include "utils/guc.h"
 #include "utils/timestamp.h"

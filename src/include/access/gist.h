@@ -16,10 +16,10 @@
 #ifndef GIST_H
 #define GIST_H
 
-#include "C:\projects\postgres\src\include\access\itup.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/itup.h"
+#include "access/transam.h"
+#include "access/xlog.h"
+#include "access/xlogdefs.h"
 #include "storage/block.h"
 #include "storage/bufpage.h"
 #include "utils/relcache.h"

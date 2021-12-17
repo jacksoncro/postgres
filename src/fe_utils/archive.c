@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "access/xlog_internal.h"
 #include "common/archive.h"
 #include "common/logging.h"
 #include "fe_utils/archive.h"

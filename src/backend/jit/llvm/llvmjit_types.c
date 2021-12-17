@@ -26,9 +26,9 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\htup.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
+#include "access/htup.h"
+#include "access/htup_details.h"
+#include "access/tupdesc.h"
 #include "catalog/pg_attribute.h"
 #include "executor/execExpr.h"
 #include "executor/nodeAgg.h"

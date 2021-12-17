@@ -15,7 +15,7 @@
 #include "c.h"
 
 #include <sys/param.h>
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
+#include <sys/socket.h>
 #include <unistd.h>
 #ifdef HAVE_SYS_UN_H
 #include <sys/un.h>

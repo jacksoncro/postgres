@@ -17,13 +17,13 @@
 #include <unistd.h>
 #include <signal.h>
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\heapam.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
-#include "C:\projects\postgres\src\include\access\toast_compression.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "access/genam.h"
+#include "access/heapam.h"
+#include "access/htup_details.h"
+#include "access/tableam.h"
+#include "access/toast_compression.h"
+#include "access/xact.h"
+#include "access/xlog_internal.h"
 #include "bootstrap/bootstrap.h"
 #include "catalog/index.h"
 #include "catalog/pg_collation.h"

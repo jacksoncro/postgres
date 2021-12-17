@@ -14,9 +14,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gist_private.h"
-#include "C:\projects\postgres\src\include\access\gistscan.h"
-#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "access/gist_private.h"
+#include "access/gistscan.h"
+#include "access/relscan.h"
 #include "utils/float.h"
 #include "utils/lsyscache.h"
 #include "utils/memutils.h"

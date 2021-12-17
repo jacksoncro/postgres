@@ -17,9 +17,9 @@
 #ifndef TABLEAM_H
 #define TABLEAM_H
 
-#include "C:\projects\postgres\src\include\access\relscan.h"
-#include "C:\projects\postgres\src\include\access\sdir.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/relscan.h"
+#include "access/sdir.h"
+#include "access/xact.h"
 #include "utils/guc.h"
 #include "utils/rel.h"
 #include "utils/snapshot.h"

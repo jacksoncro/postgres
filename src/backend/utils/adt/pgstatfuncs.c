@@ -14,8 +14,8 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/htup_details.h"
+#include "access/xlog.h"
 #include "catalog/pg_authid.h"
 #include "catalog/pg_type.h"
 #include "common/ip.h"

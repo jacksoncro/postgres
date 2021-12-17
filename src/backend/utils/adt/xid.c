@@ -16,9 +16,9 @@
 
 #include <limits.h>
 
-#include "C:\projects\postgres\src\include\access\multixact.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/multixact.h"
+#include "access/transam.h"
+#include "access/xact.h"
 #include "libpq/pqformat.h"
 #include "utils/builtins.h"
 #include "utils/xid8.h"

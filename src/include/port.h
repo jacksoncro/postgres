@@ -14,8 +14,8 @@
 #define PG_PORT_H
 
 #include <ctype.h>
-#include <C:\projects\postgres\src\include\port\win32\netdb.h>
-#include <C:\projects\postgres\src\include\port\win32\pwd.h>
+#include <netdb.h>
+#include <pwd.h>
 
 /*
  * Windows has enough specialized port stuff that we push most of it off
@@ -410,8 +410,8 @@ extern char *mkdtemp(char *path);
 #endif
 
 #ifndef HAVE_INET_ATON
-#include <C:\projects\postgres\src\include\port\win32\netinet\in.h>
-#include <C:\projects\postgres\src\include\port\win32\arpa\inet.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 extern int	inet_aton(const char *cp, struct in_addr *addr);
 #endif
 

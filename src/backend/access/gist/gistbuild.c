@@ -34,11 +34,11 @@
 
 #include <math.h>
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\gist_private.h"
-#include "C:\projects\postgres\src\include\access\gistxlog.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
-#include "C:\projects\postgres\src\include\access\xloginsert.h"
+#include "access/genam.h"
+#include "access/gist_private.h"
+#include "access/gistxlog.h"
+#include "access/tableam.h"
+#include "access/xloginsert.h"
 #include "catalog/index.h"
 #include "miscadmin.h"
 #include "optimizer/optimizer.h"

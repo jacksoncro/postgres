@@ -25,8 +25,8 @@
 #include <fcntl.h>
 #include <sys/file.h>
 
-#include "C:\projects\postgres\src\include\access\xlog.h"
-#include "C:\projects\postgres\src\include\access\xlogutils.h"
+#include "access/xlog.h"
+#include "access/xlogutils.h"
 #include "commands/tablespace.h"
 #include "miscadmin.h"
 #include "pg_trace.h"

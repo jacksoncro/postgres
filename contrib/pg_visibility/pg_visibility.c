@@ -10,9 +10,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\heapam.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\visibilitymap.h"
+#include "access/heapam.h"
+#include "access/htup_details.h"
+#include "access/visibilitymap.h"
 #include "catalog/pg_type.h"
 #include "catalog/storage_xlog.h"
 #include "funcapi.h"

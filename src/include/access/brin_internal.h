@@ -11,7 +11,7 @@
 #ifndef BRIN_INTERNAL_H
 #define BRIN_INTERNAL_H
 
-#include "C:\projects\postgres\src\include\access\amapi.h"
+#include "access/amapi.h"
 #include "storage/bufpage.h"
 #include "utils/typcache.h"
 

@@ -16,7 +16,7 @@
 
 #include <limits.h>
 
-#include "C:\projects\postgres\src\include\access\gin_private.h"
+#include "access/gin_private.h"
 #include "utils/datum.h"
 #include "utils/memutils.h"
 

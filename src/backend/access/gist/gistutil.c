@@ -15,9 +15,9 @@
 
 #include <math.h>
 
-#include "C:\projects\postgres\src\include\access\gist_private.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "access/gist_private.h"
+#include "access/htup_details.h"
+#include "access/reloptions.h"
 #include "catalog/pg_opclass.h"
 #include "storage/indexfsm.h"
 #include "storage/lmgr.h"

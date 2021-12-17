@@ -65,7 +65,7 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\transam.h"
+#include "access/transam.h"
 #include "fmgr.h"
 #include "funcapi.h"
 #include "miscadmin.h"

@@ -15,7 +15,7 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\detoast.h"
+#include "access/detoast.h"
 #include "catalog/pg_language.h"
 #include "catalog/pg_proc.h"
 #include "catalog/pg_type.h"

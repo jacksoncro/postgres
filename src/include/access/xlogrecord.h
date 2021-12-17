@@ -11,8 +11,8 @@
 #ifndef XLOGRECORD_H
 #define XLOGRECORD_H
 
-#include "C:\projects\postgres\src\include\access\rmgr.h"
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/rmgr.h"
+#include "access/xlogdefs.h"
 #include "port/pg_crc32c.h"
 #include "storage/block.h"
 #include "storage/relfilenode.h"

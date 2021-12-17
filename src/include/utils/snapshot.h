@@ -13,8 +13,8 @@
 #ifndef SNAPSHOT_H
 #define SNAPSHOT_H
 
-#include "C:\projects\postgres\src\include\access\htup.h"
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/htup.h"
+#include "access/xlogdefs.h"
 #include "datatype/timestamp.h"
 #include "lib/pairingheap.h"
 #include "storage/buf.h"

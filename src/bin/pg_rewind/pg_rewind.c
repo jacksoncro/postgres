@@ -14,8 +14,8 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\timeline.h"
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "access/timeline.h"
+#include "access/xlog_internal.h"
 #include "catalog/catversion.h"
 #include "catalog/pg_control.h"
 #include "common/controldata_utils.h"

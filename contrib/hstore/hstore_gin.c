@@ -3,8 +3,8 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gin.h"
-#include "C:\projects\postgres\src\include\access\stratnum.h"
+#include "access/gin.h"
+#include "access/stratnum.h"
 #include "catalog/pg_type.h"
 
 #include "hstore.h"

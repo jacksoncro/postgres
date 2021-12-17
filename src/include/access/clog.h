@@ -11,7 +11,7 @@
 #ifndef CLOG_H
 #define CLOG_H
 
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/xlogreader.h"
 #include "storage/sync.h"
 #include "lib/stringinfo.h"
 

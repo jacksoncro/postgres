@@ -14,10 +14,10 @@
 */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\hash.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\nbtree.h"
-#include "C:\projects\postgres\src\include\access\relation.h"
+#include "access/hash.h"
+#include "access/htup_details.h"
+#include "access/nbtree.h"
+#include "access/relation.h"
 #include "catalog/partition.h"
 #include "catalog/pg_inherits.h"
 #include "catalog/pg_opclass.h"

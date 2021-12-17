@@ -13,10 +13,10 @@
 
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\rmgr.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/rmgr.h"
+#include "access/xact.h"
+#include "access/xlog_internal.h"
+#include "access/xlogreader.h"
 #include "catalog/pg_control.h"
 #include "catalog/storage_xlog.h"
 #include "commands/dbcommands_xlog.h"
@@ -32,7 +32,7 @@
   name,
 
 static const char *RmgrNames[RM_MAX_ID + 1] = {
-#include "C:\projects\postgres\src\include\access\rmgrlist.h"
+#include "access/rmgrlist.h"
 };
 
 static void extractPageInfo(XLogReaderState *record);

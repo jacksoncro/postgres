@@ -7,7 +7,7 @@
 
 #include <ctype.h>
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/htup_details.h"
 #include "catalog/pg_statistic.h"
 #include "ltree.h"
 #include "utils/builtins.h"

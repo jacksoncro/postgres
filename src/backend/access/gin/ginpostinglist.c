@@ -14,7 +14,7 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gin_private.h"
+#include "access/gin_private.h"
 
 #ifdef USE_ASSERT_CHECKING
 #define CHECK_ENCODING_ROUNDTRIP

@@ -9,7 +9,7 @@
 
 #include "postgres_fe.h"
 
-#include "C:\projects\postgres\src\include\access\transam.h"
+#include "access/transam.h"
 #include "catalog/pg_class_d.h"
 #include "pg_upgrade.h"
 

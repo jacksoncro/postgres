@@ -11,65 +11,64 @@
  *-------------------------------------------------------------------------
  */
 
-#include "C:\projects\postgres\src\include\postgres.h"
+#include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\commit_ts.h"
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\heapam.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/commit_ts.h"
+#include "access/genam.h"
+#include "access/heapam.h"
+#include "access/htup_details.h"
+#include "access/sysattr.h"
+#include "access/xact.h"
+#include "access/xlog.h"
 
-#include "C:\projects\postgres\src\include\catalog\catalog.h"
-#include "C:\projects\postgres\src\include\catalog\heap.h"
-#include "C:\projects\postgres\src\include\catalog\indexing.h"
-#include "C:\projects\postgres\src\include\catalog\namespace.h"
-#include "C:\projects\postgres\src\include\catalog\pg_type.h"
+#include "catalog/catalog.h"
+#include "catalog/heap.h"
+#include "catalog/indexing.h"
+#include "catalog/namespace.h"
+#include "catalog/pg_type.h"
 
-#include "C:\projects\postgres\src\include\commands\dbcommands.h"
-#include "C:\projects\postgres\src\include\commands\event_trigger.h"
-#include "C:\projects\postgres\src\include\commands\trigger.h"
+#include "commands/dbcommands.h"
+#include "commands/event_trigger.h"
+#include "commands/trigger.h"
 
-#include "C:\projects\postgres\src\include\executor\spi.h"
+#include "executor/spi.h"
 
-#include "C:\projects\postgres\src\include\funcapi.h"
+#include "funcapi.h"
 
-#include "C:\projects\postgres\src\include\miscadmin.h"
+#include "miscadmin.h"
 
-#include "C:\projects\postgres\src\include
-odes\makefuncs.h"
+#include "nodes/makefuncs.h"
 
-#include "C:\projects\postgres\src\include\pgtime.h"
+#include "pgtime.h"
 
-#include "C:\projects\postgres\src\include\parser\parse_coerce.h"
-#include "C:\projects\postgres\src\include\parser\parse_collate.h"
-#include "C:\projects\postgres\src\include\parser\parse_expr.h"
-#include "C:\projects\postgres\src\include\parser\parse_relation.h"
+#include "parser/parse_coerce.h"
+#include "parser/parse_collate.h"
+#include "parser/parse_expr.h"
+#include "parser/parse_relation.h"
 
-#include "C:\projects\postgres\src\includeeplication\origin.h"
-#include "C:\projects\postgres\src\includeeplication\reorderbuffer.h"
-#include "C:\projects\postgres\src\includeeplication\slot.h"
+#include "replication/origin.h"
+#include "replication/reorderbuffer.h"
+#include "replication/slot.h"
 
-#include "C:\projects\postgres\src\include\storage\ipc.h"
-#include "C:\projects\postgres\src\include\storage\latch.h"
-#include "C:\projects\postgres\src\include\storage\proc.h"
+#include "storage/ipc.h"
+#include "storage/latch.h"
+#include "storage/proc.h"
 
-#include "C:\projects\postgres\src\include	cop\tcopprot.h"
+#include "tcop/tcopprot.h"
 
-#include "C:\projects\postgres\src\include\utils\array.h"
-#include "C:\projects\postgres\src\include\utils\builtins.h"
-#include "C:\projects\postgres\src\include\utils\catcache.h"
-#include "C:\projects\postgres\src\include\utils\fmgroids.h"
-#include "C:\projects\postgres\src\include\utils\inval.h"
-#include "C:\projects\postgres\src\include\utils\json.h"
-#include "C:\projects\postgres\src\include\utils\guc.h"
-#include "C:\projects\postgres\src\include\utils\lsyscache.h"
-#include "C:\projects\postgres\src\include\utils\memutils.h"
-#include "C:\projects\postgres\src\include\utils\rel.h"
-#include "C:\projects\postgres\src\include\utils\snapmgr.h"
+#include "utils/array.h"
+#include "utils/builtins.h"
+#include "utils/catcache.h"
+#include "utils/fmgroids.h"
+#include "utils/inval.h"
+#include "utils/json.h"
+#include "utils/guc.h"
+#include "utils/lsyscache.h"
+#include "utils/memutils.h"
+#include "utils/rel.h"
+#include "utils/snapmgr.h"
 
-#include "C:\projects\postgres\src\include\pgstat.h"
+#include "pgstat.h"
 
 #include "pglogical_dependency.h"
 #include "pglogical_node.h"

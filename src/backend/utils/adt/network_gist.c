@@ -45,10 +45,10 @@
  */
 #include "postgres.h"
 
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
+#include <sys/socket.h>
 
-#include "C:\projects\postgres\src\include\access\gist.h"
-#include "C:\projects\postgres\src\include\access\stratnum.h"
+#include "access/gist.h"
+#include "access/stratnum.h"
 #include "utils/builtins.h"
 #include "utils/inet.h"
 

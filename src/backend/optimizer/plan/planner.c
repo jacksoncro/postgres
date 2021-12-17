@@ -18,12 +18,12 @@
 #include <limits.h>
 #include <math.h>
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\parallel.h"
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\table.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/genam.h"
+#include "access/htup_details.h"
+#include "access/parallel.h"
+#include "access/sysattr.h"
+#include "access/table.h"
+#include "access/xact.h"
 #include "catalog/pg_constraint.h"
 #include "catalog/pg_inherits.h"
 #include "catalog/pg_proc.h"

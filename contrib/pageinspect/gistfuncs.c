@@ -9,10 +9,10 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gist.h"
-#include "C:\projects\postgres\src\include\access\gist_private.h"
-#include "C:\projects\postgres\src\include\access\htup.h"
-#include "C:\projects\postgres\src\include\access\relation.h"
+#include "access/gist.h"
+#include "access/gist_private.h"
+#include "access/htup.h"
+#include "access/relation.h"
 #include "catalog/namespace.h"
 #include "funcapi.h"
 #include "miscadmin.h"

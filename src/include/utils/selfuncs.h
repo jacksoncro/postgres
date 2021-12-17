@@ -15,7 +15,7 @@
 #ifndef SELFUNCS_H
 #define SELFUNCS_H
 
-#include "C:\projects\postgres\src\include\access\htup.h"
+#include "access/htup.h"
 #include "fmgr.h"
 #include "nodes/pathnodes.h"
 

@@ -15,8 +15,8 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\nbtree.h"
-#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "access/nbtree.h"
+#include "access/relscan.h"
 #include "miscadmin.h"
 #include "pgstat.h"
 #include "storage/predicate.h"

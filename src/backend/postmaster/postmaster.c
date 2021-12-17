@@ -71,10 +71,10 @@
 #include <sys/wait.h>
 #include <ctype.h>
 #include <sys/stat.h>
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
+#include <sys/socket.h>
 #include <fcntl.h>
 #include <sys/param.h>
-#include <C:\projects\postgres\src\include\port\win32\netdb.h>
+#include <netdb.h>
 #include <limits.h>
 
 #ifdef HAVE_SYS_SELECT_H
@@ -93,8 +93,8 @@
 #include <pthread.h>
 #endif
 
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/transam.h"
+#include "access/xlog.h"
 #include "bootstrap/bootstrap.h"
 #include "catalog/pg_control.h"
 #include "common/file_perm.h"

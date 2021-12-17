@@ -19,7 +19,7 @@
 #include <linux/fs.h>
 #endif
 
-#include "C:\projects\postgres\src\include\access\visibilitymapdefs.h"
+#include "access/visibilitymapdefs.h"
 #include "common/file_perm.h"
 #include "pg_upgrade.h"
 #include "storage/bufpage.h"

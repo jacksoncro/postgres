@@ -14,8 +14,8 @@
 #ifndef NODEINDEXSCAN_H
 #define NODEINDEXSCAN_H
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/genam.h"
+#include "access/parallel.h"
 #include "nodes/execnodes.h"
 
 extern IndexScanState *ExecInitIndexScan(IndexScan *node, EState *estate, int eflags);

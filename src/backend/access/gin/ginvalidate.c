@@ -13,9 +13,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\amvalidate.h"
-#include "C:\projects\postgres\src\include\access\gin_private.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/amvalidate.h"
+#include "access/gin_private.h"
+#include "access/htup_details.h"
 #include "catalog/pg_amop.h"
 #include "catalog/pg_amproc.h"
 #include "catalog/pg_opclass.h"

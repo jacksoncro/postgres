@@ -15,9 +15,8 @@
 
 #include "pglogical_output_plugin.h"
 
-#include "C:\projects\postgres\src\include\lib\stringinfo.h"
-#include "C:\projects\postgres\src\include
-odes\pg_list.h"
+#include "lib/stringinfo.h"
+#include "nodes/pg_list.h"
 
 #include "pglogical_output_proto.h"
 

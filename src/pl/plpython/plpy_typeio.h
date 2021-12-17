@@ -5,7 +5,7 @@
 #ifndef PLPY_TYPEIO_H
 #define PLPY_TYPEIO_H
 
-#include "C:\projects\postgres\src\include\access\htup.h"
+#include "access/htup.h"
 #include "fmgr.h"
 #include "plpython.h"
 #include "utils/typcache.h"

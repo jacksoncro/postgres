@@ -15,11 +15,11 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\relation.h"
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\table.h"
+#include "access/genam.h"
+#include "access/htup_details.h"
+#include "access/relation.h"
+#include "access/sysattr.h"
+#include "access/table.h"
 #include "catalog/catalog.h"
 #include "catalog/objectaddress.h"
 #include "catalog/pg_am.h"

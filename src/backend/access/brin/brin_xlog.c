@@ -10,11 +10,11 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\brin_page.h"
-#include "C:\projects\postgres\src\include\access\brin_pageops.h"
-#include "C:\projects\postgres\src\include\access\brin_xlog.h"
-#include "C:\projects\postgres\src\include\access\bufmask.h"
-#include "C:\projects\postgres\src\include\access\xlogutils.h"
+#include "access/brin_page.h"
+#include "access/brin_pageops.h"
+#include "access/brin_xlog.h"
+#include "access/bufmask.h"
+#include "access/xlogutils.h"
 
 
 /*

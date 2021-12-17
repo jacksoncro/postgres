@@ -33,8 +33,8 @@
 #include <sys/file.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\tableam.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/tableam.h"
+#include "access/xlog.h"
 #include "catalog/catalog.h"
 #include "catalog/storage.h"
 #include "executor/instrument.h"

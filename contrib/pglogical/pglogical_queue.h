@@ -13,7 +13,7 @@
 #ifndef PGLOGICAL_QUEUE_H
 #define PGLOGICAL_QUEUE_H
 
-#include "C:\projects\postgres\src\include\utils\jsonb.h"
+#include "utils/jsonb.h"
 
 #define QUEUE_COMMAND_TYPE_SQL			'Q'
 #define QUEUE_COMMAND_TYPE_TRUNCATE		'T'

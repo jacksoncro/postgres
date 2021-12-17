@@ -12,7 +12,7 @@
 #ifndef BRIN_REVMAP_H
 #define BRIN_REVMAP_H
 
-#include "C:\projects\postgres\src\include\access\brin_tuple.h"
+#include "access/brin_tuple.h"
 #include "storage/block.h"
 #include "storage/buf.h"
 #include "storage/itemptr.h"

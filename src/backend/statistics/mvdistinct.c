@@ -25,7 +25,7 @@
 
 #include <math.h>
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/htup_details.h"
 #include "catalog/pg_statistic_ext.h"
 #include "catalog/pg_statistic_ext_data.h"
 #include "lib/stringinfo.h"

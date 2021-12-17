@@ -13,7 +13,7 @@
 #ifndef SPGXLOG_H
 #define SPGXLOG_H
 
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/xlogreader.h"
 #include "lib/stringinfo.h"
 #include "storage/off.h"
 

@@ -14,7 +14,7 @@
 #ifndef TRANSAM_H
 #define TRANSAM_H
 
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/xlogdefs.h"
 
 
 /* ----------------

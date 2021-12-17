@@ -14,12 +14,12 @@
 #ifndef HEAPAM_H
 #define HEAPAM_H
 
-#include "C:\projects\postgres\src\include\access\relation.h"	/* for backward compatibility */
-#include "C:\projects\postgres\src\include\access\relscan.h"
-#include "C:\projects\postgres\src\include\access\sdir.h"
-#include "C:\projects\postgres\src\include\access\skey.h"
-#include "C:\projects\postgres\src\include\access\table.h"		/* for backward compatibility */
-#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "access/relation.h"	/* for backward compatibility */
+#include "access/relscan.h"
+#include "access/sdir.h"
+#include "access/skey.h"
+#include "access/table.h"		/* for backward compatibility */
+#include "access/tableam.h"
 #include "nodes/lockoptions.h"
 #include "nodes/primnodes.h"
 #include "storage/bufpage.h"

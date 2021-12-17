@@ -17,7 +17,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\transam.h"
+#include "access/transam.h"
 #include "miscadmin.h"
 #include "storage/backendid.h"
 #include "storage/ipc.h"

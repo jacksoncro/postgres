@@ -28,8 +28,8 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\relscan.h"
-#include "C:\projects\postgres\src\include\access\tsmapi.h"
+#include "access/relscan.h"
+#include "access/tsmapi.h"
 #include "catalog/pg_type.h"
 #include "miscadmin.h"
 #include "optimizer/optimizer.h"

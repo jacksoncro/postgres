@@ -14,9 +14,9 @@
 
 #include <limits.h>
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\table.h"
+#include "access/htup_details.h"
+#include "access/sysattr.h"
+#include "access/table.h"
 #include "catalog/pg_class.h"
 #include "commands/defrem.h"
 #include "commands/explain.h"

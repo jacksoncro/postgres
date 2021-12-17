@@ -78,7 +78,7 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/htup_details.h"
 #include "executor/execdebug.h"
 #include "executor/nodeIncrementalSort.h"
 #include "miscadmin.h"

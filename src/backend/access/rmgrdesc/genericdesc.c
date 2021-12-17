@@ -13,7 +13,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\generic_xlog.h"
+#include "access/generic_xlog.h"
 #include "lib/stringinfo.h"
 #include "storage/relfilenode.h"
 

@@ -12,7 +12,7 @@
 #ifndef AMAPI_H
 #define AMAPI_H
 
-#include "C:\projects\postgres\src\include\access\genam.h"
+#include "access/genam.h"
 
 /*
  * We don't wish to include planner header files here, since most of an index

@@ -28,14 +28,14 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/param.h>			/* for MAXHOSTNAMELEN on most */
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
+#include <sys/socket.h>
 #ifdef HAVE_SYS_UCRED_H
 #include <sys/ucred.h>
 #endif
 #ifndef  MAXHOSTNAMELEN
-#include <C:\projects\postgres\src\include\port\win32\netdb.h>				/* for MAXHOSTNAMELEN on some */
+#include <netdb.h>				/* for MAXHOSTNAMELEN on some */
 #endif
-#include <C:\projects\postgres\src\include\port\win32\pwd.h>
+#include <pwd.h>
 #endif
 
 #include "common/md5.h"

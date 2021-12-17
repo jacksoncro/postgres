@@ -36,7 +36,7 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\table.h"
+#include "access/table.h"
 #include "nodes/makefuncs.h"
 #include "optimizer/appendinfo.h"
 #include "optimizer/optimizer.h"

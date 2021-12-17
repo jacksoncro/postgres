@@ -14,7 +14,7 @@
 #ifndef NODESEQSCAN_H
 #define NODESEQSCAN_H
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "nodes/execnodes.h"
 
 extern SeqScanState *ExecInitSeqScan(SeqScan *node, EState *estate, int eflags);

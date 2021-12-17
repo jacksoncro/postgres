@@ -11,8 +11,8 @@
 #ifndef XLOGINSERT_H
 #define XLOGINSERT_H
 
-#include "C:\projects\postgres\src\include\access\rmgr.h"
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/rmgr.h"
+#include "access/xlogdefs.h"
 #include "storage/block.h"
 #include "storage/buf.h"
 #include "storage/relfilenode.h"

@@ -19,8 +19,8 @@
 
 #include <math.h>
 
-#include "C:\projects\postgres\src\include\access\gist.h"
-#include "C:\projects\postgres\src\include\access\stratnum.h"
+#include "access/gist.h"
+#include "access/stratnum.h"
 #include "utils/builtins.h"
 #include "utils/float.h"
 #include "utils/geo_decls.h"

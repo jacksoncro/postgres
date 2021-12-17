@@ -10,9 +10,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
+#include "access/htup_details.h"
+#include "access/sysattr.h"
+#include "access/tupdesc.h"
 #include "catalog/catalog.h"
 #include "catalog/dependency.h"
 #include "catalog/heap.h"

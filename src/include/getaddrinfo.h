@@ -22,8 +22,8 @@
 #ifndef GETADDRINFO_H
 #define GETADDRINFO_H
 
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
-#include <C:\projects\postgres\src\include\port\win32\netdb.h>
+#include <sys/socket.h>
+#include <netdb.h>
 
 
 /* Various macros that ought to be in <netdb.h>, but might not be */

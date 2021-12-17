@@ -14,8 +14,8 @@
 #ifndef RELSCAN_H
 #define RELSCAN_H
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\itup.h"
+#include "access/htup_details.h"
+#include "access/itup.h"
 #include "port/atomics.h"
 #include "storage/buf.h"
 #include "storage/spin.h"

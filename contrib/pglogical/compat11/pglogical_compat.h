@@ -1,8 +1,8 @@
 #ifndef PG_LOGICAL_COMPAT_H
 #define PG_LOGICAL_COMPAT_H
 
-#include "C:\projects\postgres\src\includeeplication\origin.h"
-#include "C:\projects\postgres\src\include\utils\varlena.h"
+#include "replication/origin.h"
+#include "utils/varlena.h"
 
 #define WaitLatchOrSocket(latch, wakeEvents, sock, timeout) \
 	WaitLatchOrSocket(latch, wakeEvents, sock, timeout, PG_WAIT_EXTENSION)

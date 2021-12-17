@@ -46,7 +46,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\syncscan.h"
+#include "access/syncscan.h"
 #include "miscadmin.h"
 #include "storage/lwlock.h"
 #include "storage/shmem.h"

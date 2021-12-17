@@ -13,7 +13,7 @@
 #ifndef SHAREDTUPLESTORE_H
 #define SHAREDTUPLESTORE_H
 
-#include "C:\projects\postgres\src\include\access\htup.h"
+#include "access/htup.h"
 #include "storage/fd.h"
 #include "storage/sharedfileset.h"
 

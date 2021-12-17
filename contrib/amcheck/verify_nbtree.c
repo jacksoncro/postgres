@@ -23,12 +23,12 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\nbtree.h"
-#include "C:\projects\postgres\src\include\access\table.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/htup_details.h"
+#include "access/nbtree.h"
+#include "access/table.h"
+#include "access/tableam.h"
+#include "access/transam.h"
+#include "access/xact.h"
 #include "catalog/index.h"
 #include "catalog/pg_am.h"
 #include "commands/tablecmds.h"

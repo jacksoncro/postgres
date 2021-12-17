@@ -12,7 +12,7 @@
 #ifndef XID8_H
 #define XID8_H
 
-#include "C:\projects\postgres\src\include\access\transam.h"
+#include "access/transam.h"
 
 #define DatumGetFullTransactionId(X) (FullTransactionIdFromU64(DatumGetUInt64(X)))
 #define FullTransactionIdGetDatum(X) (UInt64GetDatum(U64FromFullTransactionId(X)))

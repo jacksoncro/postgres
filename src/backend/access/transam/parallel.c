@@ -14,12 +14,12 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\heapam.h"
-#include "C:\projects\postgres\src\include\access\nbtree.h"
-#include "C:\projects\postgres\src\include\access\parallel.h"
-#include "C:\projects\postgres\src\include\access\session.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/heapam.h"
+#include "access/nbtree.h"
+#include "access/parallel.h"
+#include "access/session.h"
+#include "access/xact.h"
+#include "access/xlog.h"
 #include "catalog/index.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_enum.h"

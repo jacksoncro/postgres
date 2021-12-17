@@ -13,9 +13,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\bufmask.h"
-#include "C:\projects\postgres\src\include\access\generic_xlog.h"
-#include "C:\projects\postgres\src\include\access\xlogutils.h"
+#include "access/bufmask.h"
+#include "access/generic_xlog.h"
+#include "access/xlogutils.h"
 #include "miscadmin.h"
 #include "utils/memutils.h"
 

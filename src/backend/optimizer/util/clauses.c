@@ -19,7 +19,7 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/htup_details.h"
 #include "catalog/pg_aggregate.h"
 #include "catalog/pg_class.h"
 #include "catalog/pg_language.h"

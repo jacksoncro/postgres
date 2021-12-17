@@ -34,7 +34,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/xact.h"
 #include "catalog/namespace.h"
 #include "mb/pg_wchar.h"
 #include "utils/builtins.h"

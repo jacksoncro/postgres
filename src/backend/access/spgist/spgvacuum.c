@@ -15,11 +15,11 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\spgist_private.h"
-#include "C:\projects\postgres\src\include\access\spgxlog.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xloginsert.h"
+#include "access/genam.h"
+#include "access/spgist_private.h"
+#include "access/spgxlog.h"
+#include "access/transam.h"
+#include "access/xloginsert.h"
 #include "catalog/storage_xlog.h"
 #include "commands/vacuum.h"
 #include "miscadmin.h"

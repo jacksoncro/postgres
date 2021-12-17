@@ -9,9 +9,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gin.h"
-#include "C:\projects\postgres\src\include\access\gin_private.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/gin.h"
+#include "access/gin_private.h"
+#include "access/htup_details.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_type.h"
 #include "funcapi.h"

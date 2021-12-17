@@ -13,7 +13,7 @@
 #ifndef EXECPARALLEL_H
 #define EXECPARALLEL_H
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "nodes/execnodes.h"
 #include "nodes/parsenodes.h"
 #include "nodes/plannodes.h"

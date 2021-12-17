@@ -24,8 +24,8 @@
 /* This is intended to be used in both frontend and backend, so use c.h */
 #include "c.h"
 
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
-#include <C:\projects\postgres\src\include\port\win32\netdb.h>
+#include <sys/socket.h>
+#include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 

@@ -14,8 +14,8 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\table.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/table.h"
+#include "access/xact.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_inherits.h"
 #include "commands/lockcmds.h"

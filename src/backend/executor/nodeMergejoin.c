@@ -92,7 +92,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\nbtree.h"
+#include "access/nbtree.h"
 #include "executor/execdebug.h"
 #include "executor/nodeMergejoin.h"
 #include "miscadmin.h"

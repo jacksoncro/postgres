@@ -9,7 +9,7 @@
 
 #include <ctype.h>
 #include <time.h>
-#include <C:\projects\postgres\src\include\port\win32\pwd.h>
+#include <pwd.h>
 #include <utime.h>
 #ifndef WIN32
 #include <sys/stat.h>			/* for stat() */

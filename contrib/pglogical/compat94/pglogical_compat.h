@@ -3,15 +3,14 @@
 
 #include <signal.h>
 
-#include "C:\projects\postgres\src\include\access\xlog.h"
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
-#include "C:\projects\postgres\src\include\catalog\objectaddress.h"
-#include "C:\projects\postgres\src\include\catalog\pg_trigger.h"
-#include "C:\projects\postgres\src\include\commands\trigger.h"
-#include "C:\projects\postgres\src\include
-odes\pg_list.h"
-#include "C:\projects\postgres\src\include\storage\lwlock.h"
-#include "C:\projects\postgres\src\include\utils\array.h"
+#include "access/xlog.h"
+#include "access/xlogdefs.h"
+#include "catalog/objectaddress.h"
+#include "catalog/pg_trigger.h"
+#include "commands/trigger.h"
+#include "nodes/pg_list.h"
+#include "storage/lwlock.h"
+#include "utils/array.h"
 
 /* 9.4 lacks PG_*_MAX */
 #ifndef PG_UINT32_MAX

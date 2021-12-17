@@ -34,11 +34,11 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\timeline.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
-#include "C:\projects\postgres\src\include\access\xlogarchive.h"
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/timeline.h"
+#include "access/xlog.h"
+#include "access/xlog_internal.h"
+#include "access/xlogarchive.h"
+#include "access/xlogdefs.h"
 #include "pgstat.h"
 #include "storage/fd.h"
 

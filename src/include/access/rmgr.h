@@ -24,7 +24,7 @@ typedef uint8 RmgrId;
 
 typedef enum RmgrIds
 {
-#include "C:\projects\postgres\src\include\access\rmgrlist.h"
+#include "access/rmgrlist.h"
 	RM_NEXT_ID
 } RmgrIds;
 

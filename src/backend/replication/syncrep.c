@@ -74,7 +74,7 @@
 
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/xact.h"
 #include "miscadmin.h"
 #include "pgstat.h"
 #include "replication/syncrep.h"

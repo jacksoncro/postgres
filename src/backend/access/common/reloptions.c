@@ -17,13 +17,13 @@
 
 #include <float.h>
 
-#include "C:\projects\postgres\src\include\access\gist_private.h"
-#include "C:\projects\postgres\src\include\access\hash.h"
-#include "C:\projects\postgres\src\include\access\heaptoast.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\nbtree.h"
-#include "C:\projects\postgres\src\include\access\reloptions.h"
-#include "C:\projects\postgres\src\include\access\spgist_private.h"
+#include "access/gist_private.h"
+#include "access/hash.h"
+#include "access/heaptoast.h"
+#include "access/htup_details.h"
+#include "access/nbtree.h"
+#include "access/reloptions.h"
+#include "access/spgist_private.h"
 #include "catalog/pg_type.h"
 #include "commands/defrem.h"
 #include "commands/tablespace.h"

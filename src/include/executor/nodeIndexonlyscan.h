@@ -14,7 +14,7 @@
 #ifndef NODEINDEXONLYSCAN_H
 #define NODEINDEXONLYSCAN_H
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "nodes/execnodes.h"
 
 extern IndexOnlyScanState *ExecInitIndexOnlyScan(IndexOnlyScan *node, EState *estate, int eflags);

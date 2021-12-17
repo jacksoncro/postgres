@@ -91,7 +91,7 @@
 
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/xlog.h"
 #include "catalog/pg_authid.h"
 #include "catalog/pg_control.h"
 #include "common/base64.h"

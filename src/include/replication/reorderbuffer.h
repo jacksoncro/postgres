@@ -9,7 +9,7 @@
 #ifndef REORDERBUFFER_H
 #define REORDERBUFFER_H
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/htup_details.h"
 #include "lib/ilist.h"
 #include "storage/sinval.h"
 #include "utils/hsearch.h"

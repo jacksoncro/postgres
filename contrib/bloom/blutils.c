@@ -13,9 +13,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\amapi.h"
-#include "C:\projects\postgres\src\include\access\generic_xlog.h"
-#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "access/amapi.h"
+#include "access/generic_xlog.h"
+#include "access/reloptions.h"
 #include "bloom.h"
 #include "catalog/index.h"
 #include "commands/vacuum.h"

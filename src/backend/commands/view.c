@@ -14,8 +14,8 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\relation.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/relation.h"
+#include "access/xact.h"
 #include "catalog/namespace.h"
 #include "commands/defrem.h"
 #include "commands/tablecmds.h"

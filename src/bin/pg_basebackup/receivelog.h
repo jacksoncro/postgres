@@ -12,7 +12,7 @@
 #ifndef RECEIVELOG_H
 #define RECEIVELOG_H
 
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/xlogdefs.h"
 #include "libpq-fe.h"
 #include "walmethods.h"
 

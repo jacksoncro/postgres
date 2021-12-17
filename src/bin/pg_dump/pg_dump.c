@@ -38,9 +38,9 @@
 #include <termios.h>
 #endif
 
-#include "C:\projects\postgres\src\include\access\attnum.h"
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
+#include "access/attnum.h"
+#include "access/sysattr.h"
+#include "access/transam.h"
 #include "catalog/pg_aggregate_d.h"
 #include "catalog/pg_am_d.h"
 #include "catalog/pg_attribute_d.h"

@@ -14,8 +14,8 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gist_private.h"
-#include "C:\projects\postgres\src\include\access\gistscan.h"
+#include "access/gist_private.h"
+#include "access/gistscan.h"
 #include "catalog/pg_collation.h"
 #include "commands/vacuum.h"
 #include "miscadmin.h"

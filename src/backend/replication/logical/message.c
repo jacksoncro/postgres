@@ -31,7 +31,7 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/xact.h"
 #include "miscadmin.h"
 #include "nodes/execnodes.h"
 #include "replication/logical.h"

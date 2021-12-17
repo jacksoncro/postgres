@@ -18,11 +18,11 @@
 #include <fcntl.h>
 #include <sys/file.h>
 
-#include "C:\projects\postgres\src\include\access\commit_ts.h"
-#include "C:\projects\postgres\src\include\access\clog.h"
-#include "C:\projects\postgres\src\include\access\multixact.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
-#include "C:\projects\postgres\src\include\access\xlogutils.h"
+#include "access/commit_ts.h"
+#include "access/clog.h"
+#include "access/multixact.h"
+#include "access/xlog.h"
+#include "access/xlogutils.h"
 #include "commands/tablespace.h"
 #include "miscadmin.h"
 #include "pgstat.h"

@@ -49,7 +49,6 @@ SUBDIRS = \
 		tsm_system_rows \
 		tsm_system_time \
 		unaccent	\
-		pglogical	\   
 		vacuumlo
 
 ifeq ($(with_ssl),openssl)

@@ -1,8 +1,7 @@
 #ifndef PG_LOGICAL_OUTPUT_CONFIG_H
 #define PG_LOGICAL_OUTPUT_CONFIG_H
 
-#include "C:\projects\postgres\src\include
-odes\pg_list.h"
+#include "nodes/pg_list.h"
 #include "pglogical_output_plugin.h"
 
 inline static bool

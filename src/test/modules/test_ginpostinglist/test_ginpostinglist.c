@@ -12,9 +12,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gin_private.h"
-#include "C:\projects\postgres\src\include\access\ginblock.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/gin_private.h"
+#include "access/ginblock.h"
+#include "access/htup_details.h"
 #include "fmgr.h"
 
 PG_MODULE_MAGIC;

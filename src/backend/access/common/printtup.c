@@ -15,7 +15,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\printtup.h"
+#include "access/printtup.h"
 #include "libpq/libpq.h"
 #include "libpq/pqformat.h"
 #include "tcop/pquery.h"

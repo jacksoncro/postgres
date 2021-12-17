@@ -39,8 +39,8 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "access/transam.h"
+#include "access/xlog_internal.h"
 #include "common/string.h"
 #include "miscadmin.h"
 #include "pgstat.h"

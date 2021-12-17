@@ -12,7 +12,7 @@
 #ifndef NODEINCREMENTALSORT_H
 #define NODEINCREMENTALSORT_H
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "nodes/execnodes.h"
 
 extern IncrementalSortState *ExecInitIncrementalSort(IncrementalSort *node, EState *estate, int eflags);

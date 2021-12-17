@@ -14,9 +14,9 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gist.h"
-#include "C:\projects\postgres\src\include\access\heaptoast.h"
-#include "C:\projects\postgres\src\include\access\reloptions.h"
+#include "access/gist.h"
+#include "access/heaptoast.h"
+#include "access/reloptions.h"
 #include "lib/qunique.h"
 #include "port/pg_bitutils.h"
 #include "tsearch/ts_utils.h"

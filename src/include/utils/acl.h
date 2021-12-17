@@ -32,7 +32,7 @@
 #ifndef ACL_H
 #define ACL_H
 
-#include "C:\projects\postgres\src\include\access\htup.h"
+#include "access/htup.h"
 #include "nodes/parsenodes.h"
 #include "parser/parse_node.h"
 #include "utils/snapshot.h"

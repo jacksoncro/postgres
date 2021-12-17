@@ -23,12 +23,12 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <grp.h>
-#include <C:\projects\postgres\src\include\port\win32\pwd.h>
+#include <pwd.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <utime.h>
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/htup_details.h"
 #include "catalog/pg_authid.h"
 #include "common/file_perm.h"
 #include "libpq/libpq.h"

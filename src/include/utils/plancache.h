@@ -15,7 +15,7 @@
 #ifndef PLANCACHE_H
 #define PLANCACHE_H
 
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
+#include "access/tupdesc.h"
 #include "lib/ilist.h"
 #include "nodes/params.h"
 #include "tcop/cmdtag.h"

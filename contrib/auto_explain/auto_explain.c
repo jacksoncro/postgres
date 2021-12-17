@@ -14,7 +14,7 @@
 
 #include <limits.h>
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "commands/explain.h"
 #include "executor/instrument.h"
 #include "jit/jit.h"

@@ -14,9 +14,9 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gin_private.h"
-#include "C:\projects\postgres\src\include\access\ginxlog.h"
-#include "C:\projects\postgres\src\include\access\xloginsert.h"
+#include "access/gin_private.h"
+#include "access/ginxlog.h"
+#include "access/xloginsert.h"
 #include "miscadmin.h"
 #include "utils/rel.h"
 

@@ -19,10 +19,10 @@
 #include <math.h>
 #include <signal.h>
 
-#include "C:\projects\postgres\src\include\access\detoast.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/detoast.h"
+#include "access/htup_details.h"
+#include "access/transam.h"
+#include "access/xact.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_operator.h"
 #include "catalog/pg_type.h"

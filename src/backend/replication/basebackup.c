@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <time.h>
 
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"	/* for pg_start/stop_backup */
+#include "access/xlog_internal.h"	/* for pg_start/stop_backup */
 #include "catalog/pg_type.h"
 #include "common/file_perm.h"
 #include "commands/progress.h"

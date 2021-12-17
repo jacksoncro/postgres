@@ -14,9 +14,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\gist_private.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
+#include "access/genam.h"
+#include "access/gist_private.h"
+#include "access/transam.h"
 #include "commands/vacuum.h"
 #include "lib/integerset.h"
 #include "miscadmin.h"

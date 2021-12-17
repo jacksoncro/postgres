@@ -14,8 +14,8 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gin_private.h"
-#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "access/gin_private.h"
+#include "access/relscan.h"
 #include "miscadmin.h"
 #include "storage/predicate.h"
 #include "utils/datum.h"

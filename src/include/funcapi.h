@@ -17,7 +17,7 @@
 #ifndef FUNCAPI_H
 #define FUNCAPI_H
 
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
+#include "access/tupdesc.h"
 #include "executor/executor.h"
 #include "executor/tuptable.h"
 #include "fmgr.h"

@@ -18,7 +18,7 @@
 
 #include <limits.h>
 
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/xact.h"
 #include "catalog/pg_type.h"
 #include "commands/createas.h"
 #include "commands/prepare.h"

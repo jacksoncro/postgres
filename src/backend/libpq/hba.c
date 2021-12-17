@@ -17,15 +17,15 @@
 #include "postgres.h"
 
 #include <ctype.h>
-#include <C:\projects\postgres\src\include\port\win32\pwd.h>
+#include <pwd.h>
 #include <fcntl.h>
 #include <sys/param.h>
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
+#include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/htup_details.h"
 #include "catalog/pg_collation.h"
 #include "catalog/pg_type.h"
 #include "common/ip.h"

@@ -19,9 +19,9 @@
 #ifndef RELOPTIONS_H
 #define RELOPTIONS_H
 
-#include "C:\projects\postgres\src\include\access\amapi.h"
-#include "C:\projects\postgres\src\include\access\htup.h"
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
+#include "access/amapi.h"
+#include "access/htup.h"
+#include "access/tupdesc.h"
 #include "nodes/pg_list.h"
 #include "storage/lock.h"
 

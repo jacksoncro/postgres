@@ -17,7 +17,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/xlog.h"
 #include "lib/ilist.h"
 #include "storage/bufmgr.h"
 #include "storage/ipc.h"

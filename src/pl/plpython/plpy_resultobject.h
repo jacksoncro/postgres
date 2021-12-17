@@ -5,7 +5,7 @@
 #ifndef PLPY_RESULTOBJECT_H
 #define PLPY_RESULTOBJECT_H
 
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
+#include "access/tupdesc.h"
 
 #include "plpython.h"
 

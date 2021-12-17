@@ -23,7 +23,7 @@
 #include <limits.h>
 #include <signal.h>
 #include <unistd.h>
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
+#include <sys/socket.h>
 #ifdef HAVE_SYS_SELECT_H
 #include <sys/select.h>
 #endif
@@ -36,9 +36,9 @@
 #include "rusagestub.h"
 #endif
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
-#include "C:\projects\postgres\src\include\access\printtup.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/parallel.h"
+#include "access/printtup.h"
+#include "access/xact.h"
 #include "catalog/pg_type.h"
 #include "commands/async.h"
 #include "commands/prepare.h"

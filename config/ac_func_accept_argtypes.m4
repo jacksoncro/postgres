@@ -49,7 +49,7 @@ AC_DEFUN([AC_FUNC_ACCEPT_ARGTYPES],
         for ac_cv_func_accept_arg3 in 'int' 'size_t' 'socklen_t' 'unsigned int' 'void'; do
          AC_COMPILE_IFELSE([AC_LANG_SOURCE(
 [#include <sys/types.h>
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
+#include <sys/socket.h>
 extern $ac_cv_func_accept_return accept ($ac_cv_func_accept_arg1, $ac_cv_func_accept_arg2, $ac_cv_func_accept_arg3 *);])],
          [ac_not_found=no; break 4], [ac_not_found=yes])
        done

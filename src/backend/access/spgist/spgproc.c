@@ -17,7 +17,7 @@
 
 #include <math.h>
 
-#include "C:\projects\postgres\src\include\access\spgist_private.h"
+#include "access/spgist_private.h"
 #include "utils/builtins.h"
 #include "utils/float.h"
 #include "utils/geo_decls.h"

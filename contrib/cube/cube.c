@@ -10,8 +10,8 @@
 
 #include <math.h>
 
-#include "C:\projects\postgres\src\include\access\gist.h"
-#include "C:\projects\postgres\src\include\access\stratnum.h"
+#include "access/gist.h"
+#include "access/stratnum.h"
 #include "cubedata.h"
 #include "libpq/pqformat.h"
 #include "utils/array.h"

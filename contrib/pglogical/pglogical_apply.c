@@ -10,58 +10,56 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "C:\projects\postgres\src\include\postgres.h"
+#include "postgres.h"
 
-#include "C:\projects\postgres\src\include\miscadmin.h"
-#include "C:\projects\postgres\src\interfaces\libpq\libpq-fe.h"
-#include "C:\projects\postgres\src\include\pgstat.h"
+#include "miscadmin.h"
+#include "libpq-fe.h"
+#include "pgstat.h"
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/htup_details.h"
+#include "access/xact.h"
 
-#include "C:\projects\postgres\src\include\catalog\namespace.h"
+#include "catalog/namespace.h"
 
-#include "C:\projects\postgres\src\include\commands\async.h"
-#include "C:\projects\postgres\src\include\commands\dbcommands.h"
-#include "C:\projects\postgres\src\include\commands\sequence.h"
-#include "C:\projects\postgres\src\include\commands\tablecmds.h"
-#include "C:\projects\postgres\src\include\commands\trigger.h"
+#include "commands/async.h"
+#include "commands/dbcommands.h"
+#include "commands/sequence.h"
+#include "commands/tablecmds.h"
+#include "commands/trigger.h"
 
-#include "C:\projects\postgres\src\include\executor\executor.h"
+#include "executor/executor.h"
 
-#include "C:\projects\postgres\src\include\libpq\pqformat.h"
+#include "libpq/pqformat.h"
 
-#include "C:\projects\postgres\src\include\mb\pg_wchar.h"
+#include "mb/pg_wchar.h"
 
-#include "C:\projects\postgres\src\include
-odes\makefuncs.h"
-#include "C:\projects\postgres\src\include
-odes\parsenodes.h"
+#include "nodes/makefuncs.h"
+#include "nodes/parsenodes.h"
 
-#include "C:\projects\postgres\src\include\optimizer\planner.h"
+#include "optimizer/planner.h"
 
 #ifdef XCP
 #include "pgxc/pgxcnode.h"
 #endif
 
-#include "C:\projects\postgres\src\includeeplication\origin.h"
-#include "C:\projects\postgres\src\includeeplication\reorderbuffer.h"
+#include "replication/origin.h"
+#include "replication/reorderbuffer.h"
 
-#include "C:\projects\postgres\src\includeewrite\rewriteHandler.h"
+#include "rewrite/rewriteHandler.h"
 
-#include "C:\projects\postgres\src\include\storage\ipc.h"
-#include "C:\projects\postgres\src\include\storage\lmgr.h"
-#include "C:\projects\postgres\src\include\storage\proc.h"
+#include "storage/ipc.h"
+#include "storage/lmgr.h"
+#include "storage/proc.h"
 
-#include "C:\projects\postgres\src\include	cop\pquery.h"
-#include "C:\projects\postgres\src\include	cop\utility.h"
+#include "tcop/pquery.h"
+#include "tcop/utility.h"
 
-#include "C:\projects\postgres\src\include\utils\builtins.h"
-#include "C:\projects\postgres\src\include\utils\int8.h"
-#include "C:\projects\postgres\src\include\utils\jsonb.h"
-#include "C:\projects\postgres\src\include\utils\lsyscache.h"
-#include "C:\projects\postgres\src\include\utils\memutils.h"
-#include "C:\projects\postgres\src\include\utils\snapmgr.h"
+#include "utils/builtins.h"
+#include "utils/int8.h"
+#include "utils/jsonb.h"
+#include "utils/lsyscache.h"
+#include "utils/memutils.h"
+#include "utils/snapmgr.h"
 
 #include "pglogical_conflict.h"
 #include "pglogical_executor.h"

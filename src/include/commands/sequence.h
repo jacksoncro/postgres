@@ -13,7 +13,7 @@
 #ifndef SEQUENCE_H
 #define SEQUENCE_H
 
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/xlogreader.h"
 #include "catalog/objectaddress.h"
 #include "fmgr.h"
 #include "lib/stringinfo.h"

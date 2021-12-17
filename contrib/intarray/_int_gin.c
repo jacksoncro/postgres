@@ -4,8 +4,8 @@
 #include "postgres.h"
 
 #include "_int.h"
-#include "C:\projects\postgres\src\include\access\gin.h"
-#include "C:\projects\postgres\src\include\access\stratnum.h"
+#include "access/gin.h"
+#include "access/stratnum.h"
 
 PG_FUNCTION_INFO_V1(ginint4_queryextract);
 

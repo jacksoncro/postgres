@@ -15,7 +15,7 @@
 #ifndef INDEXING_H
 #define INDEXING_H
 
-#include "C:\projects\postgres\src\include\access\htup.h"
+#include "access/htup.h"
 #include "nodes/execnodes.h"
 #include "utils/relcache.h"
 

@@ -106,8 +106,8 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/htup_details.h"
+#include "access/parallel.h"
 #include "executor/executor.h"
 #include "executor/hashjoin.h"
 #include "executor/nodeHash.h"

@@ -14,7 +14,7 @@
 #ifndef TABLECMDS_H
 #define TABLECMDS_H
 
-#include "C:\projects\postgres\src\include\access\htup.h"
+#include "access/htup.h"
 #include "catalog/dependency.h"
 #include "catalog/objectaddress.h"
 #include "nodes/parsenodes.h"

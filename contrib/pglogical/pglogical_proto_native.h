@@ -13,9 +13,9 @@
 #ifndef PG_LOGICAL_PROTO_NATIVE_H
 #define PG_LOGICAL_PROTO_NATIVE_H
 
-#include "C:\projects\postgres\src\include\lib\stringinfo.h"
+#include "lib/stringinfo.h"
 
-#include "C:\projects\postgres\src\include\utils\timestamp.h"
+#include "utils/timestamp.h"
 
 #include "pglogical_output_plugin.h"
 #include "pglogical_output_proto.h"

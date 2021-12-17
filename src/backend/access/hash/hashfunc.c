@@ -26,7 +26,7 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\hash.h"
+#include "access/hash.h"
 #include "catalog/pg_collation.h"
 #include "common/hashfn.h"
 #include "utils/builtins.h"

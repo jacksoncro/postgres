@@ -10,9 +10,9 @@
 #ifndef PG_LOGICAL_MESSAGE_H
 #define PG_LOGICAL_MESSAGE_H
 
-#include "C:\projects\postgres\src\include\access\xlog.h"
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/xlog.h"
+#include "access/xlogdefs.h"
+#include "access/xlogreader.h"
 
 /*
  * Generic logical decoding message wal record.

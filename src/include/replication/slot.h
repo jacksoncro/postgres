@@ -9,8 +9,8 @@
 #ifndef SLOT_H
 #define SLOT_H
 
-#include "C:\projects\postgres\src\include\access\xlog.h"
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/xlog.h"
+#include "access/xlogreader.h"
 #include "storage/condition_variable.h"
 #include "storage/lwlock.h"
 #include "storage/shmem.h"

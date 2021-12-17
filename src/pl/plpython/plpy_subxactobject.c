@@ -6,7 +6,7 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/xact.h"
 #include "plpy_elog.h"
 #include "plpy_subxactobject.h"
 #include "plpython.h"

@@ -27,12 +27,12 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gin_private.h"
-#include "C:\projects\postgres\src\include\access\hash.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\nbtree.h"
-#include "C:\projects\postgres\src\include\access\relation.h"
-#include "C:\projects\postgres\src\include\access\table.h"
+#include "access/gin_private.h"
+#include "access/hash.h"
+#include "access/htup_details.h"
+#include "access/nbtree.h"
+#include "access/relation.h"
+#include "access/table.h"
 #include "catalog/namespace.h"
 #include "catalog/pg_am.h"
 #include "funcapi.h"

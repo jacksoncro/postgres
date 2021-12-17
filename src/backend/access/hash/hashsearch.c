@@ -14,8 +14,8 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\hash.h"
-#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "access/hash.h"
+#include "access/relscan.h"
 #include "miscadmin.h"
 #include "pgstat.h"
 #include "storage/predicate.h"

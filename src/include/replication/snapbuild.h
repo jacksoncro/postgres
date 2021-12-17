@@ -12,7 +12,7 @@
 #ifndef SNAPBUILD_H
 #define SNAPBUILD_H
 
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/xlogdefs.h"
 #include "utils/snapmgr.h"
 
 typedef enum

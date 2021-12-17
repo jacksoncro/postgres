@@ -14,7 +14,7 @@
 #ifndef HASH_XLOG_H
 #define HASH_XLOG_H
 
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/xlogreader.h"
 #include "lib/stringinfo.h"
 #include "storage/off.h"
 

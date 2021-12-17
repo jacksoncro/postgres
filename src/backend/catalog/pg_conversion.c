@@ -14,10 +14,10 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\heapam.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "access/heapam.h"
+#include "access/htup_details.h"
+#include "access/sysattr.h"
+#include "access/tableam.h"
 #include "catalog/catalog.h"
 #include "catalog/dependency.h"
 #include "catalog/indexing.h"

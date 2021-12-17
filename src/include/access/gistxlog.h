@@ -13,8 +13,8 @@
 #ifndef GIST_XLOG_H
 #define GIST_XLOG_H
 
-#include "C:\projects\postgres\src\include\access\gist.h"
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/gist.h"
+#include "access/xlogreader.h"
 #include "lib/stringinfo.h"
 
 #define XLOG_GIST_PAGE_UPDATE		0x00

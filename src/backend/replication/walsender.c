@@ -49,13 +49,13 @@
 #include <signal.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\printtup.h"
-#include "C:\projects\postgres\src\include\access\timeline.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
-#include "C:\projects\postgres\src\include\access\xlogutils.h"
+#include "access/printtup.h"
+#include "access/timeline.h"
+#include "access/transam.h"
+#include "access/xact.h"
+#include "access/xlog_internal.h"
+#include "access/xlogreader.h"
+#include "access/xlogutils.h"
 #include "catalog/pg_authid.h"
 #include "catalog/pg_type.h"
 #include "commands/dbcommands.h"

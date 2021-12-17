@@ -28,9 +28,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\slru.h"
-#include "C:\projects\postgres\src\include\access\subtrans.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
+#include "access/slru.h"
+#include "access/subtrans.h"
+#include "access/transam.h"
 #include "pg_trace.h"
 #include "utils/snapmgr.h"
 

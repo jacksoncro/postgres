@@ -13,10 +13,10 @@
 #ifndef _BLOOM_H_
 #define _BLOOM_H_
 
-#include "C:\projects\postgres\src\include\access\amapi.h"
-#include "C:\projects\postgres\src\include\access\generic_xlog.h"
-#include "C:\projects\postgres\src\include\access\itup.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/amapi.h"
+#include "access/generic_xlog.h"
+#include "access/itup.h"
+#include "access/xlog.h"
 #include "fmgr.h"
 #include "nodes/pathnodes.h"
 

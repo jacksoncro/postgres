@@ -12,7 +12,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "access/relscan.h"
 #include "bloom.h"
 #include "miscadmin.h"
 #include "pgstat.h"

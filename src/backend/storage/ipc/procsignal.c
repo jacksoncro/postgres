@@ -17,7 +17,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "port/pg_bitutils.h"
 #include "commands/async.h"
 #include "miscadmin.h"

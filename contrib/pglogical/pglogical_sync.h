@@ -13,10 +13,9 @@
 #ifndef PGLOGICAL_SYNC_H
 #define PGLOGICAL_SYNC_H
 
-#include "C:\projects\postgres\src\interfaces\libpq\libpq-fe.h"
+#include "libpq-fe.h"
 
-#include "C:\projects\postgres\src\include
-odes\primnodes.h"
+#include "nodes/primnodes.h"
 #include "pglogical_node.h"
 
 typedef struct PGLogicalSyncStatus

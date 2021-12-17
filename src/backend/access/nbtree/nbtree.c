@@ -18,10 +18,10 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\nbtree.h"
-#include "C:\projects\postgres\src\include\access\nbtxlog.h"
-#include "C:\projects\postgres\src\include\access\relscan.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/nbtree.h"
+#include "access/nbtxlog.h"
+#include "access/relscan.h"
+#include "access/xlog.h"
 #include "commands/progress.h"
 #include "commands/vacuum.h"
 #include "miscadmin.h"

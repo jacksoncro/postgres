@@ -14,8 +14,8 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gist.h"
-#include "C:\projects\postgres\src\include\access\stratnum.h"
+#include "access/gist.h"
+#include "access/stratnum.h"
 #include "utils/datum.h"
 #include "utils/float.h"
 #include "utils/fmgrprotos.h"

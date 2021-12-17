@@ -14,8 +14,8 @@
 #ifndef HEAPAM_XLOG_H
 #define HEAPAM_XLOG_H
 
-#include "C:\projects\postgres\src\include\access\htup.h"
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/htup.h"
+#include "access/xlogreader.h"
 #include "lib/stringinfo.h"
 #include "storage/buf.h"
 #include "storage/bufpage.h"

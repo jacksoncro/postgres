@@ -20,8 +20,8 @@
 
 #include <llvm-c/Core.h>
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\tupdesc_details.h"
+#include "access/htup_details.h"
+#include "access/tupdesc_details.h"
 #include "executor/tuptable.h"
 #include "jit/llvmjit.h"
 #include "jit/llvmjit_emit.h"

@@ -35,9 +35,9 @@
 #ifdef WIN32
 #include "win32.h"
 #else
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
+#include <sys/socket.h>
 #include <unistd.h>
-#include <C:\projects\postgres\src\include\port\win32\netdb.h>
+#include <netdb.h>
 #include <netinet/in.h>
 #ifdef HAVE_NETINET_TCP_H
 #include <netinet/tcp.h>

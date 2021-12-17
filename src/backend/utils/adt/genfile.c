@@ -20,8 +20,8 @@
 #include <unistd.h>
 #include <dirent.h>
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "access/htup_details.h"
+#include "access/xlog_internal.h"
 #include "catalog/pg_authid.h"
 #include "catalog/pg_tablespace_d.h"
 #include "catalog/pg_type.h"

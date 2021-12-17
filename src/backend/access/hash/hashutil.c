@@ -14,9 +14,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\hash.h"
-#include "C:\projects\postgres\src\include\access\reloptions.h"
-#include "C:\projects\postgres\src\include\access\relscan.h"
+#include "access/hash.h"
+#include "access/reloptions.h"
+#include "access/relscan.h"
 #include "port/pg_bitutils.h"
 #include "storage/buf_internals.h"
 #include "utils/lsyscache.h"

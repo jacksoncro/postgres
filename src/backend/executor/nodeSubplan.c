@@ -29,7 +29,7 @@
 #include <limits.h>
 #include <math.h>
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/htup_details.h"
 #include "executor/executor.h"
 #include "executor/nodeSubplan.h"
 #include "miscadmin.h"

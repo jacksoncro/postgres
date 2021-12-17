@@ -13,7 +13,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\table.h"
+#include "access/table.h"
 #include "catalog/catalog.h"
 #include "catalog/dependency.h"
 #include "catalog/indexing.h"

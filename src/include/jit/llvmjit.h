@@ -30,7 +30,7 @@ extern "C"
 {
 #endif
 
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
+#include "access/tupdesc.h"
 #include "fmgr.h"
 #include "jit/jit.h"
 #include "nodes/pg_list.h"

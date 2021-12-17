@@ -13,7 +13,7 @@
 #ifndef PARSE_TYPE_H
 #define PARSE_TYPE_H
 
-#include "C:\projects\postgres\src\include\access\htup.h"
+#include "access/htup.h"
 #include "parser/parse_node.h"
 
 

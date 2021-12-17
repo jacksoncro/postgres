@@ -1,11 +1,11 @@
 #ifndef PG_LOGICAL_COMPAT_H
 #define PG_LOGICAL_COMPAT_H
 
-#include "C:\projects\postgres\src\include\pgstat.h"
-#include "C:\projects\postgres\src\include\catalog\indexing.h"
-#include "C:\projects\postgres\src\include\commands\trigger.h"
-#include "C:\projects\postgres\src\include\executor\executor.h"
-#include "C:\projects\postgres\src\includeeplication\origin.h"
+#include "pgstat.h"
+#include "catalog/indexing.h"
+#include "commands/trigger.h"
+#include "executor/executor.h"
+#include "replication/origin.h"
 
 #define PGLCreateTrigger CreateTrigger
 

@@ -14,7 +14,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "common/hashfn.h"
 #include "executor/executor.h"
 #include "miscadmin.h"

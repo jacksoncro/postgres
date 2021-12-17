@@ -15,7 +15,7 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
+#include "access/htup_details.h"
 #include "commands/async.h"
 #include "commands/trigger.h"
 #include "executor/spi.h"

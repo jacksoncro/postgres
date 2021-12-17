@@ -32,7 +32,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\tupmacs.h"
+#include "access/tupmacs.h"
 #include "common/hashfn.h"
 #include "funcapi.h"
 #include "lib/stringinfo.h"

@@ -16,8 +16,8 @@
 #ifndef SYSCACHE_H
 #define SYSCACHE_H
 
-#include "C:\projects\postgres\src\include\access\attnum.h"
-#include "C:\projects\postgres\src\include\access\htup.h"
+#include "access/attnum.h"
+#include "access/htup.h"
 /* we intentionally do not include utils/catcache.h here */
 
 /*

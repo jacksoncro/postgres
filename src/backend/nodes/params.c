@@ -15,7 +15,7 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/xact.h"
 #include "fmgr.h"
 #include "mb/stringinfo_mb.h"
 #include "nodes/params.h"

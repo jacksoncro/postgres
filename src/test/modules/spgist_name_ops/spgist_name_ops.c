@@ -21,7 +21,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\spgist.h"
+#include "access/spgist.h"
 #include "catalog/pg_type.h"
 #include "utils/datum.h"
 

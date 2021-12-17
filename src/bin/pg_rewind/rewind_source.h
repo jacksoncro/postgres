@@ -15,7 +15,7 @@
 #ifndef REWIND_SOURCE_H
 #define REWIND_SOURCE_H
 
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/xlogdefs.h"
 #include "file_ops.h"
 #include "filemap.h"
 #include "libpq-fe.h"

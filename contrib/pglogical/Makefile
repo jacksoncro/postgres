@@ -70,9 +70,9 @@ pglogical_version=$(shell awk '/\#define PGLOGICAL_VERSION[ \t]+\".*\"/ { print 
 abs_top_builddir = .
 NO_TEMP_INSTALL = yes
 
+PG_CONFIG ?= pg_config
 
-
-PGVER := 14
+PGVER := $(shell $(PG_CONFIG) --version | sed 's/[^0-9]//g' | cut -c 1-2)
 
 PG_CPPFLAGS += -I$(libpq_srcdir) -I$(realpath $(srcdir)/compat$(PGVER)) -Werror=implicit-function-declaration
 SHLIB_LINK += $(libpq) $(filter -lintl, $(LIBS))
@@ -101,7 +101,7 @@ endif
 EXTRA_CLEAN += $(control_path)
 
 
-PGXS = C:\projects\postgres\dist\lib\pgxs\src\makefiles\pgxs.mk
+PGXS = $(shell $(PG_CONFIG) --pgxs)
 include $(PGXS)
 
 

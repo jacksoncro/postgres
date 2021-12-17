@@ -11,7 +11,7 @@
 #ifndef XLOG_UTILS_H
 #define XLOG_UTILS_H
 
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/xlogreader.h"
 #include "storage/bufmgr.h"
 
 

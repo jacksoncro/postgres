@@ -16,8 +16,8 @@
 #ifndef PQCOMM_H
 #define PQCOMM_H
 
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
-#include <C:\projects\postgres\src\include\port\win32\netdb.h>
+#include <sys/socket.h>
+#include <netdb.h>
 #ifdef HAVE_SYS_UN_H
 #include <sys/un.h>
 #endif

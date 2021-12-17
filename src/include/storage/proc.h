@@ -14,8 +14,8 @@
 #ifndef _PROC_H_
 #define _PROC_H_
 
-#include "C:\projects\postgres\src\include\access\clog.h"
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/clog.h"
+#include "access/xlogdefs.h"
 #include "lib/ilist.h"
 #include "storage/latch.h"
 #include "storage/lock.h"

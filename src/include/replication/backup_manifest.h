@@ -12,7 +12,7 @@
 #ifndef BACKUP_MANIFEST_H
 #define BACKUP_MANIFEST_H
 
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/xlogdefs.h"
 #include "common/checksum_helper.h"
 #include "pgtime.h"
 #include "storage/buffile.h"

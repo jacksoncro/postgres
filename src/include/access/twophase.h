@@ -14,8 +14,8 @@
 #ifndef TWOPHASE_H
 #define TWOPHASE_H
 
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/xact.h"
+#include "access/xlogdefs.h"
 #include "datatype/timestamp.h"
 #include "storage/lock.h"
 

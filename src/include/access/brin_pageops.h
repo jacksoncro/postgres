@@ -11,7 +11,7 @@
 #ifndef BRIN_PAGEOPS_H
 #define BRIN_PAGEOPS_H
 
-#include "C:\projects\postgres\src\include\access\brin_revmap.h"
+#include "access/brin_revmap.h"
 
 extern bool brin_doupdate(Relation idxrel, BlockNumber pagesPerRange,
 						  BrinRevmap *revmap, BlockNumber heapBlk,

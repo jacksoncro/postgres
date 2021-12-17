@@ -14,11 +14,11 @@
 #ifndef NBTREE_H
 #define NBTREE_H
 
-#include "C:\projects\postgres\src\include\access\amapi.h"
-#include "C:\projects\postgres\src\include\access\itup.h"
-#include "C:\projects\postgres\src\include\access\sdir.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/amapi.h"
+#include "access/itup.h"
+#include "access/sdir.h"
+#include "access/tableam.h"
+#include "access/xlogreader.h"
 #include "catalog/pg_am_d.h"
 #include "catalog/pg_index.h"
 #include "lib/stringinfo.h"

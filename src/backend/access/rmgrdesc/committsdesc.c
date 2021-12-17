@@ -14,7 +14,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\commit_ts.h"
+#include "access/commit_ts.h"
 #include "utils/timestamp.h"
 
 

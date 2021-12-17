@@ -14,7 +14,7 @@
 #ifndef NODEHASHJOIN_H
 #define NODEHASHJOIN_H
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "nodes/execnodes.h"
 #include "storage/buffile.h"
 

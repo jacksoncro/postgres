@@ -14,7 +14,7 @@
 #ifndef TYPECMDS_H
 #define TYPECMDS_H
 
-#include "C:\projects\postgres\src\include\access\htup.h"
+#include "access/htup.h"
 #include "catalog/dependency.h"
 #include "parser/parse_node.h"
 

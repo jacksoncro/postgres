@@ -57,10 +57,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\table.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "access/table.h"
+#include "access/tableam.h"
+#include "access/xact.h"
+#include "access/xlog_internal.h"
 #include "catalog/catalog.h"
 #include "catalog/namespace.h"
 #include "catalog/partition.h"

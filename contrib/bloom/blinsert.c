@@ -12,9 +12,9 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\generic_xlog.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "access/genam.h"
+#include "access/generic_xlog.h"
+#include "access/tableam.h"
 #include "bloom.h"
 #include "catalog/index.h"
 #include "miscadmin.h"

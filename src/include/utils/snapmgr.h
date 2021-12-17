@@ -13,7 +13,7 @@
 #ifndef SNAPMGR_H
 #define SNAPMGR_H
 
-#include "C:\projects\postgres\src\include\access\transam.h"
+#include "access/transam.h"
 #include "utils/relcache.h"
 #include "utils/resowner.h"
 #include "utils/snapshot.h"

@@ -13,10 +13,10 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\bufmask.h"
-#include "C:\projects\postgres\src\include\access\gin_private.h"
-#include "C:\projects\postgres\src\include\access\ginxlog.h"
-#include "C:\projects\postgres\src\include\access\xlogutils.h"
+#include "access/bufmask.h"
+#include "access/gin_private.h"
+#include "access/ginxlog.h"
+#include "access/xlogutils.h"
 #include "utils/memutils.h"
 
 static MemoryContext opCtx;		/* working memory for operations */

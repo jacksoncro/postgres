@@ -14,7 +14,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\clog.h"
+#include "access/clog.h"
 
 
 void

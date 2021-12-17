@@ -13,7 +13,7 @@
 #ifndef PRS2LOCK_H
 #define PRS2LOCK_H
 
-#include "C:\projects\postgres\src\include\access\attnum.h"
+#include "access/attnum.h"
 #include "nodes/pg_list.h"
 
 /*

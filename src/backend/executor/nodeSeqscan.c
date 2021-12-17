@@ -27,8 +27,8 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\relscan.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "access/relscan.h"
+#include "access/tableam.h"
 #include "executor/execdebug.h"
 #include "executor/nodeSeqscan.h"
 #include "utils/rel.h"

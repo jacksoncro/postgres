@@ -48,10 +48,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\subtrans.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/subtrans.h"
+#include "access/transam.h"
+#include "access/xact.h"
+#include "access/xlog.h"
 #include "catalog/catalog.h"
 #include "datatype/timestamp.h"
 #include "lib/pairingheap.h"

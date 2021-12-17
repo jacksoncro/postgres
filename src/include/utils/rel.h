@@ -14,8 +14,8 @@
 #ifndef REL_H
 #define REL_H
 
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/tupdesc.h"
+#include "access/xlog.h"
 #include "catalog/pg_class.h"
 #include "catalog/pg_index.h"
 #include "catalog/pg_publication.h"

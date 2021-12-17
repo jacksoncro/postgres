@@ -22,8 +22,8 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
+#include "access/sysattr.h"
+#include "access/tableam.h"
 #include "catalog/pg_type.h"
 #include "executor/execdebug.h"
 #include "executor/nodeTidscan.h"

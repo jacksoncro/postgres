@@ -10,26 +10,26 @@
  *
  *-------------------------------------------------------------------------
  */
-#include "C:\projects\postgres\src\include\postgres.h"
+#include "postgres.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <C:\projects\postgres\src\include\port\win32_msvc\unistd.h>
-#include <C:\projects\postgres\src\include\port\win32_msvc\dirent.h>
+#include <unistd.h>
+#include <dirent.h>
 
-#include "C:\projects\postgres\src\include\mb\pg_wchar.h"
-#include "C:\projects\postgres\src\includeeplication\logical.h"
+#include "mb/pg_wchar.h"
+#include "replication/logical.h"
 
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\executor\executor.h"
-#include "C:\projects\postgres\src\include\catalog\namespace.h"
-#include "C:\projects\postgres\src\include\storage\fd.h"
-#include "C:\projects\postgres\src\include\storage\lmgr.h"
-#include "C:\projects\postgres\src\include\utils\inval.h"
-#include "C:\projects\postgres\src\include\utils\memutils.h"
-#include "C:\projects\postgres\src\include\utils\rel.h"
-#include "C:\projects\postgres\src\include\utils\snapmgr.h"
-#include "C:\projects\postgres\src\includeeplication\origin.h"
+#include "access/xact.h"
+#include "executor/executor.h"
+#include "catalog/namespace.h"
+#include "storage/fd.h"
+#include "storage/lmgr.h"
+#include "utils/inval.h"
+#include "utils/memutils.h"
+#include "utils/rel.h"
+#include "utils/snapmgr.h"
+#include "replication/origin.h"
 
 #include "pglogical_output_plugin.h"
 #include "pglogical.h"
@@ -41,7 +41,7 @@
 #include "pglogical_repset.h"
 
 #ifdef HAVE_REPLICATION_ORIGINS
-#include "C:\projects\postgres\src\includeeplication\origin.h"
+#include "replication/origin.h"
 #endif
 
 extern void		_PG_output_plugin_init(OutputPluginCallbacks *cb);

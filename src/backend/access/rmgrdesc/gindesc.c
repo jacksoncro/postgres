@@ -14,8 +14,8 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\ginxlog.h"
-#include "C:\projects\postgres\src\include\access\xlogutils.h"
+#include "access/ginxlog.h"
+#include "access/xlogutils.h"
 #include "lib/stringinfo.h"
 #include "storage/relfilenode.h"
 

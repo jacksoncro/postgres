@@ -32,12 +32,12 @@
 
 #include <limits.h>
 
-#include "C:\projects\postgres\src\include\access\detoast.h"
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\table.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/detoast.h"
+#include "access/genam.h"
+#include "access/htup_details.h"
+#include "access/sysattr.h"
+#include "access/table.h"
+#include "access/xact.h"
 #include "catalog/dependency.h"
 #include "catalog/indexing.h"
 #include "catalog/objectaccess.h"

@@ -87,8 +87,8 @@
 #include <sys/resource.h>		/* for getrlimit */
 #endif
 
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/xact.h"
+#include "access/xlog.h"
 #include "catalog/pg_tablespace.h"
 #include "common/file_perm.h"
 #include "common/file_utils.h"

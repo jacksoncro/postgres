@@ -14,7 +14,7 @@
 #ifndef STANDBYDEFS_H
 #define STANDBYDEFS_H
 
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/xlogreader.h"
 #include "lib/stringinfo.h"
 #include "storage/lockdefs.h"
 #include "storage/sinval.h"

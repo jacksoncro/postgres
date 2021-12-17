@@ -10,7 +10,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "executor/executor.h"
 #include "executor/nodeCustom.h"
 #include "miscadmin.h"

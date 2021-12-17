@@ -15,8 +15,8 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\hash.h"
-#include "C:\projects\postgres\src\include\access\hash_xlog.h"
+#include "access/hash.h"
+#include "access/hash_xlog.h"
 #include "miscadmin.h"
 #include "storage/buf_internals.h"
 #include "storage/lwlock.h"

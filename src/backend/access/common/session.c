@@ -20,7 +20,7 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\session.h"
+#include "access/session.h"
 #include "storage/lwlock.h"
 #include "storage/shm_toc.h"
 #include "utils/memutils.h"

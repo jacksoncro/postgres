@@ -59,7 +59,7 @@
 #include "sys/mman.h"
 #endif
 
-#include "C:\projects\postgres\src\include\access\xlog_internal.h"
+#include "access/xlog_internal.h"
 #include "catalog/pg_authid_d.h"
 #include "catalog/pg_class_d.h" /* pgrminclude ignore */
 #include "catalog/pg_collation_d.h"

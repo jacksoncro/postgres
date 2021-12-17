@@ -14,7 +14,7 @@
 #ifndef EXECNODES_H
 #define EXECNODES_H
 
-#include "C:\projects\postgres\src\include\access\tupconvert.h"
+#include "access/tupconvert.h"
 #include "executor/instrument.h"
 #include "fmgr.h"
 #include "lib/ilist.h"

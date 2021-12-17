@@ -14,10 +14,10 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gin_private.h"
-#include "C:\projects\postgres\src\include\access\ginxlog.h"
-#include "C:\projects\postgres\src\include\access\reloptions.h"
-#include "C:\projects\postgres\src\include\access\xloginsert.h"
+#include "access/gin_private.h"
+#include "access/ginxlog.h"
+#include "access/reloptions.h"
+#include "access/xloginsert.h"
 #include "catalog/pg_collation.h"
 #include "catalog/pg_type.h"
 #include "commands/vacuum.h"

@@ -30,11 +30,11 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\relscan.h"
-#include "C:\projects\postgres\src\include\access\tableam.h"
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
-#include "C:\projects\postgres\src\include\access\visibilitymap.h"
+#include "access/genam.h"
+#include "access/relscan.h"
+#include "access/tableam.h"
+#include "access/tupdesc.h"
+#include "access/visibilitymap.h"
 #include "executor/execdebug.h"
 #include "executor/nodeIndexonlyscan.h"
 #include "executor/nodeIndexscan.h"

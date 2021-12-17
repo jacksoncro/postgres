@@ -13,9 +13,9 @@
 #ifndef PG_LOGICAL_OUTPUT_PROTO_H
 #define PG_LOGICAL_OUTPUT_PROTO_H
 
-#include "C:\projects\postgres\src\include\lib\stringinfo.h"
-#include "C:\projects\postgres\src\includeeplication\reorderbuffer.h"
-#include "C:\projects\postgres\src\include\utils\relcache.h"
+#include "lib/stringinfo.h"
+#include "replication/reorderbuffer.h"
+#include "utils/relcache.h"
 
 #include "pglogical_output_plugin.h"
 

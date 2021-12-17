@@ -8,11 +8,11 @@
 
 #include "postgres.h"
 
-#include <C:\projects\postgres\src\include\port\win32\sys\socket.h>
+#include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#include "C:\projects\postgres\src\include\access\stratnum.h"
+#include "access/stratnum.h"
 #include "catalog/pg_opfamily.h"
 #include "catalog/pg_type.h"
 #include "common/hashfn.h"

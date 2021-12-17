@@ -14,8 +14,8 @@
 #ifndef SPGIST_H
 #define SPGIST_H
 
-#include "C:\projects\postgres\src\include\access\amapi.h"
-#include "C:\projects\postgres\src\include\access\xlogreader.h"
+#include "access/amapi.h"
+#include "access/xlogreader.h"
 #include "lib/stringinfo.h"
 
 

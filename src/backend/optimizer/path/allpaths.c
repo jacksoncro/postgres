@@ -18,8 +18,8 @@
 #include <limits.h>
 #include <math.h>
 
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\tsmapi.h"
+#include "access/sysattr.h"
+#include "access/tsmapi.h"
 #include "catalog/pg_class.h"
 #include "catalog/pg_operator.h"
 #include "catalog/pg_proc.h"

@@ -51,9 +51,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "C:\projects\postgres\src\include\access\slru.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/slru.h"
+#include "access/transam.h"
+#include "access/xlog.h"
 #include "miscadmin.h"
 #include "pgstat.h"
 #include "storage/fd.h"

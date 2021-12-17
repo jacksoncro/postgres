@@ -14,8 +14,8 @@
 #ifndef GENAM_H
 #define GENAM_H
 
-#include "C:\projects\postgres\src\include\access\sdir.h"
-#include "C:\projects\postgres\src\include\access\skey.h"
+#include "access/sdir.h"
+#include "access/skey.h"
 #include "nodes/tidbitmap.h"
 #include "storage/lockdefs.h"
 #include "utils/relcache.h"

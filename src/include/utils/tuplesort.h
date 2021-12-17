@@ -21,7 +21,7 @@
 #ifndef TUPLESORT_H
 #define TUPLESORT_H
 
-#include "C:\projects\postgres\src\include\access\itup.h"
+#include "access/itup.h"
 #include "executor/tuptable.h"
 #include "storage/dsm.h"
 #include "utils/relcache.h"

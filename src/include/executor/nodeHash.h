@@ -14,7 +14,7 @@
 #ifndef NODEHASH_H
 #define NODEHASH_H
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "nodes/execnodes.h"
 
 struct SharedHashJoinBatch;

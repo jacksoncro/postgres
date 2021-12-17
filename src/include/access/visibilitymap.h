@@ -14,8 +14,8 @@
 #ifndef VISIBILITYMAP_H
 #define VISIBILITYMAP_H
 
-#include "C:\projects\postgres\src\include\access\visibilitymapdefs.h"
-#include "C:\projects\postgres\src\include\access\xlogdefs.h"
+#include "access/visibilitymapdefs.h"
+#include "access/xlogdefs.h"
 #include "storage/block.h"
 #include "storage/buf.h"
 #include "utils/relcache.h"

@@ -26,8 +26,8 @@
 #include <math.h>
 #include <limits.h>
 
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/htup_details.h"
+#include "access/parallel.h"
 #include "catalog/pg_statistic.h"
 #include "commands/tablespace.h"
 #include "executor/execdebug.h"

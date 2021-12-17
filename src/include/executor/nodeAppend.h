@@ -14,7 +14,7 @@
 #ifndef NODEAPPEND_H
 #define NODEAPPEND_H
 
-#include "C:\projects\postgres\src\include\access\parallel.h"
+#include "access/parallel.h"
 #include "nodes/execnodes.h"
 
 extern AppendState *ExecInitAppend(Append *node, EState *estate, int eflags);

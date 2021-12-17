@@ -47,12 +47,12 @@
 
 #include <signal.h>
 
-#include "C:\projects\postgres\src\include\access\clog.h"
-#include "C:\projects\postgres\src\include\access\subtrans.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\twophase.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/clog.h"
+#include "access/subtrans.h"
+#include "access/transam.h"
+#include "access/twophase.h"
+#include "access/xact.h"
+#include "access/xlog.h"
 #include "catalog/catalog.h"
 #include "catalog/pg_authid.h"
 #include "commands/dbcommands.h"

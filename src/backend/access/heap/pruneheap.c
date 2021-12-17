@@ -14,11 +14,11 @@
  */
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\heapam.h"
-#include "C:\projects\postgres\src\include\access\heapam_xlog.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\transam.h"
-#include "C:\projects\postgres\src\include\access\xlog.h"
+#include "access/heapam.h"
+#include "access/heapam_xlog.h"
+#include "access/htup_details.h"
+#include "access/transam.h"
+#include "access/xlog.h"
 #include "catalog/catalog.h"
 #include "miscadmin.h"
 #include "pgstat.h"

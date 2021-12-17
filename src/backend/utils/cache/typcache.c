@@ -43,13 +43,13 @@
 
 #include <limits.h>
 
-#include "C:\projects\postgres\src\include\access\hash.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\nbtree.h"
-#include "C:\projects\postgres\src\include\access\parallel.h"
-#include "C:\projects\postgres\src\include\access\relation.h"
-#include "C:\projects\postgres\src\include\access\session.h"
-#include "C:\projects\postgres\src\include\access\table.h"
+#include "access/hash.h"
+#include "access/htup_details.h"
+#include "access/nbtree.h"
+#include "access/parallel.h"
+#include "access/relation.h"
+#include "access/session.h"
+#include "access/table.h"
 #include "catalog/pg_am.h"
 #include "catalog/pg_constraint.h"
 #include "catalog/pg_enum.h"

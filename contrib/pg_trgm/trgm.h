@@ -4,9 +4,9 @@
 #ifndef __TRGM_H__
 #define __TRGM_H__
 
-#include "C:\projects\postgres\src\include\access\gist.h"
-#include "C:\projects\postgres\src\include\access\itup.h"
-#include "C:\projects\postgres\src\include\access\stratnum.h"
+#include "access/gist.h"
+#include "access/itup.h"
+#include "access/stratnum.h"
 #include "storage/bufpage.h"
 
 /*

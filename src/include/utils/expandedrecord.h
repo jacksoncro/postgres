@@ -13,8 +13,8 @@
 #ifndef EXPANDEDRECORD_H
 #define EXPANDEDRECORD_H
 
-#include "C:\projects\postgres\src\include\access\htup.h"
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
+#include "access/htup.h"
+#include "access/tupdesc.h"
 #include "fmgr.h"
 #include "utils/expandeddatum.h"
 

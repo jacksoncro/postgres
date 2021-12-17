@@ -15,8 +15,8 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\gist.h"
-#include "C:\projects\postgres\src\include\access\nbtree.h"
+#include "access/gist.h"
+#include "access/nbtree.h"
 #include "catalog/pg_am.h"
 #include "fmgr.h"
 #include "utils/lsyscache.h"

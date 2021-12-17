@@ -14,8 +14,8 @@
 #ifndef ITUP_H
 #define ITUP_H
 
-#include "C:\projects\postgres\src\include\access\tupdesc.h"
-#include "C:\projects\postgres\src\include\access\tupmacs.h"
+#include "access/tupdesc.h"
+#include "access/tupmacs.h"
 #include "storage/bufpage.h"
 #include "storage/itemptr.h"
 

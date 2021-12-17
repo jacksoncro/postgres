@@ -96,7 +96,7 @@
 
 #include <limits.h>
 
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/xact.h"
 #include "common/hashfn.h"
 #include "port/pg_bitutils.h"
 #include "storage/shmem.h"

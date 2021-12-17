@@ -11,40 +11,39 @@
  *-------------------------------------------------------------------------
  */
 
-#include "C:\projects\postgres\src\include\postgres.h"
+#include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\genam.h"
-#include "C:\projects\postgres\src\include\access\hash.h"
-#include "C:\projects\postgres\src\include\access\heapam.h"
-#include "C:\projects\postgres\src\include\access\htup_details.h"
-#include "C:\projects\postgres\src\include\access\xact.h"
+#include "access/genam.h"
+#include "access/hash.h"
+#include "access/heapam.h"
+#include "access/htup_details.h"
+#include "access/xact.h"
 
-#include "C:\projects\postgres\src\include\catalog\dependency.h"
-#include "C:\projects\postgres\src\include\catalog\indexing.h"
-#include "C:\projects\postgres\src\include\catalog\namespace.h"
-#include "C:\projects\postgres\src\include\catalog\objectaddress.h"
-#include "C:\projects\postgres\src\include\catalog\pg_extension.h"
-#include "C:\projects\postgres\src\include\catalog\pg_trigger.h"
-#include "C:\projects\postgres\src\include\catalog\pg_type.h"
+#include "catalog/dependency.h"
+#include "catalog/indexing.h"
+#include "catalog/namespace.h"
+#include "catalog/objectaddress.h"
+#include "catalog/pg_extension.h"
+#include "catalog/pg_trigger.h"
+#include "catalog/pg_type.h"
 
-#include "C:\projects\postgres\src\include\commands\extension.h"
-#include "C:\projects\postgres\src\include\commands\trigger.h"
+#include "commands/extension.h"
+#include "commands/trigger.h"
 
-#include "C:\projects\postgres\src\include\miscadmin.h"
+#include "miscadmin.h"
 
-#include "C:\projects\postgres\src\include
-odes\makefuncs.h"
+#include "nodes/makefuncs.h"
 
-#include "C:\projects\postgres\src\include\parser\parse_func.h"
+#include "parser/parse_func.h"
 
-#include "C:\projects\postgres\src\include\utils\array.h"
-#include "C:\projects\postgres\src\include\utils\builtins.h"
-#include "C:\projects\postgres\src\include\utils\fmgroids.h"
-#include "C:\projects\postgres\src\include\utils\json.h"
-#include "C:\projects\postgres\src\include\utils\jsonb.h"
-#include "C:\projects\postgres\src\include\utils\lsyscache.h"
-#include "C:\projects\postgres\src\include\utils\rel.h"
-#include "C:\projects\postgres\src\include\utils\timestamp.h"
+#include "utils/array.h"
+#include "utils/builtins.h"
+#include "utils/fmgroids.h"
+#include "utils/json.h"
+#include "utils/jsonb.h"
+#include "utils/lsyscache.h"
+#include "utils/rel.h"
+#include "utils/timestamp.h"
 
 #include "pglogical_queue.h"
 #include "pglogical.h"

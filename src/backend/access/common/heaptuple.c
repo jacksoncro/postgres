@@ -57,9 +57,9 @@
 
 #include "postgres.h"
 
-#include "C:\projects\postgres\src\include\access\heaptoast.h"
-#include "C:\projects\postgres\src\include\access\sysattr.h"
-#include "C:\projects\postgres\src\include\access\tupdesc_details.h"
+#include "access/heaptoast.h"
+#include "access/sysattr.h"
+#include "access/tupdesc_details.h"
 #include "executor/tuptable.h"
 #include "utils/expandeddatum.h"
 
