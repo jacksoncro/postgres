@@ -28,9 +28,9 @@ build_script:
   - sh -l -c "make -j2"
   - sh -l -c "make install -j2"
   - set PATH=C:/projects/postgres/dist/include/server/;C:/projects/postgres/src/makefiles;C:/projects/postgres/src/include/utils;%PATH%
-#  - cd C:\projects\postgres\contrib\pglogical
-  - sh -l -c "C:/projects/postgres/contrib/pglogical/make"
-  - sh -l -c "C:/projects/postgres/contrib/pglogical/make install"
+  - cd C:\projects\postgres\contrib\pglogical
+  - sh -l -c "make"
+  - sh -l -c "make install"
   - 7z a -r postgre.zip C:\projects\postgres\dist
   - appveyor PushArtifact postgre.zip
   
