@@ -2067,8 +2067,7 @@ QuoteWindowsArgvElement(StringInfo cmdline, const char *arg, bool force)
  * (This should arguably be part of libpq_fe.c, but I didn't want to expand our
  * abuse of PqExpBuffer.)
  */
-static void
-QuoteWindowsArgv(StringInfo cmdline, const char * argv[])
+static void QuoteWindowsArgv(StringInfo cmdline, const char * argv[])
 {
 	/* argv0 is required */
 	Assert(*argv != NULL && **argv != '\0');
