@@ -25,9 +25,12 @@ build_script:
   - pwd
 #  - sh -l -c "echo "teste" > arquivo.txt"  
 #  - sh -l -c "make clean"
-  - set PATH=C:/projects/postgres/dist/include/server/;%PATH%
-  - sh -l -c "make world-bin -j2"
-  - sh -l -c "make install world-bin -j2"
+  - sh -l -c "make -j2"
+  - sh -l -c "make install -j2"
+  - set PATH=C:/projects/postgres/dist/include/server/;C:/projects/postgres/src/makefiles;C:/projects/postgres/src/include/utils;%PATH%
+#  - cd C:\projects\postgres\contrib\pglogical
+  - sh -l -c "C:/projects/postgres/contrib/pglogical/make"
+  - sh -l -c "C:/projects/postgres/contrib/pglogical/make install"
   - 7z a -r postgre.zip C:\projects\postgres\dist
   - appveyor PushArtifact postgre.zip
   
