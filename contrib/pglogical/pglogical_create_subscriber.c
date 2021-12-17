@@ -10,7 +10,10 @@
  *
  * -------------------------------------------------------------------------
  */
-
+#include "postgres.h"
+#include "libpq-fe.h"
+#include "postgres_fe.h"
+#include "pqexpbuffer.h"
 /* dirent.h on port/win32_msvc expects MAX_PATH to be defined */
 #if defined(_WIN32)
 #define WIN32_LEAN_AND_MEAN
@@ -42,9 +45,7 @@
 
 #endif
 
-#include "libpq-fe.h"
-#include "postgres_fe.h"
-#include "pqexpbuffer.h"
+
 
 #include "getopt_long.h"
 
