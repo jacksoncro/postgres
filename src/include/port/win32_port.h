@@ -55,7 +55,9 @@
 /* needed before sys/stat hacking below: */
 #define fstat microsoft_native_fstat
 #define stat microsoft_native_stat
+#if !defined(__MINGW64_VERSION_MAJOR) || defined(_MSC_VER)
 #include <sys/stat.h>
+#endif
 #undef fstat
 #undef stat
 
