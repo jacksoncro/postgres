@@ -52,7 +52,7 @@
 #include <direct.h>
 #undef near
 
-/* needed before sys/stat hacking below: 
+/* needed before sys/stat hacking below: */
 #define fstat microsoft_native_fstat
 #define stat microsoft_native_stat
 #if !defined(__MINGW64_VERSION_MAJOR) || defined(_MSC_VER)
@@ -60,7 +60,7 @@
 #endif
 #undef fstat
 #undef stat
-*/
+
 
 /* Must be here to avoid conflicting with prototype in windows.h */
 #define mkdir(a,b)	mkdir(a)
