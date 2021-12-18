@@ -3,7 +3,7 @@
  * pg_shdepend.c
  *	  routines to support manipulation of the pg_shdepend relation
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  *
@@ -362,7 +362,7 @@ void
 recordDependencyOnTablespace(Oid classId, Oid objectId, Oid tablespace)
 {
 	ObjectAddress myself,
-				referenced;
+				  referenced;
 
 	ObjectAddressSet(myself, classId, objectId);
 	ObjectAddressSet(referenced, TableSpaceRelationId, tablespace);
@@ -695,7 +695,7 @@ checkSharedDependencies(Oid classId, Oid objectId,
 			ereport(ERROR,
 					(errcode(ERRCODE_DEPENDENT_OBJECTS_STILL_EXIST),
 					 errmsg("cannot drop %s because it is required by the database system",
-							getObjectDescription(&object, false))));
+							getObjectDescription(&object))));
 		}
 
 		object.classId = sdepForm->classid;
@@ -842,7 +842,6 @@ checkSharedDependencies(Oid classId, Oid objectId,
 	return true;
 }
 
-
 /*
  * copyTemplateDependencies
  *
@@ -858,20 +857,12 @@ copyTemplateDependencies(Oid templateDbId, Oid newDbId)
 	SysScanDesc scan;
 	HeapTuple	tup;
 	CatalogIndexState indstate;
-	TupleTableSlot **slot;
-	int			max_slots,
-				slot_init_count,
-				slot_stored_count;
+	Datum		values[Natts_pg_shdepend];
+	bool		nulls[Natts_pg_shdepend];
+	bool		replace[Natts_pg_shdepend];
 
 	sdepRel = table_open(SharedDependRelationId, RowExclusiveLock);
 	sdepDesc = RelationGetDescr(sdepRel);
-
-	/*
-	 * Allocate the slots to use, but delay costly initialization until we
-	 * know that they will be used.
-	 */
-	max_slots = MAX_CATALOG_MULTI_INSERT_BYTES / sizeof(FormData_pg_shdepend);
-	slot = palloc(sizeof(TupleTableSlot *) * max_slots);
 
 	indstate = CatalogOpenIndexes(sdepRel);
 
@@ -884,10 +875,13 @@ copyTemplateDependencies(Oid templateDbId, Oid newDbId)
 	scan = systable_beginscan(sdepRel, SharedDependDependerIndexId, true,
 							  NULL, 1, key);
 
-	/* number of slots currently storing tuples */
-	slot_stored_count = 0;
-	/* number of slots currently initialized */
-	slot_init_count = 0;
+	/* Set up to copy the tuples except for inserting newDbId */
+	memset(values, 0, sizeof(values));
+	memset(nulls, false, sizeof(nulls));
+	memset(replace, false, sizeof(replace));
+
+	replace[Anum_pg_shdepend_dbid - 1] = true;
+	values[Anum_pg_shdepend_dbid - 1] = ObjectIdGetDatum(newDbId);
 
 	/*
 	 * Copy the entries of the original database, changing the database Id to
@@ -898,53 +892,18 @@ copyTemplateDependencies(Oid templateDbId, Oid newDbId)
 	 */
 	while (HeapTupleIsValid(tup = systable_getnext(scan)))
 	{
-		Form_pg_shdepend shdep;
+		HeapTuple	newtup;
 
-		if (slot_init_count < max_slots)
-		{
-			slot[slot_stored_count] = MakeSingleTupleTableSlot(sdepDesc, &TTSOpsHeapTuple);
-			slot_init_count++;
-		}
+		newtup = heap_modify_tuple(tup, sdepDesc, values, nulls, replace);
+		CatalogTupleInsertWithInfo(sdepRel, newtup, indstate);
 
-		ExecClearTuple(slot[slot_stored_count]);
-
-		memset(slot[slot_stored_count]->tts_isnull, false,
-			   slot[slot_stored_count]->tts_tupleDescriptor->natts * sizeof(bool));
-
-		shdep = (Form_pg_shdepend) GETSTRUCT(tup);
-
-		slot[slot_stored_count]->tts_values[Anum_pg_shdepend_dbid - 1] = ObjectIdGetDatum(newDbId);
-		slot[slot_stored_count]->tts_values[Anum_pg_shdepend_classid - 1] = shdep->classid;
-		slot[slot_stored_count]->tts_values[Anum_pg_shdepend_objid - 1] = shdep->objid;
-		slot[slot_stored_count]->tts_values[Anum_pg_shdepend_objsubid - 1] = shdep->objsubid;
-		slot[slot_stored_count]->tts_values[Anum_pg_shdepend_refclassid - 1] = shdep->refclassid;
-		slot[slot_stored_count]->tts_values[Anum_pg_shdepend_refobjid - 1] = shdep->refobjid;
-		slot[slot_stored_count]->tts_values[Anum_pg_shdepend_deptype - 1] = shdep->deptype;
-
-		ExecStoreVirtualTuple(slot[slot_stored_count]);
-		slot_stored_count++;
-
-		/* If slots are full, insert a batch of tuples */
-		if (slot_stored_count == max_slots)
-		{
-			CatalogTuplesMultiInsertWithInfo(sdepRel, slot, slot_stored_count, indstate);
-			slot_stored_count = 0;
-		}
+		heap_freetuple(newtup);
 	}
-
-	/* Insert any tuples left in the buffer */
-	if (slot_stored_count > 0)
-		CatalogTuplesMultiInsertWithInfo(sdepRel, slot, slot_stored_count, indstate);
 
 	systable_endscan(scan);
 
 	CatalogCloseIndexes(indstate);
 	table_close(sdepRel, RowExclusiveLock);
-
-	/* Drop only the number of slots used */
-	for (int i = 0; i < slot_init_count; i++)
-		ExecDropSingleTupleTableSlot(slot[i]);
-	pfree(slot);
 }
 
 /*
@@ -1237,7 +1196,7 @@ storeObjectDescription(StringInfo descs,
 					   SharedDependencyType deptype,
 					   int count)
 {
-	char	   *objdesc = getObjectDescription(object, false);
+	char	   *objdesc = getObjectDescription(object);
 
 	/*
 	 * An object being dropped concurrently doesn't need to be reported.
@@ -1381,7 +1340,7 @@ shdepDropOwned(List *roleids, DropBehavior behavior)
 					(errcode(ERRCODE_DEPENDENT_OBJECTS_STILL_EXIST),
 					 errmsg("cannot drop objects owned by %s because they are "
 							"required by the database system",
-							getObjectDescription(&obj, false))));
+							getObjectDescription(&obj))));
 		}
 
 		ScanKeyInit(&key[0],
@@ -1527,7 +1486,7 @@ shdepReassignOwned(List *roleids, Oid newrole)
 			ereport(ERROR,
 					(errcode(ERRCODE_DEPENDENT_OBJECTS_STILL_EXIST),
 					 errmsg("cannot reassign ownership of objects owned by %s because they are required by the database system",
-							getObjectDescription(&obj, false))));
+							getObjectDescription(&obj))));
 
 			/*
 			 * There's no need to tell the whole truth, which is that we

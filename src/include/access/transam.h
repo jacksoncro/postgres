@@ -4,7 +4,7 @@
  *	  postgres transaction access method support code
  *
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  * src/include/access/transam.h
@@ -54,8 +54,6 @@
 #define FullTransactionIdFollowsOrEquals(a, b) ((a).value >= (b).value)
 #define FullTransactionIdIsValid(x)		TransactionIdIsValid(XidFromFullTransactionId(x))
 #define InvalidFullTransactionId		FullTransactionIdFromEpochAndXid(0, InvalidTransactionId)
-#define FirstNormalFullTransactionId	FullTransactionIdFromEpochAndXid(0, FirstNormalTransactionId)
-#define FullTransactionIdIsNormal(x)	FullTransactionIdFollowsOrEquals(x, FirstNormalFullTransactionId)
 
 /*
  * A 64 bit value that contains an epoch and a TransactionId.  This is
@@ -95,44 +93,11 @@ FullTransactionIdFromU64(uint64 value)
 			(dest) = FirstNormalTransactionId; \
 	} while(0)
 
-/*
- * Retreat a FullTransactionId variable, stepping over xids that would appear
- * to be special only when viewed as 32bit XIDs.
- */
-static inline void
-FullTransactionIdRetreat(FullTransactionId *dest)
-{
-	dest->value--;
-
-	/*
-	 * In contrast to 32bit XIDs don't step over the "actual" special xids.
-	 * For 64bit xids these can't be reached as part of a wraparound as they
-	 * can in the 32bit case.
-	 */
-	if (FullTransactionIdPrecedes(*dest, FirstNormalFullTransactionId))
-		return;
-
-	/*
-	 * But we do need to step over XIDs that'd appear special only for 32bit
-	 * XIDs.
-	 */
-	while (XidFromFullTransactionId(*dest) < FirstNormalTransactionId)
-		dest->value--;
-}
-
-/*
- * Advance a FullTransactionId variable, stepping over xids that would appear
- * to be special only when viewed as 32bit XIDs.
- */
+/* advance a FullTransactionId variable, stepping over special XIDs */
 static inline void
 FullTransactionIdAdvance(FullTransactionId *dest)
 {
 	dest->value++;
-
-	/* see FullTransactionIdAdvance() */
-	if (FullTransactionIdPrecedes(*dest, FirstNormalFullTransactionId))
-		return;
-
 	while (XidFromFullTransactionId(*dest) < FirstNormalTransactionId)
 		dest->value++;
 }
@@ -163,9 +128,7 @@ FullTransactionIdAdvance(FullTransactionId *dest)
  *
  *		OIDs 10000-11999 are reserved for assignment by genbki.pl, for use
  *		when the .dat files in src/include/catalog/ do not specify an OID
- *		for a catalog entry that requires one.  Note that genbki.pl assigns
- *		these OIDs independently in each catalog, so they're not guaranteed
- *		to be globally unique.
+ *		for a catalog entry that requires one.
  *
  *		OIDS 12000-16383 are reserved for assignment during initdb
  *		using the OID generator.  (We start the generator at 12000.)
@@ -212,12 +175,12 @@ typedef struct VariableCacheData
 	/*
 	 * These fields are protected by XidGenLock.
 	 */
-	FullTransactionId nextXid;	/* next XID to assign */
+	FullTransactionId nextFullXid;	/* next full XID to assign */
 
 	TransactionId oldestXid;	/* cluster-wide minimum datfrozenxid */
 	TransactionId xidVacLimit;	/* start forcing autovacuums here */
 	TransactionId xidWarnLimit; /* start complaining here */
-	TransactionId xidStopLimit; /* refuse to advance nextXid beyond here */
+	TransactionId xidStopLimit; /* refuse to advance nextFullXid beyond here */
 	TransactionId xidWrapLimit; /* where the world ends */
 	Oid			oldestXidDB;	/* database with minimum datfrozenxid */
 
@@ -230,17 +193,8 @@ typedef struct VariableCacheData
 	/*
 	 * These fields are protected by ProcArrayLock.
 	 */
-	FullTransactionId latestCompletedXid;	/* newest full XID that has
-											 * committed or aborted */
-
-	/*
-	 * Number of top-level transactions with xids (i.e. which may have
-	 * modified the database) that completed in some form since the start of
-	 * the server. This currently is solely used to check whether
-	 * GetSnapshotData() needs to recompute the contents of the snapshot, or
-	 * not. There are likely other users of this.  Always above 1.
-	 */
-	uint64		xactCompletionCount;
+	TransactionId latestCompletedXid;	/* newest XID that has committed or
+										 * aborted */
 
 	/*
 	 * These fields are protected by XactTruncationLock
@@ -290,12 +244,6 @@ extern void AdvanceOldestClogXid(TransactionId oldest_datfrozenxid);
 extern bool ForceTransactionIdLimitUpdate(void);
 extern Oid	GetNewObjectId(void);
 
-#ifdef USE_ASSERT_CHECKING
-extern void AssertTransactionIdInAllowableRange(TransactionId xid);
-#else
-#define AssertTransactionIdInAllowableRange(xid) ((void)true)
-#endif
-
 /*
  * Some frontend programs include this header.  For compilers that emit static
  * inline functions even when they're unused, that leads to unsatisfied
@@ -307,62 +255,9 @@ extern void AssertTransactionIdInAllowableRange(TransactionId xid);
  * For callers that just need the XID part of the next transaction ID.
  */
 static inline TransactionId
-ReadNextTransactionId(void)
+ReadNewTransactionId(void)
 {
 	return XidFromFullTransactionId(ReadNextFullTransactionId());
-}
-
-/* return transaction ID backed up by amount, handling wraparound correctly */
-static inline TransactionId
-TransactionIdRetreatedBy(TransactionId xid, uint32 amount)
-{
-	xid -= amount;
-
-	while (xid < FirstNormalTransactionId)
-		xid--;
-
-	return xid;
-}
-
-/* return the older of the two IDs */
-static inline TransactionId
-TransactionIdOlder(TransactionId a, TransactionId b)
-{
-	if (!TransactionIdIsValid(a))
-		return b;
-
-	if (!TransactionIdIsValid(b))
-		return a;
-
-	if (TransactionIdPrecedes(a, b))
-		return a;
-	return b;
-}
-
-/* return the older of the two IDs, assuming they're both normal */
-static inline TransactionId
-NormalTransactionIdOlder(TransactionId a, TransactionId b)
-{
-	Assert(TransactionIdIsNormal(a));
-	Assert(TransactionIdIsNormal(b));
-	if (NormalTransactionIdPrecedes(a, b))
-		return a;
-	return b;
-}
-
-/* return the newer of the two IDs */
-static inline FullTransactionId
-FullTransactionIdNewer(FullTransactionId a, FullTransactionId b)
-{
-	if (!FullTransactionIdIsValid(a))
-		return b;
-
-	if (!FullTransactionIdIsValid(b))
-		return a;
-
-	if (FullTransactionIdFollows(a, b))
-		return a;
-	return b;
 }
 
 #endif							/* FRONTEND */

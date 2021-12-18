@@ -6,7 +6,7 @@
 # runs the regression tests (to put in some data), runs pg_dumpall,
 # runs pg_upgrade, runs pg_dumpall again, compares the dumps.
 #
-# Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+# Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
 # Portions Copyright (c) 1994, Regents of the University of California
 
 set -e
@@ -107,14 +107,9 @@ outputdir="$temp_root/regress"
 EXTRA_REGRESS_OPTS="$EXTRA_REGRESS_OPTS --outputdir=$outputdir"
 export EXTRA_REGRESS_OPTS
 mkdir "$outputdir"
-
-# pg_regress --make-tablespacedir would take care of that in 14~, but this is
-# still required for older versions where this option is not supported.
-if [ "$newsrc" != "$oldsrc" ]; then
-	mkdir "$outputdir"/testtablespace
-	mkdir "$outputdir"/sql
-	mkdir "$outputdir"/expected
-fi
+mkdir "$outputdir"/sql
+mkdir "$outputdir"/expected
+mkdir "$outputdir"/testtablespace
 
 logdir=`pwd`/log
 rm -rf "$logdir"
@@ -241,7 +236,7 @@ pg_upgrade $PG_UPGRADE_OPTS -d "${PGDATA}.old" -D "$PGDATA" -b "$oldbindir" -p "
 # make sure all directories and files have group permissions, on Unix hosts
 # Windows hosts don't support Unix-y permissions.
 case $testhost in
-	MINGW*|CYGWIN*) ;;
+	MINGW*) ;;
 	*)	if [ `find "$PGDATA" -type f ! -perm 640 | wc -l` -ne 0 ]; then
 			echo "files in PGDATA with permission != 640";
 			exit 1;
@@ -249,7 +244,7 @@ case $testhost in
 esac
 
 case $testhost in
-	MINGW*|CYGWIN*) ;;
+	MINGW*) ;;
 	*)	if [ `find "$PGDATA" -type d ! -perm 750 | wc -l` -ne 0 ]; then
 			echo "directories in PGDATA with permission != 750";
 			exit 1;
@@ -257,6 +252,14 @@ case $testhost in
 esac
 
 pg_ctl start -l "$logdir/postmaster2.log" -o "$POSTMASTER_OPTS" -w
+
+# In the commands below we inhibit msys2 from converting the "/c" switch
+# in "cmd /c" to a file system path.
+
+case $testhost in
+	MINGW*)	MSYS2_ARG_CONV_EXCL=/c cmd /c analyze_new_cluster.bat ;;
+	*)		sh ./analyze_new_cluster.sh ;;
+esac
 
 pg_dumpall $extra_dump_options --no-sync \
 	-f "$temp_root"/dump2.sql || pg_dumpall2_status=$?

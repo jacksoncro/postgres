@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 # Test behavior with different schema on subscriber
 use strict;
 use warnings;

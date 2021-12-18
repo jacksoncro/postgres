@@ -3,7 +3,7 @@
  * vacuumlo.c
  *	  This removes orphaned large objects from a database.
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  *
@@ -24,7 +24,6 @@
 #include "catalog/pg_class_d.h"
 #include "common/connect.h"
 #include "common/logging.h"
-#include "common/string.h"
 #include "getopt_long.h"
 #include "libpq-fe.h"
 #include "pg_getopt.h"
@@ -70,11 +69,15 @@ vacuumlo(const char *database, const struct _param *param)
 	int			i;
 	bool		new_pass;
 	bool		success = true;
-	static char *password = NULL;
+	static bool have_password = false;
+	static char password[100];
 
 	/* Note: password can be carried over from a previous call */
-	if (param->pg_prompt == TRI_YES && !password)
-		password = simple_prompt("Password: ", false);
+	if (param->pg_prompt == TRI_YES && !have_password)
+	{
+		simple_prompt("Password: ", password, sizeof(password), false);
+		have_password = true;
+	}
 
 	/*
 	 * Start the connection.  Loop until we have a password if requested by
@@ -94,7 +97,7 @@ vacuumlo(const char *database, const struct _param *param)
 		keywords[2] = "user";
 		values[2] = param->pg_user;
 		keywords[3] = "password";
-		values[3] = password;
+		values[3] = have_password ? password : NULL;
 		keywords[4] = "dbname";
 		values[4] = database;
 		keywords[5] = "fallback_application_name";
@@ -112,11 +115,12 @@ vacuumlo(const char *database, const struct _param *param)
 
 		if (PQstatus(conn) == CONNECTION_BAD &&
 			PQconnectionNeedsPassword(conn) &&
-			!password &&
+			!have_password &&
 			param->pg_prompt != TRI_NO)
 		{
 			PQfinish(conn);
-			password = simple_prompt("Password: ", false);
+			simple_prompt("Password: ", password, sizeof(password), false);
+			have_password = true;
 			new_pass = true;
 		}
 	} while (new_pass);
@@ -124,7 +128,8 @@ vacuumlo(const char *database, const struct _param *param)
 	/* check to see that the backend connection was successfully made */
 	if (PQstatus(conn) == CONNECTION_BAD)
 	{
-		pg_log_error("%s", PQerrorMessage(conn));
+		pg_log_error("connection to database \"%s\" failed: %s",
+					 PQdb(conn) ? PQdb(conn) : "", PQerrorMessage(conn));
 		PQfinish(conn);
 		return -1;
 	}

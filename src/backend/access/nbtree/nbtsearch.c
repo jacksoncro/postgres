@@ -4,7 +4,7 @@
  *	  Search code for postgres btrees.
  *
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  * IDENTIFICATION
@@ -64,7 +64,7 @@ static inline void _bt_initialize_more_data(BTScanOpaque so, ScanDirection dir);
 static void
 _bt_drop_lock_and_maybe_pin(IndexScanDesc scan, BTScanPos sp)
 {
-	_bt_unlockbuf(scan->indexRelation, sp->buf);
+	LockBuffer(sp->buf, BUFFER_LOCK_UNLOCK);
 
 	if (IsMVCCSnapshot(scan->xs_snapshot) &&
 		RelationNeedsWAL(scan->indexRelation) &&
@@ -82,10 +82,9 @@ _bt_drop_lock_and_maybe_pin(IndexScanDesc scan, BTScanPos sp)
  * The passed scankey is an insertion-type scankey (see nbtree/README),
  * but it can omit the rightmost column(s) of the index.
  *
- * Return value is a stack of parent-page pointers (i.e. there is no entry for
- * the leaf level/page).  *bufP is set to the address of the leaf-page buffer,
- * which is locked and pinned.  No locks are held on the parent pages,
- * however!
+ * Return value is a stack of parent-page pointers.  *bufP is set to the
+ * address of the leaf-page buffer, which is locked and pinned.  No locks
+ * are held on the parent pages, however!
  *
  * If the snapshot parameter is not NULL, "old snapshot" checking will take
  * place during the descent through the tree.  This is not needed when
@@ -119,20 +118,21 @@ _bt_search(Relation rel, BTScanInsert key, Buffer *bufP, int access,
 		OffsetNumber offnum;
 		ItemId		itemid;
 		IndexTuple	itup;
-		BlockNumber child;
+		BlockNumber blkno;
+		BlockNumber par_blkno;
 		BTStack		new_stack;
 
 		/*
 		 * Race -- the page we just grabbed may have split since we read its
-		 * downlink in its parent page (or the metapage).  If it has, we may
-		 * need to move right to its new sibling.  Do that.
+		 * pointer in the parent (or metapage).  If it has, we may need to
+		 * move right to its new sibling.  Do that.
 		 *
 		 * In write-mode, allow _bt_moveright to finish any incomplete splits
 		 * along the way.  Strictly speaking, we'd only need to finish an
 		 * incomplete split on the leaf page we're about to insert to, not on
-		 * any of the upper levels (internal pages with incomplete splits are
-		 * also taken care of in _bt_getstackbuf).  But this is a good
-		 * opportunity to finish splits of internal pages too.
+		 * any of the upper levels (they are taken care of in _bt_getstackbuf,
+		 * if the leaf page is split and we insert to the parent page).  But
+		 * this is a good opportunity to finish splits of internal pages too.
 		 */
 		*bufP = _bt_moveright(rel, key, *bufP, (access == BT_WRITE), stack_in,
 							  page_access, snapshot);
@@ -144,23 +144,25 @@ _bt_search(Relation rel, BTScanInsert key, Buffer *bufP, int access,
 			break;
 
 		/*
-		 * Find the appropriate pivot tuple on this page.  Its downlink points
-		 * to the child page that we're about to descend to.
+		 * Find the appropriate item on the internal page, and get the child
+		 * page that it points to.
 		 */
 		offnum = _bt_binsrch(rel, key, *bufP);
 		itemid = PageGetItemId(page, offnum);
 		itup = (IndexTuple) PageGetItem(page, itemid);
 		Assert(BTreeTupleIsPivot(itup) || !key->heapkeyspace);
-		child = BTreeTupleGetDownLink(itup);
+		blkno = BTreeTupleGetDownLink(itup);
+		par_blkno = BufferGetBlockNumber(*bufP);
 
 		/*
-		 * We need to save the location of the pivot tuple we chose in a new
-		 * stack entry for this page/level.  If caller ends up splitting a
-		 * page one level down, it usually ends up inserting a new pivot
-		 * tuple/downlink immediately after the location recorded here.
+		 * We need to save the location of the pivot tuple we chose in the
+		 * parent page on a stack.  If we need to split a page, we'll use the
+		 * stack to work back up to its parent page.  If caller ends up
+		 * splitting a page one level down, it usually ends up inserting a new
+		 * pivot tuple/downlink immediately after the location recorded here.
 		 */
 		new_stack = (BTStack) palloc(sizeof(BTStackData));
-		new_stack->bts_blkno = BufferGetBlockNumber(*bufP);
+		new_stack->bts_blkno = par_blkno;
 		new_stack->bts_offset = offnum;
 		new_stack->bts_parent = stack_in;
 
@@ -169,11 +171,11 @@ _bt_search(Relation rel, BTScanInsert key, Buffer *bufP, int access,
 		 * we're on the level 1 and asked to lock leaf page in write mode,
 		 * then lock next page in write mode, because it must be a leaf.
 		 */
-		if (opaque->btpo_level == 1 && access == BT_WRITE)
+		if (opaque->btpo.level == 1 && access == BT_WRITE)
 			page_access = BT_WRITE;
 
-		/* drop the read lock on the page, then acquire one on its child */
-		*bufP = _bt_relandgetbuf(rel, *bufP, child, page_access);
+		/* drop the read lock on the parent page, acquire one on the child */
+		*bufP = _bt_relandgetbuf(rel, *bufP, blkno, page_access);
 
 		/* okay, all set to move down a level */
 		stack_in = new_stack;
@@ -187,13 +189,15 @@ _bt_search(Relation rel, BTScanInsert key, Buffer *bufP, int access,
 	if (access == BT_WRITE && page_access == BT_READ)
 	{
 		/* trade in our read lock for a write lock */
-		_bt_unlockbuf(rel, *bufP);
-		_bt_lockbuf(rel, *bufP, BT_WRITE);
+		LockBuffer(*bufP, BUFFER_LOCK_UNLOCK);
+		LockBuffer(*bufP, BT_WRITE);
 
 		/*
-		 * Race -- the leaf page may have split after we dropped the read lock
-		 * but before we acquired a write lock.  If it has, we may need to
-		 * move right to its new sibling.  Do that.
+		 * If the page was split between the time that we surrendered our read
+		 * lock and acquired our write lock, then this page may no longer be
+		 * the right place for the key we want to insert.  In this case, we
+		 * need to move right in the tree.  See Lehman and Yao for an
+		 * excruciatingly precise description.
 		 */
 		*bufP = _bt_moveright(rel, key, *bufP, true, stack_in, BT_WRITE,
 							  snapshot);
@@ -288,8 +292,8 @@ _bt_moveright(Relation rel,
 			/* upgrade our lock if necessary */
 			if (access == BT_READ)
 			{
-				_bt_unlockbuf(rel, buf);
-				_bt_lockbuf(rel, buf, BT_WRITE);
+				LockBuffer(buf, BUFFER_LOCK_UNLOCK);
+				LockBuffer(buf, BT_WRITE);
 			}
 
 			if (P_INCOMPLETE_SPLIT(opaque))
@@ -877,7 +881,7 @@ _bt_first(IndexScanDesc scan, ScanDirection dir)
 	ScanKeyData notnullkeys[INDEX_MAX_KEYS];
 	int			keysCount = 0;
 	int			i;
-	bool		status;
+	bool		status = true;
 	StrategyNumber strat_total;
 	BTScanPosItem *currItem;
 	BlockNumber blkno;
@@ -1433,7 +1437,7 @@ _bt_first(IndexScanDesc scan, ScanDirection dir)
 		 * There's no actually-matching data on this page.  Try to advance to
 		 * the next page.  Return false if there's no matching data at all.
 		 */
-		_bt_unlockbuf(scan->indexRelation, so->currPos.buf);
+		LockBuffer(so->currPos.buf, BUFFER_LOCK_UNLOCK);
 		if (!_bt_steppage(scan, dir))
 			return false;
 	}
@@ -1879,7 +1883,7 @@ _bt_steppage(IndexScanDesc scan, ScanDirection dir)
 {
 	BTScanOpaque so = (BTScanOpaque) scan->opaque;
 	BlockNumber blkno = InvalidBlockNumber;
-	bool		status;
+	bool		status = true;
 
 	Assert(BTScanPosIsValid(so->currPos));
 
@@ -1988,7 +1992,7 @@ _bt_readnextpage(IndexScanDesc scan, BlockNumber blkno, ScanDirection dir)
 	Relation	rel;
 	Page		page;
 	BTPageOpaque opaque;
-	bool		status;
+	bool		status = true;
 
 	rel = scan->indexRelation;
 
@@ -2081,7 +2085,7 @@ _bt_readnextpage(IndexScanDesc scan, BlockNumber blkno, ScanDirection dir)
 		 * deleted.
 		 */
 		if (BTScanPosIsPinned(so->currPos))
-			_bt_lockbuf(rel, so->currPos.buf, BT_READ);
+			LockBuffer(so->currPos.buf, BT_READ);
 		else
 			so->currPos.buf = _bt_getbuf(rel, so->currPos.currPage, BT_READ);
 
@@ -2358,9 +2362,9 @@ _bt_get_endpoint(Relation rel, uint32 level, bool rightmost,
 		}
 
 		/* Done? */
-		if (opaque->btpo_level == level)
+		if (opaque->btpo.level == level)
 			break;
-		if (opaque->btpo_level < level)
+		if (opaque->btpo.level < level)
 			ereport(ERROR,
 					(errcode(ERRCODE_INDEX_CORRUPTED),
 					 errmsg_internal("btree level %u not found in index \"%s\"",
@@ -2459,7 +2463,7 @@ _bt_endpoint(IndexScanDesc scan, ScanDirection dir)
 		 * There's no actually-matching data on this page.  Try to advance to
 		 * the next page.  Return false if there's no matching data at all.
 		 */
-		_bt_unlockbuf(scan->indexRelation, so->currPos.buf);
+		LockBuffer(so->currPos.buf, BUFFER_LOCK_UNLOCK);
 		if (!_bt_steppage(scan, dir))
 			return false;
 	}

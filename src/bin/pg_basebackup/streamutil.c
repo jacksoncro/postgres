@@ -5,7 +5,7 @@
  *
  * Author: Magnus Hagander <magnus@hagander.net>
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  *
  * IDENTIFICATION
  *		  src/bin/pg_basebackup/streamutil.c
@@ -22,7 +22,6 @@
 #include "common/fe_memutils.h"
 #include "common/file_perm.h"
 #include "common/logging.h"
-#include "common/string.h"
 #include "datatype/timestamp.h"
 #include "port/pg_bswap.h"
 #include "pqexpbuffer.h"
@@ -50,7 +49,8 @@ char	   *dbuser = NULL;
 char	   *dbport = NULL;
 char	   *dbname = NULL;
 int			dbgetpassword = 0;	/* 0=auto, -1=never, 1=always */
-static char *password = NULL;
+static bool have_password = false;
+static char password[100];
 PGconn	   *conn = NULL;
 
 /*
@@ -150,21 +150,20 @@ GetConnection(void)
 	}
 
 	/* If -W was given, force prompt for password, but only the first time */
-	need_password = (dbgetpassword == 1 && !password);
+	need_password = (dbgetpassword == 1 && !have_password);
 
 	do
 	{
 		/* Get a new password if appropriate */
 		if (need_password)
 		{
-			if (password)
-				free(password);
-			password = simple_prompt("Password: ", false);
+			simple_prompt("Password: ", password, sizeof(password), false);
+			have_password = true;
 			need_password = false;
 		}
 
 		/* Use (or reuse, on a subsequent connection) password if we have it */
-		if (password)
+		if (have_password)
 		{
 			keywords[i] = "password";
 			values[i] = password;

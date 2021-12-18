@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 # Test collations, in particular nondeterministic ones
 # (only works with ICU)
 use strict;

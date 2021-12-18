@@ -558,7 +558,6 @@ select jsonb_pretty(explain_analyze_inc_sort_nodes_without_memory('select * from
          "Node Type": "Incremental Sort",       +
          "Actual Rows": 55,                     +
          "Actual Loops": 1,                     +
-         "Async Capable": false,                +
          "Presorted Key": [                     +
              "t.a"                              +
          ],                                     +
@@ -761,7 +760,6 @@ select jsonb_pretty(explain_analyze_inc_sort_nodes_without_memory('select * from
          "Node Type": "Incremental Sort",       +
          "Actual Rows": 70,                     +
          "Actual Loops": 1,                     +
-         "Async Capable": false,                +
          "Presorted Key": [                     +
              "t.a"                              +
          ],                                     +

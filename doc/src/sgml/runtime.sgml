@@ -629,8 +629,9 @@ DETAIL:  Failed system call was semget(5440126, 17, 03600).
 
     <para>
 <screen>
-psql: error: connection to server at "server.joe.com" (123.123.123.123), port 5432 failed: Connection refused
-        Is the server running on that host and accepting TCP/IP connections?
+psql: could not connect to server: Connection refused
+        Is the server running on host "server.joe.com" and accepting
+        TCP/IP connections on port 5432?
 </screen>
      This is the generic <quote>I couldn't find a server to talk
      to</quote> failure. It looks like the above when TCP/IP
@@ -639,22 +640,19 @@ psql: error: connection to server at "server.joe.com" (123.123.123.123), port 54
     </para>
 
     <para>
-     Alternatively, you might get this when attempting Unix-domain socket
+     Alternatively, you'll get this when attempting Unix-domain socket
      communication to a local server:
 <screen>
-psql: error: connection to server on socket "/tmp/.s.PGSQL.5432" failed: No such file or directory
-        Is the server running locally and accepting connections on that socket?
+psql: could not connect to server: No such file or directory
+        Is the server running locally and accepting
+        connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
 </screen>
-     If the server is indeed running, check that the client's idea of the
-     socket path (here <literal>/tmp</literal>) agrees with the server's
-     <xref linkend="guc-unix-socket-directories"/> setting.
     </para>
 
     <para>
-     A connection failure message always shows the server address or socket
-     path name, which is useful in verifying that the client is trying to
+     The last line is useful in verifying that the client is trying to
      connect to the right place. If there is in fact no server
-     listening there, the kernel error message will typically be either
+     running there, the kernel error message will typically be either
      <computeroutput>Connection refused</computeroutput> or
      <computeroutput>No such file or directory</computeroutput>, as
      illustrated. (It is important to realize that
@@ -665,7 +663,7 @@ psql: error: connection to server on socket "/tmp/.s.PGSQL.5432" failed: No such
      linkend="client-authentication-problems"/>.) Other error messages
      such as <computeroutput>Connection timed out</computeroutput> might
      indicate more fundamental problems, like lack of network
-     connectivity, or a firewall blocking the connection.
+     connectivity.
     </para>
    </sect2>
   </sect1>
@@ -1339,7 +1337,7 @@ default:\
     optimal for <productname>PostgreSQL</productname>. Because of the
     way that the kernel implements memory overcommit, the kernel might
     terminate the <productname>PostgreSQL</productname> postmaster (the
-    supervisor server process) if the memory demands of either
+    master server process) if the memory demands of either
     <productname>PostgreSQL</productname> or another process cause the
     system to run out of virtual memory.
    </para>
@@ -1440,14 +1438,13 @@ export PG_OOM_ADJUST_VALUE=0
     using large values of <xref linkend="guc-shared-buffers"/>.  To use this
     feature in <productname>PostgreSQL</productname> you need a kernel
     with <varname>CONFIG_HUGETLBFS=y</varname> and
-    <varname>CONFIG_HUGETLB_PAGE=y</varname>. You will also have to configure
-    the operating system to provide enough huge pages of the desired size.
-    To estimate the number of huge pages needed, start
-    <productname>PostgreSQL</productname> without huge pages enabled and check
-    the postmaster's anonymous shared memory segment size, as well as the
-    system's default and supported huge page sizes, using the
-    <filename>/proc</filename> and <filename>/sys</filename> file systems.
-    This might look like:
+    <varname>CONFIG_HUGETLB_PAGE=y</varname>. You will also have to adjust
+    the kernel setting <varname>vm.nr_hugepages</varname>. To estimate the
+    number of huge pages needed, start <productname>PostgreSQL</productname>
+    without huge pages enabled and check the
+    postmaster's anonymous shared memory segment size, as well as the system's
+    huge page size, using the <filename>/proc</filename> file system.  This might
+    look like:
 <programlisting>
 $ <userinput>head -1 $PGDATA/postmaster.pid</userinput>
 4170
@@ -1455,40 +1452,27 @@ $ <userinput>pmap 4170 | awk '/rw-s/ &amp;&amp; /zero/ {print $2}'</userinput>
 6490428K
 $ <userinput>grep ^Hugepagesize /proc/meminfo</userinput>
 Hugepagesize:       2048 kB
-$ <userinput>ls /sys/kernel/mm/hugepages</userinput>
-hugepages-1048576kB  hugepages-2048kB
 </programlisting>
-
-     In this example the default is 2MB, but you can also explicitly request
-     either 2MB or 1GB with <xref linkend="guc-huge-page-size"/>.
-
-     Assuming <literal>2MB</literal> huge pages,
      <literal>6490428</literal> / <literal>2048</literal> gives approximately
      <literal>3169.154</literal>, so in this example we need at
-     least <literal>3170</literal> huge pages.  A larger setting would be
-     appropriate if other programs on the machine also need huge pages.
-     We can set this with:
+     least <literal>3170</literal> huge pages, which we can set with:
 <programlisting>
-# <userinput>sysctl -w vm.nr_hugepages=3170</userinput>
+$ <userinput>sysctl -w vm.nr_hugepages=3170</userinput>
 </programlisting>
-     Don't forget to add this setting to <filename>/etc/sysctl.conf</filename>
-     so that it is reapplied after reboots.  For non-default huge page sizes,
-     we can instead use:
-<programlisting>
-# <userinput>echo 3170 > /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages</userinput>
-</programlisting>
-    It is also possible to provide these settings at boot time using
-    kernel parameters such as <literal>hugepagesz=2M hugepages=3170</literal>.
+    A larger setting would be appropriate if other programs on the machine
+    also need huge pages.  Don't forget to add this setting
+    to <filename>/etc/sysctl.conf</filename> so that it will be reapplied
+    after reboots.
    </para>
 
    <para>
     Sometimes the kernel is not able to allocate the desired number of huge
-    pages immediately due to fragmentation, so it might be necessary
-    to repeat the command or to reboot.  (Immediately after a reboot, most of
-    the machine's memory should be available to convert into huge pages.)
-    To verify the huge page allocation situation for a given size, use:
+    pages immediately, so it might be necessary to repeat the command or to
+    reboot.  (Immediately after a reboot, most of the machine's memory
+    should be available to convert into huge pages.)  To verify the huge
+    page allocation situation, use:
 <programlisting>
-$ <userinput>cat /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages</userinput>
+$ <userinput>grep Huge /proc/meminfo</userinput>
 </programlisting>
    </para>
 
@@ -1501,9 +1485,8 @@ $ <userinput>cat /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages</userinp
 
    <para>
     The default behavior for huge pages in
-    <productname>PostgreSQL</productname> is to use them when possible, with
-    the system's default huge page size, and
-    to fall back to normal pages on failure. To enforce the use of huge
+    <productname>PostgreSQL</productname> is to use them when possible and
+    to fall back to normal pages when failing. To enforce the use of huge
     pages, you can set <xref linkend="guc-huge-pages"/>
     to <literal>on</literal> in <filename>postgresql.conf</filename>.
     Note that with this setting <productname>PostgreSQL</productname> will fail to
@@ -1589,7 +1572,7 @@ $ <userinput>cat /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages</userinp
       The server will send <systemitem>SIGQUIT</systemitem> to all child
       processes and wait for them to terminate.  If any do not terminate
       within 5 seconds, they will be sent <systemitem>SIGKILL</systemitem>.
-      The supervisor server process exits as soon as all child processes have
+      The master server process exits as soon as all child processes have
       exited, without doing normal database shutdown processing.
       This will lead to recovery (by
       replaying the WAL log) upon next start-up. This is recommended
@@ -1946,9 +1929,9 @@ pg_dumpall -p 5432 | psql -d postgres -p 5433
     This is possible because logical replication supports
     replication between different major versions of
     <productname>PostgreSQL</productname>.  The standby can be on the same computer or
-    a different computer.  Once it has synced up with the primary server
+    a different computer.  Once it has synced up with the master server
     (running the older version of <productname>PostgreSQL</productname>), you can
-    switch primaries and make the standby the primary and shut down the older
+    switch masters and make the standby the master and shut down the older
     database instance.  Such a switch-over results in only several seconds
     of downtime for an upgrade.
    </para>
@@ -2258,7 +2241,7 @@ pg_dumpall -p 5432 | psql -d postgres -p 5433
    The certificates of <quote>intermediate</quote> certificate authorities
    can also be appended to the file.  Doing this avoids the necessity of
    storing intermediate certificates on clients, assuming the root and
-   intermediate certificates were created with <literal>v3_ca</literal>
+   intermediate certificates were created with <literal>v3_ca </literal>
    extensions.  (This sets the certificate's basic constraint of
    <literal>CA</literal> to <literal>true</literal>.)
    This allows easier expiration of intermediate certificates.
@@ -2340,16 +2323,16 @@ pg_dumpall -p 5432 | psql -d postgres -p 5433
    you wish to avoid storing them on clients (assuming the root and
    intermediate certificates were created with <literal>v3_ca</literal>
    extensions).  Certificate Revocation List (CRL) entries are also
-   checked if the parameter <xref linkend="guc-ssl-crl-file"/> or
-   <xref linkend="guc-ssl-crl-dir"/> is set.
+   checked if the parameter <xref linkend="guc-ssl-crl-file"/> is set.
   </para>
 
   <para>
    The <literal>clientcert</literal> authentication option is available for
    all authentication methods, but only in <filename>pg_hba.conf</filename> lines
    specified as <literal>hostssl</literal>.  When <literal>clientcert</literal> is
-   not specified, the server verifies the client certificate against its CA
-   file only if a client certificate is presented and the CA is configured.
+   not specified or is set to <literal>no-verify</literal>, the server will still
+   verify any presented client certificates against its CA file, if one is
+   configured &mdash; but it will not insist that a client certificate be presented.
   </para>
 
   <para>

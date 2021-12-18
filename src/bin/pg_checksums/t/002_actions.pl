@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 # Do basic sanity checks supported by pg_checksums using
 # an initialized cluster.
 
@@ -8,8 +5,6 @@ use strict;
 use warnings;
 use PostgresNode;
 use TestLib;
-
-use Fcntl qw(:seek);
 use Test::More tests => 63;
 
 
@@ -26,7 +21,7 @@ sub check_relation_corruption
 
 	$node->safe_psql(
 		'postgres',
-		"CREATE TABLE $table AS SELECT a FROM generate_series(1,10000) AS a;
+		"SELECT a INTO $table FROM generate_series(1,10000) AS a;
 		ALTER TABLE $table SET (autovacuum_enabled=false);");
 
 	$node->safe_psql('postgres',
@@ -55,7 +50,7 @@ sub check_relation_corruption
 
 	# Time to create some corruption
 	open my $file, '+<', "$pgdata/$file_corrupted";
-	seek($file, $pageheader_size, SEEK_SET);
+	seek($file, $pageheader_size, 0);
 	syswrite($file, "\0\0\0\0\0\0\0\0\0");
 	close $file;
 

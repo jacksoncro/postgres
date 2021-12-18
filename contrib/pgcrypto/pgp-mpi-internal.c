@@ -60,10 +60,10 @@ mp_px_rand(uint32 bits, mpz_t *res)
 	int			last_bits = bits & 7;
 	uint8	   *buf;
 
-	buf = palloc(bytes);
+	buf = px_alloc(bytes);
 	if (!pg_strong_random(buf, bytes))
 	{
-		pfree(buf);
+		px_free(buf);
 		return PXE_NO_RANDOM;
 	}
 
@@ -78,7 +78,7 @@ mp_px_rand(uint32 bits, mpz_t *res)
 
 	mp_int_read_unsigned(res, buf, bytes);
 
-	pfree(buf);
+	px_free(buf);
 
 	return 0;
 }

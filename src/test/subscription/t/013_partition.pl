@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 # Test logical replication with partitioned tables
 use strict;
 use warnings;
@@ -683,8 +680,7 @@ is($result, qq(), 'truncate of tab3_1 replicated');
 # check that the map to convert tuples from leaf partition to the root
 # table is correctly rebuilt when a new column is added
 $node_publisher->safe_psql('postgres',
-	"ALTER TABLE tab2 DROP b, ADD COLUMN c text DEFAULT 'pub_tab2', ADD b text"
-);
+	"ALTER TABLE tab2 DROP b, ADD COLUMN c text DEFAULT 'pub_tab2', ADD b text");
 $node_publisher->safe_psql('postgres',
 	"INSERT INTO tab2 (a, b) VALUES (1, 'xxx'), (3, 'yyy'), (5, 'zzz')");
 $node_publisher->safe_psql('postgres',

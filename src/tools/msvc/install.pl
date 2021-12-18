@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 #
 # Script that provides 'make install' functionality for msvc builds
 #

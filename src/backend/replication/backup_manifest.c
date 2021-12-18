@@ -3,7 +3,7 @@
  * backup_manifest.c
  *	  code for generating and sending a backup manifest
  *
- * Portions Copyright (c) 2010-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 2010-2020, PostgreSQL Global Development Group
  *
  * IDENTIFICATION
  *	  src/backend/replication/backup_manifest.c
@@ -65,9 +65,7 @@ InitializeBackupManifest(backup_manifest_info *manifest,
 	else
 	{
 		manifest->buffile = BufFileCreateTemp(false);
-		manifest->manifest_ctx = pg_cryptohash_create(PG_SHA256);
-		if (pg_cryptohash_init(manifest->manifest_ctx) < 0)
-			elog(ERROR, "failed to initialize checksum of backup manifest");
+		pg_sha256_init(&manifest->manifest_ctx);
 	}
 
 	manifest->manifest_size = UINT64CONST(0);
@@ -79,16 +77,6 @@ InitializeBackupManifest(backup_manifest_info *manifest,
 		AppendToManifest(manifest,
 						 "{ \"PostgreSQL-Backup-Manifest-Version\": 1,\n"
 						 "\"Files\": [");
-}
-
-/*
- * Free resources assigned to a backup manifest constructed.
- */
-void
-FreeBackupManifest(backup_manifest_info *manifest)
-{
-	pg_cryptohash_free(manifest->manifest_ctx);
-	manifest->manifest_ctx = NULL;
 }
 
 /*
@@ -129,7 +117,7 @@ AddFileToBackupManifest(backup_manifest_info *manifest, const char *spcoid,
 	initStringInfo(&buf);
 	if (manifest->first_file)
 	{
-		appendStringInfoChar(&buf, '\n');
+		appendStringInfoString(&buf, "\n");
 		manifest->first_file = false;
 	}
 	else
@@ -169,7 +157,7 @@ AddFileToBackupManifest(backup_manifest_info *manifest, const char *spcoid,
 	enlargeStringInfo(&buf, 128);
 	buf.len += pg_strftime(&buf.data[buf.len], 128, "%Y-%m-%d %H:%M:%S %Z",
 						   pg_gmtime(&mtime));
-	appendStringInfoChar(&buf, '"');
+	appendStringInfoString(&buf, "\"");
 
 	/* Add checksum information. */
 	if (checksum_ctx->type != CHECKSUM_TYPE_NONE)
@@ -178,9 +166,6 @@ AddFileToBackupManifest(backup_manifest_info *manifest, const char *spcoid,
 		int			checksumlen;
 
 		checksumlen = pg_checksum_final(checksum_ctx, checksumbuf);
-		if (checksumlen < 0)
-			elog(ERROR, "could not finalize checksum of file \"%s\"",
-				 pathname);
 
 		appendStringInfo(&buf,
 						 ", \"Checksum-Algorithm\": \"%s\", \"Checksum\": \"",
@@ -188,7 +173,7 @@ AddFileToBackupManifest(backup_manifest_info *manifest, const char *spcoid,
 		enlargeStringInfo(&buf, 2 * checksumlen);
 		buf.len += hex_encode((char *) checksumbuf, checksumlen,
 							  &buf.data[buf.len]);
-		appendStringInfoChar(&buf, '"');
+		appendStringInfoString(&buf, "\"");
 	}
 
 	/* Close out the object. */
@@ -280,8 +265,8 @@ AddWALInfoToBackupManifest(backup_manifest_info *manifest, XLogRecPtr startptr,
 						 "%s{ \"Timeline\": %u, \"Start-LSN\": \"%X/%X\", \"End-LSN\": \"%X/%X\" }",
 						 first_wal_range ? "" : ",\n",
 						 entry->tli,
-						 LSN_FORMAT_ARGS(tl_beginptr),
-						 LSN_FORMAT_ARGS(endptr));
+						 (uint32) (tl_beginptr >> 32), (uint32) tl_beginptr,
+						 (uint32) (endptr >> 32), (uint32) endptr);
 
 		if (starttli == entry->tli)
 		{
@@ -332,14 +317,10 @@ SendBackupManifest(backup_manifest_info *manifest)
 	 * twice.
 	 */
 	manifest->still_checksumming = false;
-	if (pg_cryptohash_final(manifest->manifest_ctx, checksumbuf,
-							sizeof(checksumbuf)) < 0)
-		elog(ERROR, "failed to finalize checksum of backup manifest");
+	pg_sha256_final(&manifest->manifest_ctx, checksumbuf);
 	AppendStringToManifest(manifest, "\"Manifest-Checksum\": \"");
-
 	hex_encode((char *) checksumbuf, sizeof checksumbuf, checksumstringbuf);
 	checksumstringbuf[PG_SHA256_DIGEST_STRING_LENGTH - 1] = '\0';
-
 	AppendStringToManifest(manifest, checksumstringbuf);
 	AppendStringToManifest(manifest, "\"}\n");
 
@@ -399,10 +380,7 @@ AppendStringToManifest(backup_manifest_info *manifest, char *s)
 
 	Assert(manifest != NULL);
 	if (manifest->still_checksumming)
-	{
-		if (pg_cryptohash_update(manifest->manifest_ctx, (uint8 *) s, len) < 0)
-			elog(ERROR, "failed to update checksum of backup manifest");
-	}
+		pg_sha256_update(&manifest->manifest_ctx, (uint8 *) s, len);
 	BufFileWrite(manifest->buffile, s, len);
 	manifest->manifest_size += len;
 }

@@ -12,7 +12,6 @@
 #include "catalog/pg_class_d.h"
 #include "common/connect.h"
 #include "common/logging.h"
-#include "common/string.h"
 #include "getopt_long.h"
 #include "libpq-fe.h"
 #include "pg_getopt.h"
@@ -294,7 +293,8 @@ PGconn *
 sql_conn(struct options *my_opts)
 {
 	PGconn	   *conn;
-	char	   *password = NULL;
+	bool		have_password = false;
+	char		password[100];
 	bool		new_pass;
 	PGresult   *res;
 
@@ -316,7 +316,7 @@ sql_conn(struct options *my_opts)
 		keywords[2] = "user";
 		values[2] = my_opts->username;
 		keywords[3] = "password";
-		values[3] = password;
+		values[3] = have_password ? password : NULL;
 		keywords[4] = "dbname";
 		values[4] = my_opts->dbname;
 		keywords[5] = "fallback_application_name";
@@ -336,10 +336,11 @@ sql_conn(struct options *my_opts)
 
 		if (PQstatus(conn) == CONNECTION_BAD &&
 			PQconnectionNeedsPassword(conn) &&
-			!password)
+			!have_password)
 		{
 			PQfinish(conn);
-			password = simple_prompt("Password: ", false);
+			simple_prompt("Password: ", password, sizeof(password), false);
+			have_password = true;
 			new_pass = true;
 		}
 	} while (new_pass);
@@ -347,7 +348,8 @@ sql_conn(struct options *my_opts)
 	/* check to see that the backend connection was successfully made */
 	if (PQstatus(conn) == CONNECTION_BAD)
 	{
-		pg_log_error("%s", PQerrorMessage(conn));
+		pg_log_error("could not connect to database \"%s\": %s",
+					 PQdb(conn) ? PQdb(conn) : "", PQerrorMessage(conn));
 		PQfinish(conn);
 		exit(1);
 	}

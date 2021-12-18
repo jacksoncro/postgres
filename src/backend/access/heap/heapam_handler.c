@@ -3,7 +3,7 @@
  * heapam_handler.c
  *	  heap table access method code
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  *
@@ -24,7 +24,6 @@
 #include "access/heaptoast.h"
 #include "access/multixact.h"
 #include "access/rewriteheap.h"
-#include "access/syncscan.h"
 #include "access/tableam.h"
 #include "access/tsmapi.h"
 #include "access/xact.h"
@@ -369,10 +368,9 @@ tuple_lock_retry:
 	if (result == TM_Updated &&
 		(flags & TUPLE_LOCK_FLAG_FIND_LAST_VERSION))
 	{
+		ReleaseBuffer(buffer);
 		/* Should not encounter speculative tuple on recheck */
 		Assert(!HeapTupleHeaderIsSpeculative(tuple->t_data));
-
-		ReleaseBuffer(buffer);
 
 		if (!ItemPointerEquals(&tmfd->ctid, &tuple->t_self))
 		{
@@ -664,7 +662,7 @@ heapam_relation_copy_data(Relation rel, const RelFileNode *newrnode)
 			 * WAL log creation if the relation is persistent, or this is the
 			 * init fork of an unlogged relation.
 			 */
-			if (RelationIsPermanent(rel) ||
+			if (rel->rd_rel->relpersistence == RELPERSISTENCE_PERMANENT ||
 				(rel->rd_rel->relpersistence == RELPERSISTENCE_UNLOGGED &&
 				 forkNum == INIT_FORKNUM))
 				log_smgrcreate(newrnode, forkNum);
@@ -1232,7 +1230,7 @@ heapam_index_build_range_scan(Relation heapRelation,
 
 	/* okay to ignore lazy VACUUMs here */
 	if (!IsBootstrapProcessingMode() && !indexInfo->ii_Concurrent)
-		OldestXmin = GetOldestNonRemovableTransactionId(heapRelation);
+		OldestXmin = GetOldestXmin(heapRelation, PROCARRAY_FLAGS_VACUUM);
 
 	if (!scan)
 	{
@@ -1273,17 +1271,6 @@ heapam_index_build_range_scan(Relation heapRelation,
 
 	hscan = (HeapScanDesc) scan;
 
-	/*
-	 * Must have called GetOldestNonRemovableTransactionId() if using
-	 * SnapshotAny.  Shouldn't have for an MVCC snapshot. (It's especially
-	 * worth checking this for parallel builds, since ambuild routines that
-	 * support parallel builds must work these details out for themselves.)
-	 */
-	Assert(snapshot == SnapshotAny || IsMVCCSnapshot(snapshot));
-	Assert(snapshot == SnapshotAny ? TransactionIdIsValid(OldestXmin) :
-		   !TransactionIdIsValid(OldestXmin));
-	Assert(snapshot == SnapshotAny || !anyvisible);
-
 	/* Publish number of blocks to scan */
 	if (progress)
 	{
@@ -1302,6 +1289,17 @@ heapam_index_build_range_scan(Relation heapRelation,
 		pgstat_progress_update_param(PROGRESS_SCAN_BLOCKS_TOTAL,
 									 nblocks);
 	}
+
+	/*
+	 * Must call GetOldestXmin() with SnapshotAny.  Should never call
+	 * GetOldestXmin() with MVCC snapshot. (It's especially worth checking
+	 * this for parallel builds, since ambuild routines that support parallel
+	 * builds must work these details out for themselves.)
+	 */
+	Assert(snapshot == SnapshotAny || IsMVCCSnapshot(snapshot));
+	Assert(snapshot == SnapshotAny ? TransactionIdIsValid(OldestXmin) :
+		   !TransactionIdIsValid(OldestXmin));
+	Assert(snapshot == SnapshotAny || !anyvisible);
 
 	/* set our scan endpoints */
 	if (!allow_sync)
@@ -1661,13 +1659,13 @@ heapam_index_build_range_scan(Relation heapRelation,
 			offnum = ItemPointerGetOffsetNumber(&heapTuple->t_self);
 
 			/*
-			 * If a HOT tuple points to a root that we don't know about,
-			 * obtain root items afresh.  If that still fails, report it as
-			 * corruption.
+			 * If a HOT tuple points to a root that we don't know
+			 * about, obtain root items afresh.  If that still fails,
+			 * report it as corruption.
 			 */
 			if (root_offsets[offnum - 1] == InvalidOffsetNumber)
 			{
-				Page		page = BufferGetPage(hscan->rs_cbuf);
+				Page	page = BufferGetPage(hscan->rs_cbuf);
 
 				LockBuffer(hscan->rs_cbuf, BUFFER_LOCK_SHARE);
 				heap_get_root_tuples(page, root_offsets);
@@ -1960,7 +1958,6 @@ heapam_index_validate_scan(Relation heapRelation,
 						 heapRelation,
 						 indexInfo->ii_Unique ?
 						 UNIQUE_CHECK_YES : UNIQUE_CHECK_NO,
-						 false,
 						 indexInfo);
 
 			state->tups_inserted += 1;
@@ -2546,9 +2543,6 @@ static const TableAmRoutine heapam_methods = {
 	.scan_rescan = heap_rescan,
 	.scan_getnextslot = heap_getnextslot,
 
-	.scan_set_tidrange = heap_set_tidrange,
-	.scan_getnextslot_tidrange = heap_getnextslot_tidrange,
-
 	.parallelscan_estimate = table_block_parallelscan_estimate,
 	.parallelscan_initialize = table_block_parallelscan_initialize,
 	.parallelscan_reinitialize = table_block_parallelscan_reinitialize,
@@ -2570,7 +2564,7 @@ static const TableAmRoutine heapam_methods = {
 	.tuple_get_latest_tid = heap_get_latest_tid,
 	.tuple_tid_valid = heapam_tuple_tid_valid,
 	.tuple_satisfies_snapshot = heapam_tuple_satisfies_snapshot,
-	.index_delete_tuples = heap_index_delete_tuples,
+	.compute_xid_horizon_for_tuples = heap_compute_xid_horizon_for_tuples,
 
 	.relation_set_new_filenode = heapam_relation_set_new_filenode,
 	.relation_nontransactional_truncate = heapam_relation_nontransactional_truncate,

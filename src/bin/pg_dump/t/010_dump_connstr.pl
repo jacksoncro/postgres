@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 use strict;
 use warnings;
 
@@ -8,7 +5,7 @@ use PostgresNode;
 use TestLib;
 use Test::More;
 
-if ($TestLib::is_msys2)
+if ($^O eq 'msys' && `uname -or` =~ /^[2-9].*Msys/)
 {
 	plan skip_all => 'High bit name tests fail on Msys2';
 }

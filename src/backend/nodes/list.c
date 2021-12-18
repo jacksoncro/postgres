@@ -6,7 +6,7 @@
  * See comments in pg_list.h.
  *
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  *
@@ -277,21 +277,6 @@ list_make4_impl(NodeTag t, ListCell datum1, ListCell datum2,
 	return list;
 }
 
-List *
-list_make5_impl(NodeTag t, ListCell datum1, ListCell datum2,
-				ListCell datum3, ListCell datum4, ListCell datum5)
-{
-	List	   *list = new_list(t, 5);
-
-	list->elements[0] = datum1;
-	list->elements[1] = datum2;
-	list->elements[2] = datum3;
-	list->elements[3] = datum4;
-	list->elements[4] = datum5;
-	check_list_invariants(list);
-	return list;
-}
-
 /*
  * Make room for a new head cell in the given (non-NIL) list.
  *
@@ -342,7 +327,7 @@ lappend(List *list, void *datum)
 	else
 		new_tail_cell(list);
 
-	llast(list) = datum;
+	lfirst(list_tail(list)) = datum;
 	check_list_invariants(list);
 	return list;
 }
@@ -360,7 +345,7 @@ lappend_int(List *list, int datum)
 	else
 		new_tail_cell(list);
 
-	llast_int(list) = datum;
+	lfirst_int(list_tail(list)) = datum;
 	check_list_invariants(list);
 	return list;
 }
@@ -378,7 +363,7 @@ lappend_oid(List *list, Oid datum)
 	else
 		new_tail_cell(list);
 
-	llast_oid(list) = datum;
+	lfirst_oid(list_tail(list)) = datum;
 	check_list_invariants(list);
 	return list;
 }
@@ -474,7 +459,7 @@ lcons(void *datum, List *list)
 	else
 		new_head_cell(list);
 
-	linitial(list) = datum;
+	lfirst(list_head(list)) = datum;
 	check_list_invariants(list);
 	return list;
 }
@@ -492,7 +477,7 @@ lcons_int(int datum, List *list)
 	else
 		new_head_cell(list);
 
-	linitial_int(list) = datum;
+	lfirst_int(list_head(list)) = datum;
 	check_list_invariants(list);
 	return list;
 }
@@ -510,7 +495,7 @@ lcons_oid(Oid datum, List *list)
 	else
 		new_head_cell(list);
 
-	linitial_oid(list) = datum;
+	lfirst_oid(list_head(list)) = datum;
 	check_list_invariants(list);
 	return list;
 }
@@ -1570,22 +1555,6 @@ list_sort(List *list, list_sort_comparator cmp)
 	len = list_length(list);
 	if (len > 1)
 		qsort(list->elements, len, sizeof(ListCell), (qsort_comparator) cmp);
-}
-
-/*
- * list_sort comparator for sorting a list into ascending int order.
- */
-int
-list_int_cmp(const ListCell *p1, const ListCell *p2)
-{
-	int			v1 = lfirst_int(p1);
-	int			v2 = lfirst_int(p2);
-
-	if (v1 < v2)
-		return -1;
-	if (v1 > v2)
-		return 1;
-	return 0;
 }
 
 /*

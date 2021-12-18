@@ -531,8 +531,6 @@ handle_insert(StringInfo s)
 	PGLogicalRelation  *rel;
 	bool				started_tx = ensure_transaction();
 
-	PushActiveSnapshot(GetTransactionSnapshot());
-
 	errcallback_arg.action_name = "INSERT";
 	xact_action_counter++;
 
@@ -543,8 +541,6 @@ handle_insert(StringInfo s)
 	if (!should_apply_changes_for_rel(rel->nspname, rel->relname))
 	{
 		pglogical_relation_close(rel, NoLock);
-		PopActiveSnapshot();
-		CommandCounterIncrement();
 		return;
 	}
 
@@ -600,9 +596,6 @@ handle_insert(StringInfo s)
 		LockRelationIdForSession(&lockid, RowExclusiveLock);
 		pglogical_relation_close(rel, NoLock);
 
-		PopActiveSnapshot();
-		CommandCounterIncrement();
-
 		apply_api.on_commit();
 
 		handle_queued_message(ht, started_tx);
@@ -622,12 +615,7 @@ handle_insert(StringInfo s)
 //			CommitTransactionCommand();
 	}
 	else
-	{
 		pglogical_relation_close(rel, NoLock);
-
-		PopActiveSnapshot();
-		CommandCounterIncrement();
-	}
 }
 
 static void
@@ -666,8 +654,6 @@ handle_update(StringInfo s)
 
 	multi_insert_finish();
 
-	PushActiveSnapshot(GetTransactionSnapshot());
-
 	rel = pglogical_read_update(s, RowExclusiveLock, &hasoldtup, &oldtup,
 								&newtup);
 	errcallback_arg.rel = rel;
@@ -676,17 +662,12 @@ handle_update(StringInfo s)
 	if (!should_apply_changes_for_rel(rel->nspname, rel->relname))
 	{
 		pglogical_relation_close(rel, NoLock);
-		PopActiveSnapshot();
-		CommandCounterIncrement();
 		return;
 	}
 
 	apply_api.do_update(rel, hasoldtup ? &oldtup : &newtup, &newtup);
 
 	pglogical_relation_close(rel, NoLock);
-
-	PopActiveSnapshot();
-	CommandCounterIncrement();
 }
 
 static void
@@ -702,8 +683,6 @@ handle_delete(StringInfo s)
 
 	multi_insert_finish();
 
-	PushActiveSnapshot(GetTransactionSnapshot());
-
 	rel = pglogical_read_delete(s, RowExclusiveLock, &oldtup);
 	errcallback_arg.rel = rel;
 
@@ -711,17 +690,12 @@ handle_delete(StringInfo s)
 	if (!should_apply_changes_for_rel(rel->nspname, rel->relname))
 	{
 		pglogical_relation_close(rel, NoLock);
-		PopActiveSnapshot();
-		CommandCounterIncrement();
 		return;
 	}
 
 	apply_api.do_delete(rel, &oldtup);
 
 	pglogical_relation_close(rel, NoLock);
-
-	PopActiveSnapshot();
-	CommandCounterIncrement();
 }
 
 inline static bool

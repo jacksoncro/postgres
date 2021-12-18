@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 # Test WAL replay when some operation has skipped WAL.
 #
 # These tests exercise code that once violated the mandate described in

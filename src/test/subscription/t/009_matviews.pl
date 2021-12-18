@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 # Test materialized views behavior
 use strict;
 use warnings;

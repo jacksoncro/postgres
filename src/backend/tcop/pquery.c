@@ -3,7 +3,7 @@
  * pquery.c
  *	  POSTGRES process query command code
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  *
@@ -1005,9 +1005,7 @@ FillPortalStore(Portal portal, bool isTopLevel)
 	SetTuplestoreDestReceiverParams(treceiver,
 									portal->holdStore,
 									portal->holdContext,
-									false,
-									NULL,
-									NULL);
+									false);
 
 	switch (portal->strategy)
 	{
@@ -1154,7 +1152,6 @@ PortalRunUtility(Portal portal, PlannedStmt *pstmt,
 
 	ProcessUtility(pstmt,
 				   portal->sourceText,
-				   (portal->cplan != NULL), /* protect tree if in plancache */
 				   isTopLevel ? PROCESS_UTILITY_TOPLEVEL : PROCESS_UTILITY_QUERY,
 				   portal->portalParams,
 				   portal->queryEnv,

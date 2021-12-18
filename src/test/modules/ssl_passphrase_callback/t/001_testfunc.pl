@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 use strict;
 use warnings;
 
@@ -10,9 +7,9 @@ use TestLib;
 use Test::More;
 use PostgresNode;
 
-unless ($ENV{with_ssl} eq 'openssl')
+unless (($ENV{with_openssl} || 'no') eq 'yes')
 {
-	plan skip_all => 'OpenSSL not supported by this build';
+	plan skip_all => 'SSL not supported by this build';
 }
 
 my $clearpass = "FooBaR1";

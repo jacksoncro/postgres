@@ -3,7 +3,7 @@
  *
  *	options functions
  *
- *	Copyright (c) 2010-2021, PostgreSQL Global Development Group
+ *	Copyright (c) 2010-2020, PostgreSQL Global Development Group
  *	src/bin/pg_upgrade/option.c
  */
 
@@ -192,7 +192,7 @@ parseCommandLine(int argc, char *argv[])
 				 * Push the user name into the environment so pre-9.1
 				 * pg_ctl/libpq uses it.
 				 */
-				setenv("PGUSER", os_info.user, 1);
+				pg_putenv("PGUSER", os_info.user);
 				break;
 
 			case 'v':
@@ -240,11 +240,11 @@ parseCommandLine(int argc, char *argv[])
 		char	   *pgoptions = psprintf("%s %s", FIX_DEFAULT_READ_ONLY,
 										 getenv("PGOPTIONS"));
 
-		setenv("PGOPTIONS", pgoptions, 1);
+		pg_putenv("PGOPTIONS", pgoptions);
 		pfree(pgoptions);
 	}
 	else
-		setenv("PGOPTIONS", FIX_DEFAULT_READ_ONLY, 1);
+		pg_putenv("PGOPTIONS", FIX_DEFAULT_READ_ONLY);
 
 	/* Get values from env if not already set */
 	check_required_directory(&old_cluster.bindir, "PGBINOLD", false,

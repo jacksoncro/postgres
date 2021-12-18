@@ -4,7 +4,7 @@
  *	Catalog routines used by pg_dump; long ago these were shared
  *	by another dump tool, but not anymore.
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  *
@@ -266,9 +266,7 @@ getSchemaData(Archive *fout, int *numTablesPtr)
 
 /* flagInhTables -
  *	 Fill in parent link fields of tables for which we need that information,
- *	 mark parents of target tables as interesting, and create
- *	 TableAttachInfo objects for partitioned tables with appropriate
- *	 dependency links.
+ *	 and mark parents of target tables as interesting
  *
  * Note that only direct ancestors of targets are marked interesting.
  * This is sufficient; we don't much care whether they inherited their
@@ -326,40 +324,6 @@ flagInhTables(Archive *fout, TableInfo *tblinfo, int numTables,
 
 			for (j = 0; j < numParents; j++)
 				parents[j]->interesting = true;
-		}
-
-		/* Create TableAttachInfo object if needed */
-		if (tblinfo[i].dobj.dump && tblinfo[i].ispartition)
-		{
-			TableAttachInfo *attachinfo;
-
-			/* With partitions there can only be one parent */
-			if (tblinfo[i].numParents != 1)
-				fatal("invalid number of parents %d for table \"%s\"",
-					  tblinfo[i].numParents,
-					  tblinfo[i].dobj.name);
-
-			attachinfo = (TableAttachInfo *) palloc(sizeof(TableAttachInfo));
-			attachinfo->dobj.objType = DO_TABLE_ATTACH;
-			attachinfo->dobj.catId.tableoid = 0;
-			attachinfo->dobj.catId.oid = 0;
-			AssignDumpId(&attachinfo->dobj);
-			attachinfo->dobj.name = pg_strdup(tblinfo[i].dobj.name);
-			attachinfo->dobj.namespace = tblinfo[i].dobj.namespace;
-			attachinfo->parentTbl = tblinfo[i].parents[0];
-			attachinfo->partitionTbl = &tblinfo[i];
-
-			/*
-			 * We must state the DO_TABLE_ATTACH object's dependencies
-			 * explicitly, since it will not match anything in pg_depend.
-			 *
-			 * Give it dependencies on both the partition table and the parent
-			 * table, so that it will not be executed till both of those
-			 * exist.  (There's no need to care what order those are created
-			 * in.)
-			 */
-			addObjectDependency(&attachinfo->dobj, tblinfo[i].dobj.dumpId);
-			addObjectDependency(&attachinfo->dobj, tblinfo[i].parents[0]->dobj.dumpId);
 		}
 	}
 }
@@ -522,7 +486,7 @@ flagInhAttrs(DumpOptions *dopt, TableInfo *tblinfo, int numTables)
 		{
 			bool		foundNotNull;	/* Attr was NOT NULL in a parent */
 			bool		foundDefault;	/* Found a default in a parent */
-			bool		foundGenerated; /* Found a generated in a parent */
+			bool		foundGenerated;	/* Found a generated in a parent */
 
 			/* no point in examining dropped columns */
 			if (tbinfo->attisdropped[j])
@@ -608,7 +572,6 @@ AssignDumpId(DumpableObject *dobj)
 	dobj->name = NULL;			/* must be set later */
 	dobj->namespace = NULL;		/* may be set later */
 	dobj->dump = DUMP_COMPONENT_ALL;	/* default assumption */
-	dobj->dump_contains = DUMP_COMPONENT_ALL;	/* default assumption */
 	dobj->ext_member = false;	/* default assumption */
 	dobj->depends_on_ext = false;	/* default assumption */
 	dobj->dependencies = NULL;
@@ -779,9 +742,6 @@ buildIndexArray(void *objArray, int numObjs, Size objSize)
 {
 	DumpableObject **ptrs;
 	int			i;
-
-	if (numObjs <= 0)
-		return NULL;
 
 	ptrs = (DumpableObject **) pg_malloc(numObjs * sizeof(DumpableObject *));
 	for (i = 0; i < numObjs; i++)

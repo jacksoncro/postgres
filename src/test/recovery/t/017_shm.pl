@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 #
 # Tests of pg_shmem.h functions
 #

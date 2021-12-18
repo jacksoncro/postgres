@@ -5,7 +5,7 @@
  * NOTE! The caller must ensure that only one method is instantiated in
  *		 any given program, and that it's only instantiated once!
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  *
  * IDENTIFICATION
  *		  src/bin/pg_basebackup/walmethods.c
@@ -470,7 +470,7 @@ typedef struct TarMethodFile
 {
 	off_t		ofs_start;		/* Where does the *header* for this file start */
 	off_t		currpos;
-	char		header[TAR_BLOCK_SIZE];
+	char		header[512];
 	char	   *pathname;
 	size_t		pad_to_size;
 } TarMethodFile;
@@ -727,8 +727,7 @@ tar_open_for_write(const char *pathname, const char *temp_suffix, size_t pad_to_
 	if (!tar_data->compression)
 	{
 		errno = 0;
-		if (write(tar_data->fd, tar_data->currentfile->header,
-				  TAR_BLOCK_SIZE) != TAR_BLOCK_SIZE)
+		if (write(tar_data->fd, tar_data->currentfile->header, 512) != 512)
 		{
 			/* If write didn't set errno, assume problem is no disk space */
 			tar_data->lasterrno = errno ? errno : ENOSPC;
@@ -741,8 +740,7 @@ tar_open_for_write(const char *pathname, const char *temp_suffix, size_t pad_to_
 	else
 	{
 		/* Write header through the zlib APIs but with no compression */
-		if (!tar_write_compressed_data(tar_data->currentfile->header,
-									   TAR_BLOCK_SIZE, true))
+		if (!tar_write_compressed_data(tar_data->currentfile->header, 512, true))
 			return NULL;
 
 		/* Re-enable compression for the rest of the file */
@@ -770,8 +768,8 @@ tar_open_for_write(const char *pathname, const char *temp_suffix, size_t pad_to_
 				return NULL;
 			/* Seek back to start */
 			if (lseek(tar_data->fd,
-					  tar_data->currentfile->ofs_start + TAR_BLOCK_SIZE,
-					  SEEK_SET) != tar_data->currentfile->ofs_start + TAR_BLOCK_SIZE)
+					  tar_data->currentfile->ofs_start + 512,
+					  SEEK_SET) != tar_data->currentfile->ofs_start + 512)
 			{
 				tar_data->lasterrno = errno;
 				return NULL;
@@ -901,14 +899,14 @@ tar_close(Walfile f, WalCloseMethod method)
 	}
 
 	/*
-	 * Get the size of the file, and pad out to a multiple of the tar block
-	 * size.
+	 * Get the size of the file, and pad the current data up to the nearest
+	 * 512 byte boundary.
 	 */
 	filesize = tar_get_current_pos(f);
-	padding = tarPaddingBytesRequired(filesize);
+	padding = ((filesize + 511) & ~511) - filesize;
 	if (padding)
 	{
-		char		zerobuf[TAR_BLOCK_SIZE];
+		char		zerobuf[512];
 
 		MemSet(zerobuf, 0, padding);
 		if (tar_write(f, zerobuf, padding) != padding)
@@ -949,7 +947,7 @@ tar_close(Walfile f, WalCloseMethod method)
 	if (!tar_data->compression)
 	{
 		errno = 0;
-		if (write(tar_data->fd, tf->header, TAR_BLOCK_SIZE) != TAR_BLOCK_SIZE)
+		if (write(tar_data->fd, tf->header, 512) != 512)
 		{
 			/* If write didn't set errno, assume problem is no disk space */
 			tar_data->lasterrno = errno ? errno : ENOSPC;
@@ -967,8 +965,7 @@ tar_close(Walfile f, WalCloseMethod method)
 		}
 
 		/* Overwrite the header, assuming the size will be the same */
-		if (!tar_write_compressed_data(tar_data->currentfile->header,
-									   TAR_BLOCK_SIZE, true))
+		if (!tar_write_compressed_data(tar_data->currentfile->header, 512, true))
 			return -1;
 
 		/* Turn compression back on */

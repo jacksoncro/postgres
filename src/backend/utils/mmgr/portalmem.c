@@ -8,7 +8,7 @@
  * doesn't actually run the executor for them.
  *
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  * IDENTIFICATION
@@ -119,7 +119,7 @@ EnablePortalManager(void)
 	 * create, initially
 	 */
 	PortalHashTable = hash_create("Portal hash", PORTALS_PER_USER,
-								  &ctl, HASH_ELEM | HASH_STRINGS);
+								  &ctl, HASH_ELEM);
 }
 
 /*
@@ -221,8 +221,8 @@ CreatePortal(const char *name, bool allowDup, bool dupSilent)
 	/* put portal in table (sets portal->name) */
 	PortalHashTableInsert(portal, name);
 
-	/* for named portals reuse portal->name copy */
-	MemoryContextSetIdentifier(portal->portalContext, portal->name[0] ? portal->name : "<unnamed>");
+	/* reuse portal->name copy */
+	MemoryContextSetIdentifier(portal->portalContext, portal->name);
 
 	return portal;
 }
@@ -311,7 +311,7 @@ PortalReleaseCachedPlan(Portal portal)
 {
 	if (portal->cplan)
 	{
-		ReleaseCachedPlan(portal->cplan, NULL);
+		ReleaseCachedPlan(portal->cplan, false);
 		portal->cplan = NULL;
 
 		/*

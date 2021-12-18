@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PostgreSQL 14\n"
+"Project-Id-Version: PostgreSQL 13\n"
 "Report-Msgid-Bugs-To: pgsql-bugs@lists.postgresql.org\n"
-"POT-Creation-Date: 2021-11-06 22:16+0000\n"
-"PO-Revision-Date: 2021-11-07 07:06+0100\n"
+"POT-Creation-Date: 2021-11-07 07:15+0000\n"
+"PO-Revision-Date: 2021-11-07 10:55+0100\n"
 "Last-Translator: Dennis Björklund <db@zigo.dhs.org>\n"
 "Language-Team: Swedish <pgsql-translators@postgresql.org>\n"
 "Language: sv\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../../../src/common/logging.c:259
+#: ../../../src/common/logging.c:236
 #, c-format
 msgid "fatal: "
 msgstr "fatalt: "
 
-#: ../../../src/common/logging.c:266
+#: ../../../src/common/logging.c:243
 #, c-format
 msgid "error: "
 msgstr "fel: "
 
-#: ../../../src/common/logging.c:273
+#: ../../../src/common/logging.c:250
 #, c-format
 msgid "warning: "
 msgstr "varning: "

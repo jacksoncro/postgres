@@ -18,7 +18,6 @@
 #endif
 
 #include "common/connect.h"
-#include "common/string.h"
 #include "dumputils.h"
 #include "fe_utils/string_utils.h"
 #include "parallel.h"
@@ -118,6 +117,7 @@ ConnectDatabase(Archive *AHX,
 	ArchiveHandle *AH = (ArchiveHandle *) AHX;
 	trivalue	prompt_password;
 	char	   *password;
+	char		passbuf[100];
 	bool		new_pass;
 
 	if (AH->connection)
@@ -129,7 +129,10 @@ ConnectDatabase(Archive *AHX,
 	password = AH->savedPassword;
 
 	if (prompt_password == TRI_YES && password == NULL)
-		password = simple_prompt("Password: ", false);
+	{
+		simple_prompt("Password: ", passbuf, sizeof(passbuf), false);
+		password = passbuf;
+	}
 
 	/*
 	 * Start the connection.  Loop until we have a password if requested by
@@ -179,7 +182,8 @@ ConnectDatabase(Archive *AHX,
 			prompt_password != TRI_NO)
 		{
 			PQfinish(AH->connection);
-			password = simple_prompt("Password: ", false);
+			simple_prompt("Password: ", passbuf, sizeof(passbuf), false);
+			password = passbuf;
 			new_pass = true;
 		}
 	} while (new_pass);
@@ -188,19 +192,18 @@ ConnectDatabase(Archive *AHX,
 	if (PQstatus(AH->connection) == CONNECTION_BAD)
 	{
 		if (isReconnect)
-			fatal("reconnection failed: %s",
+			fatal("reconnection to database \"%s\" failed: %s",
+				  PQdb(AH->connection) ? PQdb(AH->connection) : "",
 				  PQerrorMessage(AH->connection));
 		else
-			fatal("%s",
+			fatal("connection to database \"%s\" failed: %s",
+				  PQdb(AH->connection) ? PQdb(AH->connection) : "",
 				  PQerrorMessage(AH->connection));
 	}
 
 	/* Start strict; later phases may override this. */
 	PQclear(ExecuteSqlQueryForSingleRow((Archive *) AH,
 										ALWAYS_SECURE_SEARCH_PATH_SQL));
-
-	if (password && password != AH->savedPassword)
-		free(password);
 
 	/*
 	 * We want to remember connection's actual password, whether or not we got

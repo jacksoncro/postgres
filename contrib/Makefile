@@ -27,14 +27,13 @@ SUBDIRS = \
 		lo		\
 		ltree		\
 		oid2name	\
-		old_snapshot	\
 		pageinspect	\
 		passwordcheck	\
 		pg_buffercache	\
 		pg_freespacemap \
 		pg_prewarm	\
+		pg_standby	\
 		pg_stat_statements \
-		pg_surgery	\
 		pg_trgm		\
 		pgcrypto	\
 		pgrowlocks	\
@@ -49,10 +48,9 @@ SUBDIRS = \
 		tsm_system_rows \
 		tsm_system_time \
 		unaccent	\
-		pglogical	\   
 		vacuumlo
 
-ifeq ($(with_ssl),openssl)
+ifeq ($(with_openssl),yes)
 SUBDIRS += sslinfo
 else
 ALWAYS_SUBDIRS += sslinfo

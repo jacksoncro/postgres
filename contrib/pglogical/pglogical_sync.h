@@ -91,5 +91,6 @@ extern List *get_subscription_tables(Oid subid);
 #ifdef WIN32
 extern void QuoteWindowsArgv(StringInfo cmdline, const char * argv[]);
 #endif
+
 #endif /* PGLOGICAL_SYNC_H */
 

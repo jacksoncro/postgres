@@ -3,7 +3,7 @@
  * basebackup.c
  *	  code for taking a base backup and streaming it to a standby
  *
- * Portions Copyright (c) 2010-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 2010-2020, PostgreSQL Global Development Group
  *
  * IDENTIFICATION
  *	  src/backend/replication/basebackup.c
@@ -58,8 +58,6 @@ typedef struct
 	pg_checksum_type manifest_checksum_type;
 } basebackup_options;
 
-static int64 sendTablespace(char *path, char *oid, bool sizeonly,
-							struct backup_manifest_info *manifest);
 static int64 sendDir(const char *path, int basepathlen, bool sizeonly,
 					 List *tablespaces, bool sendtblspclinks,
 					 backup_manifest_info *manifest, const char *spcoid);
@@ -81,8 +79,6 @@ static int	compareWalFileNames(const ListCell *a, const ListCell *b);
 static void throttle(size_t increment);
 static void update_basebackup_progress(int64 delta);
 static bool is_checksummed_file(const char *fullpath, const char *filename);
-static int	basebackup_read_file(int fd, char *buf, size_t nbytes, off_t offset,
-								 const char *filename, bool partial_read_ok);
 
 /* Was the backup currently in-progress initiated in recovery mode? */
 static bool backup_started_in_recovery = false;
@@ -99,6 +95,18 @@ static char *statrelpath = NULL;
  * How frequently to throttle, as a fraction of the specified rate-second.
  */
 #define THROTTLING_FREQUENCY	8
+
+/*
+ * Checks whether we encountered any error in fread().  fread() doesn't give
+ * any clue what has happened, so we check with ferror().  Also, neither
+ * fread() nor ferror() set errno, so we just throw a generic error.
+ */
+#define CHECK_FREAD_ERROR(fp, filename) \
+do { \
+	if (ferror(fp)) \
+		ereport(ERROR, \
+				(errmsg("could not read from file \"%s\"", filename))); \
+} while (0)
 
 /* The actual number of bytes, transfer of which may cause sleep. */
 static uint64 throttling_sample;
@@ -161,7 +169,7 @@ static const char *const excludeDirContents[] =
 
 	/*
 	 * It is generally not useful to backup the contents of this directory
-	 * even if the intention is to restore to another primary. See backup.sgml
+	 * even if the intention is to restore to another master. See backup.sgml
 	 * for a more detailed description.
 	 */
 	"pg_replslot",
@@ -259,7 +267,7 @@ perform_base_backup(basebackup_options *opt)
 	XLogRecPtr	endptr;
 	TimeLineID	endtli;
 	StringInfo	labelfile;
-	StringInfo	tblspc_map_file;
+	StringInfo	tblspc_map_file = NULL;
 	backup_manifest_info manifest;
 	int			datadirpathlen;
 	List	   *tablespaces = NIL;
@@ -299,7 +307,8 @@ perform_base_backup(basebackup_options *opt)
 								 PROGRESS_BASEBACKUP_PHASE_WAIT_CHECKPOINT);
 	startptr = do_pg_start_backup(opt->label, opt->fastcheckpoint, &starttli,
 								  labelfile, &tablespaces,
-								  tblspc_map_file);
+								  tblspc_map_file,
+								  opt->progress, opt->sendtblspcmapfile);
 
 	/*
 	 * Once do_pg_start_backup has been called, ensure that any failure causes
@@ -328,7 +337,10 @@ perform_base_backup(basebackup_options *opt)
 
 		/* Add a node for the base directory at the end */
 		ti = palloc0(sizeof(tablespaceinfo));
-		ti->size = -1;
+		if (opt->progress)
+			ti->size = sendDir(".", 1, true, tablespaces, true, NULL, NULL);
+		else
+			ti->size = -1;
 		tablespaces = lappend(tablespaces, ti);
 
 		/*
@@ -337,19 +349,10 @@ perform_base_backup(basebackup_options *opt)
 		 */
 		if (opt->progress)
 		{
-			pgstat_progress_update_param(PROGRESS_BASEBACKUP_PHASE,
-										 PROGRESS_BASEBACKUP_PHASE_ESTIMATE_BACKUP_SIZE);
-
 			foreach(lc, tablespaces)
 			{
 				tablespaceinfo *tmp = (tablespaceinfo *) lfirst(lc);
 
-				if (tmp->path == NULL)
-					tmp->size = sendDir(".", 1, true, tablespaces, true, NULL,
-										NULL);
-				else
-					tmp->size = sendTablespace(tmp->path, tmp->oid, true,
-											   NULL);
 				backup_total += tmp->size;
 			}
 		}
@@ -414,23 +417,25 @@ perform_base_backup(basebackup_options *opt)
 			if (ti->path == NULL)
 			{
 				struct stat statbuf;
-				bool		sendtblspclinks = true;
 
 				/* In the main tar, include the backup_label first... */
 				sendFileWithContent(BACKUP_LABEL_FILE, labelfile->data,
 									&manifest);
 
-				/* Then the tablespace_map file, if required... */
-				if (opt->sendtblspcmapfile)
+				/*
+				 * Send tablespace_map file if required and then the bulk of
+				 * the files.
+				 */
+				if (tblspc_map_file && opt->sendtblspcmapfile)
 				{
 					sendFileWithContent(TABLESPACE_MAP, tblspc_map_file->data,
 										&manifest);
-					sendtblspclinks = false;
+					sendDir(".", 1, false, tablespaces, false,
+							&manifest, NULL);
 				}
-
-				/* Then the bulk of the files... */
-				sendDir(".", 1, false, tablespaces, sendtblspclinks,
-						&manifest, NULL);
+				else
+					sendDir(".", 1, false, tablespaces, true,
+							&manifest, NULL);
 
 				/* ... and pg_control after everything else. */
 				if (lstat(XLOG_CONTROL_FILE, &statbuf) != 0)
@@ -590,7 +595,7 @@ perform_base_backup(basebackup_options *opt)
 		foreach(lc, walFileList)
 		{
 			char	   *walFileName = (char *) lfirst(lc);
-			int			fd;
+			FILE	   *fp;
 			char		buf[TAR_SEND_SIZE];
 			size_t		cnt;
 			pgoff_t		len = 0;
@@ -598,8 +603,8 @@ perform_base_backup(basebackup_options *opt)
 			snprintf(pathbuf, MAXPGPATH, XLOGDIR "/%s", walFileName);
 			XLogFromFileName(walFileName, &tli, &segno, wal_segment_size);
 
-			fd = OpenTransientFile(pathbuf, O_RDONLY | PG_BINARY);
-			if (fd < 0)
+			fp = AllocateFile(pathbuf, "rb");
+			if (fp == NULL)
 			{
 				int			save_errno = errno;
 
@@ -616,7 +621,7 @@ perform_base_backup(basebackup_options *opt)
 						 errmsg("could not open file \"%s\": %m", pathbuf)));
 			}
 
-			if (fstat(fd, &statbuf) != 0)
+			if (fstat(fileno(fp), &statbuf) != 0)
 				ereport(ERROR,
 						(errcode_for_file_access(),
 						 errmsg("could not stat file \"%s\": %m",
@@ -632,10 +637,9 @@ perform_base_backup(basebackup_options *opt)
 			/* send the WAL file itself */
 			_tarWriteHeader(pathbuf, NULL, &statbuf, false);
 
-			while ((cnt = basebackup_read_file(fd, buf,
-											   Min(sizeof(buf),
-												   wal_segment_size - len),
-											   len, pathbuf, true)) > 0)
+			while ((cnt = fread(buf, 1,
+								Min(sizeof(buf), wal_segment_size - len),
+								fp)) > 0)
 			{
 				CheckXLogRemoved(segno, tli);
 				/* Send the chunk as a CopyData message */
@@ -651,6 +655,8 @@ perform_base_backup(basebackup_options *opt)
 					break;
 			}
 
+			CHECK_FREAD_ERROR(fp, pathbuf);
+
 			if (len != wal_segment_size)
 			{
 				CheckXLogRemoved(segno, tli);
@@ -659,13 +665,9 @@ perform_base_backup(basebackup_options *opt)
 						 errmsg("unexpected WAL file size \"%s\"", walFileName)));
 			}
 
-			/*
-			 * wal_segment_size is a multiple of TAR_BLOCK_SIZE, so no need
-			 * for padding.
-			 */
-			Assert(wal_segment_size % TAR_BLOCK_SIZE == 0);
+			/* wal_segment_size is a multiple of 512, so no need for padding */
 
-			CloseTransientFile(fd);
+			FreeFile(fp);
 
 			/*
 			 * Mark file as archived, otherwise files can get archived again
@@ -728,13 +730,6 @@ perform_base_backup(basebackup_options *opt)
 				(errcode(ERRCODE_DATA_CORRUPTED),
 				 errmsg("checksum verification failure during base backup")));
 	}
-
-	/*
-	 * Make sure to free the manifest before the resource owners as manifests
-	 * use cryptohash contexts that may depend on resource owners (like
-	 * OpenSSL).
-	 */
-	FreeBackupManifest(&manifest);
 
 	/* clean up the resource owner we created */
 	WalSndResourceCleanup(true);
@@ -1075,7 +1070,7 @@ SendXlogRecPtrResult(XLogRecPtr ptr, TimeLineID tli)
 	pq_sendint16(&buf, 2);		/* number of columns */
 
 	len = snprintf(str, sizeof(str),
-				   "%X/%X", LSN_FORMAT_ARGS(ptr));
+				   "%X/%X", (uint32) (ptr >> 32), (uint32) ptr);
 	pq_sendint32(&buf, len);
 	pq_sendbytes(&buf, str, len);
 
@@ -1101,9 +1096,7 @@ sendFileWithContent(const char *filename, const char *content,
 				len;
 	pg_checksum_context checksum_ctx;
 
-	if (pg_checksum_init(&checksum_ctx, manifest->checksum_type) < 0)
-		elog(ERROR, "could not initialize checksum of file \"%s\"",
-			 filename);
+	pg_checksum_init(&checksum_ctx, manifest->checksum_type);
 
 	len = strlen(content);
 
@@ -1128,21 +1121,18 @@ sendFileWithContent(const char *filename, const char *content,
 	pq_putmessage('d', content, len);
 	update_basebackup_progress(len);
 
-	/* Pad to a multiple of the tar block size. */
-	pad = tarPaddingBytesRequired(len);
+	/* Pad to 512 byte boundary, per tar format requirements */
+	pad = ((len + 511) & ~511) - len;
 	if (pad > 0)
 	{
-		char		buf[TAR_BLOCK_SIZE];
+		char		buf[512];
 
 		MemSet(buf, 0, pad);
 		pq_putmessage('d', buf, pad);
 		update_basebackup_progress(pad);
 	}
 
-	if (pg_checksum_update(&checksum_ctx, (uint8 *) content, len) < 0)
-		elog(ERROR, "could not update checksum of file \"%s\"",
-			 filename);
-
+	pg_checksum_update(&checksum_ctx, (uint8 *) content, len);
 	AddFileToBackupManifest(manifest, NULL, filename, len,
 							(pg_time_t) statbuf.st_mtime, &checksum_ctx);
 }
@@ -1154,7 +1144,7 @@ sendFileWithContent(const char *filename, const char *content,
  *
  * Only used to send auxiliary tablespaces, not PGDATA.
  */
-static int64
+int64
 sendTablespace(char *path, char *spcoid, bool sizeonly,
 			   backup_manifest_info *manifest)
 {
@@ -1504,14 +1494,9 @@ sendDir(const char *path, int basepathlen, bool sizeonly, List *tablespaces,
 
 			if (sent || sizeonly)
 			{
-				/* Add size. */
-				size += statbuf.st_size;
-
-				/* Pad to a multiple of the tar block size. */
-				size += tarPaddingBytesRequired(statbuf.st_size);
-
-				/* Size of the header for the file. */
-				size += TAR_BLOCK_SIZE;
+				/* Add size, rounded up to 512byte block */
+				size += ((statbuf.st_size + 511) & ~511);
+				size += 512;	/* Size of the header of the file */
 			}
 		}
 		else
@@ -1579,7 +1564,7 @@ sendFile(const char *readfilename, const char *tarfilename,
 		 struct stat *statbuf, bool missing_ok, Oid dboid,
 		 backup_manifest_info *manifest, const char *spcoid)
 {
-	int			fd;
+	FILE	   *fp;
 	BlockNumber blkno = 0;
 	bool		block_retry = false;
 	char		buf[TAR_SEND_SIZE];
@@ -1596,12 +1581,10 @@ sendFile(const char *readfilename, const char *tarfilename,
 	bool		verify_checksum = false;
 	pg_checksum_context checksum_ctx;
 
-	if (pg_checksum_init(&checksum_ctx, manifest->checksum_type) < 0)
-		elog(ERROR, "could not initialize checksum of file \"%s\"",
-			 readfilename);
+	pg_checksum_init(&checksum_ctx, manifest->checksum_type);
 
-	fd = OpenTransientFile(readfilename, O_RDONLY | PG_BINARY);
-	if (fd < 0)
+	fp = AllocateFile(readfilename, "rb");
+	if (fp == NULL)
 	{
 		if (errno == ENOENT && missing_ok)
 			return false;
@@ -1643,27 +1626,8 @@ sendFile(const char *readfilename, const char *tarfilename,
 		}
 	}
 
-	/*
-	 * Loop until we read the amount of data the caller told us to expect. The
-	 * file could be longer, if it was extended while we were sending it, but
-	 * for a base backup we can ignore such extended data. It will be restored
-	 * from WAL.
-	 */
-	while (len < statbuf->st_size)
+	while ((cnt = fread(buf, 1, Min(sizeof(buf), statbuf->st_size - len), fp)) > 0)
 	{
-		/* Try to read some more data. */
-		cnt = basebackup_read_file(fd, buf,
-								   Min(sizeof(buf), statbuf->st_size - len),
-								   len, readfilename, true);
-
-		/*
-		 * If we hit end-of-file, a concurrent truncation must have occurred.
-		 * That's not an error condition, because WAL replay will fix things
-		 * up.
-		 */
-		if (cnt == 0)
-			break;
-
 		/*
 		 * The checksums are verified at block level, so we iterate over the
 		 * buffer in chunks of BLCKSZ, after making sure that
@@ -1676,7 +1640,7 @@ sendFile(const char *readfilename, const char *tarfilename,
 		{
 			ereport(WARNING,
 					(errmsg("could not verify checksum in file \"%s\", block "
-							"%u: read buffer size %d and page size %d "
+							"%d: read buffer size %d and page size %d "
 							"differ",
 							readfilename, blkno, (int) cnt, BLCKSZ)));
 			verify_checksum = false;
@@ -1714,15 +1678,16 @@ sendFile(const char *readfilename, const char *tarfilename,
 						 */
 						if (block_retry == false)
 						{
-							int			reread_cnt;
-
 							/* Reread the failed block */
-							reread_cnt =
-								basebackup_read_file(fd, buf + BLCKSZ * i,
-													 BLCKSZ, len + BLCKSZ * i,
-													 readfilename,
-													 false);
-							if (reread_cnt == 0)
+							if (fseek(fp, -(cnt - BLCKSZ * i), SEEK_CUR) == -1)
+							{
+								ereport(ERROR,
+										(errcode_for_file_access(),
+										 errmsg("could not fseek in file \"%s\": %m",
+												readfilename)));
+							}
+
+							if (fread(buf + BLCKSZ * i, 1, BLCKSZ, fp) != BLCKSZ)
 							{
 								/*
 								 * If we hit end-of-file, a concurrent
@@ -1732,8 +1697,24 @@ sendFile(const char *readfilename, const char *tarfilename,
 								 * code that handles that case. (We must fix
 								 * up cnt first, though.)
 								 */
-								cnt = BLCKSZ * i;
-								break;
+								if (feof(fp))
+								{
+									cnt = BLCKSZ * i;
+									break;
+								}
+
+								ereport(ERROR,
+										(errcode_for_file_access(),
+										 errmsg("could not reread block %d of file \"%s\": %m",
+												blkno, readfilename)));
+							}
+
+							if (fseek(fp, cnt - BLCKSZ * i - BLCKSZ, SEEK_CUR) == -1)
+							{
+								ereport(ERROR,
+										(errcode_for_file_access(),
+										 errmsg("could not fseek in file \"%s\": %m",
+												readfilename)));
 							}
 
 							/* Set flag so we know a retry was attempted */
@@ -1749,7 +1730,7 @@ sendFile(const char *readfilename, const char *tarfilename,
 						if (checksum_failures <= 5)
 							ereport(WARNING,
 									(errmsg("checksum verification failed in "
-											"file \"%s\", block %u: calculated "
+											"file \"%s\", block %d: calculated "
 											"%X but expected %X",
 											readfilename, blkno, checksum,
 											phdr->pd_checksum)));
@@ -1772,12 +1753,23 @@ sendFile(const char *readfilename, const char *tarfilename,
 		update_basebackup_progress(cnt);
 
 		/* Also feed it to the checksum machinery. */
-		if (pg_checksum_update(&checksum_ctx, (uint8 *) buf, cnt) < 0)
-			elog(ERROR, "could not update checksum of base backup");
+		pg_checksum_update(&checksum_ctx, (uint8 *) buf, cnt);
 
 		len += cnt;
 		throttle(cnt);
+
+		if (feof(fp) || len >= statbuf->st_size)
+		{
+			/*
+			 * Reached end of file. The file could be longer, if it was
+			 * extended while we were sending it, but for a base backup we can
+			 * ignore such extended data. It will be restored from WAL.
+			 */
+			break;
+		}
 	}
+
+	CHECK_FREAD_ERROR(fp, readfilename);
 
 	/* If the file was truncated while we were sending it, pad it with zeros */
 	if (len < statbuf->st_size)
@@ -1787,8 +1779,7 @@ sendFile(const char *readfilename, const char *tarfilename,
 		{
 			cnt = Min(sizeof(buf), statbuf->st_size - len);
 			pq_putmessage('d', buf, cnt);
-			if (pg_checksum_update(&checksum_ctx, (uint8 *) buf, cnt) < 0)
-				elog(ERROR, "could not update checksum of base backup");
+			pg_checksum_update(&checksum_ctx, (uint8 *) buf, cnt);
 			update_basebackup_progress(cnt);
 			len += cnt;
 			throttle(cnt);
@@ -1796,11 +1787,11 @@ sendFile(const char *readfilename, const char *tarfilename,
 	}
 
 	/*
-	 * Pad to a block boundary, per tar format requirements. (This small piece
-	 * of data is probably not worth throttling, and is not checksummed
+	 * Pad to 512 byte boundary, per tar format requirements. (This small
+	 * piece of data is probably not worth throttling, and is not checksummed
 	 * because it's not actually part of the file.)
 	 */
-	pad = tarPaddingBytesRequired(len);
+	pad = ((len + 511) & ~511) - len;
 	if (pad > 0)
 	{
 		MemSet(buf, 0, pad);
@@ -1808,7 +1799,7 @@ sendFile(const char *readfilename, const char *tarfilename,
 		update_basebackup_progress(pad);
 	}
 
-	CloseTransientFile(fd);
+	FreeFile(fp);
 
 	if (checksum_failures > 1)
 	{
@@ -1834,7 +1825,7 @@ static int64
 _tarWriteHeader(const char *filename, const char *linktarget,
 				struct stat *statbuf, bool sizeonly)
 {
-	char		h[TAR_BLOCK_SIZE];
+	char		h[512];
 	enum tarError rc;
 
 	if (!sizeonly)
@@ -1993,36 +1984,4 @@ update_basebackup_progress(int64 delta)
 	}
 
 	pgstat_progress_update_multi_param(nparam, index, val);
-}
-
-/*
- * Read some data from a file, setting a wait event and reporting any error
- * encountered.
- *
- * If partial_read_ok is false, also report an error if the number of bytes
- * read is not equal to the number of bytes requested.
- *
- * Returns the number of bytes read.
- */
-static int
-basebackup_read_file(int fd, char *buf, size_t nbytes, off_t offset,
-					 const char *filename, bool partial_read_ok)
-{
-	int			rc;
-
-	pgstat_report_wait_start(WAIT_EVENT_BASEBACKUP_READ);
-	rc = pg_pread(fd, buf, nbytes, offset);
-	pgstat_report_wait_end();
-
-	if (rc < 0)
-		ereport(ERROR,
-				(errcode_for_file_access(),
-				 errmsg("could not read file \"%s\": %m", filename)));
-	if (!partial_read_ok && rc > 0 && rc != nbytes)
-		ereport(ERROR,
-				(errcode_for_file_access(),
-				 errmsg("could not read file \"%s\": read %d of %zu",
-						filename, rc, nbytes)));
-
-	return rc;
 }

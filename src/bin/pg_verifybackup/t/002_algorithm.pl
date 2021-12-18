@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 # Verify that we can take and verify backups with various checksum types.
 
 use strict;
@@ -12,13 +9,13 @@ use PostgresNode;
 use TestLib;
 use Test::More tests => 19;
 
-my $primary = get_new_node('primary');
-$primary->init(allows_streaming => 1);
-$primary->start;
+my $master = get_new_node('master');
+$master->init(allows_streaming => 1);
+$master->start;
 
 for my $algorithm (qw(bogus none crc32c sha224 sha256 sha384 sha512))
 {
-	my $backup_path = $primary->backup_dir . '/' . $algorithm;
+	my $backup_path = $master->backup_dir . '/' . $algorithm;
 	my @backup      = (
 		'pg_basebackup', '-D', $backup_path,
 		'--manifest-checksums', $algorithm, '--no-sync');
@@ -27,13 +24,13 @@ for my $algorithm (qw(bogus none crc32c sha224 sha256 sha384 sha512))
 	# A backup with a bogus algorithm should fail.
 	if ($algorithm eq 'bogus')
 	{
-		$primary->command_fails(\@backup,
+		$master->command_fails(\@backup,
 			"backup fails with algorithm \"$algorithm\"");
 		next;
 	}
 
 	# A backup with a valid algorithm should work.
-	$primary->command_ok(\@backup, "backup ok with algorithm \"$algorithm\"");
+	$master->command_ok(\@backup, "backup ok with algorithm \"$algorithm\"");
 
 	# We expect each real checksum algorithm to be mentioned on every line of
 	# the backup manifest file except the first and last; for simplicity, we
@@ -53,7 +50,7 @@ for my $algorithm (qw(bogus none crc32c sha224 sha256 sha384 sha512))
 	}
 
 	# Make sure that it verifies OK.
-	$primary->command_ok(\@verify,
+	$master->command_ok(\@verify,
 		"verify backup with algorithm \"$algorithm\"");
 
 	# Remove backup immediately to save disk space.

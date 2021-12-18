@@ -34,7 +34,7 @@
  * This code isn't concerned about the FSM at all. The caller is responsible
  * for initializing that.
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  * IDENTIFICATION
@@ -49,6 +49,7 @@
 #include "access/parallel.h"
 #include "access/relscan.h"
 #include "access/table.h"
+#include "access/tableam.h"
 #include "access/xact.h"
 #include "access/xlog.h"
 #include "access/xloginsert.h"
@@ -266,7 +267,7 @@ static void _bt_build_callback(Relation index, ItemPointer tid, Datum *values,
 							   bool *isnull, bool tupleIsAlive, void *state);
 static Page _bt_blnewpage(uint32 level);
 static BTPageState *_bt_pagestate(BTWriteState *wstate, uint32 level);
-static void _bt_slideleft(Page rightmostpage);
+static void _bt_slideleft(Page page);
 static void _bt_sortaddtup(Page page, Size itemsize,
 						   IndexTuple itup, OffsetNumber itup_off,
 						   bool newfirstdataitem);
@@ -486,17 +487,17 @@ _bt_spools_heapscan(Relation heap, Relation index, BTBuildState *buildstate,
 	 * values set by table_index_build_scan
 	 */
 	{
-		const int	progress_index[] = {
+		const int	index[] = {
 			PROGRESS_CREATEIDX_TUPLES_TOTAL,
 			PROGRESS_SCAN_BLOCKS_TOTAL,
 			PROGRESS_SCAN_BLOCKS_DONE
 		};
-		const int64 progress_vals[] = {
+		const int64 val[] = {
 			buildstate->indtuples,
 			0, 0
 		};
 
-		pgstat_progress_update_multi_param(3, progress_index, progress_vals);
+		pgstat_progress_update_multi_param(3, index, val);
 	}
 
 	/* okay, all heap tuples are spooled */
@@ -621,7 +622,7 @@ _bt_blnewpage(uint32 level)
 	/* Initialize BT opaque state */
 	opaque = (BTPageOpaque) PageGetSpecialPointer(page);
 	opaque->btpo_prev = opaque->btpo_next = P_NONE;
-	opaque->btpo_level = level;
+	opaque->btpo.level = level;
 	opaque->btpo_flags = (level > 0) ? 0 : BTP_LEAF;
 	opaque->btpo_cycleid = 0;
 
@@ -721,32 +722,31 @@ _bt_pagestate(BTWriteState *wstate, uint32 level)
 }
 
 /*
- * Slide the array of ItemIds from the page back one slot (from P_FIRSTKEY to
- * P_HIKEY, overwriting P_HIKEY).
- *
- * _bt_blnewpage() makes the P_HIKEY line pointer appear allocated, but the
- * rightmost page on its level is not supposed to get a high key.  Now that
- * it's clear that this page is a rightmost page, remove the unneeded empty
- * P_HIKEY line pointer space.
+ * slide an array of ItemIds back one slot (from P_FIRSTKEY to
+ * P_HIKEY, overwriting P_HIKEY).  we need to do this when we discover
+ * that we have built an ItemId array in what has turned out to be a
+ * P_RIGHTMOST page.
  */
 static void
-_bt_slideleft(Page rightmostpage)
+_bt_slideleft(Page page)
 {
 	OffsetNumber off;
 	OffsetNumber maxoff;
 	ItemId		previi;
+	ItemId		thisii;
 
-	maxoff = PageGetMaxOffsetNumber(rightmostpage);
-	Assert(maxoff >= P_FIRSTKEY);
-	previi = PageGetItemId(rightmostpage, P_HIKEY);
-	for (off = P_FIRSTKEY; off <= maxoff; off = OffsetNumberNext(off))
+	if (!PageIsEmpty(page))
 	{
-		ItemId		thisii = PageGetItemId(rightmostpage, off);
-
-		*previi = *thisii;
-		previi = thisii;
+		maxoff = PageGetMaxOffsetNumber(page);
+		previi = PageGetItemId(page, P_HIKEY);
+		for (off = P_FIRSTKEY; off <= maxoff; off = OffsetNumberNext(off))
+		{
+			thisii = PageGetItemId(page, off);
+			*previi = *thisii;
+			previi = thisii;
+		}
+		((PageHeader) page)->pd_lower -= sizeof(ItemIdData);
 	}
-	((PageHeader) rightmostpage)->pd_lower -= sizeof(ItemIdData);
 }
 
 /*
@@ -1813,13 +1813,6 @@ _bt_parallel_build_main(dsm_segment *seg, shm_toc *toc)
 	if (log_btree_build_stats)
 		ResetUsage();
 #endif							/* BTREE_BUILD_STATS */
-
-	/*
-	 * The only possible status flag that can be set to the parallel worker is
-	 * PROC_IN_SAFE_IC.
-	 */
-	Assert((MyProc->statusFlags == 0) ||
-		   (MyProc->statusFlags == PROC_IN_SAFE_IC));
 
 	/* Set debug_query_string for individual workers first */
 	sharedquery = shm_toc_lookup(toc, PARALLEL_KEY_QUERY_TEXT, true);

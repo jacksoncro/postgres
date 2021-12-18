@@ -11,8 +11,12 @@
  * Hence these functions are now called at the start of execution of their
  * respective utility commands.
  *
+ * NOTE: in general we must avoid scribbling on the passed-in raw parse
+ * tree, since it might be in a plan cache.  The simplest solution is
+ * a quick copyObject() call before manipulating the query tree.
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ *
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  *	src/backend/parser/parse_utilcmd.c
@@ -27,7 +31,6 @@
 #include "access/relation.h"
 #include "access/reloptions.h"
 #include "access/table.h"
-#include "access/toast_compression.h"
 #include "catalog/dependency.h"
 #include "catalog/heap.h"
 #include "catalog/index.h"
@@ -172,6 +175,13 @@ transformCreateStmt(CreateStmt *stmt, const char *queryString)
 	Oid			namespaceid;
 	Oid			existing_relid;
 	ParseCallbackState pcbstate;
+	bool		is_foreign_table = IsA(stmt, CreateForeignTableStmt);
+
+	/*
+	 * We must not scribble on the passed-in CreateStmt, so copy it.  (This is
+	 * overkill, but easy.)
+	 */
+	stmt = copyObject(stmt);
 
 	/* Set up pstate */
 	pstate = make_parsestate(NULL);
@@ -322,11 +332,8 @@ transformCreateStmt(CreateStmt *stmt, const char *queryString)
 
 	/*
 	 * Postprocess check constraints.
-	 *
-	 * For regular tables all constraints can be marked valid immediately,
-	 * because the table is new therefore empty. Not so for foreign tables.
 	 */
-	transformCheckConstraints(&cxt, !cxt.isforeign);
+	transformCheckConstraints(&cxt, !is_foreign_table ? true : false);
 
 	/*
 	 * Postprocess extended statistics.
@@ -369,7 +376,6 @@ generateSerialExtraStmts(CreateStmtContext *cxt, ColumnDef *column,
 	CreateSeqStmt *seqstmt;
 	AlterSeqStmt *altseqstmt;
 	List	   *attnamelist;
-	int			nameEl_idx = -1;
 
 	/*
 	 * Determine namespace and name to use for the sequence.
@@ -396,7 +402,6 @@ generateSerialExtraStmts(CreateStmtContext *cxt, ColumnDef *column,
 						(errcode(ERRCODE_SYNTAX_ERROR),
 						 errmsg("conflicting or redundant options")));
 			nameEl = defel;
-			nameEl_idx = foreach_current_index(option);
 		}
 	}
 
@@ -416,7 +421,7 @@ generateSerialExtraStmts(CreateStmtContext *cxt, ColumnDef *column,
 		}
 		sname = rv->relname;
 		/* Remove the SEQUENCE NAME item from seqoptions */
-		seqoptions = list_delete_nth_cell(seqoptions, nameEl_idx);
+		seqoptions = list_delete_ptr(seqoptions, nameEl);
 	}
 	else
 	{
@@ -436,9 +441,9 @@ generateSerialExtraStmts(CreateStmtContext *cxt, ColumnDef *column,
 	}
 
 	ereport(DEBUG1,
-			(errmsg_internal("%s will create implicit sequence \"%s\" for serial column \"%s.%s\"",
-							 cxt->stmtType, sname,
-							 cxt->relation->relname, column->colname)));
+			(errmsg("%s will create implicit sequence \"%s\" for serial column \"%s.%s\"",
+					cxt->stmtType, sname,
+					cxt->relation->relname, column->colname)));
 
 	/*
 	 * Build a CREATE SEQUENCE command to create the sequence object, and add
@@ -613,7 +618,6 @@ transformColumnDefinition(CreateStmtContext *cxt, ColumnDef *column)
 		castnode->location = -1;
 		funccallnode = makeFuncCall(SystemFuncName("nextval"),
 									list_make1(castnode),
-									COERCE_EXPLICIT_CALL,
 									-1);
 		constraint = makeNode(Constraint);
 		constraint->contype = CONSTR_DEFAULT;
@@ -852,7 +856,7 @@ transformColumnDefinition(CreateStmtContext *cxt, ColumnDef *column)
 		stmt = makeNode(AlterTableStmt);
 		stmt->relation = cxt->relation;
 		stmt->cmds = NIL;
-		stmt->objtype = OBJECT_FOREIGN_TABLE;
+		stmt->relkind = OBJECT_FOREIGN_TABLE;
 		stmt->cmds = lappend(stmt->cmds, cmd);
 
 		cxt->alist = lappend(cxt->alist, stmt);
@@ -1085,14 +1089,6 @@ transformTableLikeClause(CreateStmtContext *cxt, TableLikeClause *table_like_cla
 		else
 			def->storage = 0;
 
-		/* Likewise, copy compression if requested */
-		if ((table_like_clause->options & CREATE_TABLE_LIKE_COMPRESSION) != 0
-			&& CompressionMethodIsValid(attribute->attcompression))
-			def->compression =
-				pstrdup(GetCompressionMethodName(attribute->attcompression));
-		else
-			def->compression = NULL;
-
 		/* Likewise, copy comment if requested */
 		if ((table_like_clause->options & CREATE_TABLE_LIKE_COMMENTS) &&
 			(comment = GetComment(attribute->attrelid,
@@ -1231,6 +1227,8 @@ expandTableLikeClause(RangeVar *heapRel, TableLikeClause *table_like_clause)
 		 (CREATE_TABLE_LIKE_DEFAULTS | CREATE_TABLE_LIKE_GENERATED)) &&
 		constr != NULL)
 	{
+		AttrDefault *attrdef = constr->defval;
+
 		for (parent_attno = 1; parent_attno <= tupleDesc->natts;
 			 parent_attno++)
 		{
@@ -1254,7 +1252,6 @@ expandTableLikeClause(RangeVar *heapRel, TableLikeClause *table_like_clause)
 				 (table_like_clause->options & CREATE_TABLE_LIKE_DEFAULTS)))
 			{
 				Node	   *this_default = NULL;
-				AttrDefault *attrdef = constr->defval;
 				AlterTableCmd *atsubcmd;
 				bool		found_whole_row;
 
@@ -1267,9 +1264,7 @@ expandTableLikeClause(RangeVar *heapRel, TableLikeClause *table_like_clause)
 						break;
 					}
 				}
-				if (this_default == NULL)
-					elog(ERROR, "default expression not found for attribute %d of relation \"%s\"",
-						 parent_attno, RelationGetRelationName(relation));
+				Assert(this_default != NULL);
 
 				atsubcmd = makeNode(AlterTableCmd);
 				atsubcmd->subtype = AT_CookedColumnDefault;
@@ -1384,7 +1379,7 @@ expandTableLikeClause(RangeVar *heapRel, TableLikeClause *table_like_clause)
 
 		atcmd->relation = copyObject(heapRel);
 		atcmd->cmds = atsubcmds;
-		atcmd->objtype = OBJECT_TABLE;
+		atcmd->relkind = OBJECT_TABLE;
 		atcmd->missing_ok = false;
 		result = lcons(atcmd, result);
 	}
@@ -1804,6 +1799,7 @@ generateClonedIndexStmt(RangeVar *heapRel, Relation source_idx,
 			char	   *attname;
 
 			attname = get_attname(indrelid, attnum, false);
+			keycoltype = get_atttype(indrelid, attnum);
 
 			iparam->name = attname;
 			iparam->expr = NULL;
@@ -1910,9 +1906,6 @@ generateClonedExtStatsStmt(RangeVar *heapRel, Oid heapRelid,
 			stat_types = lappend(stat_types, makeString("dependencies"));
 		else if (enabled[i] == STATS_EXT_MCV)
 			stat_types = lappend(stat_types, makeString("mcv"));
-		else if (enabled[i] == STATS_EXT_EXPRESSIONS)
-			/* expression stats are not exposed to users */
-			continue;
 		else
 			elog(ERROR, "unrecognized statistics kind %c", enabled[i]);
 	}
@@ -1920,47 +1913,14 @@ generateClonedExtStatsStmt(RangeVar *heapRel, Oid heapRelid,
 	/* Determine which columns the statistics are on */
 	for (i = 0; i < statsrec->stxkeys.dim1; i++)
 	{
-		StatsElem  *selem = makeNode(StatsElem);
+		ColumnRef  *cref = makeNode(ColumnRef);
 		AttrNumber	attnum = statsrec->stxkeys.values[i];
 
-		selem->name = get_attname(heapRelid, attnum, false);
-		selem->expr = NULL;
+		cref->fields = list_make1(makeString(get_attname(heapRelid,
+														 attnum, false)));
+		cref->location = -1;
 
-		def_names = lappend(def_names, selem);
-	}
-
-	/*
-	 * Now handle expressions, if there are any. The order (with respect to
-	 * regular attributes) does not really matter for extended stats, so we
-	 * simply append them after simple column references.
-	 *
-	 * XXX Some places during build/estimation treat expressions as if they
-	 * are before attributes, but for the CREATE command that's entirely
-	 * irrelevant.
-	 */
-	datum = SysCacheGetAttr(STATEXTOID, ht_stats,
-							Anum_pg_statistic_ext_stxexprs, &isnull);
-
-	if (!isnull)
-	{
-		ListCell   *lc;
-		List	   *exprs = NIL;
-		char	   *exprsString;
-
-		exprsString = TextDatumGetCString(datum);
-		exprs = (List *) stringToNode(exprsString);
-
-		foreach(lc, exprs)
-		{
-			StatsElem  *selem = makeNode(StatsElem);
-
-			selem->name = NULL;
-			selem->expr = (Node *) lfirst(lc);
-
-			def_names = lappend(def_names, selem);
-		}
-
-		pfree(exprsString);
+		def_names = lappend(def_names, cref);
 	}
 
 	/* finally, build the output node */
@@ -1970,7 +1930,6 @@ generateClonedExtStatsStmt(RangeVar *heapRel, Oid heapRelid,
 	stats->exprs = def_names;
 	stats->relations = list_make1(heapRel);
 	stats->stxcomment = NULL;
-	stats->transformed = true;	/* don't need transformStatsStmt again */
 	stats->if_not_exists = false;
 
 	/* Clean up */
@@ -2671,7 +2630,7 @@ transformIndexConstraint(Constraint *constraint, CreateStmtContext *cxt)
 
 		alterstmt->relation = copyObject(cxt->relation);
 		alterstmt->cmds = notnullcmds;
-		alterstmt->objtype = OBJECT_TABLE;
+		alterstmt->relkind = OBJECT_TABLE;
 		alterstmt->missing_ok = false;
 
 		cxt->alist = lappend(cxt->alist, alterstmt);
@@ -2773,7 +2732,7 @@ transformFKConstraints(CreateStmtContext *cxt,
 
 		alterstmt->relation = cxt->relation;
 		alterstmt->cmds = NIL;
-		alterstmt->objtype = OBJECT_TABLE;
+		alterstmt->relkind = OBJECT_TABLE;
 
 		foreach(fkclist, cxt->fkconstraints)
 		{
@@ -2813,6 +2772,12 @@ transformIndexStmt(Oid relid, IndexStmt *stmt, const char *queryString)
 	/* Nothing to do if statement already transformed. */
 	if (stmt->transformed)
 		return stmt;
+
+	/*
+	 * We must not scribble on the passed-in IndexStmt, so copy it.  (This is
+	 * overkill, but easy.)
+	 */
+	stmt = copyObject(stmt);
 
 	/* Set up pstate */
 	pstate = make_parsestate(NULL);
@@ -2890,78 +2855,6 @@ transformIndexStmt(Oid relid, IndexStmt *stmt, const char *queryString)
 	return stmt;
 }
 
-/*
- * transformStatsStmt - parse analysis for CREATE STATISTICS
- *
- * To avoid race conditions, it's important that this function relies only on
- * the passed-in relid (and not on stmt->relation) to determine the target
- * relation.
- */
-CreateStatsStmt *
-transformStatsStmt(Oid relid, CreateStatsStmt *stmt, const char *queryString)
-{
-	ParseState *pstate;
-	ParseNamespaceItem *nsitem;
-	ListCell   *l;
-	Relation	rel;
-
-	/* Nothing to do if statement already transformed. */
-	if (stmt->transformed)
-		return stmt;
-
-	/* Set up pstate */
-	pstate = make_parsestate(NULL);
-	pstate->p_sourcetext = queryString;
-
-	/*
-	 * Put the parent table into the rtable so that the expressions can refer
-	 * to its fields without qualification.  Caller is responsible for locking
-	 * relation, but we still need to open it.
-	 */
-	rel = relation_open(relid, NoLock);
-	nsitem = addRangeTableEntryForRelation(pstate, rel,
-										   AccessShareLock,
-										   NULL, false, true);
-
-	/* no to join list, yes to namespaces */
-	addNSItemToQuery(pstate, nsitem, false, true, true);
-
-	/* take care of any expressions */
-	foreach(l, stmt->exprs)
-	{
-		StatsElem  *selem = (StatsElem *) lfirst(l);
-
-		if (selem->expr)
-		{
-			/* Now do parse transformation of the expression */
-			selem->expr = transformExpr(pstate, selem->expr,
-										EXPR_KIND_STATS_EXPRESSION);
-
-			/* We have to fix its collations too */
-			assign_expr_collations(pstate, selem->expr);
-		}
-	}
-
-	/*
-	 * Check that only the base rel is mentioned.  (This should be dead code
-	 * now that add_missing_from is history.)
-	 */
-	if (list_length(pstate->p_rtable) != 1)
-		ereport(ERROR,
-				(errcode(ERRCODE_INVALID_COLUMN_REFERENCE),
-				 errmsg("statistics expressions can refer only to the table being referenced")));
-
-	free_parsestate(pstate);
-
-	/* Close relation */
-	table_close(rel, NoLock);
-
-	/* Mark statement as successfully transformed */
-	stmt->transformed = true;
-
-	return stmt;
-}
-
 
 /*
  * transformRuleStmt -
@@ -2971,6 +2864,9 @@ transformStatsStmt(Oid relid, CreateStatsStmt *stmt, const char *queryString)
  *
  * actions and whereClause are output parameters that receive the
  * transformed results.
+ *
+ * Note that we must not scribble on the passed-in RuleStmt, so we do
+ * copyObject() on the actions and WHERE clause.
  */
 void
 transformRuleStmt(RuleStmt *stmt, const char *queryString,
@@ -3045,7 +2941,7 @@ transformRuleStmt(RuleStmt *stmt, const char *queryString,
 
 	/* take care of the where clause */
 	*whereClause = transformWhereClause(pstate,
-										stmt->whereClause,
+										(Node *) copyObject(stmt->whereClause),
 										EXPR_KIND_WHERE,
 										"WHERE");
 	/* we have to fix its collations too */
@@ -3117,7 +3013,8 @@ transformRuleStmt(RuleStmt *stmt, const char *queryString,
 			addNSItemToQuery(sub_pstate, newnsitem, false, true, false);
 
 			/* Transform the rule action statement */
-			top_subqry = transformStmt(sub_pstate, action);
+			top_subqry = transformStmt(sub_pstate,
+									   (Node *) copyObject(action));
 
 			/*
 			 * We cannot support utility-statement actions (eg NOTIFY) with
@@ -3298,6 +3195,12 @@ transformAlterTableStmt(Oid relid, AlterTableStmt *stmt,
 	bool		skipValidation = true;
 	AlterTableCmd *newcmd;
 	ParseNamespaceItem *nsitem;
+
+	/*
+	 * We must not scribble on the passed-in AlterTableStmt, so copy it. (This
+	 * is overkill, but easy.)
+	 */
+	stmt = copyObject(stmt);
 
 	/* Caller is responsible for locking the relation */
 	rel = relation_open(relid, NoLock);
@@ -3616,7 +3519,7 @@ transformAlterTableStmt(Oid relid, AlterTableStmt *stmt,
 		newcmds = lappend(newcmds, newcmd);
 	}
 
-	/* Append extended statistics objects */
+	/* Append extended statistic objects */
 	transformExtendedStatistics(&cxt);
 
 	/* Close rel */
@@ -4297,7 +4200,7 @@ validateInfiniteBounds(ParseState *pstate, List *blist)
 }
 
 /*
- * Transform one entry in a partition bound spec, producing a constant.
+ * Transform one constant in a partition bound spec
  */
 static Const *
 transformPartitionBoundValue(ParseState *pstate, Node *val,
@@ -4310,17 +4213,50 @@ transformPartitionBoundValue(ParseState *pstate, Node *val,
 	value = transformExpr(pstate, val, EXPR_KIND_PARTITION_BOUND);
 
 	/*
-	 * transformExpr() should have already rejected column references,
-	 * subqueries, aggregates, window functions, and SRFs, based on the
-	 * EXPR_KIND_ of a partition bound expression.
+	 * Check that the input expression's collation is compatible with one
+	 * specified for the parent's partition key (partcollation).  Don't throw
+	 * an error if it's the default collation which we'll replace with the
+	 * parent's collation anyway.
 	 */
-	Assert(!contain_var_clause(value));
+	if (IsA(value, CollateExpr))
+	{
+		Oid			exprCollOid = exprCollation(value);
 
-	/*
-	 * Coerce to the correct type.  This might cause an explicit coercion step
-	 * to be added on top of the expression, which must be evaluated before
-	 * returning the result to the caller.
-	 */
+		/*
+		 * Check we have a collation iff it is a collatable type.  The only
+		 * expected failures here are (1) COLLATE applied to a noncollatable
+		 * type, or (2) partition bound expression had an unresolved
+		 * collation.  But we might as well code this to be a complete
+		 * consistency check.
+		 */
+		if (type_is_collatable(colType))
+		{
+			if (!OidIsValid(exprCollOid))
+				ereport(ERROR,
+						(errcode(ERRCODE_INDETERMINATE_COLLATION),
+						 errmsg("could not determine which collation to use for partition bound expression"),
+						 errhint("Use the COLLATE clause to set the collation explicitly.")));
+		}
+		else
+		{
+			if (OidIsValid(exprCollOid))
+				ereport(ERROR,
+						(errcode(ERRCODE_DATATYPE_MISMATCH),
+						 errmsg("collations are not supported by type %s",
+								format_type_be(colType))));
+		}
+
+		if (OidIsValid(exprCollOid) &&
+			exprCollOid != DEFAULT_COLLATION_OID &&
+			exprCollOid != partCollation)
+			ereport(ERROR,
+					(errcode(ERRCODE_DATATYPE_MISMATCH),
+					 errmsg("collation of partition bound value for column \"%s\" does not match partition key collation \"%s\"",
+							colName, get_collation_name(partCollation)),
+					 parser_errposition(pstate, exprLocation(value))));
+	}
+
+	/* Coerce to correct type */
 	value = coerce_to_target_type(pstate,
 								  value, exprType(value),
 								  colType,
@@ -4336,36 +4272,28 @@ transformPartitionBoundValue(ParseState *pstate, Node *val,
 						format_type_be(colType), colName),
 				 parser_errposition(pstate, exprLocation(val))));
 
-	/*
-	 * Evaluate the expression, if needed, assigning the partition key's data
-	 * type and collation to the resulting Const node.
-	 */
+	/* Simplify the expression, in case we had a coercion */
 	if (!IsA(value, Const))
 	{
 		assign_expr_collations(pstate, value);
 		value = (Node *) expression_planner((Expr *) value);
-		value = (Node *) evaluate_expr((Expr *) value, colType, colTypmod,
-									   partCollation);
-		if (!IsA(value, Const))
-			elog(ERROR, "could not evaluate partition bound expression");
-	}
-	else
-	{
-		/*
-		 * If the expression is already a Const, as is often the case, we can
-		 * skip the rather expensive steps above.  But we still have to insert
-		 * the right collation, since coerce_to_target_type doesn't handle
-		 * that.
-		 */
-		((Const *) value)->constcollid = partCollation;
 	}
 
 	/*
-	 * Attach original expression's parse location to the Const, so that
-	 * that's what will be reported for any later errors related to this
-	 * partition bound.
+	 * transformExpr() should have already rejected column references,
+	 * subqueries, aggregates, window functions, and SRFs, based on the
+	 * EXPR_KIND_ for a default expression.
 	 */
-	((Const *) value)->location = exprLocation(val);
+	Assert(!contain_var_clause(value));
+
+	/*
+	 * Evaluate the expression, assigning the partition key's collation to the
+	 * resulting Const expression.
+	 */
+	value = (Node *) evaluate_expr((Expr *) value, colType, colTypmod,
+								   partCollation);
+	if (!IsA(value, Const))
+		elog(ERROR, "could not evaluate partition bound expression");
 
 	return (Const *) value;
 }

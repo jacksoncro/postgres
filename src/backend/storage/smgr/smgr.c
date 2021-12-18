@@ -6,7 +6,7 @@
  *	  All file system operations in POSTGRES dispatch through these
  *	  routines.
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  *
@@ -17,7 +17,6 @@
  */
 #include "postgres.h"
 
-#include "access/xlog.h"
 #include "lib/ilist.h"
 #include "storage/bufmgr.h"
 #include "storage/ipc.h"
@@ -154,6 +153,7 @@ smgropen(RelFileNode rnode, BackendId backend)
 		/* First time through: initialize the hash table */
 		HASHCTL		ctl;
 
+		MemSet(&ctl, 0, sizeof(ctl));
 		ctl.keysize = sizeof(RelFileNodeBackend);
 		ctl.entrysize = sizeof(SMgrRelationData);
 		SMgrRelationHash = hash_create("smgr relation table", 400,
@@ -174,8 +174,8 @@ smgropen(RelFileNode rnode, BackendId backend)
 		/* hash_search already filled in the lookup key */
 		reln->smgr_owner = NULL;
 		reln->smgr_targblock = InvalidBlockNumber;
-		for (int i = 0; i <= MAX_FORKNUM; ++i)
-			reln->smgr_cached_nblocks[i] = InvalidBlockNumber;
+		reln->smgr_fsm_nblocks = InvalidBlockNumber;
+		reln->smgr_vm_nblocks = InvalidBlockNumber;
 		reln->smgr_which = 0;	/* we only have md.c at present */
 
 		/* implementation-specific initialization */
@@ -391,12 +391,6 @@ smgrdounlinkall(SMgrRelation *rels, int nrels, bool isRedo)
 		return;
 
 	/*
-	 * Get rid of any remaining buffers for the relations.  bufmgr will just
-	 * drop them without bothering to write the contents.
-	 */
-	DropRelFileNodesAllBuffers(rels, nrels);
-
-	/*
 	 * create an array which contains all relations to be dropped, and close
 	 * each relation's forks at the smgr level while at it
 	 */
@@ -412,6 +406,12 @@ smgrdounlinkall(SMgrRelation *rels, int nrels, bool isRedo)
 		for (forknum = 0; forknum <= MAX_FORKNUM; forknum++)
 			smgrsw[which].smgr_close(rels[i], forknum);
 	}
+
+	/*
+	 * Get rid of any remaining buffers for the relations.  bufmgr will just
+	 * drop them without bothering to write the contents.
+	 */
+	DropRelFileNodesAllBuffers(rnodes, nrels);
 
 	/*
 	 * It'd be nice to tell the stats collector to forget them immediately,
@@ -464,16 +464,6 @@ smgrextend(SMgrRelation reln, ForkNumber forknum, BlockNumber blocknum,
 {
 	smgrsw[reln->smgr_which].smgr_extend(reln, forknum, blocknum,
 										 buffer, skipFsync);
-
-	/*
-	 * Normally we expect this to increase nblocks by one, but if the cached
-	 * value isn't as expected, just invalidate it so the next call asks the
-	 * kernel.
-	 */
-	if (reln->smgr_cached_nblocks[forknum] == blocknum)
-		reln->smgr_cached_nblocks[forknum] = blocknum + 1;
-	else
-		reln->smgr_cached_nblocks[forknum] = InvalidBlockNumber;
 }
 
 /*
@@ -547,38 +537,7 @@ smgrwriteback(SMgrRelation reln, ForkNumber forknum, BlockNumber blocknum,
 BlockNumber
 smgrnblocks(SMgrRelation reln, ForkNumber forknum)
 {
-	BlockNumber result;
-
-	/* Check and return if we get the cached value for the number of blocks. */
-	result = smgrnblocks_cached(reln, forknum);
-	if (result != InvalidBlockNumber)
-		return result;
-
-	result = smgrsw[reln->smgr_which].smgr_nblocks(reln, forknum);
-
-	reln->smgr_cached_nblocks[forknum] = result;
-
-	return result;
-}
-
-/*
- *	smgrnblocks_cached() -- Get the cached number of blocks in the supplied
- *							relation.
- *
- * Returns an InvalidBlockNumber when not in recovery and when the relation
- * fork size is not cached.
- */
-BlockNumber
-smgrnblocks_cached(SMgrRelation reln, ForkNumber forknum)
-{
-	/*
-	 * For now, we only use cached values in recovery due to lack of a shared
-	 * invalidation mechanism for changes in file size.
-	 */
-	if (InRecovery && reln->smgr_cached_nblocks[forknum] != InvalidBlockNumber)
-		return reln->smgr_cached_nblocks[forknum];
-
-	return InvalidBlockNumber;
+	return smgrsw[reln->smgr_which].smgr_nblocks(reln, forknum);
 }
 
 /*
@@ -600,7 +559,7 @@ smgrtruncate(SMgrRelation reln, ForkNumber *forknum, int nforks, BlockNumber *nb
 	 * Get rid of any buffers for the about-to-be-deleted blocks. bufmgr will
 	 * just drop them without bothering to write the contents.
 	 */
-	DropRelFileNodeBuffers(reln, forknum, nforks, nblocks);
+	DropRelFileNodeBuffers(reln->smgr_rnode, forknum, nforks, nblocks);
 
 	/*
 	 * Send a shared-inval message to force other backends to close any smgr
@@ -617,19 +576,20 @@ smgrtruncate(SMgrRelation reln, ForkNumber *forknum, int nforks, BlockNumber *nb
 	/* Do the truncation */
 	for (i = 0; i < nforks; i++)
 	{
-		/* Make the cached size is invalid if we encounter an error. */
-		reln->smgr_cached_nblocks[forknum[i]] = InvalidBlockNumber;
-
 		smgrsw[reln->smgr_which].smgr_truncate(reln, forknum[i], nblocks[i]);
 
 		/*
-		 * We might as well update the local smgr_cached_nblocks values. The
-		 * smgr cache inval message that this function sent will cause other
-		 * backends to invalidate their copies of smgr_fsm_nblocks and
-		 * smgr_vm_nblocks, and these ones too at the next command boundary.
-		 * But these ensure they aren't outright wrong until then.
+		 * We might as well update the local smgr_fsm_nblocks and
+		 * smgr_vm_nblocks settings. The smgr cache inval message that this
+		 * function sent will cause other backends to invalidate their copies
+		 * of smgr_fsm_nblocks and smgr_vm_nblocks, and these ones too at the
+		 * next command boundary. But these ensure they aren't outright wrong
+		 * until then.
 		 */
-		reln->smgr_cached_nblocks[forknum[i]] = nblocks[i];
+		if (forknum[i] == FSM_FORKNUM)
+			reln->smgr_fsm_nblocks = nblocks[i];
+		if (forknum[i] == VISIBILITYMAP_FORKNUM)
+			reln->smgr_vm_nblocks = nblocks[i];
 	}
 }
 

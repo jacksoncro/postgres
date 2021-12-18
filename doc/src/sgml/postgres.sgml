@@ -154,7 +154,6 @@ break is not needed in a wider output rendering.
    </para>
   </partintro>
 
-  &installbin;
   &installation;
   &installw;
   &runtime;

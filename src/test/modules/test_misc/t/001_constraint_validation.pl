@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 # Verify that ALTER TABLE optimizes certain operations as expected
 
 use strict;
@@ -10,7 +7,7 @@ use TestLib;
 use Test::More tests => 42;
 
 # Initialize a test cluster
-my $node = get_new_node('primary');
+my $node = get_new_node('master');
 $node->init();
 # Turn message level up to DEBUG1 so that we get the messages we want to see
 $node->append_conf('postgresql.conf', 'client_min_messages = DEBUG1');

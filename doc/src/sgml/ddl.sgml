@@ -956,7 +956,7 @@ CREATE TABLE tree (
 );
 </programlisting>
     A top-level node would have NULL <structfield>parent_id</structfield>,
-    while non-NULL <structfield>parent_id</structfield> entries would be
+    but non-NULL <structfield>parent_id</structfield> entries would be
     constrained to reference valid rows of the table.
    </para>
 
@@ -1168,8 +1168,7 @@ CREATE TABLE circles (
 
      <para>
       The OID of the table containing this row.  This column is
-      particularly handy for queries that select from partitioned
-      tables (see <xref linkend="ddl-partitioning"/>) or inheritance
+      particularly handy for queries that select from inheritance
       hierarchies (see <xref linkend="ddl-inherit"/>), since without it,
       it's difficult to tell which individual table a row came from.  The
       <structfield>tableoid</structfield> can be joined against the
@@ -1700,12 +1699,12 @@ REVOKE ALL ON accounts FROM PUBLIC;
      <term><literal>SELECT</literal></term>
      <listitem>
       <para>
-       Allows <command>SELECT</command> from
+       Allows <xref linkend="sql-select"/> from
        any column, or specific column(s), of a table, view, materialized
        view, or other table-like object.
-       Also allows use of <command>COPY TO</command>.
+       Also allows use of <xref linkend="sql-copy"/> TO.
        This privilege is also needed to reference existing column values in
-       <command>UPDATE</command> or <command>DELETE</command>.
+       <xref linkend="sql-update"/> or <xref linkend="sql-delete"/>.
        For sequences, this privilege also allows use of the
        <function>currval</function> function.
        For large objects, this privilege allows the object to be read.
@@ -1717,11 +1716,11 @@ REVOKE ALL ON accounts FROM PUBLIC;
      <term><literal>INSERT</literal></term>
      <listitem>
       <para>
-       Allows <command>INSERT</command> of a new row into a table, view,
+       Allows <xref linkend="sql-insert"/> of a new row into a table, view,
        etc.  Can be granted on specific column(s), in which case
        only those columns may be assigned to in the <command>INSERT</command>
        command (other columns will therefore receive default values).
-       Also allows use of <command>COPY FROM</command>.
+       Also allows use of <xref linkend="sql-copy"/> FROM.
       </para>
      </listitem>
     </varlistentry>
@@ -1730,7 +1729,7 @@ REVOKE ALL ON accounts FROM PUBLIC;
      <term><literal>UPDATE</literal></term>
      <listitem>
       <para>
-       Allows <command>UPDATE</command> of any
+       Allows <xref linkend="sql-update"/> of any
        column, or specific column(s), of a table, view, etc.
        (In practice, any nontrivial <command>UPDATE</command> command will
        require <literal>SELECT</literal> privilege as well, since it must
@@ -1752,7 +1751,7 @@ REVOKE ALL ON accounts FROM PUBLIC;
      <term><literal>DELETE</literal></term>
      <listitem>
       <para>
-       Allows <command>DELETE</command> of a row from a table, view, etc.
+       Allows <xref linkend="sql-delete"/> of a row from a table, view, etc.
        (In practice, any nontrivial <command>DELETE</command> command will
        require <literal>SELECT</literal> privilege as well, since it must
        reference table columns to determine which rows to delete.)
@@ -1764,7 +1763,7 @@ REVOKE ALL ON accounts FROM PUBLIC;
      <term><literal>TRUNCATE</literal></term>
      <listitem>
       <para>
-       Allows <command>TRUNCATE</command> on a table.
+       Allows <xref linkend="sql-truncate"/> on a table.
       </para>
      </listitem>
     </varlistentry>
@@ -2406,7 +2405,7 @@ INSERT INTO passwd VALUES
 INSERT INTO passwd VALUES
   ('alice','xxx',2,1,'Alice','098-765-4321',null,'/home/alice','/bin/zsh');
 
--- Be sure to enable row-level security on the table
+-- Be sure to enable row level security on the table
 ALTER TABLE passwd ENABLE ROW LEVEL SECURITY;
 
 -- Create policies
@@ -2517,6 +2516,12 @@ CREATE POLICY admin_local_only ON passwd AS RESTRICTIVE TO admin
  inet_client_addr 
 ------------------
  127.0.0.1
+(1 row)
+
+=&gt; SELECT current_user;
+ current_user 
+--------------
+ admin
 (1 row)
 
 =&gt; TABLE passwd;
@@ -2782,8 +2787,8 @@ CREATE SCHEMA myschema;
 <synopsis>
 <replaceable>database</replaceable><literal>.</literal><replaceable>schema</replaceable><literal>.</literal><replaceable>table</replaceable>
 </synopsis>
-    can be used too, but at present this is just for pro forma
-    compliance with the SQL standard.  If you write a database name,
+    can be used too, but at present this is just for <foreignphrase>pro
+    forma</foreignphrase> compliance with the SQL standard.  If you write a database name,
     it must be the same as the database you are connected to.
    </para>
 
@@ -3390,11 +3395,11 @@ VALUES ('Albany', NULL, NULL, 'NY');
   <para>
    Table inheritance is typically established when the child table is
    created, using the <literal>INHERITS</literal> clause of the
-   <link linkend="sql-createtable"><command>CREATE TABLE</command></link>
+   <xref linkend="sql-createtable"/>
    statement.
    Alternatively, a table which is already defined in a compatible way can
    have a new parent relationship added, using the <literal>INHERIT</literal>
-   variant of <link linkend="sql-altertable"><command>ALTER TABLE</command></link>.
+   variant of <xref linkend="sql-altertable"/>.
    To do this the new child table must already include columns with
    the same names and types as the columns of the parent. It must also include
    check constraints with the same names and check expressions as those of the
@@ -3426,7 +3431,7 @@ VALUES ('Albany', NULL, NULL, 'NY');
   </para>
 
   <para>
-   <command>ALTER TABLE</command> will
+   <xref linkend="sql-altertable"/> will
    propagate any changes in column data definitions and check
    constraints down the inheritance hierarchy.  Again, dropping
    columns that are depended on by other tables is only possible when using
@@ -3915,25 +3920,18 @@ DROP TABLE measurement_y2006m02;
    <para>
      Another option that is often preferable is to remove the partition from
      the partitioned table but retain access to it as a table in its own
-     right.  This has two forms:
+     right:
 
 <programlisting>
 ALTER TABLE measurement DETACH PARTITION measurement_y2006m02;
-ALTER TABLE measurement DETACH PARTITION measurement_y2006m02 CONCURRENTLY;
 </programlisting>
 
-     These allow further operations to be performed on the data before
+     This allows further operations to be performed on the data before
      it is dropped. For example, this is often a useful time to back up
      the data using <command>COPY</command>, <application>pg_dump</application>, or
      similar tools. It might also be a useful time to aggregate data
      into smaller formats, perform other data manipulations, or run
-     reports.  The first form of the command requires an
-     <literal>ACCESS EXCLUSIVE</literal> lock on the parent table.
-     Adding the <literal>CONCURRENTLY</literal> qualifier as in the second
-     form allows the detach operation to require only
-     <literal>SHARE UPDATE EXCLUSIVE</literal> lock on the parent table, but see
-     <link linkend="sql-altertable-detach-partition"><literal>ALTER TABLE ... DETACH PARTITION</literal></link>
-     for details on the restrictions.
+     reports.
    </para>
 
    <para>
@@ -4193,6 +4191,17 @@ ALTER INDEX measurement_city_id_logdate_key
         might be poor.)
        </para>
       </listitem>
+
+      <listitem>
+       <para>
+        Some operations require a stronger lock when using declarative
+        partitioning than when using table inheritance.  For example,
+        removing a partition from a partitioned table requires taking
+        an <literal>ACCESS EXCLUSIVE</literal> lock on the parent table,
+        whereas a <literal>SHARE UPDATE EXCLUSIVE</literal> lock is enough
+        in the case of regular inheritance.
+       </para>
+      </listitem>
      </itemizedlist>
     </para>
 
@@ -4207,12 +4216,12 @@ ALTER INDEX measurement_city_id_logdate_key
       <orderedlist spacing="compact">
        <listitem>
         <para>
-         Create the <quote>root</quote> table, from which all of the
+         Create the <quote>master</quote> table, from which all of the
          <quote>child</quote> tables will inherit.  This table will contain no data.  Do not
          define any check constraints on this table, unless you intend them
          to be applied equally to all child tables.  There is no point in
          defining any indexes or unique constraints on it, either.  For our
-         example, the root table is the <structname>measurement</structname>
+         example, the master table is the <structname>measurement</structname>
          table as originally defined:
 
 <programlisting>
@@ -4229,8 +4238,8 @@ CREATE TABLE measurement (
        <listitem>
         <para>
          Create several <quote>child</quote> tables that each inherit from
-         the root table.  Normally, these tables will not add any columns
-         to the set inherited from the root.  Just as with declarative
+         the master table.  Normally, these tables will not add any columns
+         to the set inherited from the master.  Just as with declarative
          partitioning, these tables are in every way normal
          <productname>PostgreSQL</productname> tables (or foreign tables).
         </para>
@@ -4315,7 +4324,7 @@ CREATE INDEX measurement_y2008m01_logdate ON measurement_y2008m01 (logdate);
          We want our application to be able to say <literal>INSERT INTO
          measurement ...</literal> and have the data be redirected into the
          appropriate child table.  We can arrange that by attaching
-         a suitable trigger function to the root table.
+         a suitable trigger function to the master table.
          If data will be added only to the latest child, we can
          use a very simple trigger function:
 
@@ -4397,7 +4406,7 @@ LANGUAGE plpgsql;
         <para>
          A different approach to redirecting inserts into the appropriate
          child table is to set up rules, instead of a trigger, on the
-         root table.  For example:
+         master table.  For example:
 
 <programlisting>
 CREATE RULE measurement_insert_y2006m02 AS
@@ -4422,7 +4431,7 @@ DO INSTEAD
         <para>
          Be aware that <command>COPY</command> ignores rules.  If you want to
          use <command>COPY</command> to insert data, you'll need to copy into the
-         correct child table rather than directly into the root. <command>COPY</command>
+         correct child table rather than directly into the master. <command>COPY</command>
          does fire triggers, so you can use it normally if you use the trigger
          approach.
         </para>
@@ -4430,7 +4439,7 @@ DO INSTEAD
         <para>
          Another disadvantage of the rule approach is that there is no simple
          way to force an error if the set of rules doesn't cover the insertion
-         date; the data will silently go into the root table instead.
+         date; the data will silently go into the master table instead.
         </para>
        </listitem>
 
@@ -4544,7 +4553,7 @@ ALTER TABLE measurement_y2008m02 INHERIT measurement;
 <programlisting>
 ANALYZE measurement;
 </programlisting>
-        will only process the root table.
+        will only process the master table.
        </para>
       </listitem>
 
@@ -4701,6 +4710,16 @@ EXPLAIN SELECT count(*) FROM measurement WHERE logdate &gt;= DATE '2008-01-01';
     Partition pruning can be disabled using the
     <xref linkend="guc-enable-partition-pruning"/> setting.
    </para>
+
+   <note>
+    <para>
+     Execution-time partition pruning currently only occurs for the
+     <literal>Append</literal> and <literal>MergeAppend</literal> node types.
+     It is not yet implemented for the <literal>ModifyTable</literal> node
+     type, but that is likely to be changed in a future release of
+     <productname>PostgreSQL</productname>.
+    </para>
+   </note>
   </sect2>
 
   <sect2 id="ddl-partitioning-constraint-exclusion">
@@ -4857,7 +4876,8 @@ EXPLAIN SELECT count(*) FROM measurement WHERE logdate &gt;= DATE '2008-01-01';
     well, provided that typical queries allow the query planner to prune all
     but a small number of partitions.  Planning times become longer and memory
     consumption becomes higher when more partitions remain after the planner
-    performs partition pruning.  Another
+    performs partition pruning.  This is particularly true for the
+    <command>UPDATE</command> and <command>DELETE</command> commands.  Another
     reason to be concerned about having a large number of partitions is that
     the server's memory consumption may grow significantly over
     time, especially if many sessions touch large numbers of partitions.

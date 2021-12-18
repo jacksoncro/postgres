@@ -85,7 +85,7 @@ typedef struct _restoreOptions
 	char	   *use_role;		/* Issue SET ROLE to this */
 	int			dropSchema;
 	int			disable_dollar_quoting;
-	int			dump_inserts;	/* 0 = COPY, otherwise rows per INSERT */
+	int			dump_inserts;
 	int			column_inserts;
 	int			if_exists;
 	int			no_comments;	/* Skip comments */
@@ -159,7 +159,6 @@ typedef struct _dumpOptions
 	int			no_publications;
 	int			no_subscriptions;
 	int			no_synchronized_snapshots;
-	int			no_toast_compression;
 	int			no_unlogged_table_data;
 	int			serializable_deferrable;
 	int			disable_triggers;
@@ -248,7 +247,7 @@ typedef int DumpId;
  * Function pointer prototypes for assorted callback methods.
  */
 
-typedef int (*DataDumperPtr) (Archive *AH, const void *userArg);
+typedef int (*DataDumperPtr) (Archive *AH, void *userArg);
 
 typedef void (*SetupWorkerPtrType) (Archive *AH);
 

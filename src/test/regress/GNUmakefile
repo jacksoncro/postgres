@@ -3,7 +3,7 @@
 # GNUmakefile--
 #    Makefile for src/test/regress (the regression tests)
 #
-# Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+# Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
 # Portions Copyright (c) 1994, Regents of the University of California
 #
 # src/test/regress/GNUmakefile
@@ -83,7 +83,7 @@ regress_data_files = \
 	$(wildcard $(srcdir)/output/*.source) \
 	$(filter-out $(addprefix $(srcdir)/,$(input_files)),$(wildcard $(srcdir)/sql/*.sql)) \
 	$(wildcard $(srcdir)/data/*.data) \
-	$(srcdir)/parallel_schedule $(srcdir)/resultmap
+	$(srcdir)/parallel_schedule $(srcdir)/serial_schedule $(srcdir)/resultmap
 
 install-tests: all install install-lib installdirs-tests
 	$(MAKE) -C $(top_builddir)/contrib/spi install
@@ -114,27 +114,33 @@ submake-contrib-spi: | submake-libpgport submake-generated-headers
 
 .PHONY: submake-contrib-spi
 
+# Tablespace setup
+
+.PHONY: tablespace-setup
+tablespace-setup:
+	rm -rf ./testtablespace
+	mkdir ./testtablespace
+
 
 ##
 ## Run tests
 ##
 
-REGRESS_OPTS = --dlpath=. --max-concurrent-tests=20 --make-testtablespace-dir \
-	$(EXTRA_REGRESS_OPTS)
+REGRESS_OPTS = --dlpath=. --max-concurrent-tests=20 $(EXTRA_REGRESS_OPTS)
 
-check: all
+check: all tablespace-setup
 	$(pg_regress_check) $(REGRESS_OPTS) --schedule=$(srcdir)/parallel_schedule $(MAXCONNOPT) $(EXTRA_TESTS)
 
-check-tests: all | temp-install
+check-tests: all tablespace-setup | temp-install
 	$(pg_regress_check) $(REGRESS_OPTS) $(MAXCONNOPT) $(TESTS) $(EXTRA_TESTS)
 
-installcheck: all
-	$(pg_regress_installcheck) $(REGRESS_OPTS) --schedule=$(srcdir)/parallel_schedule --max-connections=1 $(EXTRA_TESTS)
+installcheck: all tablespace-setup
+	$(pg_regress_installcheck) $(REGRESS_OPTS) --schedule=$(srcdir)/serial_schedule $(EXTRA_TESTS)
 
-installcheck-parallel: all
+installcheck-parallel: all tablespace-setup
 	$(pg_regress_installcheck) $(REGRESS_OPTS) --schedule=$(srcdir)/parallel_schedule $(MAXCONNOPT) $(EXTRA_TESTS)
 
-installcheck-tests: all
+installcheck-tests: all tablespace-setup
 	$(pg_regress_installcheck) $(REGRESS_OPTS) $(TESTS) $(EXTRA_TESTS)
 
 standbycheck: all
@@ -146,10 +152,10 @@ runcheck: check
 runtest: installcheck
 runtest-parallel: installcheck-parallel
 
-bigtest: all
-	$(pg_regress_installcheck) $(REGRESS_OPTS) --schedule=$(srcdir)/parallel_schedule --max-connections=1 numeric_big
+bigtest: all tablespace-setup
+	$(pg_regress_installcheck) $(REGRESS_OPTS) --schedule=$(srcdir)/serial_schedule numeric_big
 
-bigcheck: all | temp-install
+bigcheck: all tablespace-setup | temp-install
 	$(pg_regress_check) $(REGRESS_OPTS) --schedule=$(srcdir)/parallel_schedule $(MAXCONNOPT) numeric_big
 
 

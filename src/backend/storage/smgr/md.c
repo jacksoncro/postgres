@@ -10,7 +10,7 @@
  * It doesn't matter whether the bits are on spinning rust or some other
  * storage technology.
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  *
@@ -294,8 +294,19 @@ do_truncate(const char *path)
 {
 	int			save_errno;
 	int			ret;
+	int			fd;
 
-	ret = pg_truncate(path, 0);
+	/* truncate(2) would be easier here, but Windows hasn't got it */
+	fd = OpenTransientFile(path, O_RDWR | PG_BINARY);
+	if (fd >= 0)
+	{
+		ret = ftruncate(fd, 0);
+		save_errno = errno;
+		CloseTransientFile(fd);
+		errno = save_errno;
+	}
+	else
+		ret = -1;
 
 	/* Log a warning here to avoid repetition in callers. */
 	if (ret < 0 && errno != ENOENT)
@@ -762,11 +773,9 @@ mdwrite(SMgrRelation reln, ForkNumber forknum, BlockNumber blocknum,
 BlockNumber
 mdnblocks(SMgrRelation reln, ForkNumber forknum)
 {
-	MdfdVec    *v;
+	MdfdVec    *v = mdopenfork(reln, forknum, EXTENSION_FAIL);
 	BlockNumber nblocks;
-	BlockNumber segno;
-
-	mdopenfork(reln, forknum, EXTENSION_FAIL);
+	BlockNumber segno = 0;
 
 	/* mdopen has opened the first segment */
 	Assert(reln->md_num_open_segs[forknum] > 0);
@@ -984,7 +993,7 @@ register_dirty_segment(SMgrRelation reln, ForkNumber forknum, MdfdVec *seg)
 	if (!RegisterSyncRequest(&tag, SYNC_REQUEST, false /* retryOnError */ ))
 	{
 		ereport(DEBUG1,
-				(errmsg_internal("could not forward fsync request because request queue is full")));
+				(errmsg("could not forward fsync request because request queue is full")));
 
 		if (FileSync(seg->mdfd_vfd, WAIT_EVENT_DATA_FILE_SYNC) < 0)
 			ereport(data_sync_elevel(ERROR),

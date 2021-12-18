@@ -352,9 +352,9 @@ PLy_output_setup_func(PLyObToDatum *arg, MemoryContext arg_mcxt,
 							  proc);
 	}
 	else if (typentry &&
-			 IsTrueArrayType(typentry))
+			 OidIsValid(typentry->typelem) && typentry->typlen == -1)
 	{
-		/* Standard array */
+		/* Standard varlena array (cf. get_element_type) */
 		arg->func = PLySequence_ToArray;
 		/* Get base type OID to insert into constructed array */
 		/* (note this might not be the same as the immediate child type) */
@@ -470,9 +470,9 @@ PLy_input_setup_func(PLyDatumToOb *arg, MemoryContext arg_mcxt,
 							 proc);
 	}
 	else if (typentry &&
-			 IsTrueArrayType(typentry))
+			 OidIsValid(typentry->typelem) && typentry->typlen == -1)
 	{
-		/* Standard array */
+		/* Standard varlena array (cf. get_element_type) */
 		arg->func = PLyList_FromArray;
 		/* Recursively set up conversion info for the element type */
 		arg->u.array.elm = (PLyDatumToOb *)
@@ -1173,25 +1173,18 @@ PLySequence_ToArray(PLyObToDatum *arg, PyObject *plrv,
 			break;
 
 		if (ndim == MAXDIM)
-			ereport(ERROR,
-					(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-					 errmsg("number of array dimensions exceeds the maximum allowed (%d)",
-							MAXDIM)));
+			PLy_elog(ERROR, "number of array dimensions exceeds the maximum allowed (%d)", MAXDIM);
 
 		dims[ndim] = PySequence_Length(pyptr);
 		if (dims[ndim] < 0)
 			PLy_elog(ERROR, "could not determine sequence length for function return value");
 
 		if (dims[ndim] > MaxAllocSize)
-			ereport(ERROR,
-					(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-					 errmsg("array size exceeds the maximum allowed")));
+			PLy_elog(ERROR, "array size exceeds the maximum allowed");
 
 		len *= dims[ndim];
 		if (len > MaxAllocSize)
-			ereport(ERROR,
-					(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-					 errmsg("array size exceeds the maximum allowed")));
+			PLy_elog(ERROR, "array size exceeds the maximum allowed");
 
 		if (dims[ndim] == 0)
 		{
@@ -1217,9 +1210,7 @@ PLySequence_ToArray(PLyObToDatum *arg, PyObject *plrv,
 	if (ndim == 0)
 	{
 		if (!PySequence_Check(plrv))
-			ereport(ERROR,
-					(errcode(ERRCODE_DATATYPE_MISMATCH),
-					 errmsg("return value of function with array return type is not a Python sequence")));
+			PLy_elog(ERROR, "return value of function with array return type is not a Python sequence");
 
 		ndim = 1;
 		len = dims[0] = PySequence_Length(plrv);
@@ -1265,8 +1256,7 @@ PLySequence_ToArray_recurse(PLyObToDatum *elm, PyObject *list,
 
 	if (PySequence_Length(list) != dims[dim])
 		ereport(ERROR,
-				(errcode(ERRCODE_ARRAY_SUBSCRIPT_ERROR),
-				 errmsg("wrong length of inner sequence: has length %d, but %d was expected",
+				(errmsg("wrong length of inner sequence: has length %d, but %d was expected",
 						(int) PySequence_Length(list), dims[dim]),
 				 (errdetail("To construct a multidimensional array, the inner sequences must all have the same length."))));
 

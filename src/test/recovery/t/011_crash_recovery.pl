@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 #
 # Tests relating to PostgreSQL crash recovery and redo
 #
@@ -10,10 +7,18 @@ use PostgresNode;
 use TestLib;
 use Test::More;
 use Config;
+if ($Config{osname} eq 'MSWin32')
+{
 
-plan tests => 3;
+	# some Windows Perls at least don't like IPC::Run's start/kill_kill regime.
+	plan skip_all => "Test fails on Windows perl";
+}
+else
+{
+	plan tests => 3;
+}
 
-my $node = get_new_node('primary');
+my $node = get_new_node('master');
 $node->init(allows_streaming => 1);
 $node->start;
 
@@ -60,5 +65,4 @@ cmp_ok($node->safe_psql('postgres', 'SELECT pg_current_xact_id()'),
 is($node->safe_psql('postgres', qq[SELECT pg_xact_status('$xid');]),
 	'aborted', 'xid is aborted after crash');
 
-$stdin .= "\\q\n";
-$tx->finish;    # wait for psql to quit gracefully
+$tx->kill_kill;

@@ -3,7 +3,7 @@
  * slotfuncs.c
  *	   Support functions for replication slots
  *
- * Copyright (c) 2012-2021, PostgreSQL Global Development Group
+ * Copyright (c) 2012-2020, PostgreSQL Global Development Group
  *
  * IDENTIFICATION
  *	  src/backend/replication/slotfuncs.c
@@ -50,7 +50,7 @@ create_physical_replication_slot(char *name, bool immediately_reserve,
 
 	/* acquire replication slot, this will check for conflicting names */
 	ReplicationSlotCreate(name, false,
-						  temporary ? RS_TEMPORARY : RS_PERSISTENT, false);
+						  temporary ? RS_TEMPORARY : RS_PERSISTENT);
 
 	if (immediately_reserve)
 	{
@@ -124,8 +124,7 @@ pg_create_physical_replication_slot(PG_FUNCTION_ARGS)
  */
 static void
 create_logical_replication_slot(char *name, char *plugin,
-								bool temporary, bool two_phase,
-								XLogRecPtr restart_lsn,
+								bool temporary, XLogRecPtr restart_lsn,
 								bool find_startpoint)
 {
 	LogicalDecodingContext *ctx = NULL;
@@ -141,7 +140,7 @@ create_logical_replication_slot(char *name, char *plugin,
 	 * error as well.
 	 */
 	ReplicationSlotCreate(name, true,
-						  temporary ? RS_TEMPORARY : RS_EPHEMERAL, two_phase);
+						  temporary ? RS_TEMPORARY : RS_EPHEMERAL);
 
 	/*
 	 * Create logical decoding context to find start point or, if we don't
@@ -178,7 +177,6 @@ pg_create_logical_replication_slot(PG_FUNCTION_ARGS)
 	Name		name = PG_GETARG_NAME(0);
 	Name		plugin = PG_GETARG_NAME(1);
 	bool		temporary = PG_GETARG_BOOL(2);
-	bool		two_phase = PG_GETARG_BOOL(3);
 	Datum		result;
 	TupleDesc	tupdesc;
 	HeapTuple	tuple;
@@ -195,7 +193,6 @@ pg_create_logical_replication_slot(PG_FUNCTION_ARGS)
 	create_logical_replication_slot(NameStr(*name),
 									NameStr(*plugin),
 									temporary,
-									two_phase,
 									InvalidXLogRecPtr,
 									true);
 
@@ -239,7 +236,7 @@ pg_drop_replication_slot(PG_FUNCTION_ARGS)
 Datum
 pg_get_replication_slots(PG_FUNCTION_ARGS)
 {
-#define PG_GET_REPLICATION_SLOTS_COLS 14
+#define PG_GET_REPLICATION_SLOTS_COLS 13
 	ReturnSetInfo *rsinfo = (ReturnSetInfo *) fcinfo->resultinfo;
 	TupleDesc	tupdesc;
 	Tuplestorestate *tupstore;
@@ -415,11 +412,11 @@ pg_get_replication_slots(PG_FUNCTION_ARGS)
 			nulls[i++] = true;
 		else
 		{
-			XLogSegNo	targetSeg;
-			uint64		slotKeepSegs;
-			uint64		keepSegs;
-			XLogSegNo	failSeg;
-			XLogRecPtr	failLSN;
+			XLogSegNo   targetSeg;
+			uint64   slotKeepSegs;
+			uint64   keepSegs;
+			XLogSegNo   failSeg;
+			XLogRecPtr  failLSN;
 
 			XLByteToSeg(slot_contents.data.restart_lsn, targetSeg, wal_segment_size);
 
@@ -434,8 +431,6 @@ pg_get_replication_slots(PG_FUNCTION_ARGS)
 
 			values[i++] = Int64GetDatum(failLSN - currlsn);
 		}
-
-		values[i++] = BoolGetDatum(slot_contents.data.two_phase);
 
 		Assert(i == PG_GET_REPLICATION_SLOTS_COLS);
 
@@ -522,6 +517,9 @@ pg_logical_replication_slot_advance(XLogRecPtr moveto)
 		 * a valid record.
 		 */
 		XLogBeginRead(ctx->reader, MyReplicationSlot->data.restart_lsn);
+
+		/* Initialize our return value in case we don't do anything */
+		retlsn = MyReplicationSlot->data.confirmed_flush;
 
 		/* invalidate non-timetravel entries */
 		InvalidateSystemCaches();
@@ -639,7 +637,7 @@ pg_replication_slot_advance(PG_FUNCTION_ARGS)
 		moveto = Min(moveto, GetXLogReplayRecPtr(&ThisTimeLineID));
 
 	/* Acquire the slot so we "own" it */
-	ReplicationSlotAcquire(NameStr(*slotname), true);
+	(void) ReplicationSlotAcquire(NameStr(*slotname), SAB_Error);
 
 	/* A slot whose restart_lsn has never been reserved cannot be advanced */
 	if (XLogRecPtrIsInvalid(MyReplicationSlot->data.restart_lsn))
@@ -647,7 +645,7 @@ pg_replication_slot_advance(PG_FUNCTION_ARGS)
 				(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
 				 errmsg("replication slot \"%s\" cannot be advanced",
 						NameStr(*slotname)),
-				 errdetail("This slot has never previously reserved WAL, or it has been invalidated.")));
+				 errdetail("This slot has never previously reserved WAL, or has been invalidated.")));
 
 	/*
 	 * Check if the slot is not moving backwards.  Physical slots rely simply
@@ -664,7 +662,8 @@ pg_replication_slot_advance(PG_FUNCTION_ARGS)
 		ereport(ERROR,
 				(errcode(ERRCODE_OBJECT_NOT_IN_PREREQUISITE_STATE),
 				 errmsg("cannot advance replication slot to %X/%X, minimum is %X/%X",
-						LSN_FORMAT_ARGS(moveto), LSN_FORMAT_ARGS(minlsn))));
+						(uint32) (moveto >> 32), (uint32) moveto,
+						(uint32) (minlsn >> 32), (uint32) minlsn)));
 
 	/* Do the actual slot update, depending on the slot type */
 	if (OidIsValid(MyReplicationSlot->data.database))
@@ -801,7 +800,6 @@ copy_replication_slot(FunctionCallInfo fcinfo, bool logical_slot)
 		create_logical_replication_slot(NameStr(*dst_name),
 										plugin,
 										temporary,
-										false,
 										src_restart_lsn,
 										false);
 	}

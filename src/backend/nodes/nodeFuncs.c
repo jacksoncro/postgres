@@ -3,7 +3,7 @@
  * nodeFuncs.c
  *		Various general-purpose manipulations of Node trees
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  *
@@ -66,7 +66,15 @@ exprType(const Node *expr)
 			type = ((const WindowFunc *) expr)->wintype;
 			break;
 		case T_SubscriptingRef:
-			type = ((const SubscriptingRef *) expr)->refrestype;
+			{
+				const SubscriptingRef *sbsref = (const SubscriptingRef *) expr;
+
+				/* slice and/or store operations yield the container type */
+				if (sbsref->reflowerindexpr || sbsref->refassgnexpr)
+					type = sbsref->refcontainertype;
+				else
+					type = sbsref->refelemtype;
+			}
 			break;
 		case T_FuncExpr:
 			type = ((const FuncExpr *) expr)->funcresulttype;
@@ -278,6 +286,7 @@ exprTypmod(const Node *expr)
 		case T_Param:
 			return ((const Param *) expr)->paramtypmod;
 		case T_SubscriptingRef:
+			/* typmod is the same for container or element */
 			return ((const SubscriptingRef *) expr)->reftypmod;
 		case T_FuncExpr:
 			{
@@ -802,12 +811,10 @@ exprCollation(const Node *expr)
 			coll = ((const NullIfExpr *) expr)->opcollid;
 			break;
 		case T_ScalarArrayOpExpr:
-			/* ScalarArrayOpExpr's result is boolean ... */
-			coll = InvalidOid;	/* ... so it has no collation */
+			coll = InvalidOid;	/* result is always boolean */
 			break;
 		case T_BoolExpr:
-			/* BoolExpr's result is boolean ... */
-			coll = InvalidOid;	/* ... so it has no collation */
+			coll = InvalidOid;	/* result is always boolean */
 			break;
 		case T_SubLink:
 			{
@@ -829,8 +836,8 @@ exprCollation(const Node *expr)
 				}
 				else
 				{
-					/* otherwise, SubLink's result is RECORD or BOOLEAN */
-					coll = InvalidOid;	/* ... so it has no collation */
+					/* otherwise, result is RECORD or BOOLEAN */
+					coll = InvalidOid;
 				}
 			}
 			break;
@@ -847,8 +854,8 @@ exprCollation(const Node *expr)
 				}
 				else
 				{
-					/* otherwise, SubPlan's result is RECORD or BOOLEAN */
-					coll = InvalidOid;	/* ... so it has no collation */
+					/* otherwise, result is RECORD or BOOLEAN */
+					coll = InvalidOid;
 				}
 			}
 			break;
@@ -864,8 +871,7 @@ exprCollation(const Node *expr)
 			coll = ((const FieldSelect *) expr)->resultcollid;
 			break;
 		case T_FieldStore:
-			/* FieldStore's result is composite ... */
-			coll = InvalidOid;	/* ... so it has no collation */
+			coll = InvalidOid;	/* result is always composite */
 			break;
 		case T_RelabelType:
 			coll = ((const RelabelType *) expr)->resultcollid;
@@ -877,8 +883,7 @@ exprCollation(const Node *expr)
 			coll = ((const ArrayCoerceExpr *) expr)->resultcollid;
 			break;
 		case T_ConvertRowtypeExpr:
-			/* ConvertRowtypeExpr's result is composite ... */
-			coll = InvalidOid;	/* ... so it has no collation */
+			coll = InvalidOid;	/* result is always composite */
 			break;
 		case T_CollateExpr:
 			coll = ((const CollateExpr *) expr)->collOid;
@@ -893,12 +898,10 @@ exprCollation(const Node *expr)
 			coll = ((const ArrayExpr *) expr)->array_collid;
 			break;
 		case T_RowExpr:
-			/* RowExpr's result is composite ... */
-			coll = InvalidOid;	/* ... so it has no collation */
+			coll = InvalidOid;	/* result is always composite */
 			break;
 		case T_RowCompareExpr:
-			/* RowCompareExpr's result is boolean ... */
-			coll = InvalidOid;	/* ... so it has no collation */
+			coll = InvalidOid;	/* result is always boolean */
 			break;
 		case T_CoalesceExpr:
 			coll = ((const CoalesceExpr *) expr)->coalescecollid;
@@ -926,12 +929,10 @@ exprCollation(const Node *expr)
 				coll = InvalidOid;
 			break;
 		case T_NullTest:
-			/* NullTest's result is boolean ... */
-			coll = InvalidOid;	/* ... so it has no collation */
+			coll = InvalidOid;	/* result is always boolean */
 			break;
 		case T_BooleanTest:
-			/* BooleanTest's result is boolean ... */
-			coll = InvalidOid;	/* ... so it has no collation */
+			coll = InvalidOid;	/* result is always boolean */
 			break;
 		case T_CoerceToDomain:
 			coll = ((const CoerceToDomain *) expr)->resultcollid;
@@ -943,12 +944,10 @@ exprCollation(const Node *expr)
 			coll = ((const SetToDefault *) expr)->collation;
 			break;
 		case T_CurrentOfExpr:
-			/* CurrentOfExpr's result is boolean ... */
-			coll = InvalidOid;	/* ... so it has no collation */
+			coll = InvalidOid;	/* result is always boolean */
 			break;
 		case T_NextValueExpr:
-			/* NextValueExpr's result is an integer type ... */
-			coll = InvalidOid;	/* ... so it has no collation */
+			coll = InvalidOid;	/* result is always an integer type */
 			break;
 		case T_InferenceElem:
 			coll = exprCollation((Node *) ((const InferenceElem *) expr)->expr);
@@ -1060,12 +1059,10 @@ exprSetCollation(Node *expr, Oid collation)
 			((NullIfExpr *) expr)->opcollid = collation;
 			break;
 		case T_ScalarArrayOpExpr:
-			/* ScalarArrayOpExpr's result is boolean ... */
-			Assert(!OidIsValid(collation)); /* ... so never set a collation */
+			Assert(!OidIsValid(collation)); /* result is always boolean */
 			break;
 		case T_BoolExpr:
-			/* BoolExpr's result is boolean ... */
-			Assert(!OidIsValid(collation)); /* ... so never set a collation */
+			Assert(!OidIsValid(collation)); /* result is always boolean */
 			break;
 		case T_SubLink:
 #ifdef USE_ASSERT_CHECKING
@@ -1097,8 +1094,7 @@ exprSetCollation(Node *expr, Oid collation)
 			((FieldSelect *) expr)->resultcollid = collation;
 			break;
 		case T_FieldStore:
-			/* FieldStore's result is composite ... */
-			Assert(!OidIsValid(collation)); /* ... so never set a collation */
+			Assert(!OidIsValid(collation)); /* result is always composite */
 			break;
 		case T_RelabelType:
 			((RelabelType *) expr)->resultcollid = collation;
@@ -1110,8 +1106,7 @@ exprSetCollation(Node *expr, Oid collation)
 			((ArrayCoerceExpr *) expr)->resultcollid = collation;
 			break;
 		case T_ConvertRowtypeExpr:
-			/* ConvertRowtypeExpr's result is composite ... */
-			Assert(!OidIsValid(collation)); /* ... so never set a collation */
+			Assert(!OidIsValid(collation)); /* result is always composite */
 			break;
 		case T_CaseExpr:
 			((CaseExpr *) expr)->casecollid = collation;
@@ -1120,12 +1115,10 @@ exprSetCollation(Node *expr, Oid collation)
 			((ArrayExpr *) expr)->array_collid = collation;
 			break;
 		case T_RowExpr:
-			/* RowExpr's result is composite ... */
-			Assert(!OidIsValid(collation)); /* ... so never set a collation */
+			Assert(!OidIsValid(collation)); /* result is always composite */
 			break;
 		case T_RowCompareExpr:
-			/* RowCompareExpr's result is boolean ... */
-			Assert(!OidIsValid(collation)); /* ... so never set a collation */
+			Assert(!OidIsValid(collation)); /* result is always boolean */
 			break;
 		case T_CoalesceExpr:
 			((CoalesceExpr *) expr)->coalescecollid = collation;
@@ -1144,12 +1137,10 @@ exprSetCollation(Node *expr, Oid collation)
 				   (collation == InvalidOid));
 			break;
 		case T_NullTest:
-			/* NullTest's result is boolean ... */
-			Assert(!OidIsValid(collation)); /* ... so never set a collation */
+			Assert(!OidIsValid(collation)); /* result is always boolean */
 			break;
 		case T_BooleanTest:
-			/* BooleanTest's result is boolean ... */
-			Assert(!OidIsValid(collation)); /* ... so never set a collation */
+			Assert(!OidIsValid(collation)); /* result is always boolean */
 			break;
 		case T_CoerceToDomain:
 			((CoerceToDomain *) expr)->resultcollid = collation;
@@ -1161,12 +1152,11 @@ exprSetCollation(Node *expr, Oid collation)
 			((SetToDefault *) expr)->collation = collation;
 			break;
 		case T_CurrentOfExpr:
-			/* CurrentOfExpr's result is boolean ... */
-			Assert(!OidIsValid(collation)); /* ... so never set a collation */
+			Assert(!OidIsValid(collation)); /* result is always boolean */
 			break;
 		case T_NextValueExpr:
-			/* NextValueExpr's result is an integer type ... */
-			Assert(!OidIsValid(collation)); /* ... so never set a collation */
+			Assert(!OidIsValid(collation)); /* result is always an integer
+											 * type */
 			break;
 		default:
 			elog(ERROR, "unrecognized node type: %d", (int) nodeTag(expr));
@@ -1585,12 +1575,6 @@ exprLocation(const Node *expr)
 		case T_OnConflictClause:
 			loc = ((const OnConflictClause *) expr)->location;
 			break;
-		case T_CTESearchClause:
-			loc = ((const CTESearchClause *) expr)->location;
-			break;
-		case T_CTECycleClause:
-			loc = ((const CTECycleClause *) expr)->location;
-			break;
 		case T_CommonTableExpr:
 			loc = ((const CommonTableExpr *) expr)->location;
 			break;
@@ -1934,7 +1918,6 @@ expression_tree_walker(Node *node,
 		case T_NextValueExpr:
 		case T_RangeTblRef:
 		case T_SortGroupClause:
-		case T_CTESearchClause:
 			/* primitive node types with no expression subnodes */
 			break;
 		case T_WithCheckOption:
@@ -2174,16 +2157,6 @@ expression_tree_walker(Node *node,
 					return true;
 			}
 			break;
-		case T_CTECycleClause:
-			{
-				CTECycleClause *cc = (CTECycleClause *) node;
-
-				if (walker(cc->cycle_mark_value, context))
-					return true;
-				if (walker(cc->cycle_mark_default, context))
-					return true;
-			}
-			break;
 		case T_CommonTableExpr:
 			{
 				CommonTableExpr *cte = (CommonTableExpr *) node;
@@ -2192,13 +2165,7 @@ expression_tree_walker(Node *node,
 				 * Invoke the walker on the CTE's Query node, so it can
 				 * recurse into the sub-query if it wants to.
 				 */
-				if (walker(cte->ctequery, context))
-					return true;
-
-				if (walker(cte->search_clause, context))
-					return true;
-				if (walker(cte->cycle_clause, context))
-					return true;
+				return walker(cte->ctequery, context);
 			}
 			break;
 		case T_List:
@@ -2657,7 +2624,6 @@ expression_tree_mutator(Node *node,
 		case T_NextValueExpr:
 		case T_RangeTblRef:
 		case T_SortGroupClause:
-		case T_CTESearchClause:
 			return (Node *) copyObject(node);
 		case T_WithCheckOption:
 			{
@@ -3062,17 +3028,6 @@ expression_tree_mutator(Node *node,
 				return (Node *) newnode;
 			}
 			break;
-		case T_CTECycleClause:
-			{
-				CTECycleClause *cc = (CTECycleClause *) node;
-				CTECycleClause *newnode;
-
-				FLATCOPY(newnode, cc, CTECycleClause);
-				MUTATE(newnode->cycle_mark_value, cc->cycle_mark_value, Node *);
-				MUTATE(newnode->cycle_mark_default, cc->cycle_mark_default, Node *);
-				return (Node *) newnode;
-			}
-			break;
 		case T_CommonTableExpr:
 			{
 				CommonTableExpr *cte = (CommonTableExpr *) node;
@@ -3085,10 +3040,6 @@ expression_tree_mutator(Node *node,
 				 * recurse into the sub-query if it wants to.
 				 */
 				MUTATE(newnode->ctequery, cte->ctequery, Node *);
-
-				MUTATE(newnode->search_clause, cte->search_clause, CTESearchClause *);
-				MUTATE(newnode->cycle_clause, cte->cycle_clause, CTECycleClause *);
-
 				return (Node *) newnode;
 			}
 			break;
@@ -3727,16 +3678,6 @@ raw_expression_tree_walker(Node *node,
 					return true;
 			}
 			break;
-		case T_PLAssignStmt:
-			{
-				PLAssignStmt *stmt = (PLAssignStmt *) node;
-
-				if (walker(stmt->indirection, context))
-					return true;
-				if (walker(stmt->val, context))
-					return true;
-			}
-			break;
 		case T_A_Expr:
 			{
 				A_Expr	   *expr = (A_Expr *) node;
@@ -3916,8 +3857,6 @@ raw_expression_tree_walker(Node *node,
 
 				if (walker(coldef->typeName, context))
 					return true;
-				if (walker(coldef->compression, context))
-					return true;
 				if (walker(coldef->raw_default, context))
 					return true;
 				if (walker(coldef->collClause, context))
@@ -3973,7 +3912,6 @@ raw_expression_tree_walker(Node *node,
 			}
 			break;
 		case T_CommonTableExpr:
-			/* search_clause and cycle_clause are not interesting here */
 			return walker(((CommonTableExpr *) node)->ctequery, context);
 		default:
 			elog(ERROR, "unrecognized node type: %d",
@@ -4021,6 +3959,12 @@ planstate_tree_walker(PlanState *planstate,
 	/* special child plans */
 	switch (nodeTag(plan))
 	{
+		case T_ModifyTable:
+			if (planstate_walk_members(((ModifyTableState *) planstate)->mt_plans,
+									   ((ModifyTableState *) planstate)->mt_nplans,
+									   walker, context))
+				return true;
+			break;
 		case T_Append:
 			if (planstate_walk_members(((AppendState *) planstate)->appendplans,
 									   ((AppendState *) planstate)->as_nplans,

@@ -3,7 +3,7 @@
  * reinit.c
  *	  Reinitialization of unlogged relations
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  * IDENTIFICATION
@@ -30,7 +30,7 @@ static void ResetUnloggedRelationsInDbspaceDir(const char *dbspacedirname,
 
 typedef struct
 {
-	Oid			reloid;			/* hash key */
+	char		oid[OIDCHARS + 1];
 } unlogged_relation_entry;
 
 /*
@@ -172,11 +172,10 @@ ResetUnloggedRelationsInDbspaceDir(const char *dbspacedirname, int op)
 		 * need to be reset.  Otherwise, this cleanup operation would be
 		 * O(n^2).
 		 */
-		ctl.keysize = sizeof(Oid);
+		memset(&ctl, 0, sizeof(ctl));
+		ctl.keysize = sizeof(unlogged_relation_entry);
 		ctl.entrysize = sizeof(unlogged_relation_entry);
-		ctl.hcxt = CurrentMemoryContext;
-		hash = hash_create("unlogged relation OIDs", 32, &ctl,
-						   HASH_ELEM | HASH_BLOBS | HASH_CONTEXT);
+		hash = hash_create("unlogged hash", 32, &ctl, HASH_ELEM);
 
 		/* Scan the directory. */
 		dbspace_dir = AllocateDir(dbspacedirname);
@@ -199,8 +198,9 @@ ResetUnloggedRelationsInDbspaceDir(const char *dbspacedirname, int op)
 			 * Put the OID portion of the name into the hash table, if it
 			 * isn't already.
 			 */
-			ent.reloid = atooid(de->d_name);
-			(void) hash_search(hash, &ent, HASH_ENTER, NULL);
+			memset(ent.oid, 0, sizeof(ent.oid));
+			memcpy(ent.oid, de->d_name, oidchars);
+			hash_search(hash, &ent, HASH_ENTER, NULL);
 		}
 
 		/* Done with the first pass. */
@@ -224,6 +224,7 @@ ResetUnloggedRelationsInDbspaceDir(const char *dbspacedirname, int op)
 		{
 			ForkNumber	forkNum;
 			int			oidchars;
+			bool		found;
 			unlogged_relation_entry ent;
 
 			/* Skip anything that doesn't look like a relation data file. */
@@ -237,10 +238,14 @@ ResetUnloggedRelationsInDbspaceDir(const char *dbspacedirname, int op)
 
 			/*
 			 * See whether the OID portion of the name shows up in the hash
-			 * table.  If so, nuke it!
+			 * table.
 			 */
-			ent.reloid = atooid(de->d_name);
-			if (hash_search(hash, &ent, HASH_FIND, NULL))
+			memset(ent.oid, 0, sizeof(ent.oid));
+			memcpy(ent.oid, de->d_name, oidchars);
+			hash_search(hash, &ent, HASH_FIND, &found);
+
+			/* If so, nuke it! */
+			if (found)
 			{
 				snprintf(rm_path, sizeof(rm_path), "%s/%s",
 						 dbspacedirname, de->d_name);

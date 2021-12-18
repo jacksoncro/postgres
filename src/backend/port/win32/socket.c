@@ -3,7 +3,7 @@
  * socket.c
  *	  Microsoft Windows Win32 Socket Functions
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  *
  * IDENTIFICATION
  *	  src/backend/port/win32/socket.c
@@ -120,21 +120,13 @@ TranslateSocketError(void)
 		case WSAEADDRNOTAVAIL:
 			errno = EADDRNOTAVAIL;
 			break;
-		case WSAEHOSTDOWN:
-			errno = EHOSTDOWN;
-			break;
 		case WSAEHOSTUNREACH:
+		case WSAEHOSTDOWN:
 		case WSAHOST_NOT_FOUND:
-			errno = EHOSTUNREACH;
-			break;
 		case WSAENETDOWN:
-			errno = ENETDOWN;
-			break;
 		case WSAENETUNREACH:
-			errno = ENETUNREACH;
-			break;
 		case WSAENETRESET:
-			errno = ENETRESET;
+			errno = EHOSTUNREACH;
 			break;
 		case WSAENOTCONN:
 		case WSAESHUTDOWN:
@@ -635,7 +627,7 @@ pgwin32_select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, c
 		{
 			ZeroMemory(&resEvents, sizeof(resEvents));
 			if (WSAEnumNetworkEvents(sockets[i], events[i], &resEvents) != 0)
-				elog(ERROR, "failed to enumerate network events: error code %d",
+				elog(ERROR, "failed to enumerate network events: error code %u",
 					 WSAGetLastError());
 			/* Read activity? */
 			if (readfds && FD_ISSET(sockets[i], readfds))

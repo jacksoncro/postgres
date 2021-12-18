@@ -23,29 +23,29 @@ INSERT INTO VARCHAR_TBL (f1) VALUES ('cd');
 INSERT INTO VARCHAR_TBL (f1) VALUES ('c     ');
 
 
-SELECT * FROM VARCHAR_TBL;
+SELECT '' AS seven, * FROM VARCHAR_TBL;
 
-SELECT c.*
+SELECT '' AS six, c.*
    FROM VARCHAR_TBL c
    WHERE c.f1 <> 'a';
 
-SELECT c.*
+SELECT '' AS one, c.*
    FROM VARCHAR_TBL c
    WHERE c.f1 = 'a';
 
-SELECT c.*
+SELECT '' AS five, c.*
    FROM VARCHAR_TBL c
    WHERE c.f1 < 'a';
 
-SELECT c.*
+SELECT '' AS six, c.*
    FROM VARCHAR_TBL c
    WHERE c.f1 <= 'a';
 
-SELECT c.*
+SELECT '' AS one, c.*
    FROM VARCHAR_TBL c
    WHERE c.f1 > 'a';
 
-SELECT c.*
+SELECT '' AS two, c.*
    FROM VARCHAR_TBL c
    WHERE c.f1 >= 'a';
 
@@ -63,4 +63,4 @@ INSERT INTO VARCHAR_TBL (f1) VALUES ('abcd');
 INSERT INTO VARCHAR_TBL (f1) VALUES ('abcde');
 INSERT INTO VARCHAR_TBL (f1) VALUES ('abcd    ');
 
-SELECT * FROM VARCHAR_TBL;
+SELECT '' AS four, * FROM VARCHAR_TBL;

@@ -22,7 +22,7 @@ PostgreSQL documentation
  <refsynopsisdiv>
 <synopsis>
 CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] <replaceable class="parameter">table_name</replaceable> ( [
-  { <replaceable class="parameter">column_name</replaceable> <replaceable class="parameter">data_type</replaceable> [ COMPRESSION <replaceable>compression_method</replaceable> ] [ COLLATE <replaceable>collation</replaceable> ] [ <replaceable class="parameter">column_constraint</replaceable> [ ... ] ]
+  { <replaceable class="parameter">column_name</replaceable> <replaceable class="parameter">data_type</replaceable> [ COLLATE <replaceable>collation</replaceable> ] [ <replaceable class="parameter">column_constraint</replaceable> [ ... ] ]
     | <replaceable>table_constraint</replaceable>
     | LIKE <replaceable>source_table</replaceable> [ <replaceable>like_option</replaceable> ... ] }
     [, ... ]
@@ -87,7 +87,7 @@ class="parameter">referential_action</replaceable> ] [ ON UPDATE <replaceable cl
 
 <phrase>and <replaceable class="parameter">like_option</replaceable> is:</phrase>
 
-{ INCLUDING | EXCLUDING } { COMMENTS | COMPRESSION | CONSTRAINTS | DEFAULTS | GENERATED | IDENTITY | INDEXES | STATISTICS | STORAGE | ALL }
+{ INCLUDING | EXCLUDING } { COMMENTS | CONSTRAINTS | DEFAULTS | GENERATED | IDENTITY | INDEXES | STATISTICS | STORAGE | ALL }
 
 <phrase>and <replaceable class="parameter">partition_bound_spec</replaceable> is:</phrase>
 
@@ -171,9 +171,8 @@ WITH ( MODULUS <replaceable class="parameter">numeric_literal</replaceable>, REM
       If specified, the table is created as a temporary table.
       Temporary tables are automatically dropped at the end of a
       session, or optionally at the end of the current transaction
-      (see <literal>ON COMMIT</literal> below).  The default
-      search_path includes the temporary schema first and so identically
-      named existing permanent tables are not chosen for new plans
+      (see <literal>ON COMMIT</literal> below).  Existing permanent
+      tables with the same name are not visible to the current session
       while the temporary table exists, unless they are referenced
       with schema-qualified names. Any indexes created on a temporary
       table are automatically temporary as well.
@@ -284,31 +283,6 @@ WITH ( MODULUS <replaceable class="parameter">numeric_literal</replaceable>, REM
       The <literal>COLLATE</literal> clause assigns a collation to
       the column (which must be of a collatable data type).
       If not specified, the column data type's default collation is used.
-     </para>
-    </listitem>
-   </varlistentry>
-
-   <varlistentry>
-    <term><literal>COMPRESSION <replaceable class="parameter">compression_method</replaceable></literal></term>
-    <listitem>
-     <para>
-      The <literal>COMPRESSION</literal> clause sets the compression method
-      for the column.  Compression is supported only for variable-width data
-      types, and is used only when the column's storage mode
-      is <literal>main</literal> or <literal>extended</literal>.
-      (See <xref linkend="sql-altertable"/> for information on
-      column storage modes.) Setting this property for a partitioned table
-      has no direct effect, because such tables have no storage of their own,
-      but the configured value will be inherited by newly-created partitions.
-      The supported compression methods are <literal>pglz</literal> and
-      <literal>lz4</literal>.  (<literal>lz4</literal> is available only if
-      <option>--with-lz4</option> was used when building
-      <productname>PostgreSQL</productname>.)  In addition,
-      <replaceable class="parameter">compression_method</replaceable>
-      can be <literal>default</literal> to explicitly specify the default
-      behavior, which is to consult the
-      <xref linkend="guc-default-toast-compression"/> setting at the time of
-      data insertion to determine the method to use.
      </para>
     </listitem>
    </varlistentry>
@@ -626,17 +600,6 @@ WITH ( MODULUS <replaceable class="parameter">numeric_literal</replaceable>, REM
           copied.  The default behavior is to exclude comments, resulting in
           the copied columns and constraints in the new table having no
           comments.
-         </para>
-        </listitem>
-       </varlistentry>
-
-       <varlistentry>
-        <term><literal>INCLUDING COMPRESSION</literal></term>
-        <listitem>
-         <para>
-          Compression method of the columns will be copied.  The default
-          behavior is to exclude compression methods, resulting in columns
-          having the default compression method.
          </para>
         </listitem>
        </varlistentry>
@@ -1204,7 +1167,7 @@ WITH ( MODULUS <replaceable class="parameter">numeric_literal</replaceable>, REM
       constraint that is not deferrable will be checked immediately
       after every command.  Checking of constraints that are
       deferrable can be postponed until the end of the transaction
-      (using the <link linkend="sql-set-constraints"><command>SET CONSTRAINTS</command></link> command).
+      (using the <xref linkend="sql-set-constraints"/> command).
       <literal>NOT DEFERRABLE</literal> is the default.
       Currently, only <literal>UNIQUE</literal>, <literal>PRIMARY KEY</literal>,
       <literal>EXCLUDE</literal>, and
@@ -1228,7 +1191,7 @@ WITH ( MODULUS <replaceable class="parameter">numeric_literal</replaceable>, REM
       statement. This is the default.  If the constraint is
       <literal>INITIALLY DEFERRED</literal>, it is checked only at the
       end of the transaction.  The constraint check time can be
-      altered with the <link linkend="sql-set-constraints"><command>SET CONSTRAINTS</command></link> command.
+      altered with the <xref linkend="sql-set-constraints"/> command.
      </para>
     </listitem>
    </varlistentry>
@@ -1296,8 +1259,8 @@ WITH ( MODULUS <replaceable class="parameter">numeric_literal</replaceable>, REM
         <listitem>
          <para>
           All rows in the temporary table will be deleted at the end
-          of each transaction block.  Essentially, an automatic <link
-          linkend="sql-truncate"><command>TRUNCATE</command></link> is done
+          of each transaction block.  Essentially, an automatic <xref
+          linkend="sql-truncate"/> is done
           at each commit.  When used on a partitioned table, this
           is not cascaded to its partitions.
          </para>
@@ -1471,27 +1434,20 @@ WITH ( MODULUS <replaceable class="parameter">numeric_literal</replaceable>, REM
    </varlistentry>
 
    <varlistentry id="reloption-vacuum-index-cleanup" xreflabel="vacuum_index_cleanup">
-    <term><literal>vacuum_index_cleanup</literal>, <literal>toast.vacuum_index_cleanup</literal> (<type>enum</type>)
+    <term><literal>vacuum_index_cleanup</literal>, <literal>toast.vacuum_index_cleanup</literal> (<type>boolean</type>)
     <indexterm>
      <primary><varname>vacuum_index_cleanup</varname> storage parameter</primary>
     </indexterm>
     </term>
     <listitem>
      <para>
-      Forces or disables index cleanup when <command>VACUUM</command>
-      is run on this table.  The default value is
-      <literal>AUTO</literal>.  With <literal>OFF</literal>, index
-      cleanup is disabled, with <literal>ON</literal> it is enabled,
-      and with <literal>AUTO</literal> a decision is made dynamically,
-      each time <command>VACUUM</command> runs.  The dynamic behavior
-      allows <command>VACUUM</command> to avoid needlessly scanning
-      indexes to remove very few dead tuples.  Forcibly disabling all
-      index cleanup can speed up <command>VACUUM</command> very
-      significantly, but may also lead to severely bloated indexes if
-      table modifications are frequent.  The
-      <literal>INDEX_CLEANUP</literal> parameter of <link
-       linkend="sql-vacuum"><command>VACUUM</command></link>, if
-      specified, overrides the value of this option.
+      Enables or disables index cleanup when <command>VACUUM</command> is
+      run on this table.  The default value is <literal>true</literal>.
+      Disabling index cleanup can speed up <command>VACUUM</command> very
+      significantly, but may also lead to severely bloated indexes if table
+      modifications are frequent.  The <literal>INDEX_CLEANUP</literal>
+      parameter of <xref linkend="sql-vacuum"/>, if specified, overrides
+      the value of this option.
      </para>
     </listitem>
    </varlistentry>
@@ -1511,7 +1467,7 @@ WITH ( MODULUS <replaceable class="parameter">numeric_literal</replaceable>, REM
       the truncated pages is returned to the operating system.
       Note that the truncation requires <literal>ACCESS EXCLUSIVE</literal>
       lock on the table. The <literal>TRUNCATE</literal> parameter
-      of <link linkend="sql-vacuum"><command>VACUUM</command></link>, if specified, overrides the value
+      of <xref linkend="sql-vacuum"/>, if specified, overrides the value
       of this option.
      </para>
     </listitem>

@@ -28,7 +28,7 @@ OBJS = \
 	pqmq.o \
 	pqsignal.o
 
-ifeq ($(with_ssl),openssl)
+ifeq ($(with_openssl),yes)
 OBJS += be-secure-openssl.o
 endif
 

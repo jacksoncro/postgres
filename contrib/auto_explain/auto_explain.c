@@ -3,7 +3,7 @@
  * auto_explain.c
  *
  *
- * Copyright (c) 2008-2021, PostgreSQL Global Development Group
+ * Copyright (c) 2008-2020, PostgreSQL Global Development Group
  *
  * IDENTIFICATION
  *	  contrib/auto_explain/auto_explain.c
@@ -314,7 +314,7 @@ explain_ExecutorStart(QueryDesc *queryDesc, int eflags)
 			MemoryContext oldcxt;
 
 			oldcxt = MemoryContextSwitchTo(queryDesc->estate->es_query_cxt);
-			queryDesc->totaltime = InstrAlloc(1, INSTRUMENT_ALL, false);
+			queryDesc->totaltime = InstrAlloc(1, INSTRUMENT_ALL);
 			MemoryContextSwitchTo(oldcxt);
 		}
 	}

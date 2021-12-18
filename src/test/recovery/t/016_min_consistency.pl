@@ -1,6 +1,3 @@
-
-# Copyright (c) 2021, PostgreSQL Global Development Group
-
 # Test for checking consistency of on-disk pages for a cluster with
 # the minimum recovery LSN, ensuring that the updates happen across
 # all processes.  In this test, the updates from the startup process

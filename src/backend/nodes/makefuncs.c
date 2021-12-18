@@ -4,7 +4,7 @@
  *	  creator functions for various nodes. The functions here are for the
  *	  most frequently created nodes.
  *
- * Portions Copyright (c) 1996-2021, PostgreSQL Global Development Group
+ * Portions Copyright (c) 1996-2020, PostgreSQL Global Development Group
  * Portions Copyright (c) 1994, Regents of the University of California
  *
  *
@@ -145,10 +145,8 @@ makeWholeRowVar(RangeTblEntry *rte,
 			/* relation: the rowtype is a named composite type */
 			toid = get_rel_type_id(rte->relid);
 			if (!OidIsValid(toid))
-				ereport(ERROR,
-						(errcode(ERRCODE_WRONG_OBJECT_TYPE),
-						 errmsg("relation \"%s\" does not have a composite type",
-								get_rel_name(rte->relid))));
+				elog(ERROR, "could not find type OID for relation %u",
+					 rte->relid);
 			result = makeVar(varno,
 							 InvalidAttrNumber,
 							 toid,
@@ -582,7 +580,7 @@ makeDefElemExtended(char *nameSpace, char *name, Node *arg,
  * supply.  Any non-default parameters have to be inserted by the caller.
  */
 FuncCall *
-makeFuncCall(List *name, List *args, CoercionForm funcformat, int location)
+makeFuncCall(List *name, List *args, int location)
 {
 	FuncCall   *n = makeNode(FuncCall);
 
@@ -590,12 +588,11 @@ makeFuncCall(List *name, List *args, CoercionForm funcformat, int location)
 	n->args = args;
 	n->agg_order = NIL;
 	n->agg_filter = NULL;
-	n->over = NULL;
 	n->agg_within_group = false;
 	n->agg_star = false;
 	n->agg_distinct = false;
 	n->func_variadic = false;
-	n->funcformat = funcformat;
+	n->over = NULL;
 	n->location = location;
 	return n;
 }

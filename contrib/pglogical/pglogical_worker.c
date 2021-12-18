@@ -219,7 +219,7 @@ wait_for_worker_startup(PGLogicalWorker *worker,
 
 		if (status == BGWH_STARTED && pglogical_worker_running(worker))
 		{
-			elog(DEBUG2, "%s worker at slot %zu started with pid %lld and attached to shmem",
+			elog(DEBUG2, "%s worker at slot %zu started with pid %d and attached to shmem",
 				 pglogical_worker_type_name(worker->worker_type), (worker - &PGLogicalCtx->workers[0]), pid);
 			break;
 		}
