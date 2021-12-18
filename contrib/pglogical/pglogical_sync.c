@@ -1969,7 +1969,7 @@ PglGetLastWin32Error(void)
  * for the utterly putrid way Windows handles command line arguments, and the insane lack of any inverse
  * form of the CommandLineToArgvW function in the win32 API.
  */
-static void
+void
 QuoteWindowsArgvElement(StringInfo cmdline, const char *arg, bool force)
 {
 	if (!force && *arg != '\0'
