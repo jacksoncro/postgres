@@ -1,3 +1,6 @@
+
+# Copyright (c) 2021, PostgreSQL Global Development Group
+
 #
 # Tests restarts of postgres due to crashes of a subprocess.
 #
@@ -14,7 +17,6 @@ use PostgresNode;
 use TestLib;
 use Test::More;
 use Config;
-use Time::HiRes qw(usleep);
 
 plan tests => 18;
 
@@ -25,7 +27,7 @@ plan tests => 18;
 # is really wrong.
 my $psql_timeout = IPC::Run::timer(60);
 
-my $node = get_new_node('master');
+my $node = get_new_node('primary');
 $node->init(allows_streaming => 1);
 $node->start();
 

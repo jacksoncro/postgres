@@ -9,7 +9,7 @@ PostgreSQL documentation
  </indexterm>
 
  <refmeta>
-  <refentrytitle>pg_restore</refentrytitle>
+  <refentrytitle><application>pg_restore</application></refentrytitle>
   <manvolnum>1</manvolnum>
   <refmiscinfo>Application</refmiscinfo>
  </refmeta>
@@ -486,7 +486,12 @@ PostgreSQL documentation
       <term><option>--verbose</option></term>
       <listitem>
        <para>
-        Specifies verbose mode.
+        Specifies verbose mode.  This will cause
+        <application>pg_restore</application> to output detailed object
+        comments and start/stop times to the output file, and progress
+        messages to standard error.
+        Repeating the option causes additional debug-level messages
+        to appear on standard error.
        </para>
       </listitem>
      </varlistentry>

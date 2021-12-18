@@ -257,8 +257,6 @@ init_apply_exec_state(PGLogicalRelation *rel)
 {
 	ApplyExecState	   *aestate = palloc0(sizeof(ApplyExecState));
 
-	PushActiveSnapshot(GetTransactionSnapshot());
-
 	/* Initialize the executor state. */
 	aestate->estate = create_estate_for_relation(rel->rel, true);
 
@@ -303,8 +301,6 @@ finish_apply_exec_state(ApplyExecState *aestate)
 	/* Free the memory. */
 	FreeExecutorState(aestate->estate);
 	pfree(aestate);
-
-	PopActiveSnapshot();
 }
 
 /*
@@ -541,8 +537,6 @@ pglogical_apply_heap_update(PGLogicalRelation *rel, PGLogicalTupleData *oldtup,
 	ExecSetSlotDescriptor(localslot, RelationGetDescr(rel->rel));
 #endif
 
-	PushActiveSnapshot(GetTransactionSnapshot());
-
 	/* Search for existing tuple with same key */
 	found = pglogical_tuple_find_replidx(aestate->resultRelInfo, oldtup, localslot,
 										 &replident_idx_id);
@@ -729,8 +723,6 @@ pglogical_apply_heap_delete(PGLogicalRelation *rel, PGLogicalTupleData *oldtup)
 	localslot = ExecInitExtraTupleSlot(aestate->estate);
 	ExecSetSlotDescriptor(localslot, RelationGetDescr(rel->rel));
 #endif
-
-	PushActiveSnapshot(GetTransactionSnapshot());
 
 	if (pglogical_tuple_find_replidx(aestate->resultRelInfo, oldtup, localslot,
 									 &replident_idx_id))

@@ -62,7 +62,7 @@ PostgreSQL documentation
 
   <para>
    <application>vacuumdb</application> is a wrapper around the SQL
-   command <xref linkend="sql-vacuum"/>.
+   command <link linkend="sql-vacuum"><command>VACUUM</command></link>.
    There is no effective difference between vacuuming and analyzing
    databases via this utility and via other methods for accessing the
    server.
@@ -152,6 +152,21 @@ PostgreSQL documentation
      </varlistentry>
 
      <varlistentry>
+      <term><option>--force-index-cleanup</option></term>
+      <listitem>
+       <para>
+        Always remove index entries pointing to dead tuples.
+       </para>
+       <note>
+        <para>
+         This option is only available for servers running
+         <productname>PostgreSQL</productname> 12 and later.
+        </para>
+       </note>
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
       <term><option>-j <replaceable class="parameter">njobs</replaceable></option></term>
       <term><option>--jobs=<replaceable class="parameter">njobs</replaceable></option></term>
       <listitem>
@@ -224,6 +239,51 @@ PostgreSQL documentation
         <para>
          This option is only available for servers running
          <productname>PostgreSQL</productname> 9.6 and later.
+        </para>
+       </note>
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--no-index-cleanup</option></term>
+      <listitem>
+       <para>
+        Do not remove index entries pointing to dead tuples.
+       </para>
+       <note>
+        <para>
+         This option is only available for servers running
+         <productname>PostgreSQL</productname> 12 and later.
+        </para>
+       </note>
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--no-process-toast</option></term>
+      <listitem>
+       <para>
+        Skip the TOAST table associated with the table to vacuum, if any.
+       </para>
+       <note>
+        <para>
+         This option is only available for servers running
+         <productname>PostgreSQL</productname> 14 and later.
+        </para>
+       </note>
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--no-truncate</option></term>
+      <listitem>
+       <para>
+        Do not truncate empty pages at the end of the table.
+       </para>
+       <note>
+        <para>
+         This option is only available for servers running
+         <productname>PostgreSQL</productname> 12 and later.
         </para>
        </note>
       </listitem>

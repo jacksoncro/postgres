@@ -143,9 +143,10 @@ msgid ""
 "                         (default: current directory, ./pg_wal, $PGDATA/pg_wal)\n"
 msgstr ""
 "  -p, --path=CHEMIN             répertoire où trouver les fichiers des segments\n"
-"                                de journaux de transactions ou un répertoire avec\n"
-"                                ./pg_wal qui contient ces fichiers (par défaut:\n"
-"                                répertoire courant, ./pg_wal, $PGDATA/pg_wal)\n"
+"                                de journaux de transactions ou un répertoire\n"
+"                                avec ./pg_wal qui contient ces fichiers (par\n"
+"                                défaut : répertoire courant, ./pg_wal,\n"
+"                                $PGDATA/pg_wal)\n"
 
 #: pg_waldump.c:724
 #, c-format
@@ -159,9 +160,9 @@ msgid ""
 "                         use --rmgr=list to list valid resource manager names\n"
 msgstr ""
 "  -r, --rmgr=RMGR               affiche seulement les enregistrements générés\n"
-"                                par le gestionnaire de ressources RMGR,\n"
-"                                utilisez --rmgr=list pour avoir une liste des\n"
-"                                noms valides de gestionnaires de ressources\n"
+"                                par le gestionnaire de ressources RMGR, utilisez\n"
+"                                --rmgr=list pour avoir une liste des noms valides\n"
+"                                de gestionnaires de ressources\n"
 
 #: pg_waldump.c:727
 #, c-format
@@ -177,8 +178,8 @@ msgid ""
 "                         (default: 1 or the value used in STARTSEG)\n"
 msgstr ""
 "  -t, --timeline=TLI            timeline à partir de laquelle lire les\n"
-"                                enregistrements des journaux (par défaut:\n"
-"                                1 ou la valeur utilisée dans SEG_DÉBUT)\n"
+"                                enregistrements des journaux (par défaut: 1 ou\n"
+"                                la valeur utilisée dans SEG_DÉBUT)\n"
 
 #: pg_waldump.c:730
 #, c-format
@@ -199,8 +200,8 @@ msgid ""
 "                         (optionally, show per-record statistics)\n"
 msgstr ""
 "  -z, --stats[=enregistrement]  affiche des statistiques à la place\n"
-"                                d'enregistrements (en option, affiche\n"
-"                                des statistiques par enregistrement)\n"
+"                                d'enregistrements (en option, affiche des\n"
+"                                statistiques par enregistrement)\n"
 
 #: pg_waldump.c:734
 #, c-format

@@ -29,6 +29,7 @@ build_script:
   - sh -l -c "make install -j2"
   - set PATH=C:/projects/postgres/dist/bin/;C:/projects/postgres/dist/include/server/;C:/projects/postgres/src/makefiles;C:/projects/postgres/src/include/utils;C:/projects/postgres/src/port/;%PATH%
   - cd C:\projects\postgres\contrib\pglogical
+  - sh -l -c "make distclean"
   - sh -l -c "make"
   - sh -l -c "make install"
   - 7z a -r postgre.zip C:\projects\postgres\dist
